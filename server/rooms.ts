@@ -438,6 +438,9 @@ export class GlobalRoom extends BasicRoom {
 	reportUserStatsInterval: NodeJS.Timeout;
 	modlogStream: WriteStream;
 	formatList: string;
+	/* our stuff */
+	disableEmoticons: boolean;
+	/* our stuff end */
 	constructor(roomid: string) {
 		if (roomid !== 'global') throw new Error(`The global room's room ID must be 'global'`);
 		super(roomid);
@@ -515,6 +518,10 @@ export class GlobalRoom extends BasicRoom {
 		this.userCount = 0; // cache of `size(this.users)`
 		this.maxUsers = 0;
 		this.maxUsersDate = 0;
+
+		/* our stuff */
+		this.disableEmoticons = false;
+		/* our stuff end */
 
 		this.reportUserStatsInterval = setInterval(
 			() => this.reportUserStats(),
@@ -1025,6 +1032,9 @@ export class BasicChatRoom extends BasicRoom {
 	game: RoomGame | null;
 	battle: RoomBattle | null;
 	tour: Tournament | null;
+	/* our stuff */
+	disableEmoticons: boolean;
+	/* our stuff end*/
 	constructor(roomid: string, title?: string, options: AnyObject = {}) {
 		super(roomid, title);
 
@@ -1051,6 +1061,7 @@ export class BasicChatRoom extends BasicRoom {
 		this.staffMessage = '';
 		this.autojoin = false;
 		this.staffAutojoin = false;
+		this.disableEmoticons = false;
 
 		this.banwordRegex = null;
 		this.banwords = [];

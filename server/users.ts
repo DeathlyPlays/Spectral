@@ -64,6 +64,11 @@ function move(user: User, newUserid: ID) {
 	user.userid = newUserid;
 	users.set(newUserid, user);
 
+	if (Ontime[user.userid]) {
+		Db.ontime.set(user.userid, Db.ontime.get(user.userid, 0) + (Date.now() - Ontime[user.userid]));
+		delete Ontime[user.userid];
+	}
+
 	user.forcedPublic = null;
 	if (Config.forcedpublicprefixes) {
 		for (const prefix of Config.forcedpublicprefixes) {
@@ -809,6 +814,13 @@ export class User extends Chat.MessageContext {
 			return false;
 		}
 
+		/* our stuff */
+		if (Tells.inbox[userid]) Tells.sendTell(userid, this);
+		Ontime[userid] = Date.now();
+		Server.showNews(userid, this);
+		Server.checkFriends(userid, this);
+		/* our stuff end*/
+
 		const tokenSemicolonPos = token.indexOf(';');
 		const tokenData = token.substr(0, tokenSemicolonPos);
 		const tokenSig = token.substr(tokenSemicolonPos + 1);
@@ -1233,6 +1245,14 @@ export class User extends Chat.MessageContext {
 		// NOTE: can't do a this.update(...) at this point because we're no longer connected.
 	}
 	onDisconnect(connection: Connection) {
+		/* our stuff */
+		if (this.named) Db.seen.set(this.userid, Date.now());
+		if (Ontime[this.userid]) {
+			Db.ontime.set(this.userid, Db.ontime.get(this.userid, 0) + (Date.now() - Ontime[this.userid]));
+			delete Ontime[this.userid];
+		}
+		/* our stuff end */
+
 		for (const [i, connected] of this.connections.entries()) {
 			if (connected === connection) {
 				// console.log('DISCONNECT: ' + this.userid);

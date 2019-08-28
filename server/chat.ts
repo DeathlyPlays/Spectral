@@ -363,11 +363,32 @@ export class CommandContext extends MessageContext {
 		}
 
 		// Output the message
-
 		if (message && message !== true && typeof message.then !== 'function') {
+			let emoticons = Server.parseEmoticons(message, this.room);
 			if (this.pmTarget) {
-				Chat.sendPM(message, this.user, this.pmTarget);
+				Chat.sendPM((emoticons ? `/html ${emoticons}` : `${message}`), this.user, this.pmTarget);
 			} else {
+				if (emoticons && !this.room.disableEmoticons) {
+					for (let u in this.room.users) {
+						let curUser = Users.get(u);
+						if (!curUser || !curUser.connected) continue;
+						if (Server.ignoreEmotes[curUser.userid]) {
+							curUser.sendTo(this.room, `${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
+							continue;
+						}
+						curUser.sendTo(this.room, `${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|/html ${emoticons}`);
+					}
+					this.room.add(`${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
+				} else {
+					// @ts-ignore
+					if (Users.ShadowBan.checkBanned(this.user)) {
+						// @ts-ignore
+						Users.ShadowBan.addMessage(this.user, `To ${this.room.id}, ${message}`);
+						this.user.sendTo(this.room, `${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
+					} else {
+						this.room.add(`${(this.room.type === 'chat' ? (this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`) : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
+					}
+				}
 				this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 				if (this.room && this.room.game && this.room.game.onLogMessage) {
 					this.room.game.onLogMessage(message, this.user);
@@ -742,6 +763,13 @@ export class CommandContext extends MessageContext {
 			// canTalk will only return true with no message
 			this.message = message as string;
 			this.broadcastMessage = broadcastMessage;
+
+			if (Users.ShadowBan.checkBanned(this.user)) {
+				Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
+				this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+				this.parse('/' + this.message.substr(1));
+				return false;
+			}
 		}
 		return true;
 	}
@@ -1337,7 +1365,11 @@ export const Chat = new class {
 		const buf = `|pm|${user.getIdentity()}|${pmTarget.getIdentity()}|${message}`;
 		if (onlyRecipient) return onlyRecipient.send(buf);
 		user.send(buf);
-		if (pmTarget !== user) pmTarget.send(buf);
+		if (Users.ShadowBan.checkBanned(user)) {
+			Users.ShadowBan.addMessage(user, `Private to ${pmTarget.getIdentity()}, ${message}`);
+		} else if (pmTarget !== user) {
+			pmTarget.send(buf);
+		}
 		pmTarget.lastPM = user.userid;
 		user.lastPM = pmTarget.userid;
 	}
@@ -1423,6 +1455,20 @@ export const Chat = new class {
 			if (plugin.nicknamefilter) Chat.nicknamefilters.push(plugin.nicknamefilter);
 			if (plugin.statusfilter) Chat.statusfilters.push(plugin.statusfilter);
 		}
+
+		let customfiles = FS('server-plugins/').readdirSync();
+
+		for (const customfile of customfiles) {
+			if (customfile.substr(-3) !== '.js') continue;
+			const serverplugin = require(`./server-plugins/${customfile}`);
+
+			Object.assign(Chat.commands, serverplugin.commands);
+
+			if (serverplugin.chatfilter) Chat.filters.push(serverplugin.chatfilter);
+			if (serverplugin.namefilter) Chat.namefilters.push(serverplugin.namefilter);
+			if (serverplugin.hostfilter) Chat.hostfilters.push(serverplugin.hostfilter);
+		}
+
 	}
 	destroy() {
 		for (const handler of Chat.destroyHandlers) {

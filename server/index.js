@@ -91,6 +91,14 @@ if (Config.watchconfig) {
  * Set up most of our globals
  *********************************************************/
 
+/* our shit start */
+global.Server = {};
+
+global.Db = require('nef')(require('nef-fs')('config/db'));
+global.Ontime = {};
+global.Tells = require('./tells');
+/* our shit end */
+
 global.Dex = require('../.sim-dist/dex').Dex;
 global.toID = Dex.getId;
 

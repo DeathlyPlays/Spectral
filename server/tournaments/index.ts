@@ -1078,6 +1078,64 @@ export class Tournament extends Rooms.RoomGame {
 			bracketData: this.getBracketData(),
 		};
 		this.room.add(`|tournament|end|${JSON.stringify(update)}`);
+
+		//
+		// Tournament Winnings
+		//
+
+		let color = '#088cc7';
+		let data = (this.generator.getResults() as TournamentPlayer[][]).map(usersToNames).toString();
+		let dataSplit: string[];
+		let winner: any, runnerUp: any;
+
+		if (data.indexOf(',') >= 0) {
+			dataSplit = data.split(',');
+			winner = dataSplit[0];
+			if (dataSplit[1]) runnerUp = dataSplit[1];
+		} else {
+			winner = data;
+		}
+
+		let wid = toID(winner);
+		let rid = toID(runnerUp);
+		let tourSize = this.players.length;
+
+		if ((tourSize >= 2) && this.room.isOfficial) {
+			let firstMoney = Math.round(tourSize / 2);
+			let secondMoney = Math.round(firstMoney / 2);
+			if (firstMoney < 2) firstMoney = 2;
+			if (secondMoney < 1) secondMoney = 1;
+
+			Economy.writeMoney(wid, firstMoney, () => {
+				Economy.readMoney(wid, () => {
+					if (Users.get(wid) && Users.get(wid).connected) {
+						Users.get(wid).popup(`|html|You have received ${firstMoney} ${(firstMoney === 1 ? global.moneyName : global.moneyPlural)} from winning the tournament.`);
+					}
+					Economy.logTransaction(`${Chat.escapeHTML(winner)} has won ${firstMoney} ${(firstMoney === 1 ? global.moneyName : global.moneyPlural)} from a tournament.`);
+				});
+			});
+
+			if (Server.getFaction(winner)) {
+				let factionName = Server.getFaction(winner);
+				let factionId = toID(factionName);
+				Db.factionbank.set(factionId, Db.factionbank.get(factionId, 0) + 10);
+				this.room.addRaw(`<strong>Congratulations to ${factionName}! Your faction has gained 10 faction money (points)! To view it type /faction bank atm (faction).</strong>`);
+			}
+
+			this.room.addRaw(`${Server.nameColor(winner, true)} <strong>has won <font color='${color}'>${firstMoney}</font> ${(firstMoney === 1 ? global.moneyName : global.moneyPlural)} for winning the tournament!</strong>`);
+
+			if (runnerUp) {
+				Economy.writeMoney(rid, secondMoney, () => {
+					Economy.readMoney(rid, newAmount => {
+						if (Users.get(rid) && Users.get(rid).connected) {
+							Users.get(rid).popup(`|html|You have received ${secondMoney} ${(secondMoney === 1 ? global.moneyName : global.moneyPlural)} from winning the tournament.`);
+						}
+						Economy.logTransaction(`${Chat.escapeHTML(runnerUp)} has won ${secondMoney} ${(secondMoney === 1 ? global.moneyName : global.moneyPlural)} from a tournament.`);
+					});
+				});
+				this.room.addRaw(`${Server.nameColor(runnerUp, true)} <strong>has won <font color='${color}'>${secondMoney}</font> ${(secondMoney === 1 ? global.moneyName : global.moneyPlural)} for coming in second in the tournament!</strong>`);
+			}
+		}
 		this.remove();
 	}
 }
