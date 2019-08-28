@@ -278,7 +278,7 @@ exports.commands = {
 
 	"!xpladder": true,
 	expladder: "xpladder",
-	xpladder(target,room, user) {
+	xpladder(target, room, user) {
 		if (!target) target = 100;
 		target = Number(target);
 		if (isNaN(target)) target = 100;
