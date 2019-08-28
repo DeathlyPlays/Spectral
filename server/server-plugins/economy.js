@@ -1,6 +1,6 @@
 "use strict";
 
-const FS = require("../../.lib-dist/fs").FS
+const FS = require("../../.lib-dist/fs").FS;
 
 // This should be the default amount of money users have..
 // Ideally, this should be zero.
@@ -66,7 +66,7 @@ let Economy = global.Economy = {
  	* @param {Function} callback
  	* @return {Function} callback
  	*/
-	readMoney: function (userid, callback) {
+	readMoney(userid, callback) {
 		// In case someone forgot to turn `userid` into an actual ID...
 		userid = toID(userid);
 		if (userid.substring(0, 5) === "guest") return 0;
@@ -89,7 +89,7 @@ let Economy = global.Economy = {
  	* @param {Function} callback (optional)
  	* @return {Function} callback (optional)
  	*/
-	writeMoney: function (userid, amount, callback) {
+	writeMoney(userid, amount, callback) {
 		// In case someone forgot to turn `userid` into an actual ID...
 		userid = toID(userid);
 
@@ -109,19 +109,19 @@ let Economy = global.Economy = {
 		}
 	},
 
-	writeMoneyArr: function (users, amount) {
+	writeMoneyArr(users, amount) {
 		this.writeMoney(users[0], amount, () => {
 			users.splice(0, 1);
 			if (users.length > 0) this.writeMoneyArr(users, amount);
 		});
 	},
 
-	logTransaction: function (message) {
+	logTransaction(message) {
 		if (!message) return false;
 		FS("logs/transactions.log").append(`[${new Date().toUTCString()}] ${message}\n`);
 	},
 
-	logDice: function (message) {
+	logDice(message) {
 		if (!message) return false;
 		FS("logs/dice.log").append(`[${new Date().toUTCString()}] ${message}\n`);
 	},

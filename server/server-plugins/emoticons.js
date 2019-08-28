@@ -4,7 +4,7 @@ This plugin allows you to use emoticons in both chat rooms (as long as they are 
 */
 "use strict";
 
-const FS = require("../../.lib-dist/fs").FS
+const FS = require("../../.lib-dist/fs").FS;
 
 let emoticons = {"feelsbd": "http://i.imgur.com/TZvJ1lI.png"};
 let emoteRegex = new RegExp("feelsbd", "g");

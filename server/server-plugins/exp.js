@@ -21,7 +21,7 @@ function isExp(exp) {
 Server.isExp = isExp;
 
 let EXP = Server.EXP = {
-	readExp: function (userid, callback) {
+	readExp(userid, callback) {
 		userid = toID(userid);
 
 		let amount = Db.exp.get(userid, DEFAULT_AMOUNT);
@@ -32,7 +32,7 @@ let EXP = Server.EXP = {
 		}
 	},
 
-	writeExp: function (userid, amount, callback) {
+	writeExp(userid, amount, callback) {
 		// In case someone forgot to turn `userid` into an actual ID...
 		userid = toID(userid);
 

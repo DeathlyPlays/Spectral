@@ -5,7 +5,7 @@
 
 "use strict";
 
-const FS = require("../../.lib-dist/fs").FS
+const FS = require("../../.lib-dist/fs").FS;
 
 let friends = FS("config/chat-plugins/friends.json").readIfExistsSync();
 

@@ -5,7 +5,7 @@
 
 "use strict";
 
-const FS = require("../../.lib-dist/fs").FS
+const FS = require("../../.lib-dist/fs").FS;
 
 let quotes = FS("config/chat-plugins/quotes.json").readIfExistsSync();
 

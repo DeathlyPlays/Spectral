@@ -1,9 +1,9 @@
 "use strict";
 
-const FS = require("../../.lib-dist/fs").FS
+const FS = require("../../.lib-dist/fs").FS;
 
 let ssbWrite = true; //if false, do not write to JSON
-let noRead = false; //if true, do not read from JSON
+//let noRead = false; //if true, do not read from JSON (isn't even used)
 
 const MAX_MOVEPOOL_SIZE = 4;
 
@@ -590,7 +590,7 @@ try {
 			console.log("config/chat-plugins/ssb.json not found, creating a new one...");
 		}
 	});
-	noRead = true;
+	//noRead = true;
 }
 
 //We need to load data after the SSB class is declared.

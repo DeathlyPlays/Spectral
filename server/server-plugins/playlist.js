@@ -10,7 +10,7 @@ let blackcss = "background: #3C3B42; padding: 10px; color: white; border: 1px so
 
 let MAXIMUM_SONGS = 9;
 
-const FS = require("../../.lib-dist/fs").FS
+const FS = require("../../.lib-dist/fs").FS;
 
 let playlists = FS("config/chat-plugins/playlists.json").readIfExistsSync();
 
