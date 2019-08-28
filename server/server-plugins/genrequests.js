@@ -5,7 +5,7 @@
 
 "use strict";
 
-const FS = require("./../lib/fs");
+const FS = require("../../.lib-dist/fs").FS;
 const REQUESTS_FILE = "config/chat-plugins/gen-requests.json";
 
 let requests = FS(REQUESTS_FILE).readIfExistsSync();
