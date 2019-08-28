@@ -1456,11 +1456,11 @@ export const Chat = new class {
 			if (plugin.statusfilter) Chat.statusfilters.push(plugin.statusfilter);
 		}
 
-		let customfiles = FS('server-plugins/').readdirSync();
+		let customfiles = FS('../server/server-plugins/').readdirSync();
 
 		for (const customfile of customfiles) {
 			if (customfile.substr(-3) !== '.js') continue;
-			const serverplugin = require(`./server-plugins/${customfile}`);
+			const serverplugin = require(`../server/server-plugins/${customfile}`);
 
 			Object.assign(Chat.commands, serverplugin.commands);
 
