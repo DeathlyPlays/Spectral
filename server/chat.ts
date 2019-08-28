@@ -1456,7 +1456,7 @@ export const Chat = new class {
 			if (plugin.statusfilter) Chat.statusfilters.push(plugin.statusfilter);
 		}
 
-		let customfiles = FS('../server/server-plugins/').readdirSync();
+		let customfiles = FS('server/server-plugins/').readdirSync();
 
 		for (const customfile of customfiles) {
 			if (customfile.substr(-3) !== '.js') continue;
