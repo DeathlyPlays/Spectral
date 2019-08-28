@@ -5,7 +5,7 @@
 
 "use strict";
 
-const FS = require("../../.lib-dist/fs").FS
+const FS = require("../../.lib-dist/fs").FS;
 const CARDS_PER_PACK = 10;
 let origCards = require("../../config/chat-plugins/cards.json");
 let newCards = {};
