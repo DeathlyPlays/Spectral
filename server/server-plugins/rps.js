@@ -321,11 +321,11 @@ exports.commands = {
 		rank: function (target, room, user, connection, cmd) {
 			if (!this.runBroadcast()) return false;
 			if (!target) target = user.userid;
-			target = toId(target);
+			target = toID(target);
 			let rpslsCommands = ["rpslsrank", "rpslsranking", "rpslspoints"];
 			let file = Db.rpsrank;
 			if (rpslsCommands.includes(cmd)) file = Db.rpslsrank;
-			let userRank = file.get(toId(target), 1000).toLocaleString();
+			let userRank = file.get(toID(target), 1000).toLocaleString();
 			this.sendReplyBox(`<strong>Rank - ${Server.nameColor(target, true)}: ${userRank}</strong>`);
 		},
 

@@ -154,9 +154,9 @@ exports.commands = {
 				if (!target) return this.parse(`/splatfesthelp`);
 				let SPLATFEST = Db.splatoon.get("SPLATFEST", {alpha: null, bravo: null, active: false});
 				if (!SPLATFEST.active) return this.errorReply(`There is currently not a Splatfest. :(`);
-				if (toId(SPLATFEST.alpha) !== toId(target) && toId(SPLATFEST.bravo) !== toId(target)) return this.errorReply(`This is not a Splatfest team.`);
+				if (toID(SPLATFEST.alpha) !== toID(target) && toID(SPLATFEST.bravo) !== toID(target)) return this.errorReply(`This is not a Splatfest team.`);
 				let splatProfile = Db.splatoon.get(user.userid);
-				splatProfile.splatfest = (toId(target) === toId(SPLATFEST.alpha) ? SPLATFEST.alpha : SPLATFEST.bravo);
+				splatProfile.splatfest = (toID(target) === toID(SPLATFEST.alpha) ? SPLATFEST.alpha : SPLATFEST.bravo);
 				Db.splatoon.set(user.userid, splatProfile);
 				return this.sendReply(`You have successfully joined Splatfest Team "${target}".`);
 			},
@@ -252,19 +252,19 @@ exports.commands = {
 		profile: function (target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = user.userid;
-			target = toId(target);
+			target = toID(target);
 			if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 			let targetUser = Users.get(target);
 			let username = (targetUser ? targetUser.name : target);
-			let splatProfile = Db.splatoon.get(toId(username), {ranks: {}});
+			let splatProfile = Db.splatoon.get(toID(username), {ranks: {}});
 			let SPLATFEST = Db.splatoon.get("SPLATFEST", {alpha: null, bravo: null, active: false});
 
-			let profile = `<div><strong>Name:</strong> ${Server.nameColor(toId(username), true, true)}`;
+			let profile = `<div><strong>Name:</strong> ${Server.nameColor(toID(username), true, true)}`;
 			if (splatProfile.ign) profile += ` <strong>In-Game Name:</strong> ${splatProfile.ign}`;
 			if (splatProfile.level) profile += ` <strong>Level:</strong> ${splatProfile.level}`;
 			if (splatProfile.prestige) profile += ` <strong>Prestige:</strong> ${splatProfile.prestige}`;
 			profile += `<br />`;
-			if (Db.switchfc.has(toId(username))) profile += `<strong>Switch Friend Code:</strong> SW-${Db.switchfc.get(toId(username))}<br />`;
+			if (Db.switchfc.has(toID(username))) profile += `<strong>Switch Friend Code:</strong> SW-${Db.switchfc.get(toID(username))}<br />`;
 			if (splatProfile.weapon) profile += `<strong>Weapon:</strong> ${splatProfile.weapon}<br />`;
 			if (splatProfile.headgear) profile += `<strong>Headgear:</strong> ${splatProfile.headgear}<br />`;
 			if (splatProfile.clothing) profile += `<strong>Clothing:</strong> ${splatProfile.clothing}<br />`;

@@ -22,7 +22,7 @@ Server.isExp = isExp;
 
 let EXP = Server.EXP = {
 	readExp: function (userid, callback) {
-		userid = toId(userid);
+		userid = toID(userid);
 
 		let amount = Db.exp.get(userid, DEFAULT_AMOUNT);
 		if (typeof callback !== "function") {
@@ -34,7 +34,7 @@ let EXP = Server.EXP = {
 
 	writeExp: function (userid, amount, callback) {
 		// In case someone forgot to turn `userid` into an actual ID...
-		userid = toId(userid);
+		userid = toID(userid);
 
 		// In case someone forgot to make sure `amount` was a Number...
 		amount = Number(amount);
@@ -65,21 +65,21 @@ class ExpFunctions {
 	}
 
 	level(userid) {
-		userid = toId(userid);
+		userid = toID(userid);
 		let curExp = Db.exp.get(userid, 0);
 		return Math.floor(Math.pow(curExp / minLevelExp, 1 / multiply) + 1);
 	}
 
 	nextLevel(user) {
-		let curExp = Db.exp.get(toId(user), 0);
-		let lvl = this.level(toId(user));
+		let curExp = Db.exp.get(toID(user), 0);
+		let lvl = this.level(toID(user));
 		return Math.floor(Math.pow(lvl, multiply) * minLevelExp) - curExp;
 	}
 
 	addExp(user, room, amount) {
 		if (!user) return;
 		if (!room) room = Rooms.get("lobby");
-		user = Users.get(toId(user));
+		user = Users.get(toID(user));
 		if (!user.registered) return false;
 		if (Db.expoff.get(user.userid)) return false;
 		if (DOUBLE_XP || user.doubleExp) amount = amount * 2;
@@ -185,7 +185,7 @@ exports.commands = {
 	xp: "exp",
 	exp: function (target, room, user) {
 		if (!this.runBroadcast()) return;
-		let targetId = toId(target);
+		let targetId = toID(target);
 		if (target || !target && this.broadcasting) {
 			if (!target) targetId = user.userid;
 			EXP.readExp(targetId, exp => {
@@ -215,7 +215,7 @@ exports.commands = {
 		let [username, amount] = target.split(",").map(p => { return p.trim(); });
 		if (!amount) return this.parse("/help giveexp");
 
-		let uid = toId(username);
+		let uid = toID(username);
 		amount = isExp(amount);
 
 		if (amount > 1000) return this.sendReply("You cannot give more than 1,000 exp at a time.");
@@ -231,7 +231,7 @@ exports.commands = {
 	confirmresetexp: "resetxp",
 	resetxp: function (target, room, user, conection, cmd) {
 		if (!target) return this.errorReply("USAGE: /resetxp (USER)");
-		let targetUser = toId(target);
+		let targetUser = toID(target);
 		if (!this.can("exp")) return false;
 		if (cmd !== "confirmresetexp") {
 			return this.popupReply(`|html|<center><button name="send" value="/confirmresetexp ${targetUser}" style="background-color: red; height: 300px; width: 150px"><strong><font color= "white" size= 3>Confirm EXP reset of ${Server.nameColor(targetUser, true)}; this is only to be used in emergencies, cannot be undone!</font></strong></button>`);
@@ -255,7 +255,7 @@ exports.commands = {
 	expunban: function (target, room, user) {
 		if (!this.can("exp")) return false;
 		if (!target) return this.parse("/help expunban");
-		let targetId = toId(target);
+		let targetId = toID(target);
 		if (!Db.expoff.has(targetId)) return this.errorReply(`${target} is not currently exp banned.`);
 		Db.expoff.remove(targetId);
 		this.globalModlog(`EXPUNBAN`, targetId, ` by ${user.name}`);
@@ -267,7 +267,7 @@ exports.commands = {
 	expban: function (target, room, user) {
 		if (!this.can("exp")) return false;
 		if (!target) return this.parse("/help expban");
-		let targetId = toId(target);
+		let targetId = toID(target);
 		if (Db.expoff.has(targetId)) return this.errorReply(`${target} is currently exp banned.`);
 		Db.expoff.set(targetId, true);
 		this.globalModlog(`EXPBAN`, targetId, ` by ${user.name}`);
@@ -287,7 +287,7 @@ exports.commands = {
 			return {name: name, exp: Db.exp.get(name).toLocaleString()};
 		});
 		if (!keys.length) return this.sendReplyBox("EXP ladder is empty.");
-		keys.sort(function (a, b) { return toId(b.exp) - toId(a.exp); });
+		keys.sort(function (a, b) { return toID(b.exp) - toID(a.exp); });
 		this.sendReplyBox(rankLadder("Exp Ladder", "EXP", keys.slice(0, target), "exp") + "</div>");
 	},
 };

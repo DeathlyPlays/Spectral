@@ -41,10 +41,10 @@ exports.commands = {
 			if (title.length > 30) return this.errorReply("Please make sure your suggestion title is 30 characters or less.");
 			if (suggestion.length > 500) return this.errorReply("Please make your suggestion 500 characters or less.");
 			if (Rooms.get("staff")) Rooms.get("staff").add(`/raw <div style="border: #000000 solid 2px;"><center><br><font size="1">${Server.nameColor(user.name, true, true)} has submitted a suggestion:</font>"${suggestion}"</center><br /></div>`);
-			suggestions[toId(title)] = {
+			suggestions[toID(title)] = {
 				user: user.userid,
 				title: title,
-				id: toId(title),
+				id: toID(title),
 				desc: suggestion,
 			};
 			write();
@@ -55,7 +55,7 @@ exports.commands = {
 		delete: function (target) {
 			if (!this.can("ban")) return false;
 			if (!target) return this.errorReply("Please enter a valid suggestion ID.");
-			let suggestionid = toId(target);
+			let suggestionid = toID(target);
 			if (!suggestions[suggestionid]) return this.errorReply(`${target} is not currently registered as a suggestion.`);
 			delete suggestions[suggestionid];
 			write();
@@ -79,7 +79,7 @@ exports.commands = {
 		view: function (target, room) {
 			if (!this.can("ban")) return false;
 			if (room && room.id === "staff" && !this.runBroadcast()) return;
-			let suggestion = toId(target);
+			let suggestion = toID(target);
 			if (!suggestions[suggestion]) return this.errorReply(`The suggestion "${target}" is not currently a suggestion on ${Config.serverName}.`);
 			this.sendReplyBox(`<strong>"${suggestions[suggestion].title}"</strong> was suggested by ${Server.nameColor(suggestions[suggestion].user, true, true)}:<br /> ${suggestions[suggestion].desc}`);
 		},

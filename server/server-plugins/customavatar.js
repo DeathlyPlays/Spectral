@@ -57,7 +57,7 @@ exports.commands = {
 			let parts = target.split(",").map(param => param.trim());
 			if (parts.length < 2) return this.parse("/help customavatar");
 
-			let name = toId(parts[0]);
+			let name = toID(parts[0]);
 			let avatarUrl = parts[1];
 			if (!/^https?:\/\//i.test(avatarUrl)) avatarUrl = `http://${avatarUrl}`;
 			let ext = path.extname(avatarUrl);
@@ -77,7 +77,7 @@ exports.commands = {
 		delete: function (target, room, user) {
 			if (!this.can("profile")) return false;
 
-			let userid = toId(target);
+			let userid = toID(target);
 			let image = Config.customavatars[userid];
 
 			if (!image) return this.errorReply(`${target} does not have a custom avatar.`);

@@ -39,9 +39,9 @@ exports.commands = {
 			if (!quote) return this.parse("/quotehelp");
 			if (name.length > 18) return this.errorReply("Quote names must be 18 characters or less!");
 			if (quote.length > 300) return this.errorReply("Quotes should remain 300 characters long or less.");
-			quotes[toId(name)] = {
+			quotes[toID(name)] = {
 				name: name,
-				id: toId(name),
+				id: toID(name),
 				quote: quote.join(", "),
 			};
 			write();
@@ -51,7 +51,7 @@ exports.commands = {
 		delete: function (target) {
 			if (!this.can("quotes")) return false;
 			if (!target) return this.parse("/quotehelp");
-			let quoteid = toId(target);
+			let quoteid = toID(target);
 			if (!quotes[quoteid]) return this.errorReply(`${target} is not currently registered as a quote.`);
 			delete quotes[quoteid];
 			write();
@@ -70,7 +70,7 @@ exports.commands = {
 				let randomQuote = quotes[randQuote].quote;
 				this.sendReply(`${title}: "${randomQuote}"`);
 			} else {
-				let quoteid = toId(target);
+				let quoteid = toID(target);
 				if (!quotes[quoteid]) return this.errorReply('That quote does not exist.');
 				this.sendReply(`${quotes[quoteid].name}: "${quotes[quoteid].quote}"`);
 			}

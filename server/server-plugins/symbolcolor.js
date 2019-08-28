@@ -38,7 +38,7 @@ function updateSC() {
 
 function generateCSS(name, sc) {
 	let css = ``;
-	name = toId(name);
+	name = toID(name);
 	css = `[id*="-userlist-user-${name}"] button > em.group {/ncolor: ${sc} !important;/n}/n`;
 	return css;
 }
@@ -52,13 +52,13 @@ exports.commands = {
 			target = target.split(",");
 			for (let u in target) target[u] = target[u].trim();
 			if (target.length !== 2) return this.parse("/sc help");
-			if (toId(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
-			if (sc[toId(target[0])]) return this.errorReply("This user already has a custom sc.  Do /sc delete [user] and then set their new symbol color.");
+			if (toID(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
+			if (sc[toID(target[0])]) return this.errorReply("This user already has a custom sc.  Do /sc delete [user] and then set their new symbol color.");
 			this.sendReply(`|raw|You have given ${Server.nameColor(target[0], true)} an symbol color.`);
 			Monitor.log(`${target[0]} has received an symbol color from ${user.name}.`);
 			this.privateModAction(`|raw|(${Server.nameColor(target[0], true)} has received a symbol color: <font color="${target[1]}">${target[1]}</font> from ${user.name}.)`);
 			if (Users.get(target[0]) && Users.get(target[0]).connected) Users.get(target[0]).popup(`|html|${Server.nameColor(user.name, true)} has set your symbol color to: <font color="${target[1]}">${target[1]}</font>.<br /><center>Refresh, If you don't see it.</center>`);
-			sc[toId(target[0])] = target[1];
+			sc[toID(target[0])] = target[1];
 			updateSC();
 		},
 
@@ -66,7 +66,7 @@ exports.commands = {
 		remove: "delete",
 		delete: function (target, room, user) {
 			if (!this.can("profile")) return false;
-			target = toId(target);
+			target = toID(target);
 			if (!sc[target]) return this.errorReply(`/sc - ${target} does not have an symbol color.`);
 			delete sc[target];
 			updateSC();

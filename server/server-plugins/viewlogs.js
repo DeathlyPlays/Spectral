@@ -13,7 +13,7 @@ exports.commands = {
 		if (target) {
 			let targets = target.split(",").map(p => { return p.trim(); });
 			if (!targets[1]) return this.errorReply("Please use /viewlogs with no target.");
-			switch (toId(targets[0])) {
+			switch (toID(targets[0])) {
 			case "month":
 				if (!targets[1]) return this.errorReply("Please use /viewlogs with no target.");
 				if (!permissionCheck(user, targets[1])) return this.errorReply("/viewlogs - Access denied.");
@@ -56,9 +56,9 @@ exports.commands = {
 		if (!dateOfLogs) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] -Provides you with a temporary link to view the target rooms chat logs.");
 		if (!permissionCheck(user, targetRoom)) return this.errorReply("/viewlogs - Access denied.");
 		let date;
-		if (toId(dateOfLogs) === "today" || toId(dateOfLogs) === "yesterday") {
+		if (toID(dateOfLogs) === "today" || toID(dateOfLogs) === "yesterday") {
 			date = new Date();
-			if (toId(dateOfLogs) === "yesterday") date.setDate(date.getDate() - 1);
+			if (toID(dateOfLogs) === "yesterday") date.setDate(date.getDate() - 1);
 			date = date.toLocaleDateString("en-US", {
 				day: "numeric",
 				month: "numeric",
@@ -73,7 +73,7 @@ exports.commands = {
 		if (splitDate.length < 3) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] - Provides you with a temporary link to view the target rooms chat logs.");
 
 		FS(`logs/chat/${targetRoom.toLowerCase()}/${splitDate[0]}-${splitDate[1]}/${date}.txt`).read().then(data => {
-			FS("logs/viewlogs.log").append(`[${new Date().toUTCString()}] ${user.name} viewed the logs of ${toId(targetRoom)}. Date: ${date}\n`);
+			FS("logs/viewlogs.log").append(`[${new Date().toUTCString()}] ${user.name} viewed the logs of ${toID(targetRoom)}. Date: ${date}\n`);
 
 			if (!user.can("warn", null, Rooms.get(targetRoom))) {
 				let lines = data.split("\n");
@@ -104,13 +104,13 @@ exports.commands = {
 		let [roomName, phrase] = target.split(",").map(p => { return p.trim(); });
 		if (!phrase) return this.errorReply("Please specify a phrase to search.");
 
-		if (toId(roomName) === "all" && !this.can("hotpatch")) return false;
-		if (!permissionCheck(user, toId(roomName))) return false;
+		if (toID(roomName) === "all" && !this.can("hotpatch")) return false;
+		if (!permissionCheck(user, toID(roomName))) return false;
 
-		FS("logs/viewlogs.log").append(`[${new Date().toUTCString()}] ${user.name} searched the logs of ${toId(roomName)}" for "${phrase}".\n`);
+		FS("logs/viewlogs.log").append(`[${new Date().toUTCString()}] ${user.name} searched the logs of ${toID(roomName)}" for "${phrase}".\n`);
 
 		let pattern = escapeRegExp(phrase).replace(/\\\*/g, ".*");
-		let command = 'grep -Rnw \'./logs/chat/' + (toId(roomName) === 'all' ? '' : toId(roomName)) + '\' -e "' + pattern + '"';
+		let command = 'grep -Rnw \'./logs/chat/' + (toID(roomName) === 'all' ? '' : toID(roomName)) + '\' -e "' + pattern + '"';
 
 		require("child_process").exec(command, function (error, stdout, stderr) {
 			if (error && stderr) {
@@ -132,7 +132,7 @@ exports.commands = {
 				if (message.length < 1) continue;
 				output += `<font color="#970097">${file}</font><font color="#00AAAA">:</font><font color="#008700">${lineNumber}</font><font color="#00AAAA">:</font>${message}<br />`;
 			}
-			user.send(`|popup||wide||html|Displaying last ${MAX_LINES} lines containing "${pattern}" ${(toId(roomName) === `all` ? `` : ` in "${roomName}"`)}:<br /><br />${output}`);
+			user.send(`|popup||wide||html|Displaying last ${MAX_LINES} lines containing "${pattern}" ${(toID(roomName) === `all` ? `` : ` in "${roomName}"`)}:<br /><br />${output}`);
 		});
 	},
 	searchlogshelp: ["/searchlogs [room / all], [phrase] - Phrase may contain * wildcards."],
@@ -151,7 +151,7 @@ function permissionCheck(user, room) {
 	if (Rooms.get(room) && Rooms.get(room).isPersonal && (!user.can("roomowner") && !user.can("warn", null, Rooms.get(room)))) {
 		return false;
 	}
-	if (toId(room) === "upperstaff" && !user.can("roomowner")) return false;
+	if (toID(room) === "upperstaff" && !user.can("roomowner")) return false;
 	return true;
 }
 
@@ -187,7 +187,7 @@ function parseMessage(message, user) {
 	case "c":
 		name = lineSplit[2];
 		if (name === "~") break;
-		highlight = new RegExp(`\\b${toId(user)}\\b`, `gi`);
+		highlight = new RegExp(`\\b${toID(user)}\\b`, `gi`);
 		div = `chat`;
 		if (lineSplit.slice(3).join("|").match(highlight)) div = `chat highlighted`;
 		message = `<span class="${div}"><small>[${timestamp}]</small> <small>${name.substr(0, 1)}</small><strong>${Server.nameColor(name.substr(1))}:</font></strong><em>${Server.parseMessage(lineSplit.slice(3).join("|"))}</em></span>`;
@@ -195,7 +195,7 @@ function parseMessage(message, user) {
 	case "c:":
 		name = lineSplit[3];
 		if (name === "~") break;
-		highlight = new RegExp(`\\b${toId(user)}\\b`, `gi`);
+		highlight = new RegExp(`\\b${toID(user)}\\b`, `gi`);
 		div = "chat";
 		if (lineSplit.slice(4).join("|").match(highlight)) div = `chat highlighted`;
 
@@ -205,7 +205,7 @@ function parseMessage(message, user) {
 		let components = [date.getHours(), date.getMinutes(), date.getSeconds()];
 		timestamp = components.map(function (x) { return (x < 10) ? "0" + x : x; }).join(":");
 
-		message = `<span class="${div}"><small>[${timestamp}]</small> <small>${name.substr(0, 1)}</small>${Server.nameColor(toId(name), true)}<em>${Server.parseMessage(lineSplit.slice(4).join("|"))}</em></span>`;
+		message = `<span class="${div}"><small>[${timestamp}]</small> <small>${name.substr(0, 1)}</small>${Server.nameColor(toID(name), true)}<em>${Server.parseMessage(lineSplit.slice(4).join("|"))}</em></span>`;
 		break;
 	case "uhtml":
 		message = `<span class="notice">${lineSplit.slice(3).join("|").trim()}</span>`;

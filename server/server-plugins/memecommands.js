@@ -488,13 +488,13 @@ exports.commands = {
 			let [name, img, height, width] = target.split(",").map(p => { return p.trim(); });
 			if (!width) return this.parse(`/memeshelp`);
 			if (name.length > 20) return this.errorReply(`Your name should be less than 20 characters long.`);
-			if (memes[toId(name)]) return this.errorReply(`${name} is already registered as a meme!`);
+			if (memes[toID(name)]) return this.errorReply(`${name} is already registered as a meme!`);
 			if (![".png", ".gif", ".jpg"].includes(img.slice(-4))) return this.errorReply(`The image needs to end in .png, .gif, or .jpg.`);
 			if (height > 500 || height < 100 || width > 500 || width < 100) return this.errorReply(`Your height and width attributes should be less than 500 and more than 100.`);
 			if (isNaN(height) || isNaN(width)) return this.errorReply(`Your height and width attributes must be a number!`);
-			memes[toId(name)] = {
+			memes[toID(name)] = {
 				name: name,
-				id: toId(name),
+				id: toID(name),
 				img: img,
 				height: height,
 				width: width,
@@ -508,7 +508,7 @@ exports.commands = {
 		remove: function (target) {
 			if (!this.can("lock")) return false;
 			if (!target) return this.errorReply("This command requires a target.");
-			let memeid = toId(target);
+			let memeid = toID(target);
 			if (!memes[memeid]) return this.errorReply(`${target} is not currently registered as a meme.`);
 			delete memes[memeid];
 			write();
@@ -535,7 +535,7 @@ exports.commands = {
 				let randMemeW = memes[randMeme].width;
 				this.sendReplyBox(`Random Meme "${title}": <img src="${randMemeImg}" alt="${title}" title="${title}" height="${randMemeH}" width="${randMemeW}">`);
 			} else {
-				let memeid = toId(target);
+				let memeid = toID(target);
 				if (!memes[memeid]) return this.errorReply("That meme does not exist.");
 				let name = memes[memeid].name;
 				let img = memes[memeid].img;

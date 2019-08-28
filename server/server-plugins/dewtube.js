@@ -41,7 +41,7 @@ function write() {
 }
 
 function getChannel(user) {
-	user = toId(user);
+	user = toID(user);
 	let reply;
 	for (let channel in channels) {
 		if (channels[channel].owner === user) {
@@ -62,8 +62,8 @@ let config = {
 };
 
 function collab(channel1, channel2) {
-	channel1 = toId(channel1);
-	channel2 = toId(channel2);
+	channel1 = toID(channel1);
+	channel2 = toID(channel2);
 	let combinedSubs = channels[channel1].subscribers + channels[channel2].subscribers;
 	let traffic = Math.floor(Math.random() * combinedSubs);
 	if (traffic > 1000000) {
@@ -108,10 +108,10 @@ exports.commands = {
 			if (!name || !desc) return this.parse(`/dewtubehelp`);
 			if (name.length < 1 || name.length > 25) return this.errorReply(`Your channel name must be between 1-25 characters.`);
 			if (desc.length < 1 || desc.length > 300) return this.errorReply(`Your channel description must be between 1-300 characters.`);
-			if (channels[toId(name)]) return this.errorReply(`${name} already is a DewTube channel.`);
+			if (channels[toID(name)]) return this.errorReply(`${name} already is a DewTube channel.`);
 			if (getChannel(user.userid)) return this.errorReply(`You already have a DewTube channel.`);
-			channels[toId(name)] = {
-				id: toId(name),
+			channels[toID(name)] = {
+				id: toID(name),
 				name: name,
 				aboutme: desc,
 				views: 0,
@@ -146,7 +146,7 @@ exports.commands = {
 		terminatechannel: "removechannel",
 		terminate: "removechannel",
 		removechannel: function (target, room, user) {
-			target = toId(target);
+			target = toID(target);
 			if (!target || !channels[target]) return this.errorReply(`The channel "${target}" appears to not exist.`);
 			if (!this.can("ban") && channels[target].owner !== user.userid) return this.errorReply(`You must be the channel owner or a Global Moderator (or higher) to delete a channel.`);
 			delete channels[target];
@@ -159,8 +159,8 @@ exports.commands = {
 		channel: "dashboard",
 		dashboard: function (target, room, user) {
 			if (!this.runBroadcast()) return;
-			if (!target) target = toId(getChannel(user.userid));
-			let channelId = toId(target);
+			if (!target) target = toID(getChannel(user.userid));
+			let channelId = toID(target);
 			if (!channels[channelId]) return this.errorReply(`This is not a DewTube channel.`);
 			let vidProgress = channels[channelId].vidProgress;
 			let display = `${channels[channelId].banner ? `<div style="background:url(${channels[channelId].banner}); background-size: 100% 100%; height: 100%">` : ``}<center><h2>${channels[channelId].name}</h2><strong>Creator:</strong> ${Server.nameColor(channels[channelId].owner, true, true)}`;
@@ -184,7 +184,7 @@ exports.commands = {
 		aboutme: "desc",
 		description: "desc",
 		desc: function (target, room, user) {
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
 			if (!target || target.length > 300) return this.errorReply("Needs a target; no more than 300 characters.");
 			channels[channelId].aboutme = target;
@@ -231,7 +231,7 @@ exports.commands = {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			let [title, thumbnail] = target.split(",").map(p => p.trim());
 			if (!title) return this.errorReply(`Please title the video you are filming.`);
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (Date.now() - channels[channelId].lastRecorded < RECORD_COOLDOWN) return this.errorReply(`You are on record cooldown.`);
 			let videoProgress = channels[channelId].vidProgress;
 			if (videoProgress !== "notStarted") return this.errorReply(`You already have a video recorded.`);
@@ -260,7 +260,7 @@ exports.commands = {
 		editvideo: "edit",
 		edit: function (target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			let videoProgress = channels[channelId].vidProgress;
 			if (videoProgress !== "recorded") return this.errorReply(`You haven't recorded any new footage yet.`);
 			channels[channelId].vidProgress = "edited";
@@ -272,7 +272,7 @@ exports.commands = {
 		upload: "publish",
 		publish: function (target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			let videoProgress = channels[channelId].vidProgress;
 			if (videoProgress === "notStarted") return this.errorReply(`Please record a video before uploading.`);
 			let subCount = channels[channelId].subscribers;
@@ -455,7 +455,7 @@ exports.commands = {
 		unmonetize: "monetization",
 		monetize: "monetization",
 		monetization: function (target, room, user) {
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			if (channels[channelId].subscribers < 1000) return this.errorReply(`Due to recent DewTube partnership guidelines you must have 1,000 subscribers to apply for monetization.`);
 			if (channels[channelId].isMonetized) {
@@ -475,7 +475,7 @@ exports.commands = {
 		togglenotifications: "notify",
 		notify: function (target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (channels[channelId].notifications) {
 				channels[channelId].notifications = false;
 				this.sendReply(`You have successfully deactivated video notifications.`);
@@ -490,8 +490,8 @@ exports.commands = {
 		drama: function (target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			if (!target) return this.errorReply(`Pick who you want to start drama with.`);
-			let targetId = toId(target);
-			let usersChannel = toId(getChannel(user.userid));
+			let targetId = toID(target);
+			let usersChannel = toID(getChannel(user.userid));
 			if (!channels[targetId]) return this.errorReply(`"${target}" is not a channel.`);
 			let targetChannel = channels[targetId].name;
 			if (channels[targetId] === channels[usersChannel]) return this.errorReply(`You cannot have drama with yourself.`);
@@ -561,7 +561,7 @@ exports.commands = {
 		disabledrama: "toggledrama",
 		enabledrama: "toggledrama",
 		toggledrama: function (target, room, user) {
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
 			if (!channels[channelId].allowingDrama) {
 				channels[channelId].allowingDrama = true;
@@ -575,9 +575,9 @@ exports.commands = {
 		collab: "collaborate",
 		collaborate: function (target, room, user) {
 			if (!target) return this.parse(`/dewtubehelp`);
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
-			let targetId = toId(target);
+			let targetId = toID(target);
 			if (!channels[targetId]) return this.errorReply(`"${target}" is not a channel.`);
 			if (channels[targetId] === channels[channelId]) return this.errorReply(`You cannot collaborate with yourself (what would be the point?).`);
 			// Check if the channel's owner is online (so the system can PM the user and avoid the chances the collaboration request will not be seen)
@@ -602,9 +602,9 @@ exports.commands = {
 		collabaccept: "acceptcollab",
 		acceptcollab: function (target, room, user) {
 			if (!target) return this.parse(`/dewtubehelp`);
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
-			let targetId = toId(target);
+			let targetId = toID(target);
 			if (!channels[targetId]) return this.errorReply(`"${target}" is not a channel.`);
 			if (channels[targetId].pendingCollab !== channels[channelId].id) return this.errorReply(`${channels[targetId].name} has not sent you a collaboration request, or it was cancelled.`);
 			// Check if both user's are available to record a video and collab
@@ -735,9 +735,9 @@ exports.commands = {
 		deny: "denycollab",
 		denycollab: function (target, room, user) {
 			if (!target) return this.parse(`/dewtubehelp`);
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
-			let targetId = toId(target);
+			let targetId = toID(target);
 			if (!channels[targetId]) return this.errorReply(`"${target}" is not a channel.`);
 			if (channels[targetId].pendingCollab !== channels[channelId]) return this.errorReply(`${channels[targetId].name} has not sent you a collaboration request, or it was cancelled.`);
 			// Reset the channel that was declined's pending collab
@@ -754,9 +754,9 @@ exports.commands = {
 		cancel: "cancelcollab",
 		cancelcollab: function (target, room, user) {
 			if (!target) return this.parse(`/dewtubehelp`);
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
-			let targetId = toId(target);
+			let targetId = toID(target);
 			if (!channels[targetId]) return this.errorReply(`"${target}" is not a channel.`);
 			if (channels[channelId].pendingCollab !== targetId) return this.errorReply(`${channels[targetId].name} does not have a pending collaboration request from you.`);
 			// Reset pending collab request to nothing
@@ -770,7 +770,7 @@ exports.commands = {
 		profilepicture: "pfp",
 		profilepic: "pfp",
 		pfp: function (target, room, user) {
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
 			if (!target) return this.parse(`/dewtubehelp`);
 			if (![".png", ".gif", ".jpg"].includes(target.slice(-4))) return this.errorReply(`Your profile picture image must end in an extension like .png, .gif, or .jpg.`);
@@ -783,7 +783,7 @@ exports.commands = {
 		bg: "banner",
 		background: "banner",
 		banner: function (target, room, user) {
-			let channelId = toId(getChannel(user.userid));
+			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
 			if (!target) return this.parse(`/dewtubehelp`);
 			if (![".png", ".gif", ".jpg"].includes(target.slice(-4))) return this.errorReply(`Your banner image must end in an extension like .png, .gif, or .jpg.`);
@@ -795,8 +795,8 @@ exports.commands = {
 		vids: "videos",
 		videos: function (target, room, user) {
 			if (!this.runBroadcast()) return;
-			if (!target) target = toId(getChannel(user.userid));
-			let channelId = toId(target);
+			if (!target) target = toID(getChannel(user.userid));
+			let channelId = toID(target);
 			if (!channels[channelId]) return this.errorReply(`This is not a DewTube channel.`);
 			let videos = channels[channelId].uploadedVideos;
 			if (!Object.keys(videos).length) return this.errorReply(`This DewTuber doesn't have any video data, or hasn't uploaded one yet.`);
@@ -827,7 +827,7 @@ exports.commands = {
 			if (!this.runBroadcast()) return;
 			let [channel, video] = target.split(",").map(p => { return p.trim(); });
 			if (!video) return this.parse("/dewtubehelp");
-			let channelId = toId(channel);
+			let channelId = toID(channel);
 			if (!channels[channelId]) return this.errorReply(`"${channel}" does not appear to be a channel.`);
 			let vid = channels[channelId].uploadedVideos[video];
 			if (!vid) return this.errorReply(`${channels[channelId].name} appears to not have a video titled "${video}".`);

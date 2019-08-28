@@ -17,7 +17,7 @@ const serverIp = Config.serverIp;
 function isDev(user) {
 	if (!user) return;
 	if (typeof user === "object") user = user.userid;
-	let dev = Db.devs.get(toId(user));
+	let dev = Db.devs.get(toID(user));
 	if (dev === 1) return true;
 	return false;
 }
@@ -26,7 +26,7 @@ Server.isDev = isDev;
 function isVIP(user) {
 	if (!user) return;
 	if (typeof user === "object") user = user.userid;
-	let vip = Db.vips.get(toId(user));
+	let vip = Db.vips.get(toID(user));
 	if (vip === 1) return true;
 	return false;
 }
@@ -55,7 +55,7 @@ exports.commands = {
 		give: function (target, room, user) {
 			if (!this.can("hotpatch")) return false;
 			if (!target) return this.parse("/help", true);
-			let devUsername = toId(target);
+			let devUsername = toID(target);
 			if (devUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 			if (isDev(devUsername)) return this.errorReply(`${target} is already a DEV user.`);
 			Db.devs.set(devUsername, 1);
@@ -66,7 +66,7 @@ exports.commands = {
 		take: function (target, room, user) {
 			if (!this.can("hotpatch")) return false;
 			if (!target) return this.parse("/help", true);
-			let devUsername = toId(target);
+			let devUsername = toID(target);
 			if (devUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 			if (!isDev(devUsername)) return this.errorReply(`${target} isn't a DEV user.`);
 			Db.devs.remove(devUsername);
@@ -100,7 +100,7 @@ exports.commands = {
 		give: function (target, room, user) {
 			if (!this.can("profile")) return false;
 			if (!target) return this.parse("/help", true);
-			let vipUsername = toId(target);
+			let vipUsername = toID(target);
 			if (vipUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 			if (isVIP(vipUsername)) return this.errorReply(`${target} is already a VIP user.`);
 			Db.vips.set(vipUsername, 1);
@@ -111,7 +111,7 @@ exports.commands = {
 		take: function (target, room, user) {
 			if (!this.can("profile")) return false;
 			if (!target) return this.parse("/help", true);
-			let vipUsername = toId(target);
+			let vipUsername = toID(target);
 			if (vipUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 			if (!isVIP(vipUsername)) return this.errorReply(`${target} isn't a VIP user.`);
 			Db.vips.remove(vipUsername);
@@ -148,7 +148,7 @@ exports.commands = {
 			if (!this.can("profile")) return false;
 			let [userid, titleName, color] = target.split(",").map(p => { return p.trim(); });
 			if (!color) return this.parse("/help", true);
-			userid = toId(userid);
+			userid = toID(userid);
 			let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
 			if (color.charAt(0) !== "#") return this.errorReply(`The color needs to be a hex starting with "#".`);
 			profile.data.title.title = titleName;
@@ -165,7 +165,7 @@ exports.commands = {
 		remove: function (target, room, user) {
 			if (!this.can("profile")) return false;
 			if (!target) return this.parse("/help", true);
-			let userid = toId(target);
+			let userid = toID(target);
 			let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
 			if (!(profile.data.title.title || profile.data.title.color)) return this.errorReply(`${target} doesn't have a custom title yet.`);
 			delete profile.data.title.title;
@@ -219,7 +219,7 @@ exports.commands = {
 					return this.sendReply("Your Switch friend code has been deleted from the server.");
 				} else {
 					if (!this.can("profile")) return false;
-					let userid = toId(target);
+					let userid = toID(target);
 					if (!Db.switchfc.has(userid)) return this.errorReply(`${target} hasn't set a friend code.`);
 					Db.switchfc.remove(userid);
 					return this.sendReply(`${target}'s Switch friend code has been deleted from the server.`);
@@ -260,7 +260,7 @@ exports.commands = {
 					return this.sendReply("Your friend code has been deleted from the server.");
 				} else {
 					if (!this.can("profile")) return false;
-					let userid = toId(target);
+					let userid = toID(target);
 					if (!Db.friendcode.has(userid)) return this.errorReply(`${target} hasn't set a friend code.`);
 					Db.friendcode.remove(userid);
 					return this.sendReply(`${target}'s friend code has been deleted from the server.`);
@@ -288,7 +288,7 @@ exports.commands = {
 			let profile = Db.profile.get(user.userid, {data: {title: {}, music: {}}});
 			let type = Dex.getType(target);
 			if (!type.exists) return this.errorReply("Not a type. Check your spelling?");
-			profile.type = toId(type);
+			profile.type = toID(type);
 			Db.profile.set(user.userid, profile);
 			return this.sendReply(`Your favorite type has been set to "${target}".`);
 		},
@@ -330,7 +330,7 @@ exports.commands = {
 		delete: "remove",
 		remove: function (target, room, user) {
 			if (!this.can("profile")) return false;
-			let userid = toId(target);
+			let userid = toID(target);
 			let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
 			if (!target) return this.parse("/pcolor help");
 			if (!profile.color) return this.errorReply(`${target} does not have a profile color set.`);
@@ -358,7 +358,7 @@ exports.commands = {
 		setbg: function (target) {
 			if (!this.can("profile")) return false;
 			let [userid, link] = target.split(",").map(p => { return p.trim(); });
-			userid = toId(userid);
+			userid = toID(userid);
 			let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
 			if (!link) return this.parse(`/help background`);
 			if (![".png", ".gif", ".jpg"].includes(link.slice(-4))) return this.errorReply(`Backgrounds must end in an extension like .png, .gif, or .jpg.`);
@@ -375,7 +375,7 @@ exports.commands = {
 		delete: "deletebg",
 		deletebg: function (target) {
 			if (!this.can("profile")) return false;
-			let targ = toId(target);
+			let targ = toID(target);
 			if (!targ) return this.parse("/backgroundhelp");
 			let profile = Db.profile.get(targ, {data: {title: {}, music: {}}});
 			if (!profile.background) return this.errorReply(`${target} doesn't have a custom background.`);
@@ -402,7 +402,7 @@ exports.commands = {
 		set: function (target) {
 			if (!this.can("profile")) return false;
 			let [userid, link, title] = target.split(",").map(p => { return p.trim(); });
-			userid = toId(userid);
+			userid = toID(userid);
 			let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
 			if (!title) return this.parse("/musichelp");
 			if (![".mp3", ".mp4", ".m4a"].includes(link.slice(-4))) return this.errorReply(`Music links must end in an extension like .mp3, .mp4, or .m4a.`);
@@ -416,7 +416,7 @@ exports.commands = {
 		remove: "delete",
 		delete: function (target) {
 			if (!this.can("profile")) return false;
-			target = toId(target);
+			target = toID(target);
 			let profile = Db.profile.get(target, {data: {title: {}, music: {}}});
 			if (!target) return this.parse("/musichelp");
 			if (!(profile.data.music.link || profile.data.music.title)) return this.errorReply(`${target} does not have any profile music.`);
@@ -511,7 +511,7 @@ exports.commands = {
 		if (!target) target = user.userid;
 		if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 		if (!this.runBroadcast()) return;
-		let targetUser = Users.get(toId(target));
+		let targetUser = Users.get(toID(target));
 		if (!targetUser || !targetUser.connected) return this.errorReply(`${target} is not online. Use /seen to find out how long ago they left.`);
 		return this.sendReplyBox(`${Server.nameColor(targetUser, true, true)} was last active <strong>${Chat.toDurationString(Date.now() - targetUser.lastPublicMessage)} ago.</strong>`);
 	},
@@ -519,14 +519,14 @@ exports.commands = {
 
 	"!profile": true,
 	profile: function (target, room, user) {
-		target = toId(target);
+		target = toID(target);
 		if (!target) target = user.name;
 		if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 		if (!this.runBroadcast()) return;
 		let targetUser = Users.get(target);
 		let online = (targetUser ? targetUser.connected : false);
 		let username = (targetUser ? targetUser.name : target);
-		let userid = (targetUser ? targetUser.userid : toId(target));
+		let userid = (targetUser ? targetUser.userid : toID(target));
 		let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
 		let avatar = (targetUser ? (isNaN(targetUser.avatar) ? `http://${serverIp}:${Config.port}/avatars/${targetUser.avatar}` : `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar}.png`) : (Config.customavatars[userid] ? `http://${serverIp}:${Config.port}/avatars/${Config.customavatars[userid]}` : `http://play.pokemonshowdown.com/sprites/trainers/1.png`));
 		if (targetUser && targetUser.avatar[0] === "#") avatar = `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar.substr(1)}.png`;

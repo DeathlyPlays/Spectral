@@ -14,12 +14,12 @@ exports.commands = {
 		toggle: function (target, room, user) {
 			if (!target) return this.parse(`/help roomshop toggle`);
 			if (!this.can("roomshop")) return false;
-			if (this.meansYes(toId(target))) {
+			if (this.meansYes(toID(target))) {
 				if (Db.roomshop.has(room.id)) return this.errorReply(`${room.title} already has a Room Shop.`);
 				Db.roomshop.set(room.id);
 				this.privateModAction(`${room.title}'s Room Shop has been enabled.`);
 				if (room.founder) this.parse(`/roomshop bank set ${room.founder}`);
-			} else if (this.meansNo(toId(target))) {
+			} else if (this.meansNo(toID(target))) {
 				if (!Db.roomshop.has(room.id)) return this.errorReply(`${room.title} does not have a Room Shop yet.`);
 				Db.roomshop.remove(room.id);
 				this.privateModAction(`${room.title}'s Room Shop has been disabled.`);
@@ -32,7 +32,7 @@ exports.commands = {
 		bank: {
 			set: function (target, room, user) {
 				if (!this.can("roomshop", null, room)) return false;
-				target = toId(target);
+				target = toID(target);
 				if (!target) return this.parse(`/roomshophelp`);
 				let roomshop = Db.roomshop.get(room.id, {items: {}});
 				if (!roomshop) return this.errorReply(`${room.title} does not have a Room Shop yet.`);
@@ -84,10 +84,10 @@ exports.commands = {
 			let [item, price, ...desc] = target.split(",").map(p => p.trim());
 			if (!(item && price && desc)) return this.parse("/roomshophelp");
 			if (item.length < 1 || item.length > 20) return this.errorReply(`The item name should be between 1-20 characters long.`);
-			if (roomshop.items[toId(item)]) return this.errorReply(`${item} is already an item in the room shop.`);
+			if (roomshop.items[toID(item)]) return this.errorReply(`${item} is already an item in the room shop.`);
 			if (isNaN(price) || price < 1) return this.errorReply(`The price for the item must be an integer above 0.`);
 			if (desc.length < 1 || desc.length > 50) return this.errorReply(`The description for an item must be between 1-50 characters long.`);
-			roomshop.items[toId(item)] = {id: toId(item), name: item, price: price, desc: desc.join(", ")};
+			roomshop.items[toID(item)] = {id: toID(item), name: item, price: price, desc: desc.join(", ")};
 			Db.roomshop.set(room.id, roomshop);
 			room.addRaw(`"${item}" was added to the Room Shop by ${Server.nameColor(user.name, true, true)}.`);
 			this.privateModAction(`${user.name} has added "${item}" into the Room Shop.`);
@@ -100,8 +100,8 @@ exports.commands = {
 			if (!this.can("roomshop", null, room)) return false;
 			if (!target) return this.parse(`/roomshophelp`);
 			let roomshop = Db.roomshop.get(room.id, {items: {}});
-			if (!roomshop.items[toId(target)]) return this.errorReply(`The item "${target}" does not exist.`);
-			delete roomshop.items[toId(target)];
+			if (!roomshop.items[toID(target)]) return this.errorReply(`The item "${target}" does not exist.`);
+			delete roomshop.items[toID(target)];
 			Db.roomshop.set(roomshop);
 			room.addRaw(`"${target}" was removed from the Room Shop by ${Server.nameColor(user.name, true, true)}.`);
 			this.privateModAction(`${user.name} has removed "${target}" from the Room Shop.`);
@@ -131,10 +131,10 @@ exports.commands = {
 			if (!Db.roomshop.has(room.id)) return this.errorReply("Room Shop is not enabled here.");
 			let roomshop = Db.roomshop.get(room.id, {items: {}});
 			if (!roomshop.bank) return this.errorReply(`${room.title} hasn't set a bank yet.`);
-			if (!roomshop.items[toId(target)]) return this.errorReply(`The item "${target}" does not exist.`);
+			if (!roomshop.items[toID(target)]) return this.errorReply(`The item "${target}" does not exist.`);
 			if (roomshop.bank === user.userid) return this.errorReply("Bank cannot purchase from the Room Shop.");
 			let bank = roomshop.bank;
-			let cost = roomshop.items[toId(target)].price;
+			let cost = roomshop.items[toID(target)].price;
 			// Take payments and record payments from the user
 			Economy.readMoney(user.userid, money => {
 				if (money < cost) {
@@ -166,7 +166,7 @@ exports.commands = {
 		transactions: function (target, room, user) {
 			if (!this.can("roomshop", null, room)) return false;
 			if (!Db.roomshop.has(room.id)) return this.errorReply(`Roomshop is not enabled here.`);
-			target = toId(target);
+			target = toID(target);
 
 			let numLines = 15;
 			let matching = true;

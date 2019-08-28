@@ -27,7 +27,7 @@ class Draft {
 	addTeam(teamname, manager, self) {
 		if (this.teams[teamname]) return self.errorReply("There is already a team with this Team Name.");
 		this.teams[teamname] = {
-			"manager": toId(manager),
+			"manager": toID(manager),
 			"draftpicks": [],
 		};
 		this.originalOrder.push(teamname);

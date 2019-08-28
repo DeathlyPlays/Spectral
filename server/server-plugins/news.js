@@ -19,7 +19,7 @@ if (newsRequests !== "") {
 
 function generateNews(user) {
 	let newsData, newsDisplay = [];
-	user = toId(user);
+	user = toID(user);
 	Db.news.keys().forEach(announcement => {
 		newsData = Db.news.get(announcement);
 		newsDisplay.push(`<h4>${announcement}</h4>${newsData[1]}<br /><br />—${Server.nameColor(newsData[0], true)} <small>on ${newsData[2]}</small>`);
@@ -29,12 +29,12 @@ function generateNews(user) {
 
 function hasSubscribed(user) {
 	if (typeof user === "object") user = user.userid;
-	if (Db.NewsSubscribers.has(toId(user))) return true;
+	if (Db.NewsSubscribers.has(toID(user))) return true;
 	return false;
 }
 
 function showSubButton(user) {
-	user = toId(user);
+	user = toID(user);
 	let output;
 	output = `<hr /><center><button class = "button" name= "send" value= "/news ${(hasSubscribed(user) ? "unsubscribe" : "subscribe")}">${(hasSubscribed(user) ? "Unsubscribe from the news" : "Subscribe to the news")}</button></center>`;
 	return output;
@@ -42,7 +42,7 @@ function showSubButton(user) {
 
 Server.showNews = function (userid, user) {
 	if (!user || !userid) return false;
-	userid = toId(userid);
+	userid = toID(userid);
 	let newsDisplay = generateNews(user);
 	if (!hasSubscribed(userid)) return false;
 	if (newsDisplay.length > 0) {

@@ -45,9 +45,9 @@ const packs = (function () {
 const CARDSEARCH_MAX_VALUE = 500;
 
 function toPackName(pack) {
-	pack = toId(pack);
+	pack = toID(pack);
 	for (let p = 0; p < packs.length; p++) {
-		if (toId(packs[p]) === pack) return packs[p];
+		if (toID(packs[p]) === pack) return packs[p];
 	}
 	return pack;
 }
@@ -88,17 +88,17 @@ function makePack(pack) {
 function genCard(options) {
 	if (options) {
 		for (let key in options) {
-			options[key] = toId(options[key]);
+			options[key] = toID(options[key]);
 		}
 	}
 	let validCards = Object.keys(Server.cards).filter(id => {
 		let card = Server.cards[id];
-		if (options.rarity && toId(card.rarity) !== options.rarity) return false;
-		if (options.pack && toId(card.pack) !== options.pack) return false;
-		if (options.type && toId(card.type) !== options.type) return false;
-		if (options.species && toId(card.species) !== options.species) return false;
-		if (options.cardType && toId(card.cardType) !== options.cardType) return false;
-		if (options.artist && toId(card.artist) !== options.artist) return false;
+		if (options.rarity && toID(card.rarity) !== options.rarity) return false;
+		if (options.pack && toID(card.pack) !== options.pack) return false;
+		if (options.type && toID(card.type) !== options.type) return false;
+		if (options.species && toID(card.species) !== options.species) return false;
+		if (options.cardType && toID(card.cardType) !== options.cardType) return false;
+		if (options.artist && toID(card.artist) !== options.artist) return false;
 		return true;
 	});
 	if (!validCards.length) return Server.cards["primalclashshroomish"]; // default
@@ -108,7 +108,7 @@ function genCard(options) {
 function giveCard(name, card) {
 	if (!Server.cards[card]) return false;
 	let newCard = Object.assign({}, Server.cards[card]);
-	let userid = toId(name);
+	let userid = toID(name);
 	Db.cards.set(userid, Db.cards.get(userid, []).concat([newCard]));
 }
 
@@ -147,8 +147,8 @@ exports.commands = {
 		card: function (target) {
 			if (!this.runBroadcast()) return;
 			if (!target) return this.parse(`/help psgo card`);
-			if (!Server.cards[toId(target)]) return this.errorReply(`That card does not exist.`);
-			let card = Server.cards[toId(target)];
+			if (!Server.cards[toID(target)]) return this.errorReply(`That card does not exist.`);
+			let card = Server.cards[toID(target)];
 			let display = `<div style="width: 49%; display: inline-block;"><img src="${card.image}" title="${card.id}" width="254" height="342"></div>`;
 			display += `<div style="width: 49%; display: inline-block; float: right;">`;
 			let colors = {Common: "#0066ff", Uncommon: "#008000", Rare: "#cc0000", "Ultra Rare": "#800080", Legendary: "#c0c0c0", Mythic: "#998200"};
@@ -162,7 +162,7 @@ exports.commands = {
 		showcase: function (target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = user.userid;
-			const cards = Db.cards.get(toId(target), []);
+			const cards = Db.cards.get(toID(target), []);
 			if (!cards.length) return this.errorReply(`${target} has no cards.`);
 			let cardsShown = 0;
 			// done this way because of a glitch
@@ -171,14 +171,14 @@ exports.commands = {
 				if (broadcasting && cardsShown >= 100) {
 					if (cardsShown === 100) {
 						cardsShown++;
-						return `<button name="send" value="/psgo showcase ${toId(target)}" style="border-radius: 12px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2) inset;">Show all cards</button>`;
+						return `<button name="send" value="/psgo showcase ${toID(target)}" style="border-radius: 12px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2) inset;">Show all cards</button>`;
 					}
 					return "";
 				}
 				cardsShown++;
 				return `<button name="send" value="/psgo card ${card.id}" style="border-radius: 12px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2) inset;"><img src="${card.image}" height="120" width="100" title="${card.id}"></button>`;
 			});
-			this.sendReplyBox(`<div style="max-height: 300px; overflow-y: scroll;">${cardsMapping.join("")}</div><br /><center><b>${Server.nameColor(toId(target), true)} has ${cards.length} cards</b></center>`);
+			this.sendReplyBox(`<div style="max-height: 300px; overflow-y: scroll;">${cardsMapping.join("")}</div><br /><center><b>${Server.nameColor(toID(target), true)} has ${cards.length} cards</b></center>`);
 		},
 		showcasehelp: ["/psgo showcase (user) - Show all of the selected user's cards."],
 
@@ -189,11 +189,11 @@ exports.commands = {
 			let targets = target.split(`,`).map(x => { return x.trim(); });
 			if (targets.length < 2) return this.parse(`/help psgo transfercard`);
 
-			let targetUser = Users.get(toId(targets[0]));
+			let targetUser = Users.get(toID(targets[0]));
 			if (!targetUser) return this.errorReply(`The user "${targets[0]}" was not found.`);
 			if (!targetUser.registered) return this.errorReply(`Guests cannot be given cards.`);
 			if (targetUser.userid === user.userid) return this.errorReply(`You cannot transfer cards to yourself.`);
-			let card = toId(targets[1]);
+			let card = toID(targets[1]);
 			if (!Server.cards[card]) return this.errorReply(`That card does not exist.`);
 
 			let canTransfer = hasCard(user.userid, card);
@@ -252,7 +252,7 @@ exports.commands = {
 					}
 					menu += `</details>`;
 				}
-				if (toId(target.join(""))) {
+				if (toID(target.join(""))) {
 					// Show found cards
 					let reqs = {alphabetical: "", rarity: "", pack: "", type: "", cardType: ""};
 					let invalidSearch = false;
@@ -294,9 +294,9 @@ exports.commands = {
 				}
 			} else {
 				menu += `<button class="button" name="send" value="${user.lastPSGOSearch ? `/psgo search ${user.lastPSGOSearch}` : `/psgo search`}">Back</button><br />`;
-				let card = Server.cards[toId(target)];
+				let card = Server.cards[toID(target)];
 				if (!card) {
-					menu += `The card "${toId(target)}" does not exist.</div>`;
+					menu += `The card "${toID(target)}" does not exist.</div>`;
 					return user.sendTo(room, `${change ? `|uhtmlchange|cs${user.userid}|` : `|uhtml|cs${user.userid}|`}${menu}`);
 				}
 				menu += `<div style="width: 49%; display: inline-block;">`;
@@ -315,7 +315,7 @@ exports.commands = {
 			let [pack, rarity, species, type, image, cardType] = target.split(`,`).map(x => { return x.trim(); });
 
 			if (!cardType) return this.parse(`/help psgo add`);
-			let id = toId(pack) + toId(species);
+			let id = toID(pack) + toID(species);
 			if (Server.cards[id]) return this.errorReply(`The card ${id} already exists in the PSGO database!`);
 			newCards[id] = {
 				id: id,
@@ -337,11 +337,11 @@ exports.commands = {
 		delete: function (target) {
 			if (!this.can("psgo")) return false;
 			if (!target) return this.parse(`/help psgo delete`);
-			if (!newCards[toId(target)]) return this.errorReply(`The card "${toId(target)}" is not in PSGO database or cannot be deleted.`);
-			delete newCards[toId(target)];
+			if (!newCards[toID(target)]) return this.errorReply(`The card "${toID(target)}" is not in PSGO database or cannot be deleted.`);
+			delete newCards[toID(target)];
 			saveCards();
 			Server.cards = Object.assign(newCards, origCards);
-			return this.sendReply(`${toId(target)} has been removed from the card database!`);
+			return this.sendReply(`${toID(target)} has been removed from the card database!`);
 		},
 		deletehelp: ["/psgo delete [card id] - removes a card from the PSGO database."],
 
@@ -351,10 +351,10 @@ exports.commands = {
 			let targets = target.split(`,`).map(x => {
 				return x.trim();
 			});
-			let targetUser = Users.get(toId(targets[0]));
+			let targetUser = Users.get(toID(targets[0]));
 			if (!targetUser) return this.errorReply(`The user "${targets[0]}" was not found.`);
 			if (!targetUser.named) return this.errorReply(`Guests cannot be given cards.`);
-			let card = Server.cards[toId(targets[1])];
+			let card = Server.cards[toID(targets[1])];
 			if (!card) return this.errorReply(`The card "${targets[1]}" does not exist.`);
 
 			giveCard(targetUser.userid, card.id);
@@ -370,8 +370,8 @@ exports.commands = {
 			if (!target) return this.parse(`/help psgo take`);
 			let targets = target.split(`,`);
 			for (let u in targets) targets[u] = targets[u].trim();
-			let targetUser = Users.get(toId(targets[0]));
-			if (!targetUser) targetUser = {name: target[0], userid: toId(target[0]), connected: false};
+			let targetUser = Users.get(toID(targets[0]));
+			if (!targetUser) targetUser = {name: target[0], userid: toID(target[0]), connected: false};
 			if (!Db.cards.get(targetUser.userid, []).length) return this.errorReply(`${targetUser.name} has no cards.`);
 			if (cmd !== "take") {
 				if (cmd !== "confirmtakeall") return this.sendReply(`WARNING: Are you sure you want to take ALL of ${targetUser.name}'s cards? If so use /psgo confirmtakeall ${targetUser.name}`);
@@ -379,7 +379,7 @@ exports.commands = {
 				if (targetUser.connected) targetUser.popup(`You have lost all your cards.`);
 				return this.sendReply(`All of ${targetUser.name}'s cards have been removed.`);
 			}
-			let card = Server.cards[toId(targets[1])];
+			let card = Server.cards[toID(targets[1])];
 			if (!card) return this.errorReply(`The card "${targets[1]}" does not exist.`);
 			let success = takeCard(targetUser.userid, card.id);
 			if (success) {
@@ -396,7 +396,7 @@ exports.commands = {
 
 		shop: {
 			buy: function (target, room, user) {
-				if (!toId(target)) return this.parse(`/help psgo shop buy`);
+				if (!toID(target)) return this.parse(`/help psgo shop buy`);
 				target = toPackName(target);
 				if (packs.indexOf(target) === -1) return this.parse(`/psgo shop`);
 				let userMoney = Economy.readMoney(user.userid);
@@ -434,7 +434,7 @@ exports.commands = {
 				let targets = target.split(",").map(x => {
 					return x.trim();
 				});
-				let targetUser = Users.get(toId(targets[0]));
+				let targetUser = Users.get(toID(targets[0]));
 				if (!targetUser) return this.errorReply(`The user "${targets[0]}" was not found.`);
 				let pack = toPackName(targets[1]);
 				if (!packs.includes(pack)) return this.errorReply(`The pack ${pack} does not exist!`);
@@ -453,11 +453,11 @@ exports.commands = {
 				let targets = target.split(",").map(x => {
 					return x.trim();
 				});
-				let targetUser = Users.get(toId(targets[0]));
-				if (!targetUser) targetUser = {name: target[0], userid: toId(target[0]), connected: false};
+				let targetUser = Users.get(toID(targets[0]));
+				if (!targetUser) targetUser = {name: target[0], userid: toID(target[0]), connected: false};
 				let pack = toPackName(targets[1]);
 				if (!Db.userpacks.get(targetUser.userid, []).length) return this.errorReply(`${targetUser.name} has no packs.`);
-				if (!toId(pack) && cmd !== "take") {
+				if (!toID(pack) && cmd !== "take") {
 					if (cmd !== "confirmtakeall") return this.sendReply(`WARNING: Are you sure you want to take ALL of ${targetUser.name}'s packs? If so use /psgo packs confirmtakeall ${targetUser.name}`);
 					Db.userpacks.set(targetUser.userid, []);
 					if (targetUser.connected) targetUser.popup(`You have lost all of your packs.`);
@@ -546,7 +546,7 @@ exports.commands = {
 				return {name: name, points: points.toLocaleString()};
 			});
 			if (!keys.length) return this.errorReply(`There is currently no PSGO points on ${Config.serverName}.`);
-			keys = keys.slice(0, 500).sort(function (a, b) { return toId(b.points) - toId(a.points); });
+			keys = keys.slice(0, 500).sort(function (a, b) { return toID(b.points) - toID(a.points); });
 			return this.sendReplyBox(rankLadder("PSGO Card Ladder", "Points", keys, "points"));
 		},
 		ladderhelp: ["/psgo ladder - shows the PSGO card point ladder."],
@@ -554,7 +554,7 @@ exports.commands = {
 		nuke: "reset",
 		reset: function (target, room, user) {
 			if (!this.can("psgo")) return;
-			if (!toId(target) || !user.psgoResetCode) {
+			if (!toID(target) || !user.psgoResetCode) {
 				let chars = `abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*`.split(``);
 				let out = ``;
 				for (let i = 0; i < 10; i++) {

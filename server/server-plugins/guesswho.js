@@ -48,7 +48,7 @@ class GuessWho {
 			Server.ExpControl.addExp(user.userid, this.room, 5);
 			this.end();
 		} else {
-			this.guessed[toId(guess.species)] = user.userid;
+			this.guessed[toID(guess.species)] = user.userid;
 			this.guessedPokemon.push(guess.species);
 			this.guesses--;
 			this.room.add(`|html|${Server.nameColor(user.name, true)} guessed <strong>${guess.species}</strong>, but that was not the correct answer. <strong>${this.guesses} guesses are left.</strong>`);
@@ -159,10 +159,10 @@ exports.commands = {
 			if (!this.canTalk()) return;
 
 			if (!target) return this.parse("/guesswhohelp");
-			if (!Dex.data.Pokedex[toId(target)]) return this.errorReply(`"${target}" is not a valid Pokémon.`);
-			let guess = Dex.data.Pokedex[toId(target)];
+			if (!Dex.data.Pokedex[toID(target)]) return this.errorReply(`"${target}" is not a valid Pokémon.`);
+			let guess = Dex.data.Pokedex[toID(target)];
 			if (guess.num < 1 || guess.forme) return this.errorReply(`${guess.species} is either an alternate form or doesn"t exist in the games. They cannot be guessed.`);
-			if (toId(guess.species) in room.guesswho.guessed) return this.errorReply("That Pokémon has already been guessed!");
+			if (toID(guess.species) in room.guesswho.guessed) return this.errorReply("That Pokémon has already been guessed!");
 
 			room.guesswho.guess(user, guess);
 		},

@@ -4,7 +4,7 @@ let https = require("https");
 const Autolinker = require("autolinker");
 
 Server.nameColor = function (name, bold, userGroup) {
-	let userGroupSymbol = `${Users.usergroups[toId(name)] ? `<strong><font color=#948A88>${Users.usergroups[toId(name)].substr(0, 1)}</font></strong>` : ``}`;
+	let userGroupSymbol = `${Users.usergroups[toID(name)] ? `<strong><font color=#948A88>${Users.usergroups[toID(name)].substr(0, 1)}</font></strong>` : ``}`;
 	return `${(userGroup ? userGroupSymbol : ``)}${(bold ? `<strong>` : ``)}<font color=${Server.hashColor(name)}>${(Users.get(name) && Users.get(name).connected && Users.getExact(name) ? Chat.escapeHTML(Users.getExact(name).name) : Chat.escapeHTML(name))}</font>${(bold ? `</strong>` : ``)}`;
 };
 
@@ -123,7 +123,7 @@ Server.giveDailyReward = function (user) {
 
 
 function showDailyRewardAni(userid) {
-	userid = toId(userid);
+	userid = toID(userid);
 	let streak = Db.DailyBonus.get(userid)[0];
 	let output = ``;
 	for (let i = 1; i <= streak; i++) {

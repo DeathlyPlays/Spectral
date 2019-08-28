@@ -108,7 +108,7 @@ class PassTheBomb {
 		if (!this.round) return self.sendReply("The game hasn't started yet!");
 		if (getUser.status === "dead") return self.sendReply("You've already been killed!");
 		if (!target || !target.trim()) return self.sendReply("You need to choose a player to Pass The Bomb to.");
-		let targetId = toId(target);
+		let targetId = toID(target);
 		let targetUser = Users.getExact(targetId) ? Users.get(targetId).name : target;
 		if (!this.players.has(targetId)) return self.sendReply(`${targetUser} is not a player!`);
 		if (this.players.get(targetId).status === "dead") return self.sendReply(`${this.players.get(targetId).name} has already been killed!`);
@@ -144,7 +144,7 @@ class PassTheBomb {
 
 	dq(user, target, self) {
 		if (!this.round) return self.sendReply("You can only disqualify a player after the first round has begun.");
-		let targetId = toId(target);
+		let targetId = toID(target);
 		let getUser = this.players.get(targetId);
 		if (!getUser) return self.sendReply(`${target} is not a player!`);
 		if (getUser.status === "dead") return self.sendReply(`${getUser.name} has already been killed!`);

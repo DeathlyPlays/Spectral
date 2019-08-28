@@ -56,7 +56,7 @@ exports.commands = {
 
 		remove: "delete",
 		delete: function (target, room, user) {
-			let title = toId(target);
+			let title = toID(target);
 			if (!title) return this.parse("/playlist help");
 			if (!playlists[user.userid]) playlists[user.userid] = [];
 			for (let i = 0; i < playlists[user.userid].length; i++) {
@@ -79,8 +79,8 @@ exports.commands = {
 				save();
 				return this.sendReply(`You have reset your playlist.`);
 			} else {
-				if (!this.can("lock") && toId(target) !== user.userid) return false;
-				playlists[toId(target)] = [];
+				if (!this.can("lock") && toID(target) !== user.userid) return false;
+				playlists[toID(target)] = [];
 				save();
 				return this.sendReply(`You have reset ${target}'s playlist.`);
 			}
@@ -90,7 +90,7 @@ exports.commands = {
 		play: function (target, room, user) {
 			let parts = target.split(",");
 			if (parts.length < 2) return this.parse("/playlist help");
-			let userid = toId(parts[1]);
+			let userid = toID(parts[1]);
 			if (!playlists[userid]) playlists[userid] = [];
 			for (let i = 0; i < playlists[userid].length; i++) {
 				if (playlists[userid][i][0] === parts[0].trim()) return this.sendReply(`|uhtmlchange|${userid}playlist|<div style="${blackcss}"><audio src="${playlists[userid][i][0]}" controls>${playlists[userid][i][1]}</audio><div style="float: right;"><button name="send" value="/playlist back ${userid}">Playlist</button></div></div>`);
@@ -100,7 +100,7 @@ exports.commands = {
 
 		back: function (target, room, user) {
 			if (!target) return this.sendReply(`|uhtmlchange|${user.userid}playlist|${playlistGenerator(user.userid)}`);
-			return this.sendReply(`|uhtmlchange|${toId(target)}playlist|${playlistGenerator(toId(target))}`);
+			return this.sendReply(`|uhtmlchange|${toID(target)}playlist|${playlistGenerator(toID(target))}`);
 		},
 
 		"": "list",
@@ -108,7 +108,7 @@ exports.commands = {
 		list: function (target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = user.userid;
-			return this.sendReply(`|uhtml|${toId(target)}playlist|${playlistGenerator(toId(target))}`);
+			return this.sendReply(`|uhtml|${toID(target)}playlist|${playlistGenerator(toID(target))}`);
 		},
 
 		help: function () {

@@ -155,8 +155,8 @@ exports.commands = {
 			if (!this.can("ban", null, room)) return false;
 			if (!room.tdi || room.tdi.state === "signups") return this.errorReply("A season of Total Drama Island must be airing to use this command.");
 			if (!target) return this.errorReply("This command requires a target.");
-			if (!this.room.tdi.players.includes(toId(target))) return this.errorReply(`This player is not in the season of Total Drama Island.`);
-			room.tdi.eliminate(toId(target));
+			if (!this.room.tdi.players.includes(toID(target))) return this.errorReply(`This player is not in the season of Total Drama Island.`);
+			room.tdi.eliminate(toID(target));
 			this.privateModAction(`(${user.name} has disqualified ${target} from this season of Total Drama Island.)`);
 			room.add(`|html|${Server.nameColor(target, true, true)} has been disqualified from this season of Total Drama Island.`).update();
 		},
@@ -195,7 +195,7 @@ exports.commands = {
 		mustvote: function (target, room, user) {
 			if (!this.can("ban", null, room)) return false;
 			if (!room.tdi || room.tdi.state === "signups") return this.errorReply("A season of Total Drama Island must be airing to use this command.");
-			target = toId(target);
+			target = toID(target);
 			if (!target && target !== "team1" && target !== "team2") return this.errorReply(`This command accepts the following arguments: Team 1 or Team 2.`);
 			room.add(`Sorry ${target} but you must vote to cast a teammate off.`);
 			// Make a poll of all of the team's members

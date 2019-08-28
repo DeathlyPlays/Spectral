@@ -64,7 +64,7 @@ exports.commands = {
 		give: "add",
 		add: function (target, room, user) {
 			if (!this.can("genrequest")) return false;
-			let approvedGenner = toId(target);
+			let approvedGenner = toID(target);
 			if (!approvedGenner || approvedGenner.length > 18) return this.errorReply(`This command requires a target with a maximum of 18 characters.`);
 			if (isGenner(approvedGenner)) return this.errorReply(`${target} is already an approved genner.`);
 			Db.genners.set(approvedGenner, 1);
@@ -107,7 +107,7 @@ exports.commands = {
 		ban: function (target, room, user) {
 			if (!this.can("genrequest")) return false;
 			if (!target || target.length > 18) return this.parse("/genrequesthelp");
-			let targetId = toId(target);
+			let targetId = toID(target);
 			if (!isGenner(targetId)) return this.errorReply(`${target} is not currently an approved genner.`);
 			Db.genners.remove(targetId);
 			this.sendReply(`|html|${Server.nameColor(target, true)} has been officially removed from being a genner.`);
@@ -138,7 +138,7 @@ exports.commands = {
 			if (!isGenner(user)) return this.errorReply(`You are not an Approved Genner on ${Config.serverName}.`);
 			if (!target) return this.parse("/genrequesthelp");
 			let [requestee, status] = target.split(",").map(p => { return p.trim(); });
-			let requesteeId = toId(requestee);
+			let requesteeId = toID(requestee);
 			if (!requests[requesteeId]) return this.errorReply(`${requestee} does not appear to have a request.`);
 			let statuses = ["genning", "finished"];
 			if (!statuses.includes(status)) return this.errorReply(`${status} isn't a valid status. Valid statuses are: ${Chat.toListString(statuses)}.`);

@@ -223,7 +223,7 @@ exports.commands = {
 			if (room.survey && room.survey.surveyArray.length >= 5) return this.errorReply("There can only be 5 surveys in a room at a time.");
 			if (!this.can('minigame', null, room)) return false;
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
-			let allowHTML = toId(cmd) === 'htmlcreate';
+			let allowHTML = toID(cmd) === 'htmlcreate';
 			if (allowHTML && !user.can('declare', null, room)) return false;
 			if (room.survey && room.surveyNumber) room.surveyNumber++;
 			if (room.survey) {
@@ -319,11 +319,11 @@ exports.commands = {
 			if (!targets[0] || !targets[1]) return this.parse('/help survey remove');
 			let num = room.survey.obtain(parseInt(targets[1]));
 			if (!num) return this.errorReply("That isn't a valid survey number.");
-			if (!room.survey.surveyArray[num].repliers[toId(targets[0])]) return this.errorReply(`The user ${toId(targets[0])} has not responded to this survey.`);
+			if (!room.survey.surveyArray[num].repliers[toID(targets[0])]) return this.errorReply(`The user ${toID(targets[0])} has not responded to this survey.`);
 			for (let i in room.survey.surveyArray[num].replierIps) {
-				if (room.survey.surveyArray[num].replierIps[i] === room.survey.surveyArray[num].repliers[toId(targets[0])]) {
+				if (room.survey.surveyArray[num].replierIps[i] === room.survey.surveyArray[num].repliers[toID(targets[0])]) {
 					room.survey.surveyArray[num].replierIps[i] = 0;
-					room.survey.surveyArray[num].repliers[toId(targets[0])] = 0;
+					room.survey.surveyArray[num].repliers[toID(targets[0])] = 0;
 					break;
 				}
 			}

@@ -37,7 +37,7 @@ function updateColor() {
 }
 
 function generateCSS(name, color) {
-	name = toId(name);
+	name = toID(name);
 	let css = `[class$="chatmessage-${name}"] strong, [class$="chatmessage-${name} mine"] strong, [class$="chatmessage-${name} highlighted"] strong, [id$="-userlist-user-${name}"] strong em, [id$="-userlist-user-${name}"] strong, [id$="-userlist-user-${name}"] span`;
 	css += `{\ncolor: ${color} !important;\n}\n`;
 	return css;
@@ -51,20 +51,20 @@ exports.commands = {
 			target = target.split(",");
 			for (let u = 0; u < target.length; u++) target[u] = target[u].trim();
 			if (!target[1]) return this.parse("/help customcolor");
-			if (toId(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
+			if (toID(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
 			this.sendReply(`|raw|You have given <strong><font color=${target[1]}>${Chat.escapeHTML(target[0])}</font></strong> a custom color.`);
 			this.modlog(`CUSTOMCOLOR`, target[0], `gave color ${target[1]}`);
 			this.privateModAction(`(${target[0]} has received custom color: "${target[1]}" from ${user.name}.)`);
 			Monitor.log(`${target[0]} has received custom color: "${target[1]}" from ${user.name}.`);
-			customColors[toId(target[0])] = target[1];
+			customColors[toID(target[0])] = target[1];
 			updateColor();
 		},
 
 		delete: function (target, room, user) {
 			if (!this.can("profile")) return false;
 			if (!target) return this.parse("/help customcolor");
-			if (!customColors[toId(target)]) return this.errorReply(`/customcolor - ${target} does not have a custom color.`);
-			delete customColors[toId(target)];
+			if (!customColors[toID(target)]) return this.errorReply(`/customcolor - ${target} does not have a custom color.`);
+			delete customColors[toID(target)];
 			updateColor();
 			this.modlog(`CUSTOMCOLOR`, target, `removed custom color`);
 			this.sendReply(`You removed ${target}'s custom color.`);
@@ -183,7 +183,7 @@ let colorCache = {};
 
 // hashColor function
 Server.hashColor = function (name) {
-	name = toId(name);
+	name = toID(name);
 	if (customColors[name]) return customColors[name];
 	if (colorCache[name]) return colorCache[name];
 	let hash = MD5(name);

@@ -71,13 +71,13 @@ function getStat(stat, set, evOverride, natureOverride) {
 
 function buildMenu(userid) {
 	if (!Server.ssb[userid]) return `<span style="color: red"><strong>Error: </strong>User "${userid}" not found in ssb.</span>`;
-	let speciesName = toId(Server.ssb[userid].species);
+	let speciesName = toID(Server.ssb[userid].species);
 	let split = Server.ssb[userid].species.split("-");
 	if (split.length > 1) {
-		speciesName = `${toId(split[0])}-${speciesName.substring(toId(split[0]).length)}`;
+		speciesName = `${toID(split[0])}-${speciesName.substring(toID(split[0]).length)}`;
 	}
 	let output = ``;
-	output += `<div class="setchart" style="height: 155px; background-image:url(//play.pokemonshowdown.com/sprites/${(Dex.getTemplate(toId(Server.ssb[userid].species)).gen === 7 ? `bw` : `xydex`)}${(Server.ssb[userid].shiny ? `-shiny` : ``)}/${speciesName}.png); background-position: -2px -3px; background-repeat: no-repeat;">`;
+	output += `<div class="setchart" style="height: 155px; background-image:url(//play.pokemonshowdown.com/sprites/${(Dex.getTemplate(toID(Server.ssb[userid].species)).gen === 7 ? `bw` : `xydex`)}${(Server.ssb[userid].shiny ? `-shiny` : ``)}/${speciesName}.png); background-position: -2px -3px; background-repeat: no-repeat;">`;
 	output += `<div class="setcol setcol-icon"><div class="setcell-sprite"></div><div class="setcell setcell-pokemon"><label>Pokémon</label><button class="textbox chartinput" style="width: 104px; height: 20px; text-align: left" name="send" value="/ssb edit species">${Server.ssb[userid].species}</button></div></div>`;
 	output += `<div class="setcol setcol-details"><div class="setrow"><div class="setcell setcell-details"><label>Details</label><button class="textbox setdetails" tabindex="-1" name="send" value="/ssb edit details"><span class="detailcell detailcell-first"><label>Level</label>${Server.ssb[userid].level}</span><span class="detailcell"><label>Gender</label>${(Server.ssb[userid].gender === `random` ? `-` : Server.ssb[userid].gender)}</span><span class="detailcell"><label>Happiness</label>${Server.ssb[userid].happiness}</span><span class="detailcell"><label>Shiny</label>${(Server.ssb[userid].shiny ? `Yes` : `No`)}</span></button><span class="itemicon" style="background: none"></span></div></div><div class="setrow"><div class="setcell setcell-item"><label>Item</label><button class="textbox chartinput" style="width:104px; height: 20px; text-align: left" name="send" value="/ssb edit item">${(Server.ssb[userid].item ? Server.ssb[userid].item : ``)}</button></div><div class="setcell setcell-ability"><label>Ability</label><button class="textbox chartinput" style="width:104px; height: 20px; text-align: left" name="send" value="/ssb edit ability">${Server.ssb[userid].ability}</button></div></div></div>`;
 	output += `<div class="setcol setcol-moves"><div class="setcell"><label>Moves</label><button class="textbox chartinput" style="width:129px; height: 20px; text-align: left; overflow: hidden" name="send" value="/ssb edit move">${(Server.ssb[userid].movepool[0] ? Server.ssb[userid].movepool[0] : ``)}</button></div><div class="setcell"><button class="textbox chartinput" style="width:129px; height: 20px; text-align: left; overflow: hidden" name="send" value="/ssb edit move">${(Server.ssb[userid].movepool[1] ? Server.ssb[userid].movepool[1] : ``)}</button></div><div class="setcell"><button class="textbox chartinput" style="width:129px; height: 20px; text-align: left; overflow: hidden" name="send" value="/ssb edit move">${(Server.ssb[userid].movepool[2] ? Server.ssb[userid].movepool[2] : ``)}</button></div><div class="setcell"><button class="textbox chartinput" style="width:129px; height: 20px; text-align: left; overflow: hidden" name="send" value="/ssb edit move">${(Server.ssb[userid].cMove ? Server.ssb[userid].cMove : (Server.ssb[userid].movepool[3] ? Server.ssb[userid].movepool[3] : ``))}</button></div></div>`;
@@ -85,23 +85,23 @@ function buildMenu(userid) {
 	let statNames = [`HP`, `Atk`, `Def`, `SpA`, `SpD`, `Spe`];
 	let stats = {};
 	for (let i = 0; i < statNames.length; i++) {
-		stats[toId(statNames[i])] = getStat(toId(statNames[i]), {
+		stats[toID(statNames[i])] = getStat(toID(statNames[i]), {
 			species: Server.ssb[userid].species,
 			evs: Server.ssb[userid].evs,
 			ivs: Server.ssb[userid].ivs,
 			nature: Server.ssb[userid].nature,
 			level: Server.ssb[userid].level,
 		});
-		let evBuf = `<em>${(Server.ssb[userid].evs[toId(statNames[i])] === 0 ? `` : Server.ssb[userid].evs[toId(statNames[i])])}</em>`;
-		if (Dex.getNature(Server.ssb[userid].nature).plus === toId(statNames[i])) {
+		let evBuf = `<em>${(Server.ssb[userid].evs[toID(statNames[i])] === 0 ? `` : Server.ssb[userid].evs[toID(statNames[i])])}</em>`;
+		if (Dex.getNature(Server.ssb[userid].nature).plus === toID(statNames[i])) {
 			evBuf += `<small>+</small>`;
-		} else if (Dex.getNature(Server.ssb[userid].nature).minus === toId(statNames[i])) {
+		} else if (Dex.getNature(Server.ssb[userid].nature).minus === toID(statNames[i])) {
 			evBuf += `<small>&minus;</small>`;
 		}
-		let width = stats[toId(statNames[i])] * 75 / 504;
-		if (statNames[i] === `HP`) width = stats[toId(statNames[i])] * 75 / 704;
+		let width = stats[toID(statNames[i])] * 75 / 504;
+		if (statNames[i] === `HP`) width = stats[toID(statNames[i])] * 75 / 704;
 		if (width > 75) width = 75;
-		let color = Math.floor(Server.ssb[userid].evs[toId(statNames[i])] * 180 / 714);
+		let color = Math.floor(Server.ssb[userid].evs[toID(statNames[i])] * 180 / 714);
 		if (color > 360) color = 360;
 		output += `<span class="statrow"><label>${statNames[i]}</label> <span class="statgraph"><span style="width: ${width}px; background: hsl(${color}, 40%, 75%);"></span></span> ${evBuf}</span>`;
 	}
@@ -143,8 +143,8 @@ function statMenu(userid) {
 	output += `<table style="border:1px solid black; display: inline-block; float: left"><tr><th colspan="3" style="border-right: 1px solid black;">EVs</th><th colspan="3" style="border-left: 1px solid black;">IVs</th></tr>`;
 	let values = [`HP`, `Atk`, `Def`, `SpA`, `SpD`, `Spe`];
 	for (let i = 0; i < values.length; i++) {
-		output += `<tr><td><button class="button" name="send" value="/ssb edit statsq ev, ${values[i]}, 0">Set 0</button></td><th>${values[i]}: ${Server.ssb[userid].evs[toId(values[i])]}</th><td style="border-right:1px solid black"><button class="button" name="send" value="/ssb edit statsq ev, ${values[i]}, 252">Set 252</button></td>`;
-		output += `<td style="border-left:1px solid black"><button class="button" name="send" value="/ssb edit statsq iv, ${values[i]}, 0">Set 0</button></td><th>${values[i]}: ${Server.ssb[userid].ivs[toId(values[i])]}</th><td><button class="button" name="send" value="/ssb edit statsq iv, ${values[i]}, 31">Set 31</button></td></tr>`;
+		output += `<tr><td><button class="button" name="send" value="/ssb edit statsq ev, ${values[i]}, 0">Set 0</button></td><th>${values[i]}: ${Server.ssb[userid].evs[toID(values[i])]}</th><td style="border-right:1px solid black"><button class="button" name="send" value="/ssb edit statsq ev, ${values[i]}, 252">Set 252</button></td>`;
+		output += `<td style="border-left:1px solid black"><button class="button" name="send" value="/ssb edit statsq iv, ${values[i]}, 0">Set 0</button></td><th>${values[i]}: ${Server.ssb[userid].ivs[toID(values[i])]}</th><td><button class="button" name="send" value="/ssb edit statsq iv, ${values[i]}, 31">Set 31</button></td></tr>`;
 	}
 	output += `<div style="float: right; display: inline-block; width: 40%"><strong><u>Stat Menu</u></strong><br /><br /><button class="button" name="send" value="/ssb edit stats help">Set EVs or IVs to a custom value</button><br /><br /><i>Current Nature:</i> ${Server.ssb[userid].nature}<br /><br /><button class="button" name="send" value="/ssb edit stats nature help">Set Nature</button><br /><br /><button class="button" name="send" value="/ssb edit main">Main Menu</button></div></div>`;
 	return output;
@@ -209,7 +209,7 @@ class SSB {
 	}
 
 	setSpecies(species) {
-		let speciesId = toId(species);
+		let speciesId = toID(species);
 		let speciesNum = parseInt(speciesId);
 		if (!isNaN(speciesNum)) {
 			for (let p in Dex.data.Pokedex) {
@@ -252,7 +252,7 @@ class SSB {
 	}
 
 	setGender(gender) {
-		switch (toId(gender)) {
+		switch (toID(gender)) {
 		case "m":
 		case "boy":
 		case "male":
@@ -320,10 +320,10 @@ class SSB {
 	}
 
 	setItem(item) {
-		item = Dex.getItem(toId(item));
+		item = Dex.getItem(toID(item));
 		if (!item.exists) {
 			//check custom
-			if (this.cItem && toId(this.cItem) === item.id && this.bought.cItem) {
+			if (this.cItem && toID(this.cItem) === item.id && this.bought.cItem) {
 				this.item = this.cItem;
 				return true;
 			} else {
@@ -336,10 +336,10 @@ class SSB {
 	}
 
 	setAbility(ability) {
-		ability = Dex.getAbility(toId(ability));
+		ability = Dex.getAbility(toID(ability));
 		if (!ability.exists) {
 			//check custom
-			if (this.cAbility && toId(this.cAbility) === ability.id && this.bought.cAbility) {
+			if (this.cAbility && toID(this.cAbility) === ability.id && this.bought.cAbility) {
 				this.ability = this.cAbility;
 				return true;
 			} else {
@@ -347,7 +347,7 @@ class SSB {
 			}
 		} else {
 			for (let i in Dex.getTemplate(this.species).abilities) {
-				if (toId(Dex.getTemplate(this.species).abilities[i]) === ability.id) {
+				if (toID(Dex.getTemplate(this.species).abilities[i]) === ability.id) {
 					this.ability = ability.name;
 					return true;
 				}
@@ -357,7 +357,7 @@ class SSB {
 	}
 
 	async addMove(move, self) {
-		move = Dex.getMove(toId(move));
+		move = Dex.getMove(toID(move));
 		if (!move.exists) return self.errorReply(`The move "${move.name}" does not exist.`); //Only normal moves here.
 		if (this.movepool.length + (this.cMove === false ? 0 : 1) >= MAX_MOVEPOOL_SIZE) return self.errorReply(`You already have ${MAX_MOVEPOOL_SIZE} moves.`);
 		let result = await TeamValidatorAsync("gen7ou").validateTeam(Dex.packTeam([{species: this.species, moves: [move]}]));
@@ -370,7 +370,7 @@ class SSB {
 	}
 
 	removeMove(move) {
-		move = Dex.getMove(toId(move));
+		move = Dex.getMove(toID(move));
 		if (move.exists) {
 			if (this.movepool.length < 1) return false;
 			if (this.movepool.indexOf(move.name) === -1) return false;
@@ -378,18 +378,18 @@ class SSB {
 			return true;
 		} else {
 			//check custom
-			if (move.id !== toId(this.cMove)) return false;
+			if (move.id !== toID(this.cMove)) return false;
 			this.cMove = false;
 			return true;
 		}
 	}
 
 	setCustomMove(move) {
-		move = toId(move);
-		let customIds = customMovepool.map(move => { return toId(move); });
+		move = toID(move);
+		let customIds = customMovepool.map(move => { return toID(move); });
 		if (customIds.indexOf(move) < 0) {
 			//check for self-made custom move
-			if (this.selfCustomMove && toId(this.selfCustomMove) === move && this.bought.cMove) {
+			if (this.selfCustomMove && toID(this.selfCustomMove) === move && this.bought.cMove) {
 				this.cMove = this.selfCustomMove;
 				return true;
 			} else {
@@ -401,7 +401,7 @@ class SSB {
 	}
 
 	setEvs(ev, value) {
-		ev = toId(ev);
+		ev = toID(ev);
 		value = parseInt(value);
 		if (isNaN(value)) return false;
 		if (!this.evs[ev] && this.evs[ev] !== 0) return false;
@@ -416,7 +416,7 @@ class SSB {
 	}
 
 	setIvs(iv, value) {
-		iv = toId(iv);
+		iv = toID(iv);
 		value = parseInt(value);
 		if (isNaN(value)) return false;
 		if (!this.ivs[iv] && this.ivs[iv] !== 0) return false;
@@ -426,7 +426,7 @@ class SSB {
 	}
 
 	setNature(nature) {
-		nature = Dex.getNature(toId(nature));
+		nature = Dex.getNature(toID(nature));
 		if (!nature.exists) return false;
 		this.nature = nature.name;
 		return true;
@@ -473,14 +473,14 @@ class SSB {
 		// Ability
 		let ability = dex.getAbility(this.ability);
 		if (!ability.exists || BANS.abilities.includes(this.ability) ||
-		(!Dex.getAbility(this.ability).exists && toId(this.cAbility) !== ability.id)) {
+		(!Dex.getAbility(this.ability).exists && toID(this.cAbility) !== ability.id)) {
 			msg.push((!ability.exists ? `The ability ${ability.id} does not exist.` : (BANS.abilities.includes(this.ability) ? `The ability ${ability.name} is banned.` : `${ability.name} is not your custom ability.`)));
 			this.ability = pokemon.abilities[0];
 		}
 		// Item
-		if (toId(this.item)) {
+		if (toID(this.item)) {
 			let item = dex.getItem(this.item);
-			if (!item.exists || BANS.items.includes(this.item) || (!Dex.getItem(this.item).exists && toId(this.cItem !== item.id))) {
+			if (!item.exists || BANS.items.includes(this.item) || (!Dex.getItem(this.item).exists && toID(this.cItem !== item.id))) {
 				msg.push((!item.exists ? `The item ${item.id} does not exist.` : (BANS.items.includes(this.item) ? `The item ${item.name} is banned.` : `${item.name} is not your custom item.`)));
 				this.item = "";
 			}
@@ -568,7 +568,7 @@ class SSB {
 		if (edited) msg.push(`${pokemon.species}'s IVs were invalid.`);
 		if (msg.length) {
 			this.active = false;
-			if (Users.get(toId(this.name))) Users.get(toId(this.name)).popup(`Your SSBFFA Pokemon was deactivated for the following reasons:\n${msg.join("\n")}`);
+			if (Users.get(toID(this.name))) Users.get(toID(this.name)).popup(`Your SSBFFA Pokemon was deactivated for the following reasons:\n${msg.join("\n")}`);
 			if (!quiet) self.errorReply(`Done! ${this.name}'s SSBFFA Pokemon was deactivated, and its invalid parts were reset to their defaults.`);
 		} else {
 			if (!quiet) self.sendReply(`Done! ${this.name}'s SSBFFA Pokemon is valid.`);
@@ -639,7 +639,7 @@ exports.commands = {
 					writeSSB();
 				}
 				let targetUser = Server.ssb[user.userid];
-				if (toId(target) === "") return this.sendReply("/ssb edit species [species] - change the species of your SSB Pokemon.");
+				if (toID(target) === "") return this.sendReply("/ssb edit species [species] - change the species of your SSB Pokemon.");
 				let active = targetUser.active;
 				if (!targetUser.setSpecies(target)) {
 					return this.errorReply(`The Pokemon "${target}" does not exist or is banned from SSBFFA. Check your spelling?`);
@@ -662,8 +662,8 @@ exports.commands = {
 				}
 				let targetUser = Server.ssb[user.userid];
 				target = target.split(",");
-				if (!toId(target[0])) return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${moveMenu(user.userid)}`);
-				if (toId(target[0]) === "help") return this.sendReply("/ssb edit move [set|remove|custom], [move name] - Set or remove moves. Maximum of 4 moves (3 regular + 1 custom OR 4 regular).");
+				if (!toID(target[0])) return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${moveMenu(user.userid)}`);
+				if (toID(target[0]) === "help") return this.sendReply("/ssb edit move [set|remove|custom], [move name] - Set or remove moves. Maximum of 4 moves (3 regular + 1 custom OR 4 regular).");
 				switch (target[0]) {
 				case "set":
 					//set a normal move
@@ -706,12 +706,12 @@ exports.commands = {
 				}
 				let targetUser = Server.ssb[user.userid];
 				//temp
-				if (toId(target) === "") return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${statMenu(user.userid)}`);
-				if (toId(target) === "help") return this.sendReply(`/ssb edit stats [ev|iv|nature], [stat|nature], (value) - Set your Pokemon's EVs, IVs, or nature.`);
-				if (toId(target) === "naturehelp") return this.sendReply(`/ssb edit stats nature, [nature] - Set your Pokemon's nature.`);
+				if (toID(target) === "") return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${statMenu(user.userid)}`);
+				if (toID(target) === "help") return this.sendReply(`/ssb edit stats [ev|iv|nature], [stat|nature], (value) - Set your Pokemon's EVs, IVs, or nature.`);
+				if (toID(target) === "naturehelp") return this.sendReply(`/ssb edit stats nature, [nature] - Set your Pokemon's nature.`);
 				target = target.split(",");
 				if (!target[1] && !target[2]) return this.sendReply(`/ssb edit stats [ev|iv|nature], [stat|nature], (value) - Set your Pokemon's EVs, IVs, or nature.`);
-				switch (toId(target[1])) {
+				switch (toID(target[1])) {
 				case "healthpoints":
 					target[1] = "hp";
 					break;
@@ -731,7 +731,7 @@ exports.commands = {
 					target[1] = "spe";
 					break;
 				}
-				switch (toId(target[0])) {
+				switch (toID(target[0])) {
 				case "ev":
 				case "evs":
 					if (!target[2]) return this.sendReply(`/ssb edit stats [ev|iv|nature], [stat|nature], (value) - Set your Pokemon's EVs, IVs, or nature.`);
@@ -775,8 +775,8 @@ exports.commands = {
 					writeSSB();
 				}
 				let targetUser = Server.ssb[user.userid];
-				if (toId(target) === "") return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${abilityMenu(user.userid)}`);
-				if (toId(target) === "help") return this.sendReply(`/ssb edit ability [ability] - Set your Pokemon's ability.`);
+				if (toID(target) === "") return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${abilityMenu(user.userid)}`);
+				if (toID(target) === "help") return this.sendReply(`/ssb edit ability [ability] - Set your Pokemon's ability.`);
 				if (targetUser.setAbility(target)) {
 					writeSSB();
 					if (cmd !== "abilityq") this.sendReply(`Your Pokemon's ability is now ${target}.`);
@@ -796,9 +796,9 @@ exports.commands = {
 					writeSSB();
 				}
 				let targetUser = Server.ssb[user.userid];
-				if (toId(target) === "") return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${itemMenu(user.userid)}`);
-				if (toId(target) === "help") return this.sendReply(`/ssb edit item [item] - Sets your Pokemon's item.`);
-				if (toId(target) === "reset") {
+				if (toID(target) === "") return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${itemMenu(user.userid)}`);
+				if (toID(target) === "help") return this.sendReply(`/ssb edit item [item] - Sets your Pokemon's item.`);
+				if (toID(target) === "reset") {
 					targetUser.item = false;
 					writeSSB();
 					if (cmd !== "itemq") this.sendReply("Your item was reset.");
@@ -823,10 +823,10 @@ exports.commands = {
 					writeSSB();
 				}
 				let targetUser = Server.ssb[user.userid];
-				if (toId(target) === "") return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${detailMenu(user.userid)}`);
-				if (toId(target) === "help") return this.sendReply(`/ssb edit details [level|gender|happiness|shiny], (argument) - edit your Pokemon's details.`);
+				if (toID(target) === "") return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${detailMenu(user.userid)}`);
+				if (toID(target) === "help") return this.sendReply(`/ssb edit details [level|gender|happiness|shiny], (argument) - edit your Pokemon's details.`);
 				target = target.split(",");
-				switch (toId(target[0])) {
+				switch (toID(target[0])) {
 				case "level":
 				case "lvl":
 					if (!target[1]) return this.parse(`/ssb edit details help`);
@@ -913,9 +913,9 @@ exports.commands = {
 			switch (target[0]) {
 			case "view":
 				if (!target[1]) target[1] = (user.can("ssbffa") ? "all" : user.userid);
-				if (toId(target[1]) !== user.userid && !user.can("ssbffa")) return this.errorReply("You can only view your own SSBFFA purchases.");
+				if (toID(target[1]) !== user.userid && !user.can("ssbffa")) return this.errorReply("You can only view your own SSBFFA purchases.");
 				let output = `<div style="max-height: 300px; overflow: scroll; width: 100%"><table><tr><th style="border: 1px solid black">Name</th><th style="border: 1px solid black">Item</th><th style="border: 1px solid black">Status</th>`;
-				if (toId(target[1]) === "all") {
+				if (toID(target[1]) === "all") {
 					output += `<th style="border: 1px solid black">Options</th><tr/>`;
 					for (let i in Server.ssb) {
 						for (let j in Server.ssb[i].bought) {
@@ -924,7 +924,7 @@ exports.commands = {
 						}
 					}
 				} else {
-					target[1] = toId(target[1]);
+					target[1] = toID(target[1]);
 					if (!Server.ssb[target[1]]) return this.errorReply(`${target[1]} does not have a SSBFFA Pokemon yet.`);
 					if (user.can("ssbffa")) {
 						output += `<th style="border: 1px solid black">Options</th><tr/>`;
@@ -943,9 +943,9 @@ exports.commands = {
 			case "mark":
 				if (!user.can("ssbffa")) return this.errorReply(`/ssb mark - Access Denied.`);
 				if (!target[3]) return this.parse("/help ssb log");
-				target[1] = toId(target[1]);
+				target[1] = toID(target[1]);
 				target[2] = target[2].trim();
-				target[3] = toId(target[3]);
+				target[3] = toID(target[3]);
 				if (!Server.ssb[target[1]]) return this.errorReply(`${target[1]} does not have a SSBFFA Pokemon yet.`);
 				if (Server.ssb[target[1]].bought[target[2]] === undefined) return this.parse("/help ssb log");
 				switch (target[3]) {
@@ -961,7 +961,7 @@ exports.commands = {
 					return this.sendReply(`${target[1]}'s ${target[2]} was marked as pending.`);
 				case "remove":
 					if (Server.ssb[target[1]].bought[target[2]] === false) return this.errorReply(`${target[1]}'s ${target[2]} is already removed.`);
-					if (!target[4] || toId(target[4]) !== "force") return this.sendReply(`WARNING. If you remove this purchase the user will not be able to use their ${target[2]} and the user will not be refunded (unless you provide it). If you are sure you want to do this, run: /ssb log mark, ${target[1]}, ${target[2]}, ${target[3]}, force`);
+					if (!target[4] || toID(target[4]) !== "force") return this.sendReply(`WARNING. If you remove this purchase the user will not be able to use their ${target[2]} and the user will not be refunded (unless you provide it). If you are sure you want to do this, run: /ssb log mark, ${target[1]}, ${target[2]}, ${target[3]}, force`);
 					Server.ssb[target[1]].bought[target[2]] = false;
 					writeSSB();
 					return this.sendReply(`${target[1]}'s ${target[2]} was removed.`);
@@ -982,11 +982,11 @@ exports.commands = {
 		validateall: "validate",
 		validate: function (target, room, user, connection, cmd, message) {
 			if (!this.can("ssbffa")) return;
-			if (!target && toId(cmd) !== "validateall") return this.parse("/help ssb validate");
-			let targetUser = Server.ssb[toId(target)];
-			if (!targetUser && toId(cmd) !== "validateall") return this.errorReply(`${target} does not have a SSBFFA Pokemon yet.`);
+			if (!target && toID(cmd) !== "validateall") return this.parse("/help ssb validate");
+			let targetUser = Server.ssb[toID(target)];
+			if (!targetUser && toID(cmd) !== "validateall") return this.errorReply(`${target} does not have a SSBFFA Pokemon yet.`);
 			//Start validation.
-			if (toId(cmd) !== "validateall") {
+			if (toID(cmd) !== "validateall") {
 				this.sendReply(`Validating ${targetUser.name}'s SSBFFA Pokemon...`);
 				targetUser.validate(this);
 			} else {
@@ -1005,7 +1005,7 @@ exports.commands = {
 			if (!this.can("ssbffa")) return false;
 			if (!target) return this.parse("/help ssb setcmove");
 			let targets = target.split(",");
-			let userid = toId(targets[0]);
+			let userid = toID(targets[0]);
 			if (!userid) return this.parse("/help ssb setcmove");
 			let customMove = Dex.mod("ssbffa").getMove(targets[1]);
 			if (!customMove) return this.errorReply("Must include a move!");
@@ -1024,7 +1024,7 @@ exports.commands = {
 			if (!this.can("ssbffa")) return false;
 			if (!target) return this.parse("/help ssb setcability");
 			let targets = target.split(",");
-			let userid = toId(targets[0]);
+			let userid = toID(targets[0]);
 			if (!userid) return this.errorReply("/help ssb setcability");
 			let customAbility = Dex.mod("ssbffa").getAbility(targets[1]);
 			if (!customAbility) return this.errorReply(`/ssb giveability [target], [ability]`);
@@ -1043,7 +1043,7 @@ exports.commands = {
 			if (!this.can("ssbffa")) return false;
 			if (!target) return this.parse("/help ssb setcitem");
 			let targets = target.split(",");
-			let userid = toId(targets[0]);
+			let userid = toID(targets[0]);
 			if (!userid) return this.errorReply("/help ssb givecitem");
 			let item = Dex.mod("ssbffa").getItem(targets[1]);
 			if (!item) return this.errorReply("Must include an item.");

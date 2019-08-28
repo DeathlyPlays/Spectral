@@ -34,8 +34,8 @@ class Panagram {
 			this.answer = dex[Object.keys(dex)[Math.floor(Math.random() * Object.keys(dex).length)]];
 		} while (this.answer.num < 1 || this.answer.forme);
 		do {
-			this.mixed = mix(toId(this.answer.species));
-		} while (this.mixed === toId(this.answer.species));
+			this.mixed = mix(toID(this.answer.species));
+		} while (this.mixed === toID(this.answer.species));
 
 		this.room.add(
 			`|html|<div class = "broadcast-purple"><center>A game of Panagram was started! Scrambled Pokemon: <strong>${this.mixed}</strong><br /> (Remaining Sessions: ${this.sessions})<br />` +
@@ -50,7 +50,7 @@ class Panagram {
 		].join(`<br />`);
 
 		this.room.chat = function (user, message, connection) {
-			if (Dex.data.Pokedex[toId(message)] && message.match(/^[a-z ]/i)) message = `/gp ${message}`;
+			if (Dex.data.Pokedex[toID(message)] && message.match(/^[a-z ]/i)) message = `/gp ${message}`;
 			message = Chat.parse(message, this, user, connection);
 
 			if (message && message !== true) {
@@ -67,7 +67,7 @@ class Panagram {
 			this.end();
 		} else {
 			this.room.add(`|html|${Server.nameColor(user.name, true)} guessed <strong>${guess.species}</strong>, but was not the correct answer...`);
-			this.guessed[toId(guess.species)] = user.userid;
+			this.guessed[toID(guess.species)] = user.userid;
 		}
 	}
 
@@ -128,10 +128,10 @@ exports.commands = {
 		if (!this.canTalk()) return;
 
 		if (!target) return this.sendReply(`|html|/${cmd} <em>Pokémon Name</em> - Guesses a Pokémon in a game of Panagram.`);
-		if (!Dex.data.Pokedex[toId(target)]) return this.sendReply(`"${target}"" is not a valid Pokémon.`);
-		let guess = Dex.data.Pokedex[toId(target)];
+		if (!Dex.data.Pokedex[toID(target)]) return this.sendReply(`"${target}"" is not a valid Pokémon.`);
+		let guess = Dex.data.Pokedex[toID(target)];
 		if (guess.num < 1 || guess.forme) return this.sendReply(`${guess.species} is either an alternate form or doesn't exist in the games. They cannot be guessed.`);
-		if (toId(guess.species) in pGames[room.id].guessed) return this.sendReply('That Pokémon has already been guessed!');
+		if (toID(guess.species) in pGames[room.id].guessed) return this.sendReply('That Pokémon has already been guessed!');
 
 		pGames[room.id].guess(user, guess);
 	},

@@ -76,7 +76,7 @@ try {
 function getMonData(target) {
 	let returnData = null;
 	monData.forEach(function (data) {
-		if (toId(data.split("\n")[0].split(" - ")[0] || " ") === target) {
+		if (toID(data.split("\n")[0].split(" - ")[0] || " ") === target) {
 			returnData = data.split("\n").map(function (line) {
 				return Chat.escapeHTML(line);
 			}).join("<br />");
@@ -104,7 +104,7 @@ function clearRoom(room) {
 }
 
 Server.regdate = function (target, callback) {
-	target = toId(target);
+	target = toID(target);
 	if (regdateCache[target]) return callback(regdateCache[target]);
 	let req = https.get(`https://pokemonshowdown.com/users/${target}.json`, res => {
 		let data = "";
@@ -161,7 +161,7 @@ let messages = [
 exports.commands = {
 	useroftheweek: "uotw",
 	uotw: function (target, room, user) {
-		if (toId(target.length) >= 19) return this.errorReply("Usernames have to be 18 characters or less");
+		if (toID(target.length) >= 19) return this.errorReply("Usernames have to be 18 characters or less");
 		if (!this.can("mute", null, room)) return false;
 		if (!room.chatRoomData) return;
 		if (!target) {
@@ -267,12 +267,12 @@ exports.commands = {
 	def: "define",
 	define: function (target, room, user) {
 		if (!target) return this.parse("/help define");
-		target = toId(target);
+		target = toID(target);
 		if (target > 50) return this.errorReply("/define <word> - word can not be longer than 50 characters.");
 		if (!this.runBroadcast()) return;
 
-		if (toId(target) !== "constructor" && defCache[toId(target)]) {
-			this.sendReplyBox(defCache[toId(target)]);
+		if (toID(target) !== "constructor" && defCache[toID(target)]) {
+			this.sendReplyBox(defCache[toID(target)]);
 			if (room) room.update();
 			return;
 		}
@@ -325,8 +325,8 @@ exports.commands = {
 		if (!target) return this.parse("/help urbandefine");
 		if (target.toString() > 50) return this.errorReply("Phrase can not be longer than 50 characters.");
 
-		if (toId(target) !== "constructor" && udCache[toId(target)]) {
-			this.sendReplyBox(udCache[toId(target)]);
+		if (toID(target) !== "constructor" && udCache[toID(target)]) {
+			this.sendReplyBox(udCache[toID(target)]);
 			if (room) room.update();
 			return;
 		}
@@ -363,7 +363,7 @@ exports.commands = {
 					let output = `<strong>${definitions[0][`word`]}</strong> ${definitions[0][`definition`].replace(/\r\n/g, `<br />`).replace(/\n/g, ` `)}`;
 					if (output.length > 400) output = output.slice(0, 400) + `...`;
 					this.sendReplyBox(output);
-					udCache[toId(target)] = output;
+					udCache[toID(target)] = output;
 					if (room) room.update();
 					return;
 				}
@@ -381,7 +381,7 @@ exports.commands = {
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
-		let userid = toId(name);
+		let userid = toID(name);
 
 		if (!Users.isUsernameKnown(userid)) {
 			return this.errorReply(`User "${this.targetUsername}" is offline and unrecognized, and so can't be promoted.`);
@@ -411,7 +411,7 @@ exports.commands = {
 		}
 		if (!target) return this.parse("/help roomdefounder");
 		if (!this.can("makeroom")) return false;
-		let targetUser = toId(target);
+		let targetUser = toID(target);
 		if (room.founder !== targetUser) return this.errorReply(`${target} is not the room founder of ${room.title}.`);
 		room.founder = false;
 		room.chatRoomData.founder = false;
@@ -427,7 +427,7 @@ exports.commands = {
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
-		let userid = toId(name);
+		let userid = toID(name);
 		if (!userid || userid === "") return this.errorReply(`User "${name}" does not exist.`);
 
 		if (room.auth[userid] !== "#") return this.errorReply(`User "${name}" is not a room owner.`);
@@ -480,7 +480,7 @@ exports.commands = {
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
-		let userid = toId(name);
+		let userid = toID(name);
 		if (!userid || userid === "") return this.errorReply(`User "${name}" does not exist.`);
 
 		if (room.auth[userid] !== "&") return this.errorReply(`User "${name}" is not a room leader.`);
@@ -607,7 +607,7 @@ exports.commands = {
 	away: function (target, room, user, connection, cmd) {
 		if (!user.isAway && user.name.length > 19 && !user.can("lock")) return this.errorReply("Your username is too long for any kind of use of this command.");
 		if (!this.canTalk()) return false;
-		target = toId(target);
+		target = toID(target);
 		if (/^\s*$/.test(target)) target = "away";
 		if (cmd !== "away") target = cmd;
 		let newName = user.name;
@@ -666,14 +666,14 @@ exports.commands = {
 		if (!this.runBroadcast()) return false;
 		if (!target || target === "help") return this.parse("/help dssb");
 		if (target === "credits") return this.parse("/dssbcredits");
-		if (toId(target) === "bamd") target = "backatmyday";
-		if (toId(target) === "c7") target = "c733937123";
-		if (toId(target) === "as") target = "alfastorm";
-		if (toId(target) === "aj") target = "almightyjudgment";
-		if (toId(target) === "ciel") target = "cieltsnow";
-		if (toId(target) === "exiler") target = "theexiler";
-		if (toId(target) === "str") target = "snorlaxtherain";
-		let targetData = getMonData(toId(target));
+		if (toID(target) === "bamd") target = "backatmyday";
+		if (toID(target) === "c7") target = "c733937123";
+		if (toID(target) === "as") target = "alfastorm";
+		if (toID(target) === "aj") target = "almightyjudgment";
+		if (toID(target) === "ciel") target = "cieltsnow";
+		if (toID(target) === "exiler") target = "theexiler";
+		if (toID(target) === "str") target = "snorlaxtherain";
+		let targetData = getMonData(toID(target));
 		if (!targetData) return this.errorReply(`The staffmon "${target}" could not be found.`);
 		return this.sendReplyBox(targetData);
 	},
@@ -746,7 +746,7 @@ exports.commands = {
 	"!regdate": true,
 	regdate: function (target, user) {
 		if (!target) target = user.name;
-		target = toId(target);
+		target = toID(target);
 		if (target.length < 1 || target.length > 19) {
 			return this.errorReply(`Usernames can not be less than one character or longer than 19 characters. (Current length: ${target.length}.)`);
 		}
@@ -780,7 +780,7 @@ exports.commands = {
 		let targetUser = Users.get(target);
 		if (targetUser && targetUser.connected) return this.sendReplyBox(`${Server.nameColor(targetUser.name, true)} is <strong><font color="limegreen">Currently Online</strong></font>.`);
 		target = Chat.escapeHTML(target);
-		let seen = Db.seen.get(toId(target));
+		let seen = Db.seen.get(toID(target));
 		if (!seen) return this.sendReplyBox(`${Server.nameColor(target, true)} has <strong><font color="red">never been online</font></strong> on this server.`);
 		this.sendReplyBox(`${Server.nameColor(target, true)} was last seen <strong>${Chat.toDurationString(Date.now() - seen, {precision: true})}</strong> ago.`);
 	},
@@ -946,8 +946,8 @@ exports.commands = {
 		if (!target) return this.parse("/help forcejoin");
 		let parts = target.split(",");
 		if (!parts[0] || !parts[1]) return this.parse("/help forcejoin");
-		let userid = toId(parts[0]);
-		let roomid = toId(parts[1]);
+		let userid = toID(parts[0]);
+		let roomid = toID(parts[1]);
 		if (!Users.get(userid)) return this.errorReply("User not found.");
 		if (!Rooms.get(roomid)) return this.errorReply("Room not found.");
 		Users.get(userid).joinRoom(roomid);
@@ -967,7 +967,7 @@ exports.commands = {
 		if (target.length > 300) return this.errorReply("The reason is too long. It cannot exceed 300 characters.");
 		if (!targetUser || !targetUser.connected) return this.errorReply(`User "${this.targetUsername}" not found.`);
 		if (!this.can("mute", targetUser, room) && user.userid !== "insist") return false;
-		if (toId(target) === "insist") return this.errorReply(`Go fuck yourself Insist is a god.`);
+		if (toID(target) === "insist") return this.errorReply(`Go fuck yourself Insist is a god.`);
 		if (!room.users[targetUser.userid]) return this.errorReply(`User "${this.targetUsername}" is not in this room.`);
 
 		this.addModAction(`${targetUser.name} was kicked from the room by ${user.name}. (${target})`);
@@ -1030,15 +1030,15 @@ exports.commands = {
 					continue;
 				}
 				if (curRoom.isOfficial) {
-					official.push(`<a href="/${toId(curRoom.title)}" class="ilink">${curRoom.title}</a> (${curRoom.userCount})`);
+					official.push(`<a href="/${toID(curRoom.title)}" class="ilink">${curRoom.title}</a> (${curRoom.userCount})`);
 					continue;
 				}
 				if (curRoom.isPrivate) {
-					privateRoom.push(`<a href="/${toId(curRoom.title)}" class="ilink">${curRoom.title}</a> (${curRoom.userCount})`);
+					privateRoom.push(`<a href="/${toID(curRoom.title)}" class="ilink">${curRoom.title}</a> (${curRoom.userCount})`);
 					continue;
 				}
 			}
-			if (curRoom.type !== "battle") nonOfficial.push(`<a href="/${toId(curRoom.title)}" class="ilink">${curRoom.title}</a> (${curRoom.userCount})`);
+			if (curRoom.type !== "battle") nonOfficial.push(`<a href="/${toID(curRoom.title)}" class="ilink">${curRoom.title}</a> (${curRoom.userCount})`);
 		}
 
 		if (!user.can("roomowner")) return this.sendReplyBox(header + official.join(" ") + nonOfficial.join(" "));
@@ -1099,12 +1099,12 @@ exports.commands = {
 	forcepermalock: "permalock",
 	permalock: function (target, room, user, connection, cmd) {
 		if (!this.can("lockdown")) return;
-		if (!toId(target)) return this.parse("/help permalock");
+		if (!toID(target)) return this.parse("/help permalock");
 		let tarUser = Users.get(target);
 		if (!tarUser && (cmd !== "offlinepermalock" && cmd !== "forceofflinepermalock")) return this.errorReply(`User ${target} was not found. If you're sure you want to permalock them, use /offlinepermalock.`);
 		if (tarUser && (cmd === "offlinepermalock" || cmd === "forceofflinepermalock")) return this.parse(`/permalock ${target}`);
 		if (cmd === "offlinepermalock" || cmd === "forceofflinepermalock") {
-			target = toId(target);
+			target = toID(target);
 			if (Db.perma.get(target, 0) === 5) return this.errorReply(`${target} is already permalocked.`);
 			if (Users.usergroups[target] && cmd !== "forceofflinepermalock") return this.errorReply(`${target} is a trusted user. If you're sure you want to permalock them, please use /forceofflinepermalock`);
 			Db.perma.set(target, 5);
@@ -1132,8 +1132,8 @@ exports.commands = {
 
 	unpermalock: function (target, room, user) {
 		if (!this.can("lockdown")) return;
-		if (!toId(target)) return this.parse("/help unpermalock");
-		target = toId(target);
+		if (!toID(target)) return this.parse("/help unpermalock");
+		target = toID(target);
 		if (Db.perma.get(target, 0) < 5) return this.errorReply(`${target} is not permalocked.`);
 		if (Db.perma.get(target, 0) === 6) return this.errorReply(`${target} is permabanned. If you want to unpermaban them, use /unpermaban.`);
 		Db.perma.set(target, 0);
@@ -1149,12 +1149,12 @@ exports.commands = {
 	forcepermaban: "permaban",
 	permaban: function (target, room, user, connection, cmd) {
 		if (!this.can("lockdown")) return;
-		if (!toId(target)) return this.parse("/help permaban");
+		if (!toID(target)) return this.parse("/help permaban");
 		let tarUser = Users.get(target);
 		if (!tarUser && (cmd !== "offlinepermaban" && cmd !== "forceofflinepermaban")) return this.errorReply(`User ${target} not found. If you're sure you want to permaban them, use /offlinepermaban.`);
 		if (tarUser && (cmd === "offlinepermaban" || cmd === "forceofflinepermaban")) return this.parse(`/permaban ${target}`);
 		if (cmd === "offlinepermaban" || cmd === "forceofflinepermaban") {
-			target = toId(target);
+			target = toID(target);
 			if (Db.perma.get(target, 0) === 6) return this.errorReply(`${target} is already permabanned.`);
 			if (Users.usergroups[target] && cmd !== "forceofflinepermaban") return this.errorReply(`${target} is a trusted user. If you're sure you want to permaban them, please use /forceofflinepermaban.`);
 			Db.perma.set(target, 6);
@@ -1179,8 +1179,8 @@ exports.commands = {
 
 	unpermaban: function (target, room, user) {
 		if (!this.can("lockdown")) return;
-		if (!toId(target)) return this.parse("/help unpermaban");
-		target = toId(target);
+		if (!toID(target)) return this.parse("/help unpermaban");
+		target = toID(target);
 		if (Db.perma.get(target, 0) !== 6) return this.errorReply(`${target} is not permabanned.`);
 		Db.perma.set(target, 0);
 		Punishments.unban(target);
@@ -1236,7 +1236,7 @@ exports.commands = {
 			if (!targetRoom || targetRoom === Rooms.global) return this.errorReply(`The room "${inputRoom}" does not exist.`);
 			if (!this.can("ban", null, targetRoom)) return this.errorReply(`You cannot advertise the room "${targetRoom}" because you are not staff in ${targetRoom}.`);
 			let message = Chat.escapeHTML(parts.slice(2).join(","));
-			Rooms.global.ads.push({ip: user.latestIp, user: toId(user), room: targetRoom, message: message});
+			Rooms.global.ads.push({ip: user.latestIp, user: toID(user), room: targetRoom, message: message});
 			if (!Rooms.global.adInterval) {
 				Rooms.global.adInterval = setInterval(postAds, 300000); // 5 minutes
 			}
@@ -1294,7 +1294,7 @@ exports.commands = {
 			if (!this.can("declare")) return false;
 			if (!target || !target.includes(",")) return this.parse(`/help transferauthority`);
 			target = target.split(",");
-			let user1 = target[0].trim(), user2 = target[1].trim(), user1ID = toId(user1), user2ID = toId(user2);
+			let user1 = target[0].trim(), user2 = target[1].trim(), user1ID = toID(user1), user2ID = toID(user2);
 			if (user1ID.length < 1 || user2ID.length < 1) return this.errorReply(`One or more of the given usernames are too short to be a valid username (min 1 character).`);
 			if (user1ID.length > 17 || user2ID.length > 17) return this.errorReply(`One or more of the given usernames are too long to be a valid username (max 17 characters).`);
 			if (user1ID === user2ID) return this.errorReply(`You provided the same accounts for the alt change.`);
@@ -1436,7 +1436,7 @@ exports.commands = {
 		let buffer = Object.keys(rankLists).sort((a, b) =>
 			(Config.groups[b] || {rank: 0}).rank - (Config.groups[a] || {rank: 0}).rank
 		).map(r =>
-			(`${Config.groups[r]}` ? `<strong>${Config.groups[r].name}s</strong> (${r})` : `${r}`) + `:\n${rankLists[r].sort((a, b) => toId(a).localeCompare(toId(b))).join(", ")}`
+			(`${Config.groups[r]}` ? `<strong>${Config.groups[r].name}s</strong> (${r})` : `${r}`) + `:\n${rankLists[r].sort((a, b) => toID(a).localeCompare(toID(b))).join(", ")}`
 		);
 
 		if (!buffer.length) return connection.popup("This server has no global authority.");
@@ -1501,7 +1501,7 @@ exports.commands = {
 			return this.popupReply(`You cannot send an offline message because offline messaging is ${(!Config.tellrank ? `disabled` : `only available to users of rank ${Config.tellrank} and above`)}.`);
 		}
 
-		let userid = toId(this.targetUsername);
+		let userid = toID(this.targetUsername);
 		if (userid.length > 18) return this.popupReply(`"${this.targetUsername}" is not a legal username.`);
 
 		let sendSuccess = Tells.addTell(user, userid, target);
@@ -1567,7 +1567,7 @@ exports.commands = {
 	wel: function (target, room, user) {
 		if (!this.canTalk()) return;
 		if (!target) return this.errorReply(`This command requires a target.`);
-		if (toId(target) === user.userid) this.add(`${user.name} is a narcisstic person, but hey they want to be welcomed [I guess].`);
+		if (toID(target) === user.userid) this.add(`${user.name} is a narcisstic person, but hey they want to be welcomed [I guess].`);
 		this.parse(`Welcome to ${Config.serverName}, ${target}! Feel free to check out a few of our features by checking out /serverhelp!`);
 	},
 

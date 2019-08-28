@@ -28,7 +28,7 @@ exports.commands = {
 	userontime: "ontime",
 	ontime: function (target, room, user) {
 		if (!this.runBroadcast()) return;
-		const userid = target ? toId(target) : user.userid;
+		const userid = target ? toID(target) : user.userid;
 		const currentOntime = Ontime[userid] ? Date.now() - Ontime[userid] : 0;
 		const totalOntime = Db.ontime.get(userid, 0) + currentOntime;
 

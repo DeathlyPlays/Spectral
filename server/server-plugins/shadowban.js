@@ -1,10 +1,10 @@
 'use strict';
 
 const ROOM_NAME = "Shadow Ban Room";
-let room = Rooms.get(toId(ROOM_NAME));
+let room = Rooms.get(toID(ROOM_NAME));
 if (!room) {
 	Rooms.global.addChatRoom(ROOM_NAME);
-	room = Rooms.get(toId(ROOM_NAME));
+	room = Rooms.get(toID(ROOM_NAME));
 
 	room.isPrivate = true;
 	room.staffRoom = true;
@@ -31,15 +31,15 @@ exports.room = room;
 function getAllAlts(user) {
 	let targets = {};
 	if (typeof user === 'string') {
-		targets[toId(user)] = 1;
+		targets[toID(user)] = 1;
 	} else {
 		user.getAltUsers().map(u => u.getLastName()).concat(user.name).forEach(function (altName) {
 			let alt = Users.get(altName);
 			if (!alt.named) return;
 
-			targets[toId(alt)] = 1;
+			targets[toID(alt)] = 1;
 			Object.keys(alt.prevNames).forEach(function (name) {
-				targets[toId(name)] = 1;
+				targets[toID(name)] = 1;
 			});
 		});
 	}
@@ -75,7 +75,7 @@ function intersectAndExclude(a, b) {
 
 let checkBannedCache = {};
 exports.checkBanned = function (user) {
-	let userId = toId(user);
+	let userId = toID(user);
 	if (Users.get(userId).isStaff || Users.get(userId).isSysop) return false;
 	if (userId in checkBannedCache) return checkBannedCache[userId];
 	if (Users.get(userId).shadowbanned) return true;
@@ -169,7 +169,7 @@ exports.commands = {
 		}
 		this.privateModAction("(" + user.name + " has shadow banned: " + targets.join(", ") + (reason ? " (" + reason + ")" : "") + ")");
 
-		//return this.parse('/' + action + ' ' + toId(this.targetUser) + ',' + reason);
+		//return this.parse('/' + action + ' ' + toID(this.targetUser) + ',' + reason);
 	},
 
 	unspam: 'unshadowban',
@@ -192,11 +192,11 @@ exports.commands = {
 		if (!this.canTalk() && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!this.can("sban")) return false;
 		let result = [];
-		let data = Rooms.get(toId(ROOM_NAME)).chatRoomData.addedUsers;
+		let data = Rooms.get(toID(ROOM_NAME)).chatRoomData.addedUsers;
 		for (let key in data) {
 			result.push(key);
 		}
-		Users.get(toId(user.name)).send('|popup| Here is a list of sbanned users: \n' + result.join(', '));
+		Users.get(toID(user.name)).send('|popup| Here is a list of sbanned users: \n' + result.join(', '));
 	},
 };
 

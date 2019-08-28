@@ -24,7 +24,7 @@ exports.commands = {
 			let [issue, priority, ...description] = target.split(",").map(p => p.trim());
 			if (!(issue && priority && description)) return this.parse("/taskshelp");
 			let task = Db.tasks.get("development", {issues: {}});
-			let id = toId(issue);
+			let id = toID(issue);
 			if (task.issues[id]) return this.errorReply(`This issue title already exists.`);
 			if (issue.length < 1 || issue.length > 30) return this.errorReply(`The issue title should not exceed 30 characters long. Feel free to continue in the description.`);
 			if (description.length < 1 || description.length > 100) return this.errorReply(`The description should not exceed 100 characters long.`);
@@ -40,7 +40,7 @@ exports.commands = {
 		fixed: "delete",
 		delete: function (target, room, user) {
 			if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
-			target = toId(target);
+			target = toID(target);
 			let task = Db.tasks.get("development", {issues: {}});
 			if (!target) return this.parse(`/taskshelp`);
 			if (!task.issues[target]) return this.errorReply(`The issue "${target}" has not been reported.`);
