@@ -1,6 +1,6 @@
 "use strict";
 
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 
 // This should be the default amount of money users have..
 // Ideally, this should be zero.

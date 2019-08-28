@@ -5,7 +5,7 @@
 
 "use strict";
 
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 const MAX_LINES = 1000;
 
 exports.commands = {

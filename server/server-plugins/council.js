@@ -6,7 +6,7 @@
 
 "use strict";
 
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 
 let proposals = FS("config/chat-plugins/proposals.json").readIfExistsSync();
 

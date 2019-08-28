@@ -8,7 +8,7 @@
 "use strict";
 
 /****** General Faction Functions Start ******/
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 
 let factions = FS("config/chat-plugins/factions.json").readIfExistsSync();
 

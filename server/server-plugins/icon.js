@@ -4,7 +4,7 @@
 *******************************/
 "use strict";
 
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 
 let icons = FS("config/icons.json").readIfExistsSync();
 

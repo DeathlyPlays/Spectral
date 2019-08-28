@@ -4,7 +4,7 @@
 
 const INACTIVE_END_TIME = 1 * 60 * 1000; // 1 minute
 const TAX = 0;
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 
 function diceImg(num) {
 	switch (num) {

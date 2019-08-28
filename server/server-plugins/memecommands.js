@@ -6,7 +6,7 @@
 
 "use strict";
 
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 
 let memes = FS("config/chat-plugins/memes.json").readIfExistsSync();
 

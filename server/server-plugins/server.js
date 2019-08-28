@@ -1,6 +1,6 @@
 "use strict";
 
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 const nani = require("nani").init("niisama1-uvake", "llbgsBx3inTdyGizCPMgExBVmQ5fU");
 const https = require("https");
 const http = require("http");

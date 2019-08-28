@@ -1,6 +1,6 @@
 "use strict";
 
-const FS = require("../lib/fs.js");
+const FS = require("../lib/fs");
 
 let ssbWrite = true; //if false, do not write to JSON
 let noRead = false; //if true, do not read from JSON
