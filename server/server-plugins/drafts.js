@@ -4,7 +4,7 @@
  ********************************/
 "use strict";
 
-let FS = require("../lib/fs");
+let FS = require("../../.lib-dist/fs").FS
 let path = require("path");
 let greencss = "background: #ccffcc; padding: 10px; color: #006600; border: 1px solid #006600; border-radius: 6px; text-align: center;";
 let redcss = "background: ##ffb3b3; padding: 10px; color: #ff3333; border: 1px solid #ff3333; border-radius: 6px; text-align: center;";

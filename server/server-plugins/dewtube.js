@@ -6,7 +6,7 @@
 
 "use strict";
 
-const FS = require("../lib/fs");
+const FS = require("../../.lib-dist/fs").FS
 
 // Cooldown per video (30 minutes)
 const RECORD_COOLDOWN = 30 * 60 * 1000;

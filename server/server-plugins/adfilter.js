@@ -1,6 +1,6 @@
 "use strict";
 
-const FS = require("../lib/fs");
+const FS = require("../../.lib-dist/fs").FS;
 
 let adWhitelist = ["dewdrop"]; //Put your Server name here!
 
