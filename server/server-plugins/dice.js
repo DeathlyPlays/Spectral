@@ -122,7 +122,7 @@ class Dice {
 
 exports.commands = {
 	startdice: "dicegame",
-	dicegame: function (target, room, user) {
+	dicegame(target, room, user) {
 		if (room.id === "lobby") return this.errorReply("This command cannot be used in the Lobby.");
 		if (!user.can("broadcast", null, room) && room.id !== "casino") return this.errorReply("You must be ranked + or higher in this room to start a game of dice outside the Casino.");
 		if (!this.canTalk()) return;
@@ -140,7 +140,7 @@ exports.commands = {
 	},
 
 	dicejoin: "joindice",
-	joindice: function (target, room, user) {
+	joindice(target, room, user) {
 		if (room.id === "lobby") return this.errorReply("This command cannot be used in the Lobby.");
 		if (!this.canTalk()) return;
 		if (!room.dice) return this.errorReply("There is no game of dice going on in this room.");
@@ -149,7 +149,7 @@ exports.commands = {
 	},
 
 	diceleave: "leavedice",
-	leavedice: function (target, room, user) {
+	leavedice(target, room, user) {
 		if (room.id === "lobby") return this.errorReply("This command cannot be used in the Lobby.");
 		if (!room.dice) return this.errorReply("There is no game of dice going on in this room.");
 
@@ -157,7 +157,7 @@ exports.commands = {
 	},
 
 	diceend: "enddice",
-	enddice: function (target, room, user) {
+	enddice(target, room, user) {
 		if (room.id === "lobby") return this.errorReply("This command cannot be used in the Lobby.");
 		if (!this.canTalk()) return;
 		if (!room.dice) return this.errorReply("There is no game of dice going on in this room.");
@@ -167,7 +167,7 @@ exports.commands = {
 	},
 
 	viewdice: "dicelog",
-	dicelog: function (target, room, user) {
+	dicelog(target, room, user) {
 		if (!this.can("money")) return false;
 		if (!target) return this.sendReply("Usage: /dicelog [number] to view the last x lines OR /dicelog [text] to search for text.");
 		let word = false;
@@ -196,7 +196,7 @@ exports.commands = {
 
 	disabledice: "dicedisable",
 	diceoff: "dicedisable",
-	dicedisable: function (target, room, user) {
+	dicedisable(target, room, user) {
 		if (!this.can("gamemanagement", null, room)) return;
 		if (room.id === "casino") return this.errorReply(`Casino cannot disable Dice.`);
 		if (room.diceDisabled) {
@@ -212,7 +212,7 @@ exports.commands = {
 
 	enabledice: "diceenable",
 	diceon: "diceenable",
-	diceenable: function (target, room, user) {
+	diceenable(target, room, user) {
 		if (!this.can("gamemanagement", null, room)) return;
 		if (!room.diceDisabled) {
 			return this.errorReply("Dice is already enabled in this room.");

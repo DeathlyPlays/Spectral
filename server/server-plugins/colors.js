@@ -46,7 +46,7 @@ function generateCSS(name, color) {
 exports.commands = {
 	customcolour: "customcolor",
 	customcolor: {
-		set: function (target, room, user) {
+		set(target, room, user) {
 			if (!this.can("profile")) return false;
 			target = target.split(",");
 			for (let u = 0; u < target.length; u++) target[u] = target[u].trim();
@@ -60,7 +60,7 @@ exports.commands = {
 			updateColor();
 		},
 
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			if (!this.can("profile")) return false;
 			if (!target) return this.parse("/help customcolor");
 			if (!customColors[toID(target)]) return this.errorReply(`/customcolor - ${target} does not have a custom color.`);
@@ -74,7 +74,7 @@ exports.commands = {
 			return;
 		},
 
-		preview: function (target, room, user) {
+		preview(target, room, user) {
 			if (!this.runBroadcast()) return;
 			target = target.split(",");
 			for (let u = 0; u < target.length; u++) target[u] = target[u].trim();
@@ -82,14 +82,14 @@ exports.commands = {
 			return this.sendReplyBox(`<strong><font size="3" color="${target[1]}">${Chat.escapeHTML(target[0])}</font></strong>`);
 		},
 
-		reload: function (target, room, user) {
+		reload(target, room, user) {
 			if (!this.can("profile")) return false;
 			updateColor();
 			this.privateModAction(`(${user.name} has reloaded custom colours.)`);
 		},
 
 		"": "help",
-		"": function (target, room, user) {
+		""(target, room, user) {
 			return this.parse("/help customcolor");
 		},
 	},
@@ -103,7 +103,7 @@ exports.commands = {
 	],
 
 	"!hex": true,
-	hex: function (target, room, user) {
+	hex(target, room, user) {
 		if (!this.runBroadcast()) return;
 		let targetUser = (target ? target : user.name);
 		this.sendReplyBox(`The hex code of ${Server.nameColor(targetUser, true)} is: <font color="${Server.hashColor(targetUser)}"><strong>${Server.hashColor(targetUser)}</strong></font>`);

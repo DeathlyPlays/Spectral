@@ -11,7 +11,7 @@ exports.commands = {
 	rs: "roomshop",
 	rshop: "roomshop",
 	roomshop: {
-		toggle: function (target, room, user) {
+		toggle(target, room, user) {
 			if (!target) return this.parse(`/help roomshop toggle`);
 			if (!this.can("roomshop")) return false;
 			if (this.meansYes(toID(target))) {
@@ -30,7 +30,7 @@ exports.commands = {
 		togglehelp: [`/roomshop toggle (yes/enable/on/true or no/disable/off/false) - enables or disables a Room Shop in the current room.`],
 
 		bank: {
-			set: function (target, room, user) {
+			set(target, room, user) {
 				if (!this.can("roomshop", null, room)) return false;
 				target = toID(target);
 				if (!target) return this.parse(`/roomshophelp`);
@@ -42,7 +42,7 @@ exports.commands = {
 				this.privateModAction(`${room.title}'s Room Shop Bank has been set as "${target}" by ${user.name}.`);
 			},
 
-			remove: function (target, room, user) {
+			remove(target, room, user) {
 				if (!this.can("roomshop", null, room)) return false;
 				let roomshop = Db.roomshop.get(room.id, {items: {}});
 				if (!roomshop) return this.errorReply(`${room.title} does not have a Room Shop yet.`);
@@ -53,7 +53,7 @@ exports.commands = {
 			},
 
 			account: "holder",
-			holder: function (target, room) {
+			holder(target, room) {
 				if (!this.runBroadcast()) return;
 				let roomshop = Db.roomshop.get(room.id, {items: {}});
 				if (!roomshop) return this.errorReply(`${room.title} does not have a Room Shop.`);
@@ -63,7 +63,7 @@ exports.commands = {
 
 			"": "atm",
 			money: "atm",
-			atm: function (target, room) {
+			atm(target, room) {
 				if (!this.runBroadcast()) return;
 				let roomshop = Db.roomshop.get(room.id, {items: {}});
 				if (!roomshop) return this.errorReply(`${room.title} does not have a Room Shop.`);
@@ -77,7 +77,7 @@ exports.commands = {
 		},
 
 		additem: "add",
-		add: function (target, room, user) {
+		add(target, room, user) {
 			if (!this.can("roomshop", null, room)) return false;
 			let roomshop = Db.roomshop.get(room.id, {items: {}});
 			if (Object.keys(roomshop.items).length > 12) return this.errorReply(`${room.title} has already reached the maximum amount of items allowed.`);
@@ -96,7 +96,7 @@ exports.commands = {
 		deleteitem: "remove",
 		delete: "remove",
 		removeitem: "remove",
-		remove: function (target, room, user) {
+		remove(target, room, user) {
 			if (!this.can("roomshop", null, room)) return false;
 			if (!target) return this.parse(`/roomshophelp`);
 			let roomshop = Db.roomshop.get(room.id, {items: {}});
@@ -109,7 +109,7 @@ exports.commands = {
 
 		"": "display",
 		shop: "display",
-		display: function (target, room) {
+		display(target, room) {
 			if (!this.runBroadcast()) return;
 			let roomshop = Db.roomshop.get(room.id, {items: {}});
 			if (!roomshop) return this.errorReply(`${room.title} does not have a Room Shop.`);
@@ -127,7 +127,7 @@ exports.commands = {
 		},
 
 		purchase: "buy",
-		buy: function (target, room, user) {
+		buy(target, room, user) {
 			if (!Db.roomshop.has(room.id)) return this.errorReply("Room Shop is not enabled here.");
 			let roomshop = Db.roomshop.get(room.id, {items: {}});
 			if (!roomshop.bank) return this.errorReply(`${room.title} hasn't set a bank yet.`);
@@ -163,7 +163,7 @@ exports.commands = {
 
 		logs: "transactions",
 		log: "transactions",
-		transactions: function (target, room, user) {
+		transactions(target, room, user) {
 			if (!this.can("roomshop", null, room)) return false;
 			if (!Db.roomshop.has(room.id)) return this.errorReply(`Roomshop is not enabled here.`);
 			target = toID(target);
@@ -189,7 +189,7 @@ exports.commands = {
 			});
 		},
 
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/help roomshop`);
 		},
 	},

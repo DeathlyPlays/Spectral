@@ -38,7 +38,7 @@ function playlistGenerator(user) {
 exports.commands = {
 	musicbox: "playlist",
 	playlist: {
-		add: function (target, room, user) {
+		add(target, room, user) {
 			let parts = target.split(",");
 			if (parts.length < 2) return this.parse("/playlist help");
 			let link = parts[0].trim();
@@ -55,7 +55,7 @@ exports.commands = {
 		},
 
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			let title = toID(target);
 			if (!title) return this.parse("/playlist help");
 			if (!playlists[user.userid]) playlists[user.userid] = [];
@@ -73,7 +73,7 @@ exports.commands = {
 
 		nuke: "reset",
 		clearall: "reset",
-		reset: function (target, room, user) {
+		reset(target, room, user) {
 			if (!target) {
 				playlists[user.userid] = [];
 				save();
@@ -87,7 +87,7 @@ exports.commands = {
 		},
 
 		listen: "play",
-		play: function (target, room, user) {
+		play(target, room, user) {
 			let parts = target.split(",");
 			if (parts.length < 2) return this.parse("/playlist help");
 			let userid = toID(parts[1]);
@@ -98,20 +98,20 @@ exports.commands = {
 			return this.errorReply("Your playlist does not contain this song.");
 		},
 
-		back: function (target, room, user) {
+		back(target, room, user) {
 			if (!target) return this.sendReply(`|uhtmlchange|${user.userid}playlist|${playlistGenerator(user.userid)}`);
 			return this.sendReply(`|uhtmlchange|${toID(target)}playlist|${playlistGenerator(toID(target))}`);
 		},
 
 		"": "list",
 		playlist: "list",
-		list: function (target, room, user) {
+		list(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = user.userid;
 			return this.sendReply(`|uhtml|${toID(target)}playlist|${playlistGenerator(toID(target))}`);
 		},
 
-		help: function () {
+		help(target, room, user) {
 			this.parse("/playlisthelp");
 		},
 	},

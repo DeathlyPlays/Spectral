@@ -52,7 +52,7 @@ function pColor(user) {
 
 exports.commands = {
 	dev: {
-		give: function (target, room, user) {
+		give(target, room, user) {
 			if (!this.can("hotpatch")) return false;
 			if (!target) return this.parse("/help", true);
 			let devUsername = toID(target);
@@ -63,7 +63,7 @@ exports.commands = {
 			if (Users.get(devUsername)) Users.get(devUsername).popup(`|html|You have been given DEV status by ${Server.nameColor(user.name, true)}.`);
 		},
 
-		take: function (target, room, user) {
+		take(target, room, user) {
 			if (!this.can("hotpatch")) return false;
 			if (!target) return this.parse("/help", true);
 			let devUsername = toID(target);
@@ -75,7 +75,7 @@ exports.commands = {
 		},
 
 		users: "list",
-		list: function () {
+		list(target, room, user) {
 			if (!Db.devs.keys().length) return this.errorReply("There seems to be no user(s) with DEV status.");
 			let display = [];
 			Db.devs.keys().forEach(devUser => {
@@ -85,7 +85,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse(`/help dev`);
 		},
 	},
@@ -97,7 +97,7 @@ exports.commands = {
 	],
 
 	vip: {
-		give: function (target, room, user) {
+		give(target, room, user) {
 			if (!this.can("profile")) return false;
 			if (!target) return this.parse("/help", true);
 			let vipUsername = toID(target);
@@ -108,7 +108,7 @@ exports.commands = {
 			if (Users.get(vipUsername)) Users.get(vipUsername).popup(`|html|You have been given VIP status by ${Server.nameColor(user.name, true)}.`);
 		},
 
-		take: function (target, room, user) {
+		take(target, room, user) {
 			if (!this.can("profile")) return false;
 			if (!target) return this.parse("/help", true);
 			let vipUsername = toID(target);
@@ -120,7 +120,7 @@ exports.commands = {
 		},
 
 		users: "list",
-		list: function () {
+		list() {
 			if (!Db.vips.keys().length) return this.errorReply("There seems to be no user(s) with VIP status.");
 			let display = [];
 			Db.vips.keys().forEach(vipUser => {
@@ -130,7 +130,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse(`/help vip`);
 		},
 	},
@@ -144,7 +144,7 @@ exports.commands = {
 	title: "customtitle",
 	customtitle: {
 		set: "give",
-		give: function (target, room, user) {
+		give(target, room, user) {
 			if (!this.can("profile")) return false;
 			let [userid, titleName, color] = target.split(",").map(p => { return p.trim(); });
 			if (!color) return this.parse("/help", true);
@@ -162,7 +162,7 @@ exports.commands = {
 
 		delete: "remove",
 		take: "remove",
-		remove: function (target, room, user) {
+		remove(target, room, user) {
 			if (!this.can("profile")) return false;
 			if (!target) return this.parse("/help", true);
 			let userid = toID(target);
@@ -178,7 +178,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse(`/help customtitle`);
 		},
 	},
@@ -193,7 +193,7 @@ exports.commands = {
 		switch: "nintendoswitch",
 		nintendoswitch: {
 			add: "set",
-			set: function (target, room, user) {
+			set(target, room, user) {
 				if (room.battle) return this.errorReply("Please use this command outside of battle rooms.");
 				if (!user.autoconfirmed) return this.errorReply("You must be autoconfirmed to use this command.");
 				if (!target) return this.parse("/friendcodehelp");
@@ -210,7 +210,7 @@ exports.commands = {
 			},
 
 			remove: "delete",
-			delete: function (target, room, user) {
+			delete(target, room, user) {
 				if (room.battle) return this.errorReply("Please use this command outside of battle rooms.");
 				if (!user.autoconfirmed) return this.errorReply("You must be autoconfirmed to use this command.");
 				if (!target) {
@@ -234,7 +234,7 @@ exports.commands = {
 		nintendo2ds: "ds",
 		ds: {
 			add: "set",
-			set: function (target, room, user) {
+			set(target, room, user) {
 				if (room.battle) return this.errorReply("Please use this command outside of battle rooms.");
 				if (!user.autoconfirmed) return this.errorReply("You must be autoconfirmed to use this command.");
 				if (!target) return this.parse("/friendcodehelp");
@@ -251,7 +251,7 @@ exports.commands = {
 			},
 
 			remove: "delete",
-			delete: function (target, room, user) {
+			delete(target, room, user) {
 				if (room.battle) return this.errorReply("Please use this command outside of battle rooms.");
 				if (!user.autoconfirmed) return this.errorReply("You must be autoconfirmed to use this command.");
 				if (!target) {
@@ -269,7 +269,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/friendcodehelp");
 		},
 	},
@@ -283,7 +283,7 @@ exports.commands = {
 	favoritetype: "type",
 	type: {
 		add: "set",
-		set: function (target, room, user) {
+		set(target, room, user) {
 			if (!target) return this.parse("/help type");
 			let profile = Db.profile.get(user.userid, {data: {title: {}, music: {}}});
 			let type = Dex.getType(target);
@@ -295,7 +295,7 @@ exports.commands = {
 
 		del: "delete",
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			let profile = Db.profile.get(user.userid, {data: {title: {}, music: {}}});
 			if (!profile.type) return this.errorReply(`Your profile type hasn't been set yet.`);
 			delete profile.type;
@@ -304,7 +304,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/help type");
 		},
 	},
@@ -317,7 +317,7 @@ exports.commands = {
 	profilecolor: "pcolor",
 	pcolor: {
 		set: "add",
-		add: function (target, room, user) {
+		add(target, room, user) {
 			if (!target) return this.parse("/pcolor help");
 			let profile = Db.profile.get(user.userid, {data: {title: {}, music: {}}});
 			let color = target.trim();
@@ -328,7 +328,7 @@ exports.commands = {
 		},
 
 		delete: "remove",
-		remove: function (target, room, user) {
+		remove(target, room, user) {
 			if (!this.can("profile")) return false;
 			let userid = toID(target);
 			let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
@@ -341,7 +341,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse(`/help pcolor`);
 		},
 	},
@@ -355,7 +355,7 @@ exports.commands = {
 	background: {
 		set: "setbg",
 		setbackground: "setbg",
-		setbg: function (target) {
+		setbg(target) {
 			if (!this.can("profile")) return false;
 			let [userid, link] = target.split(",").map(p => { return p.trim(); });
 			userid = toID(userid);
@@ -373,7 +373,7 @@ exports.commands = {
 		takebg: "deletebg",
 		take: "deletebg",
 		delete: "deletebg",
-		deletebg: function (target) {
+		deletebg(target) {
 			if (!this.can("profile")) return false;
 			let targ = toID(target);
 			if (!targ) return this.parse("/backgroundhelp");
@@ -385,7 +385,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/help background");
 		},
 	},
@@ -399,7 +399,7 @@ exports.commands = {
 	music: {
 		add: "set",
 		give: "set",
-		set: function (target) {
+		set(target) {
 			if (!this.can("profile")) return false;
 			let [userid, link, title] = target.split(",").map(p => { return p.trim(); });
 			userid = toID(userid);
@@ -414,7 +414,7 @@ exports.commands = {
 
 		take: "delete",
 		remove: "delete",
-		delete: function (target) {
+		delete(target) {
 			if (!this.can("profile")) return false;
 			target = toID(target);
 			let profile = Db.profile.get(target, {data: {title: {}, music: {}}});
@@ -427,7 +427,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/musichelp");
 		},
 	},
@@ -439,7 +439,7 @@ exports.commands = {
 
 	pokemon: {
 		add: "set",
-		set: function (target, room, user) {
+		set(target, room, user) {
 			if (!target) return this.parse("/pokemonhelp");
 			let profile = Db.profile.get(user.userid, {data: {title: {}, music: {}}});
 			let pkmn = Dex.getTemplate(target);
@@ -451,7 +451,7 @@ exports.commands = {
 
 		del: "delete",
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			let profile = Db.profile.get(user.userid, {data: {title: {}, music: {}}});
 			if (!profile.pokemon) return this.errorReply("Your favorite Pokemon hasn't been set.");
 			delete profile.pokemon;
@@ -460,7 +460,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/pokemonhelp");
 		},
 	},
@@ -473,7 +473,7 @@ exports.commands = {
 	natures: "nature",
 	nature: {
 		add: "set",
-		set: function (target, room, user) {
+		set(target, room, user) {
 			let profile = Db.profile.get(user.userid, {data: {title: {}, music: {}}});
 			if (!target) return this.parse("/naturehelp");
 			let nature = Dex.getNature(target);
@@ -486,7 +486,7 @@ exports.commands = {
 		del: "delete",
 		take: "delete",
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			let profile = Db.profile.get(user.userid, {data: {title: {}, music: {}}});
 			if (!profile.nature) return this.errorReply("Your nature has not been set.");
 			delete profile.nature;
@@ -495,7 +495,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/naturehelp");
 		},
 	},
@@ -507,7 +507,7 @@ exports.commands = {
 
 	"!lastactive": true,
 	checkactivity: "lastactive",
-	lastactive: function (target, room, user) {
+	lastactive(target, room, user) {
 		if (!target) target = user.userid;
 		if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 		if (!this.runBroadcast()) return;
@@ -518,7 +518,7 @@ exports.commands = {
 	lastactivehelp: ["/lastactive - Shows how long ago it has been since a user has posted a message."],
 
 	"!profile": true,
-	profile: function (target, room, user) {
+	profile(target, room, user) {
 		target = toID(target);
 		if (!target) target = user.name;
 		if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");

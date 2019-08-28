@@ -155,7 +155,7 @@ exports.commands = {
 	draft: {
 		new: "create",
 		host: "create",
-		create: function (target, room, user) {
+		create(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			if (drafts[room]) return this.errorReply("There is already a draft going on in this room.");
 			if (room.draftsDisabled) return this.errorReply(`Drafts are currently disabled in ${room.title}.`);
@@ -169,7 +169,7 @@ exports.commands = {
 		nuke: "reset",
 		restart: "reset",
 		resetdata: "reset",
-		reset: function (target, room, user) {
+		reset(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			if (!drafts[room]) return this.errorReply("This room is not taking part in a draft at the moment.");
 			delete drafts[room];
@@ -177,7 +177,7 @@ exports.commands = {
 			this.modlog(`DRAFTS`, null, `RESET`);
 		},
 
-		addteam: function (target, room, user) {
+		addteam(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			let [teamName, ...manager] = target.split(",").map(p => p.trim());
 			if (!teamName || !manager) return this.parse("/draft help");
@@ -187,7 +187,7 @@ exports.commands = {
 		},
 
 		eliminateteam: "removeteam",
-		removeteam: function (target, room, user) {
+		removeteam(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			if (!target) return this.parse("/draft help");
 			let teamNamez = target.trim();
@@ -196,7 +196,7 @@ exports.commands = {
 		},
 
 		begin: "start",
-		start: function (target, room, user) {
+		start(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 			if (drafts[room].state === "drafting") return this.errorReply("The draft has already started.");
@@ -207,7 +207,7 @@ exports.commands = {
 		randomizeteams: "random",
 		randomize: "random",
 		randomteams: "random",
-		random: function (target, room, user) {
+		random(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 			if (!target) return this.parse("/draft help");
@@ -224,7 +224,7 @@ exports.commands = {
 			}
 		},
 
-		snake: function (target, room, user) {
+		snake(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 			if (!target) return this.parse("/draft help");
@@ -244,7 +244,7 @@ exports.commands = {
 		canceldraft: "end",
 		cancel: "end",
 		enddraft: "end",
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 			drafts[room].log(`The draft has been ended by ${user.name}!`);
@@ -255,7 +255,7 @@ exports.commands = {
 
 		maxpicks: "max",
 		limitpicks: "max",
-		max: function (target, room, user) {
+		max(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 			if (!target) return this.sendReply(`The draft pick limit for this draft is ${drafts[room].maxMons}.`);
@@ -266,7 +266,7 @@ exports.commands = {
 			room.add(`|html|<div style="${greencss}">The draft limit of this draft has been set to <strong>${drafts[room].maxMons}!</strong></div>`);
 		},
 
-		stats: function (target, room, user) {
+		stats(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 			drafts[room].show(this);
@@ -276,7 +276,7 @@ exports.commands = {
 		editpicks: "change",
 		edit: "change",
 		changepicks: "change",
-		change: function (target, room, user) {
+		change(target, room, user) {
 			if (!this.can("draft", null, room)) return false;
 			let [teamname, draftpick, ...pokemon] = target.split(",").map(p => p.trim());
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
@@ -289,14 +289,14 @@ exports.commands = {
 
 		draftlist: "drafted",
 		list: "drafted",
-		drafted: function (target, room, user) {
+		drafted(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 			this.sendReply(`|html|<div style="${greencss}"><i><strong>Drafted Pokemon:</strong></i><br />${drafts[room].iconize(drafts[room].draftedMons)}`);
 		},
 
 		off: "disable",
-		disable: function (target, room, user) {
+		disable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (room.draftsDisabled) {
 				return this.errorReply("Drafts is already disabled in this room.");
@@ -310,7 +310,7 @@ exports.commands = {
 		},
 
 		on: "enable",
-		enable: function (target, room, user) {
+		enable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (!room.draftsDisabled) {
 				return this.errorReply("Drafts is already enabled in this room.");
@@ -324,7 +324,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function (target, room, user) {
+		help(target, room, user) {
 			if (!this.runBroadcast()) return;
 			let help = `<strong><center>Drafts Management By Execute. Rewritten by Insist.</center></strong>`;
 			help += `<strong>Adminstrative Commands:</strong> Requires @, #, &, ~.<br />`;
@@ -347,7 +347,7 @@ exports.commands = {
 		},
 	},
 
-	draftmon: function (target, room, user) {
+	draftmon(target, room, user) {
 		if (!drafts[room]) return this.errorReply("This room is not drafting at the moment.");
 		if (drafts[room].state !== "drafting") return this.errorReply("The draft has not started.");
 		if (!target) return this.parse("/draft help");

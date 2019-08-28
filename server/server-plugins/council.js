@@ -66,7 +66,7 @@ exports.commands = {
 	committee: {
 		invite: "give",
 		add: "give",
-		give: function (target, room, user) {
+		give(target, room, user) {
 			if (committee.vips.includes(user.userid) && !Db.councilmember.has(user.userid)) return this.errorReply(`Sorry, you have been suspended from the ${committee.name} Council.`);
 			if (!committee.owners.includes(user.userid) && !committee.vips.includes(user.userid)) return this.errorReply(`You must be a Committee Owner or VIP to add users to ${committee.name}.`);
 			if (!target) return this.parse("/committeehelp");
@@ -81,7 +81,7 @@ exports.commands = {
 		kick: "take",
 		remove: "take",
 		delete: "take",
-		take: function (target, room, user) {
+		take(target, room, user) {
 			if (committee.vips.includes(user.userid) && !Db.councilmember.has(user.userid)) return this.errorReply(`Sorry, you have been suspended from the ${committee.name} Council.`);
 			if (!committee.owners.includes(user.userid) && !committee.vips.includes(user.userid)) return this.errorReply(`You must be a Committee Owner or VIP to remove users from the ${committee.name} Council.`);
 			if (!target) return this.parse(`/committeehelp`);
@@ -94,7 +94,7 @@ exports.commands = {
 		},
 
 		users: "list",
-		list: function (target, room, user) {
+		list(target, room, user) {
 			if (!Db.councilmember.keys().length) return this.errorReply(`There seems to be no users in the ${committee.name} Council.`);
 			let display = [];
 			Db.councilmember.keys().forEach(councilMember => {
@@ -106,14 +106,14 @@ exports.commands = {
 		meeting: "message",
 		alert: "message",
 		pm: "message",
-		message: function (target, room, user) {
+		message(target, room, user) {
 			if (!committee.owners.includes(user.userid)) return this.errorReply(`This command is reserved for the ${committee.name} Council Owners.`);
 			if (!target) return this.parse("/committeehelp");
 			alertCouncilMembers(target);
 		},
 
 		requestchanges: "propose",
-		propose: function (target, room, user) {
+		propose(target, room, user) {
 			if (!isCouncilMember(user.userid)) return this.errorReply(`You are not in the ${committee.name} Council, or have been suspended.`);
 			if (!this.canTalk()) return false;
 			let [idea, ...changes] = target.split(",").map(p => { return p.trim(); });
@@ -134,7 +134,7 @@ exports.commands = {
 		modify: "editproposal",
 		edit: "editproposal",
 		modifyproposal: "editproposal",
-		editproposal: function (target, room, user) {
+		editproposal(target, room, user) {
 			if (!isCouncilMember(user.userid)) return this.errorReply(`You are not in the ${committee.name} Council, or have been suspended.`);
 			if (!this.canTalk()) return false;
 			let [proposal, ...newDesc] = target.split(",").map(p => p.trim());
@@ -156,7 +156,7 @@ exports.commands = {
 		view: "proposals",
 		proposed: "proposals",
 		showproposals: "proposals",
-		proposals: function (target, room, user) {
+		proposals(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (Object.keys(proposals).length < 1) return this.errorReply(`There are no ${committee.name} Council proposals on ${Config.serverName} so far.`);
 			if (!target) {
@@ -176,7 +176,7 @@ exports.commands = {
 		removeproposal: "deleteproposal",
 		removeproposals: "deleteproposal",
 		deleteproposals: "deleteproposal",
-		deleteproposal: function (target, room, user) {
+		deleteproposal(target, room, user) {
 			if (!target) return this.parse(`/committeehelp`);
 			let proposalid = toID(target);
 			if (!proposals[proposalid]) return this.errorReply(`This proposal doesn't exist!`);
@@ -188,7 +188,7 @@ exports.commands = {
 		},
 
 		listproposals: "viewproposals",
-		viewproposals: function () {
+		viewproposals(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (Object.keys(proposals).length < 1) return this.errorReply(`There are currently no ${committee.name} Council proposals.`);
 			let reply = `<strong><u>Proposals (${Object.keys(proposals).length})</u></strong><br />`;
@@ -196,7 +196,7 @@ exports.commands = {
 			this.sendReplyBox(`<div class="infobox infobox-limited">${reply}</div>`);
 		},
 
-		suspend: function (target, room, user) {
+		suspend(target, room, user) {
 			if (!this.canTalk()) return false;
 			if (!target || target.length > 18) return this.errorReply(`You must specify a target, with a maximum of 18 characters.`);
 			let targetUser = toID(target);
@@ -210,7 +210,7 @@ exports.commands = {
 			Db.councilmember.set(targetUser, 2);
 		},
 
-		unsuspend: function (target, room, user) {
+		unsuspend(target, room, user) {
 			if (!this.canTalk()) return false;
 			if (!target || target.length > 18) return this.errorReply(`You must specify a target, with a maximum of 18 characters.`);
 			let targetUser = toID(target);
@@ -227,14 +227,14 @@ exports.commands = {
 		info: "forums",
 		website: "forums",
 		forum: "forums",
-		forums: function () {
+		forums(target, room, user) {
 			if (!committee.forums) return this.errorReply(`The Official ${committee.name} Forums have not been set yet.`);
 			if (!this.runBroadcast()) return;
 			this.sendReplyBox(`<a href="${committee.forums}">The Official ${committee.name} Forums!</a>`);
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse("/committeehelp");
 		},
 	},

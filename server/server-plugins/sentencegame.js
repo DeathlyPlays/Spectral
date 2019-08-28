@@ -55,7 +55,7 @@ exports.commands = {
 	sentence: {
 		create: "new",
 		make: "new",
-		new: function (target, room, user) {
+		new(target, room, user) {
 			if (!this.can("minigame", null, room)) return false;
 			if (!this.canTalk()) return;
 			if (room.sentence) return this.errorReply(`There is already a Sentence Game in this room.`);
@@ -67,7 +67,7 @@ exports.commands = {
 		},
 
 		addword: "aw",
-		aw: function (target, room, user) {
+		aw(target, room, user) {
 			if (!this.canTalk()) return;
 			if (!room.sentence) return this.errorReply(`There isn't a Sentence Game in this room.`);
 			if (!target) return this.errorReply(`Please include the word you want to add.`);
@@ -78,14 +78,14 @@ exports.commands = {
 		displaysentence: "show",
 		display: "show",
 		showsentence: "show",
-		show: function (target, room, user) {
+		show(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!room.sentence) return this.errorReply(`There isn't a Sentence Game in this room.`);
 			if (room.sentence.sentence.length < 1) return this.errorReply(`The sentence hasn't begun in this game yet.`);
 			return this.sendReplyBox(`<strong>Current Sentence:</strong> ${room.sentence.sentence.join(" ")}.<br /><strong>Progress:</strong> ${room.sentence.sentence.length}/${room.sentence.wordCount} words.<br /><strong>Last User:</strong> ${Server.nameColor(room.sentence.lastUser, true, true)}.`);
 		},
 
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!this.can("minigame", null, room)) return false;
 			if (!this.canTalk()) return;
 			if (!room.sentence) return this.errorReply(`There is no Sentence Game to end in this room.`);
@@ -93,7 +93,7 @@ exports.commands = {
 		},
 
 		off: "disable",
-		disable: function (target, room, user) {
+		disable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (room.sentenceDisabled) {
 				return this.errorReply("Sentence Game is already disabled in this room.");
@@ -107,7 +107,7 @@ exports.commands = {
 		},
 
 		on: "enable",
-		enable: function (target, room, user) {
+		enable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (!room.sentenceDisabled) {
 				return this.errorReply("Sentence Game is already enabled in this room.");
@@ -121,7 +121,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/help sentence`);
 		},
 	},

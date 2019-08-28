@@ -207,16 +207,16 @@ function validateAnswer(room, message) {
 }
 
 exports.commands = {
-	sa: function (target, room, user) {
+	sa(target, room, user) {
 		this.parse(`/survey answer ${target}`);
 	},
-	sahelp: function (target, room, user) {
+	sahelp(target, room, user) {
 		this.parse('/help survey answer');
 	},
 	survey: {
 		htmlcreate: 'new',
 		create: 'new',
-		new: function (target, room, user, connection, cmd, message) {
+		new(target, room, user, connection, cmd, message) {
 			if (!target) return this.parse('/help survey new');
 			if (target.length > 300) return this.errorReply("The survey question is too long.");
 			const supportHTML = cmd === 'htmlcreate';
@@ -252,7 +252,7 @@ exports.commands = {
 		},
 		newhelp: ["/survey create [question] - Create a survey. Requires % @ # & ~"],
 
-		answer: function (target, room, user) {
+		answer(target, room, user) {
 			if (!room.survey) return this.errorReply("There are no surveys running in this room.");
 			if (!target) return this.parse('/help survey answer');
 			if (!this.canTalk()) return false;
@@ -267,7 +267,7 @@ exports.commands = {
 		},
 		answerhelp: ["/survey answer [survey number], [answer] or /sa [survey number], [answer] - Answers the specified survey with [answer]."],
 
-		results: function (target, room, user) {
+		results(target, room, user) {
 			if (!room.survey) return this.errorReply("There are no surveys running in this room.");
 			let num = room.survey.obtain(parseInt(target));
 			if (!num) return this.errorReply("That isn't a valid survey number.");
@@ -275,7 +275,7 @@ exports.commands = {
 		},
 		resultshelp: ["/survey results [survey number] - View the results of the specified survey. You can't answer this survey after viewing results."],
 
-		hideresults: function (target, room, user) {
+		hideresults(target, room, user) {
 			if (!room.survey) return this.errorReply("There is no survey running in the room.");
 			let num = room.survey.obtain(parseInt(target));
 			if (!num) return this.errorReply("That isn't a valid survey number.");
@@ -287,7 +287,7 @@ exports.commands = {
 		},
 		hideresultshelp: ["/survey hideresults [survey number] - Hide the results of the specified survey. You can't do this if you haven't answered yet."],
 
-		display: function (target, room, user, connection) {
+		display(target, room, user, connection) {
 			if (!room.survey) return this.errorReply("There are no surveys running in the room.");
 			if (!this.runBroadcast()) return;
 			room.update();
@@ -310,7 +310,7 @@ exports.commands = {
 		displayhelp: ["/survey display (survey number) - Displays the survey. survey number is optional and only displays the survey with the number given."],
 
 		delete: 'remove',
-		remove: function (target, room, user) {
+		remove(target, room, user) {
 			if (!this.can('minigame', null, room)) return false;
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 			if (!room.survey) return this.errorReply("There are no surveys running in this room.");
@@ -335,7 +335,7 @@ exports.commands = {
 
 		close: 'end',
 		stop: 'end',
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!this.can('minigame', null, room)) return false;
 			if (!this.canTalk()) return;
 			if (!room.survey) return this.errorReply("There are no surveys running in this room.");
@@ -351,7 +351,7 @@ exports.commands = {
 		},
 		endhelp: ["/survey end [survey id number] - Ends a survey and displays the results. Requires: % @ * # & ~"],
 
-		timer: function (target, room, user) {
+		timer(target, room, user) {
 			if (!room.survey) return this.errorReply("There is no survey running in this room.");
 			let targets = target.split(",");
 			for (let u = 0; u < targets.length; u++) targets[u] = targets[u].trim();
@@ -392,7 +392,7 @@ exports.commands = {
 			"/survey timer clear, [survey number] - Clears the survey's timer. Requires: % @ * # & ~",
 		],
 
-		'': function (target, room, user) {
+		''(target, room, user) {
 			return this.parse('/help survey');
 		},
 	},

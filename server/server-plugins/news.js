@@ -63,7 +63,7 @@ exports.commands = {
 	serverannouncements: {
 		"": "view",
 		display: "view",
-		view: function (target, room, user) {
+		view(target, room, user) {
 			if (!this.runBroadcast()) return;
 			let output = `<center><strong>${Config.serverName} News:</strong></center>`;
 			output += generateNews().join("<hr />") + showSubButton(user.userid);
@@ -72,7 +72,7 @@ exports.commands = {
 		},
 
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			if (!this.can("news")) return false;
 			if (!target) return this.parse("/help serverannouncements");
 			if (!Db.news.has(target)) return this.errorReply("News with this title doesn't exist.");
@@ -82,7 +82,7 @@ exports.commands = {
 		},
 
 		announce: "add",
-		add: function (target, room, user) {
+		add(target, room, user) {
 			if (!this.can("news")) return false;
 			if (!target) return this.parse("/help serverannouncements");
 			let parts = target.split(",");
@@ -105,7 +105,7 @@ exports.commands = {
 			this.privateModAction(`(${user.name} added server announcement: ${parts[0]})`);
 		},
 
-		subscribe: function (target, room, user) {
+		subscribe(target, room, user) {
 			if (!user.named) return this.errorReply("You must choose a name before subscribing.");
 			if (hasSubscribed(user.userid)) return this.errorReply(`You are already subscribed to the ${Config.serverName} News.`);
 			Db.NewsSubscribers.set(user.userid, true);
@@ -113,7 +113,7 @@ exports.commands = {
 			this.popupReply(`|wide||html|You will receive the ${Config.serverName} News automatically once you connect to ${Config.serverName} next time.<br><hr><button class="button" name = "send" value = "/news">Go Back</button>`);
 		},
 
-		unsubscribe: function (target, room, user) {
+		unsubscribe(target, room, user) {
 			if (!user.named) return this.errorReply("You must choose a name before unsubscribing.");
 			if (!hasSubscribed(user.userid)) return this.errorReply(`You have not subscribed to ${Config.serverName} News.`);
 			Db.NewsSubscribers.remove(user.userid);
@@ -121,7 +121,7 @@ exports.commands = {
 			this.popupReply(`|wide||html|You will no longer automatically receive the ${Config.serverName} News.<br /><hr /><button class="button" name="send" value="/news">Go Back</button>`);
 		},
 
-		request: function (target, room, user) {
+		request(target, room, user) {
 			if (!user.named) return this.errorReply("You must have a name before requesting an announcement.");
 			if (!this.canTalk()) return this.errorReply("You can't use this command while unable to speak.");
 			if (!target) return this.sendReply(`/news request [message] - Requests a news announcement from the ${Config.serverName} Staff.`);
@@ -144,7 +144,7 @@ exports.commands = {
 			return this.sendReply(`Your request has been sent to the ${Config.serverName} global authorities.`);
 		},
 
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/help serverannouncements`);
 		},
 	},

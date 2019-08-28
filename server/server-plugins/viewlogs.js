@@ -9,7 +9,7 @@ const FS = require("../lib/fs.js");
 const MAX_LINES = 1000;
 
 exports.commands = {
-	viewlogs: function (target, room, user) {
+	viewlogs(target, room, user) {
 		if (target) {
 			let targets = target.split(",").map(p => { return p.trim(); });
 			if (!targets[1]) return this.errorReply("Please use /viewlogs with no target.");
@@ -50,7 +50,7 @@ exports.commands = {
 	},
 
 	viewlogspopup: "viewlogs2",
-	viewlogs2: function (target, room, user, connection, cmd) {
+	viewlogs2(target, room, user, connection, cmd) {
 		if (!target) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] - Provides you with a temporary link to view the target rooms chat logs.");
 		let [targetRoom, dateOfLogs] = target.split(",").map(p => { return p.trim(); });
 		if (!dateOfLogs) return this.sendReply("Usage: /viewlogs [room], [year-month-day / 2014-12-08] -Provides you with a temporary link to view the target rooms chat logs.");
@@ -99,7 +99,7 @@ exports.commands = {
 		});
 	},
 
-	searchlogs: function (target, room, user) {
+	searchlogs(target, room, user) {
 		if (!target) return this.parse("/help searchlogs");
 		let [roomName, phrase] = target.split(",").map(p => { return p.trim(); });
 		if (!phrase) return this.errorReply("Please specify a phrase to search.");

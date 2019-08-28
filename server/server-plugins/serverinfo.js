@@ -13,7 +13,7 @@ exports.commands = {
 	 *********************************************************/
 
 	'!statset': true,
-	statset: function () {
+	statset(target, room, user) {
 		let statHP = Math.floor(Math.random() * 100) + 30;
 		let statAtk = Math.floor(Math.random() * 100) + 70;
 		let statDef = Math.floor(Math.random() * 100) + 40;
@@ -46,7 +46,7 @@ exports.commands = {
 
 	"!randtype": true,
 	randomtype: "randtype",
-	randtype: function () {
+	randtype(target, room, user) {
 		let gen = Math.floor(Math.random() * 18);
 		if (!this.runBroadcast()) return;
 		if (gen === 0) {
@@ -96,7 +96,7 @@ exports.commands = {
 	github: "opensource",
 	os: "opensource",
 	git: "opensource",
-	opensource: function () {
+	opensource(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(
 			`${Config.serverName}'s Github's:<br />` +
@@ -114,31 +114,31 @@ exports.commands = {
 	],
 
 	'!forums': true,
-	forums: function () {
+	forums(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<a href="http://exiledps.boards.net">${Config.serverName} Forums</a>`);
 	},
 
 	'!suggestions': true,
-	suggestions: function () {
+	suggestions(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<a href="http://exiledps.boards.net/board/3/suggestions">Make a suggestion for ${Config.serverName}</a>`);
 	},
 
 	'!skype': true,
-	skype: function () {
+	skype(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<a href="https://join.skype.com/Eo5DCq8nCh1j">The Official Skype Group</a>`);
 	},
 
 	'!discord': true,
-	discord: function () {
+	discord(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<a href="https://discord.gg/3UWpXwa">The Official ${Config.serverName} Discord</a>`);
 	},
 
 	'!bugs': true,
-	bugs: function (target, room) {
+	bugs(target, room, user) {
 		if (!this.runBroadcast()) return;
 		if (room && room.battle) {
 			this.sendReplyBox(`<center><button name="saveReplay"><i class="fa fa-upload"></i> Save Replay</button> &mdash; <a href="https://www.smogon.com/forums/threads/3520646/">Questions</a> &mdash; <a href="https://www.smogon.com/forums/threads/3469932/">Bug Reports</a></center>`);
@@ -151,7 +151,7 @@ exports.commands = {
 	},
 
 	'!roomhelp': true,
-	roomhelp: function (target, room) {
+	roomhelp(target, room) {
 		if (!this.canBroadcast('!htmlbox')) return;
 		if (this.broadcastMessage && !this.can('declare', null, room)) return false;
 
@@ -204,7 +204,7 @@ exports.commands = {
 
 	'!rules': true,
 	rule: 'rules',
-	rules: function (target, room, user) {
+	rules(target, room, user) {
 		if (!target) {
 			if (!this.runBroadcast()) return;
 			this.sendReplyBox("Please follow the rules:<br />" +
@@ -233,7 +233,7 @@ exports.commands = {
 		"/rules [url] - Change the room rules URL. Requires: # & ~"],
 
 	servercredits: 'credits',
-	credits: function (user) {
+	credits(target, room, user) {
 		let popup = `|html|<font size=5 color=#F7189F><u><strong>${Config.serverName} Credits:</strong></u></font><br />` +
 			`<br />` +
 			`<u><strong>Server Maintainers:</u></strong><br />` +
@@ -259,7 +259,7 @@ exports.commands = {
 
 	servercommands: 'customcommands',
 	serverhelp: 'customcommands',
-	customcommands: function () {
+	customcommands(target, room, user) {
 		if (!this.runBroadcast()) return;
 		let display = `<div class="infobox-limited"><strong><h1>Custom Commands on ${Config.serverName}</h1></strong>`;
 		display += `<h2>Game Commands:</h2><ul>`;

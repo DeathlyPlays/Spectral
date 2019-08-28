@@ -179,7 +179,7 @@ exports.commands = {
 	ambush: {
 		make: "new",
 		create: "new",
-		new: function (target, room, user) {
+		new(target, room, user) {
 			if (room.ambush) return this.errorReply("There is already a game of Ambush going on in this room.");
 			if (room.ambushDisabled) return this.errorReply(`Ambush is currently disabled in ${room.title}.`);
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
@@ -193,7 +193,7 @@ exports.commands = {
 		},
 
 		j: "join",
-		join: function (target, room, user) {
+		join(target, room, user) {
 			if (!room.ambush) return this.errorReply("There is no game of Ambush going on in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 
@@ -202,7 +202,7 @@ exports.commands = {
 
 		l: "leave",
 		part: "leave",
-		leave: function (target, room, user) {
+		leave(target, room, user) {
 			if (!room.ambush) return this.errorReply("There is no game of Ambush going on in this room.");
 
 			room.ambush.leave(user, this);
@@ -210,7 +210,7 @@ exports.commands = {
 
 		start: "proceed",
 		begin: "proceed",
-		proceed: function (target, room, user) {
+		proceed(target, room, user) {
 			if (!room.ambush) return this.errorReply("There is no game of Ambush going on in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 			if (!user.can("broadcast", null, room)) return false;
@@ -222,7 +222,7 @@ exports.commands = {
 		},
 
 		disqualify: "dq",
-		dq: function (target, room, user) {
+		dq(target, room, user) {
 			if (!room.ambush) return this.errorReply("There is no game of Ambush going on in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 			if (!user.can("mute", null, room)) return false;
@@ -231,7 +231,7 @@ exports.commands = {
 		},
 
 		shoot: "fire",
-		fire: function (target, room, user) {
+		fire(target, room, user) {
 			if (!room.ambush) return this.errorReply("There is no game of Ambush going on in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 
@@ -239,7 +239,7 @@ exports.commands = {
 		},
 
 		cancel: "end",
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!room.ambush) return this.errorReply("There is no game of Ambush going on in this room.");
 			if (!user.can("mute", null, room)) return false;
 
@@ -247,7 +247,7 @@ exports.commands = {
 		},
 
 		off: "disable",
-		disable: function (target, room, user) {
+		disable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (room.ambushDisabled) {
 				return this.errorReply("Ambush is already disabled in this room.");
@@ -261,7 +261,7 @@ exports.commands = {
 		},
 
 		on: "enable",
-		enable: function (target, room, user) {
+		enable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (!room.ambushDisabled) {
 				return this.errorReply("Ambush is already enabled in this room.");
@@ -276,13 +276,13 @@ exports.commands = {
 
 		howtoplay: "rules",
 		guide: "rules",
-		rules: function (target, room, user) {
+		rules(target, room, user) {
 			if (!this.runBroadcast()) return;
 			this.sendReplyBox(`<h3>Ambush:</h3><br />Basically Ambush is a game where everyone must compete to be the first one to shoot another user, thus eliminating them.<br />To shoot a user you use <code>/fire [${user.name}]</code> for instance.<br />Disclaimer: Keep in mind if you do /fire ${user.name}, it will kill you since you are the target.<br />If you successfully shoot a user before getting shot you get a shield, which protects you from being shot for the remainder of the round.<br />Lastly, if you successfully eliminate all of the other targets you earn 5 EXP as well as 2 ${moneyPlural}!`);
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse("/help ambush");
 		},
 	},

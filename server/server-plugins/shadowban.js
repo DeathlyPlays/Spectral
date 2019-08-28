@@ -149,7 +149,7 @@ exports.addMessage = function (user, tag, message) {
 exports.commands = {
 	spam: 'shadowban',
 	sban: 'shadowban',
-	shadowban: function (target, room, user) {
+	shadowban(target, room, user) {
 		if (!target) return this.sendReply("/shadowban OR /sban [username], [secondary command], [reason] - Sends all the user's messages to the shadow ban room.");
 
 		let params = this.splitTarget(target).split(',');
@@ -174,7 +174,7 @@ exports.commands = {
 
 	unspam: 'unshadowban',
 	unsban: 'unshadowban',
-	unshadowban: function (target, room, user) {
+	unshadowban(target, room, user) {
 		if (!target) return this.sendReply("/unshadowban OR /unsban [username] - Undoes /shadowban (except the secondary command).");
 		this.splitTarget(target);
 
@@ -187,7 +187,7 @@ exports.commands = {
 		this.privateModAction("(" + user.name + " has shadow unbanned: " + targets.join(", ") + ")");
 	},
 
-	sbanlist: function (target, room, user) {
+	sbanlist(target, room, user) {
 		if (!target && !this.can("sban")) return this.sendReply("The command '/sbanlist' was unrecognized.  To send a message starting with '/sbanlist', type '//sbanlist'.");
 		if (!this.canTalk() && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
 		if (!this.can("sban")) return false;

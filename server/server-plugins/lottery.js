@@ -80,7 +80,7 @@ exports.commands = {
 	lottery: {
 		create: "new",
 		make: "new",
-		new: function (target, room, user) {
+		new(target, room, user) {
 			if (room.lottery) return this.errorReply("A join-able Lottery drawing is already active.");
 			if (!this.can("mute", null, room)) return false;
 			if (!room.isOfficial) return this.errorReply("Lottery drawings can only be created in Official Chatrooms.");
@@ -90,7 +90,7 @@ exports.commands = {
 		},
 
 		j: "join",
-		join: function (target, room, user) {
+		join(target, room, user) {
 			if (!room.lottery) return this.errorReply("There is no join-able Lottery drawing going on right now.");
 			if (!this.canTalk()) return this.errorReply("You must be able to talk to join a Lottery drawing.");
 			if (!user.registered) return this.errorReply("To join the Lottery, you must be on a registered account.");
@@ -99,7 +99,7 @@ exports.commands = {
 
 		part: "leave",
 		l: "leave",
-		leave: function (target, room, user) {
+		leave(target, room, user) {
 			if (!room.lottery) return this.errorReply("There is no active Lottery drawing in this room.");
 			room.lottery.leaveLottery(user);
 		},
@@ -107,7 +107,7 @@ exports.commands = {
 		checkplayers: "players",
 		list: "players",
 		viewplayers: "players",
-		players: function (target, room, user) {
+		players(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!room.lottery) return this.errorReply("There is no active Lottery drawing in this room.");
 			if (room.lottery.players.length < 1) return this.errorReply(`There are currently no players in this Lottery drawing.`);
@@ -116,7 +116,7 @@ exports.commands = {
 
 		forcestart: "start",
 		begin: "start",
-		start: function (target, room, user) {
+		start(target, room, user) {
 			if (!this.can("mute", null, room)) return;
 			if (!room.lottery) return this.errorReply("There is not any Lottery drawing available to be started.");
 			if (room.lottery.players.length < 2) return this.errorReply("You can't start a Lottery drawing without at least two users joining.");
@@ -126,7 +126,7 @@ exports.commands = {
 		},
 
 		cancel: "end",
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!this.can("mute", null, room)) return;
 			if (!room.lottery) return this.errorReply("There is no Lottery drawing going on right now.");
 			this.modlog(`LOTTERY`, null, `forcefully ended`);
@@ -136,7 +136,7 @@ exports.commands = {
 
 		viewpot: "pot",
 		showpot: "pot",
-		pot: function (target, room, user) {
+		pot(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!room.lottery) return this.errorReply("There is no Lottery drawing going on right now.");
 			let pot = room.lottery.players.length + 5 + costToJoin;
@@ -144,7 +144,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/lotteryhelp`);
 		},
 	},

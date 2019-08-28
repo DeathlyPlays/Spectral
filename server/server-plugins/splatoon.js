@@ -22,7 +22,7 @@ exports.commands = {
 		ranks: "rank",
 		rank: {
 			clamblitz: "cb",
-			cb: function (target, room, user) {
+			cb(target, room, user) {
 				if (!target) return this.parse("/splatrankshelp");
 				target = target.trim().toUpperCase();
 				let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
@@ -33,7 +33,7 @@ exports.commands = {
 			},
 
 			rainmaker: "rm",
-			rm: function (target, room, user) {
+			rm(target, room, user) {
 				if (!target) return this.parse("/splatrankshelp");
 				target = target.trim().toUpperCase();
 				let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
@@ -45,7 +45,7 @@ exports.commands = {
 
 			splatzones: "sz",
 			splatzone: "sz",
-			sz: function (target, room, user) {
+			sz(target, room, user) {
 				if (!target) return this.parse("/splatrankshelp");
 				target = target.trim().toUpperCase();
 				let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
@@ -56,7 +56,7 @@ exports.commands = {
 			},
 
 			towercontrol: "tc",
-			tc: function (target, room, user) {
+			tc(target, room, user) {
 				if (!target) return this.parse("/splatrankshelp");
 				target = target.trim().toUpperCase();
 				let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
@@ -67,7 +67,7 @@ exports.commands = {
 			},
 
 			salmonrun: "sr",
-			sr: function (target, room, user) {
+			sr(target, room, user) {
 				if (!target) return this.parse("/splatrankshelp");
 				target = target.trim().split("-").map(x => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase()).join("-");
 				let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
@@ -78,12 +78,12 @@ exports.commands = {
 			},
 
 			"": "help",
-			help: function (target, room, user) {
+			help(target, room, user) {
 				this.parse(`/splatrankshelp`);
 			},
 		},
 
-		weapon: function (target, room, user) {
+		weapon(target, room, user) {
 			if (!target) return this.parse(`/splatoonhelp`);
 			let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
 			if (!weapons.includes(target)) return this.errorReply(`Invalid weapon; check your spelling? [case sensitive]`);
@@ -94,7 +94,7 @@ exports.commands = {
 
 		"!randomweapon": true,
 		randweapon: "randomweapon",
-		randomweapon: function (target, room, user) {
+		randomweapon(target, room, user) {
 			if (!this.runBroadcast()) return;
 			return this.sendReplyBox(`<strong>Randomly Generated Weapon:</strong> ${weapons[Math.floor(Math.random() * weapons.length)]}`);
 		},
@@ -104,7 +104,7 @@ exports.commands = {
 			start: "on",
 			new: "on",
 			make: "on",
-			on: function (target, room, user) {
+			on(target, room, user) {
 				if (!this.can("ban", null, room)) return this.errorReply(`You must be a Room Moderator or higher to use this command.`);
 				if (room.id !== "splatoon") return this.errorReply(`This command only works in the Splatoon room.`);
 				let SPLATFEST = Db.splatoon.get("SPLATFEST", {alpha: null, bravo: null, active: false});
@@ -123,7 +123,7 @@ exports.commands = {
 			end: "off",
 			cancel: "off",
 			remove: "off",
-			off: function (target, room, user) {
+			off(target, room, user) {
 				if (!this.can("ban", null, room)) return this.errorReply(`You must be a Room Moderator or higher to use this command.`);
 				if (room.id !== "splatoon") return this.errorReply(`This command only works in the Splatoon room.`);
 				let SPLATFEST = Db.splatoon.get("SPLATFEST", {alpha: null, bravo: null, active: false});
@@ -150,7 +150,7 @@ exports.commands = {
 			j: "join",
 			setteam: "join",
 			jointeam: "join",
-			join: function (target, room, user) {
+			join(target, room, user) {
 				if (!target) return this.parse(`/splatfesthelp`);
 				let SPLATFEST = Db.splatoon.get("SPLATFEST", {alpha: null, bravo: null, active: false});
 				if (!SPLATFEST.active) return this.errorReply(`There is currently not a Splatfest. :(`);
@@ -163,7 +163,7 @@ exports.commands = {
 
 			"!team": true,
 			teams: "team",
-			team: function (target, room, user) {
+			team(target, room, user) {
 				if (!this.runBroadcast()) return;
 				let SPLATFEST = Db.splatoon.get("SPLATFEST", {alpha: null, bravo: null, active: false});
 				if (!SPLATFEST.active) return this.errorReply(`There is currently not a Splatfest. :(`);
@@ -171,14 +171,14 @@ exports.commands = {
 			},
 
 			"": "help",
-			help: function (target, room, user) {
+			help(target, room, user) {
 				this.parse(`/splatfesthelp`);
 			},
 		},
 
 		name: "ign",
 		ingamename: "ign",
-		ign: function (target, room, user) {
+		ign(target, room, user) {
 			if (!this.canTalk()) return false;
 			if (!target || !target.trim() || target.length > 10) return this.errorReply(`Your IGN must be between 1-10 characters long.`);
 			let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
@@ -188,7 +188,7 @@ exports.commands = {
 		},
 
 		lvl: "level",
-		level: function (target, room, user) {
+		level(target, room, user) {
 			target = parseInt(target);
 			if (isNaN(target) || target > 99 || target < 1) return this.errorReply(`Your level must be a number between 1-99 (no decimals).`);
 			let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
@@ -199,7 +199,7 @@ exports.commands = {
 
 		prestige: "star",
 		stars: "star",
-		star: function (target, room, user) {
+		star(target, room, user) {
 			target = parseInt(target);
 			if (isNaN(target) || target < 1) return this.errorReply(`Your prestige must be an integer above 0.`);
 			let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
@@ -211,7 +211,7 @@ exports.commands = {
 		gear: {
 			hat: "headgear",
 			cap: "headgear",
-			headgear: function (target, room, user) {
+			headgear(target, room, user) {
 				if (!target) return this.parse(`/splatgearhelp`);
 				let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
 				if (!headgears.includes(target)) return this.errorReply(`Invalid headgear; check your spelling? [case sensitive]`);
@@ -222,7 +222,7 @@ exports.commands = {
 
 			shirt: "clothing",
 			tee: "clothing",
-			clothing: function (target, room, user) {
+			clothing(target, room, user) {
 				if (!target) return this.parse(`/splatgearhelp`);
 				let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
 				let SPLATFEST = Db.splatoon.get("SPLATFEST", {alpha: null, bravo: null, active: false});
@@ -233,7 +233,7 @@ exports.commands = {
 				return this.sendReply(`Your Splatoon 2 shirt has been set to "${target}".`);
 			},
 
-			shoes: function (target, room, user) {
+			shoes(target, room, user) {
 				if (!target) return this.parse(`/splatgearhelp`);
 				let splatProfile = Db.splatoon.get(user.userid, {ranks: {}});
 				if (!shoes.includes(target)) return this.errorReply(`Invalid shoe; check your spelling? [case sensitive]`);
@@ -243,13 +243,13 @@ exports.commands = {
 			},
 
 			"": "help",
-			help: function () {
+			help(target, room, user) {
 				this.parse(`/splatgearhelp`);
 			},
 		},
 
 		"!profile": true,
-		profile: function (target, room, user) {
+		profile(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = user.userid;
 			target = toID(target);
@@ -283,7 +283,7 @@ exports.commands = {
 		map: "rotation",
 		maps: "rotation",
 		rotations: "rotation",
-		rotation: function () {
+		rotation(target, room, user) {
 			if (!this.runBroadcast()) return;
 			const apiData = fetch("https://splatoon2.ink/data/schedules.json").then(res => res.json());
 			let self = this;
@@ -304,7 +304,7 @@ exports.commands = {
 		nextrotation: "next",
 		nextmap: "next",
 		nextmaps: "next",
-		next: function () {
+		next(target, room, user) {
 			if (!this.runBroadcast()) return;
 			const apiData = fetch("https://splatoon2.ink/data/schedules.json").then(res => res.json());
 			let self = this;
@@ -321,7 +321,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function (target, room, user) {
+		help(target, room, user) {
 			this.parse("/splatoonhelp");
 		},
 	},

@@ -255,7 +255,7 @@ exports.commands = {
 		searchladder: "search",
 		searchgame: "search",
 		searchrpsls: "search",
-		search: function (target, room, user, connection, cmd) {
+		search(target, room, user, connection, cmd) {
 			if (user.RPSgame) return this.errorReply(`You are already in a game or searching for a game of Rock/Paper/Scissors!`);
 			updateSearches();
 			let gameType = "ladderRPS";
@@ -281,7 +281,7 @@ exports.commands = {
 		stop: "stopsearch",
 		stopsearch: "endsearch",
 		end: "endsearch",
-		endsearch: function (target, room, user) {
+		endsearch(target, room, user) {
 			if (!user.RPSgame || !["searching", "searchingRPSLS"].includes(user.RPSgame)) return this.errorReply("You are not searching for a game of Rock/Paper/Scissors!");
 			updateSearches();
 			if (Rooms.global.RPS.searches[user.userid] === "bucks") {
@@ -294,7 +294,7 @@ exports.commands = {
 		},
 
 		select: "choose",
-		choose: function (target, room, user) {
+		choose(target, room, user) {
 			if (!target || !user.RPSgame) return false;
 			let parts = target.split(" ");
 			if (parts.length !== 2) return false;
@@ -318,7 +318,7 @@ exports.commands = {
 		rpslsranking: "rank",
 		ranking: "rank",
 		rpslsrank: "rank",
-		rank: function (target, room, user, connection, cmd) {
+		rank(target, room, user, connection, cmd) {
 			if (!this.runBroadcast()) return false;
 			if (!target) target = user.userid;
 			target = toID(target);
@@ -335,7 +335,7 @@ exports.commands = {
 		leaderboard: "ladder",
 		rpslsladder: "ladder",
 		rpsladder: "ladder",
-		ladder: function (target, room, user, connection, cmd) {
+		ladder(target, room, user, connection, cmd) {
 			if (!this.runBroadcast()) return false;
 			let rpslsCommands = ["rpslsleaderboard", "rpslsladder"];
 			let file = Db.rpsrank;
@@ -352,7 +352,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse("/help rps");
 		},
 	},

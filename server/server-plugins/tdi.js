@@ -114,7 +114,7 @@ exports.commands = {
 	tdi: {
 		create: "new",
 		make: "new",
-		new: function (target, room, user) {
+		new(target, room, user) {
 			if (!this.can("ban", null, room)) return false;
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 			if (room.id !== "totaldramaisland") return this.errorReply("This command only works in Total Drama Island.");
@@ -123,7 +123,7 @@ exports.commands = {
 		},
 
 		j: "join",
-		join: function (target, room, user) {
+		join(target, room, user) {
 			if (!this.canTalk()) return this.errorReply("You cannot join a season of Total Drama Island while unable to speak.");
 			if (!user.registered) return this.errorReply("You cannot join a season of Total Drama Island on unregistered accounts.");
 			if (!room.tdi) return this.errorReply(`There is not a season of Total Drama Island airing right now.`);
@@ -132,14 +132,14 @@ exports.commands = {
 		},
 
 		l: "leave",
-		leave: function (target, room, user) {
+		leave(target, room, user) {
 			if (!room.tdi) return this.errorReply(`There is not a season of Total Drama Island airing right now.`);
 			room.tdi.leave(user);
 		},
 
 		begin: "start",
 		proceed: "start",
-		start: function (target, room, user) {
+		start(target, room, user) {
 			if (!this.can("ban", null, room)) return false;
 			if (!room.tdi || room.tdi.state !== "signups") return this.errorReply("There is not a Total Drama Island season ready to start.");
 			if (room.tdi.players.length < 2 || room.tdi.players.length > 12 || room.tdi.players.length % 2 !== 0) return this.errorReply(`We must have an even amount of contestants between the range of 2-12 to begin airing.`);
@@ -151,7 +151,7 @@ exports.commands = {
 		dq: "disqualify",
 		elim: "disqualify",
 		eliminate: "disqualify",
-		disqualify: function (target, room, user) {
+		disqualify(target, room, user) {
 			if (!this.can("ban", null, room)) return false;
 			if (!room.tdi || room.tdi.state === "signups") return this.errorReply("A season of Total Drama Island must be airing to use this command.");
 			if (!target) return this.errorReply("This command requires a target.");
@@ -163,7 +163,7 @@ exports.commands = {
 
 		stop: "end",
 		cancel: "end",
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!this.can("ban", null, room)) return false;
 			if (!room.tdi) return this.errorReply("There is not an ongoing Total Drama Island season right now.");
 			room.tdi.end();
@@ -173,7 +173,7 @@ exports.commands = {
 		checkplayers: "players",
 		list: "players",
 		viewplayers: "players",
-		players: function (target, room, user) {
+		players(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!room.tdi) return this.errorReply("There is not an ongoing Total Drama Island season currently.");
 			return this.sendReplyBox(`There is currently ${this.room.tdi.players.length} player${this.room.tdi.players.length > 1 ? "s" : ""} in this season of Total Drama Island.<br /> Players: ${Chat.toListString(this.room.tdi.players)}.`);
@@ -181,7 +181,7 @@ exports.commands = {
 
 		as: "autostart",
 		timer: "autostart",
-		autostart: function (target, room, user) {
+		autostart(target, room, user) {
 			if (!this.can("minigame", null, room)) return;
 			if (!room.tdi) return this.errorReply("There is not an ongoing Total Drama Island session right now.");
 			if (!timer || timer < 60 || timer > 300000) return this.errorReply("The amount must be a number between 60 and 300,000.");
@@ -192,7 +192,7 @@ exports.commands = {
 		},
 
 		mv: "mustvote",
-		mustvote: function (target, room, user) {
+		mustvote(target, room, user) {
 			if (!this.can("ban", null, room)) return false;
 			if (!room.tdi || room.tdi.state === "signups") return this.errorReply("A season of Total Drama Island must be airing to use this command.");
 			target = toID(target);
@@ -212,7 +212,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/tdihelp`);
 		},
 	},

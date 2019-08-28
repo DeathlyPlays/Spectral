@@ -62,7 +62,7 @@ exports.commands = {
 		addgen: "add",
 		approve: "add",
 		give: "add",
-		add: function (target, room, user) {
+		add(target, room, user) {
 			if (!this.can("genrequest")) return false;
 			let approvedGenner = toID(target);
 			if (!approvedGenner || approvedGenner.length > 18) return this.errorReply(`This command requires a target with a maximum of 18 characters.`);
@@ -73,7 +73,7 @@ exports.commands = {
 		},
 
 		req: "request",
-		request: function (target, room, user) {
+		request(target, room, user) {
 			let [reward, description] = target.split(",").map(p => p.trim());
 			reward = parseInt(reward);
 			if (!user.autoconfirmed) return this.errorReply(`Only autoconfirmed Users.get( may use this command to prevent spam.`);
@@ -104,7 +104,7 @@ exports.commands = {
 		unconfirm: "ban",
 		kick: "ban",
 		take: "ban",
-		ban: function (target, room, user) {
+		ban(target, room, user) {
 			if (!this.can("genrequest")) return false;
 			if (!target || target.length > 18) return this.parse("/genrequesthelp");
 			let targetId = toID(target);
@@ -114,10 +114,10 @@ exports.commands = {
 			if (Users.get(targetId)) Users.get(targetId).popup(`|html|You have been approved as a genner by ${Server.nameColor(user.name, true)}.`);
 		},
 
-		Users.get(: "list",
+		users: "list",
 		genner: "list",
 		genners: "list",
-		list: function () {
+		list(target, room, user) {
 			if (!Db.genners.keys().length) return this.errorReply("There are currently zero approved genners.");
 			let display = [];
 			for (const approvedGenners of Db.genners.keys()) {
@@ -126,7 +126,7 @@ exports.commands = {
 			this.popupReply(`|html|<strong><u><font size="3"><center>Approved Genners:</center></font></u></strong>${Chat.toListString(display)}`);
 		},
 
-		cancel: function (target, room, user) {
+		cancel(target, room, user) {
 			if (!requests[user.userid]) return this.errorReply(`You don't have any requests to cancel.`);
 			delete requests[user.userid];
 			updateRequests();
@@ -134,7 +134,7 @@ exports.commands = {
 		},
 
 		updatestatus: "update",
-		update: function (target, room, user) {
+		update(target, room, user) {
 			if (!isGenner(user)) return this.errorReply(`You are not an Approved Genner on ${Config.serverName}.`);
 			if (!target) return this.parse("/genrequesthelp");
 			let [requestee, status] = target.split(",").map(p => { return p.trim(); });
@@ -156,7 +156,7 @@ exports.commands = {
 		viewreqs: "requests",
 		reqs: "requests",
 		viewrequests: "requests",
-		requests: function (target, room, user) {
+		requests(target, room, user) {
 			if (!isGenner(user)) return this.errorReply(`You must be an approved genner to view requests.`);
 			if (Object.keys(requests).length < 1) return this.errorReply(`There are currently no Gen Requests on ${Config.serverName}.`);
 			let sortedReqs = Object.keys(requests).sort(function (a, b) {
@@ -177,7 +177,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse("/genrequesthelp");
 		},
 	},

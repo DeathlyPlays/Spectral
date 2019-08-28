@@ -57,7 +57,7 @@ exports.commands = {
 	frens: "friends",
 	friend: "friends",
 	friends: {
-		init: function (target, room, user) {
+		init(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (friends[user.userid]) return this.errorReply(`You have already initialized your friends list.`);
 			friends[user.userid] = {
@@ -75,7 +75,7 @@ exports.commands = {
 		send: "add",
 		sendrequest: "add",
 		request: "add",
-		add: function (target, room, user) {
+		add(target, room, user) {
 			if (!target || target.length < 1 || target.length > 18) return this.parse(`/help friends`);
 			let targetUser = Users.get(target);
 			if (!targetUser || !targetUser.connected) return this.errorReply(`${target} is not online.`);
@@ -97,7 +97,7 @@ exports.commands = {
 
 		removefriend: "remove",
 		unfriend: "remove",
-		remove: function (target, room, user) {
+		remove(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!target) return this.parse(`/help friends`);
 			if (!friends[user.userid]) this.parse(`/friends init`);
@@ -113,7 +113,7 @@ exports.commands = {
 		},
 
 		approve: "accept",
-		accept: function (target, room, user) {
+		accept(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!target) return this.parse(`/help friends`);
 			let targetId = toID(target);
@@ -130,7 +130,7 @@ exports.commands = {
 		},
 
 		decline: "deny",
-		deny: function (target, room, user) {
+		deny(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!target) return this.parse(`/help friends`);
 			let targetId = toID(target);
@@ -146,7 +146,7 @@ exports.commands = {
 
 		enablefriends: "togglefriends",
 		disablefriends: "togglefriends",
-		togglefriends: function (target, room, user) {
+		togglefriends(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!friends[user.userid]) this.parse(`/friends init`);
 			if (friends[user.userid].disabledFriends) {
@@ -162,7 +162,7 @@ exports.commands = {
 
 		togglenotifications: "notify",
 		notifications: "notify",
-		notify: function (target, room, user) {
+		notify(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!friends[user.userid]) this.parse(`/friends init`);
 			if (!friends[user.userid].notifications) {
@@ -178,7 +178,7 @@ exports.commands = {
 
 		toggleprivatize: "privatize",
 		unprivatize: "privatize",
-		privatize: function (target, room, user) {
+		privatize(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!friends[user.userid]) this.parse(`/friends init`);
 			if (!friends[user.userid].private) {
@@ -193,7 +193,7 @@ exports.commands = {
 		},
 
 		unignore: "ignore",
-		ignore: function (target, room, user, connection, cmd) {
+		ignore(target, room, user, connection, cmd) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!friends[user.userid]) this.parse(`/friends init`);
 			if (!target) return this.parse(`/friends help`);
@@ -215,7 +215,7 @@ exports.commands = {
 
 		ignored: "ignorelist",
 		ignoredusers: "ignorelist",
-		ignorelist: function (target, room, user) {
+		ignorelist(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!friends[user.userid]) this.parse(`/friends init`);
 			if (friends[user.userid].ignoreList.length < 1) return this.errorReply(`You currently are not ignoring anyone.`);
@@ -225,7 +225,7 @@ exports.commands = {
 		cancelreq: "cancel",
 		cancelrequests: "cancel",
 		cancelrequest: "cancel",
-		cancel: function (target, room, user) {
+		cancel(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!friends[user.userid]) this.parse(`/friends init`);
 			target = toID(target);
@@ -238,7 +238,7 @@ exports.commands = {
 
 		pendingreqs: "pending",
 		pendingrequests: "pending",
-		pending: function (target, room, user) {
+		pending(target, room, user) {
 			if (user.locked || !user.autoconfirmed) return this.errorReply(`To prevent spamming you must be on an autoconfirmed account and unlocked to send friend requests.`);
 			if (!friends[user.userid]) this.parse(`/friends init`);
 			if (friends[user.userid].pendingRequests.length < 1) return this.errorReply(`You currently have no pending requests.`);
@@ -250,7 +250,7 @@ exports.commands = {
 		menu: "list",
 		show: "list",
 		display: "list",
-		list: function (target, room, user) {
+		list(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target || target.length > 18) target = user.userid;
 			let friendsId = toID(target);
@@ -287,7 +287,7 @@ exports.commands = {
 			return this.sendReplyBox(display);
 		},
 
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/help friends`);
 		},
 	},

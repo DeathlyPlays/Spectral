@@ -62,7 +62,7 @@ function display(result, user, slotOne, slotTwo, slotThree) {
 exports.commands = {
 	slots: {
 		start: "spin",
-		spin: function (target, room, user) {
+		spin(target, room, user) {
 			if (room.id !== "casino") return this.errorReply(`Casino games can only be played in the "Casino".`);
 			if (!this.runBroadcast()) return;
 			if (!this.canTalk()) return false;
@@ -101,7 +101,7 @@ exports.commands = {
 
 		results: "rewards",
 		prizes: "rewards",
-		rewards: function (target) {
+		rewards(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) {
 				let display = `The Slot Winnings for the Following Pokemon are (in ${moneyPlural}):<br />`;
@@ -117,7 +117,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		"help": function () {
+		help(target, room, user) {
 			return this.parse("/help slots");
 		},
 	},

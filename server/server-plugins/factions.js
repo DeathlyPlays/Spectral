@@ -333,7 +333,7 @@ exports.commands = {
 	factions: {
 		new: "create",
 		make: "create",
-		create: function (target, room, user) {
+		create(target, room, user) {
 			let [name, desc, tag] = target.split(",").map(p => { return p.trim(); });
 			if (!tag) return this.errorReply("/factions create (name), (description), (tag [4 char])");
 			if (desc.length > 100) return this.errorReply("Faction descriptions must be 100 characters or less!");
@@ -385,7 +385,7 @@ exports.commands = {
 			return this.sendReply(`Faction ${name} created!`);
 		},
 
-		joindate: function (target, room, user) {
+		joindate(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = user.userid;
 			let factionId = toID(getFaction(user.userid));
@@ -396,7 +396,7 @@ exports.commands = {
 		},
 
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			if (!target) return this.errorReply("/factions delete (name)");
 			if (!factions[toID(target)]) return this.errorReply("Doesn't exist!");
 			if (!this.can("faction") && factions[toID(target)].ranks["owner"].users.indexOf(user.userid) === -1) return false;
@@ -407,7 +407,7 @@ exports.commands = {
 		},
 
 		description: "desc",
-		desc: function (target, room, user) {
+		desc(target, room, user) {
 			if (!getFaction(user.userid)) return this.errorReply("You are not in a faction.");
 			let factionDesc = factions[toID(getFaction(user.user))].desc;
 			if (toID(getFactionRank(user.userid) !== "owner")) return this.errorReply("You do not own this faction.");
@@ -418,7 +418,7 @@ exports.commands = {
 			return this.sendReplyBox(`Your faction description is now set to: <br /> ${factionDesc}.`);
 		},
 
-		avatar: function (target, room, user) {
+		avatar(target, room, user) {
 			let factionId = toID(getFaction(user.userid));
 			if (!factionId) return this.errorReply("You are not in a faction!");
 			if (toID(getFactionRank(user.userid)) !== "owner") return this.errorReply("You are not the faction owner!");
@@ -431,7 +431,7 @@ exports.commands = {
 		},
 
 		aa: "approveavatar",
-		approveavatar: function (target, room, user) {
+		approveavatar(target, room, user) {
 			if (!this.can("faction")) return false;
 			let [factionId, factAvi] = target.split(",").map(p => { return p.trim(); });
 			if (!factAvi) return this.errorReply("Usage: /faction approveavatar factionid, link");
@@ -446,7 +446,7 @@ exports.commands = {
 		},
 
 		da: "denyavatar",
-		denyavatar: function (target, room, user) {
+		denyavatar(target, room, user) {
 			if (!this.can("faction")) return false;
 			let factionId = toID(target);
 			if (!factions[factionId]) return this.errorReply("That faction does not exist!");
@@ -458,7 +458,7 @@ exports.commands = {
 		},
 
 		pa: "pendingavatars",
-		pendingavatars: function () {
+		pendingavatars(target, room, user) {
 			if (!this.can("faction")) return false;
 			let output = `<center><table border="1" cellspacing ="0" cellpadding="3"><tr><td>Faction</td><td>Image</td><td>Approve</td><td>Deny</td</tr>`;
 			for (let faction in factions) {
@@ -474,7 +474,7 @@ exports.commands = {
 			this.sendReplyBox(output);
 		},
 
-		list: function () {
+		list(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (Object.keys(factions).length < 1) return this.errorReply(`There are no factions on ${Config.serverName}.`);
 			let output = `<center><table border="1" cellspacing ="0" cellpadding="3"><tr><td>Faction</td><td>Description</td><td>FvF Wins</td><td>Members</td></tr>`;
@@ -499,7 +499,7 @@ exports.commands = {
 			this.sendReplyBox(output);
 		},
 
-		profile: function (target, room, user) {
+		profile(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target && getFaction(user.userid)) target = getFaction(user.userid);
 			let factionId = toID(target);
@@ -515,7 +515,7 @@ exports.commands = {
 
 		private: "privatize",
 		public: "privatize",
-		privatize: function (target, room, user, connection, cmd) {
+		privatize(target, room, user, connection, cmd) {
 			let factionId = toID(getFaction(user.userid));
 			if (!factionId) return this.errorReply("You are not in a faction!");
 			if (toID(getFactionRank(user.userid)) !== "owner") return false;
@@ -535,7 +535,7 @@ exports.commands = {
 			}
 		},
 
-		approve: function (target, room, user) {
+		approve(target, room, user) {
 			if (!this.can("faction")) return false;
 			if (!target) return this.errorReply("/factions approve (faction)");
 			if (!factions[toID(target)]) return this.errorReply("Not a faction!");
@@ -551,7 +551,7 @@ exports.commands = {
 		},
 
 		j: "join",
-		join: function (target, room, user) {
+		join(target, room, user) {
 			if (!target) this.errorReply("/faction join (faction)");
 			let factionid = toID(target);
 			if (!factions[factionid] || (factions[factionid] && !factions[factionid].approved) || (factions[factionid] && factions[factionid].private)) return this.errorReply("That faction does not exist.");
@@ -567,7 +567,7 @@ exports.commands = {
 		},
 
 		inv: "invite",
-		invite: function (target, room, user) {
+		invite(target, room, user) {
 			if (!target) return this.errorReply("/factions invite (user)");
 			let faction = toID(getFaction(user.userid));
 			let targetUser = Users.get(target);
@@ -595,19 +595,19 @@ exports.commands = {
 			this.sendReply(`You've invited ${targetUser.name} to join ${factions[factionid].name}.`);
 		},
 
-		blockinvites: function (target, room, user) {
+		blockinvites(target, room, user) {
 			if (Db.blockedinvites.get(user.userid)) return this.errorReply("You are already blocking faction invites!");
 			Db.blockedinvites.set(user.userid, true);
 			return this.sendReply("Faction invites are now blocked!");
 		},
 
-		unblockinvites: function (target, room, user) {
+		unblockinvites(target, room, user) {
 			if (!Db.blockedinvites.get(user.userid)) return this.errorReply("You are currently not blocking faction invites!");
 			Db.blockedinvites.remove(user.userid);
 			return this.sendReply("Faction invites are now allowed!");
 		},
 
-		accept: function (target, room, user) {
+		accept(target, room, user) {
 			if (!target) return this.errorReply("/faction accept [faction]");
 			let factionid = toID(target);
 			if (!factions[factionid]) return this.errorReply("This faction does not exist.");
@@ -624,7 +624,7 @@ exports.commands = {
 			user.popup(`You've accepted the invitation to join ${factions[factionid].name}.`);
 		},
 
-		decline: function (target, room, user) {
+		decline(target, room, user) {
 			if (!target) return this.errorReply("/faction decline [faction]");
 			let factionid = toID(target);
 			if (!factions[factionid]) return this.errorReply("This faction does not exist.");
@@ -637,7 +637,7 @@ exports.commands = {
 			user.popup(`You've declined the invitation to join ${factions[factionid].name}.`);
 		},
 
-		leave: function (target, room, user) {
+		leave(target, room, user) {
 			let factionid = toID(getFaction(user.userid));
 			if (!factions[factionid]) return this.errorReply("You're not in a faction.");
 			if (factions[factionid].ranks["owner"].users.includes(user.userid)) return this.errorReply("You can't leave a faction, if you're the owner.");
@@ -656,7 +656,7 @@ exports.commands = {
 			this.sendReply(`You have left ${factions[factionid].name}.`);
 		},
 
-		kick: function (target, room, user) {
+		kick(target, room, user) {
 			if (!target) return this.errorReply("/factions kick [user]");
 			let factionName = getFaction(user.userid);
 			let factionid = toID(factionName);
@@ -685,7 +685,7 @@ exports.commands = {
 
 		blacklist: "ban",
 		bl: "ban",
-		ban: function (target, room, user) {
+		ban(target, room, user) {
 			if (!getFaction(user.userid)) return false;
 			if (!target) return this.errorReply("/faction ban (target)");
 			if (toID(getFactionRank(user.userid)) !== "noble" && toID(getFactionRank(user.userid)) !== "owner") return false;
@@ -706,7 +706,7 @@ exports.commands = {
 
 		unblacklist: "unban",
 		unbl: "unban",
-		unban: function (target, room, user) {
+		unban(target, room, user) {
 			if (!getFaction(user.userid)) return false;
 			if (!target) return this.errorReply("/faction unban (target)");
 			if (toID(getFactionRank(user.userid)) !== "noble" && toID(getFactionRank(user.userid)) !== "owner") return false;
@@ -716,7 +716,7 @@ exports.commands = {
 			return this.sendReply(`${target} is now unbanned from your faction.`);
 		},
 
-		shop: function (target, room, user) {
+		shop(target, room, user) {
 			if (!getFaction(user.userid)) return false;
 			if (toID(getFactionRank(user.userid)) !== "owner") return false;
 			let userCount = factions[toID(getFaction(user.userid))].users.length;
@@ -729,7 +729,7 @@ exports.commands = {
 			return this.sendReplyBox(display);
 		},
 
-		buy: function (target, room, user) {
+		buy(target, room, user) {
 			let factionId = toID(getFaction(user.userid));
 			if (!getFaction(user.userid)) return false;
 			if (toID(getFactionRank(user.userid)) !== "owner") return false;
@@ -784,7 +784,7 @@ exports.commands = {
 			return this.sendReplyBox(`${target} was purchased for the faction.`);
 		},
 
-		claimlist: function (target, room, user) {
+		claimlist(target, room, user) {
 			if (!getFaction(user.userid)) return false;
 			let factionId = toID(getFaction(user.userid));
 			if (!factions[factionId].boughtItems) factions[factionId].boughtItems = {}; // safety catch!
@@ -793,7 +793,7 @@ exports.commands = {
 			return this.sendReplyBox(`List of unclaimed items: ${Chat.toListString(list)}<br /><br /> Claim the items with /factions claim item.`);
 		},
 
-		claim: function (target, room, user) {
+		claim(target, room, user) {
 			if (!getFaction(user.userid)) return false;
 			let factionId = toID(getFaction(user.userid));
 			if (!factions[factionId].boughtItems) factions[factionId].boughtItems = {}; // safety catch!
@@ -820,14 +820,14 @@ exports.commands = {
 		coins: {
 			"": "atm",
 			coins: "atm",
-			atm: function (target, room, user) {
+			atm(target, room, user) {
 				if (!getFaction(user.userid)) return this.errorReply(`You are not in a faction!`);
 				let coins = Db.factionCoins.get(user.userid, 0);
 				this.sendReplyBox(`You currently have ${coins.toLocaleString()} ${coins === 1 ? `coin` : `coins`}.`);
 			},
 
 			give: "donate",
-			donate: function (target, room, user) {
+			donate(target, room, user) {
 				if (!getFaction(user.userid)) return this.errorReply(`You are not in a faction!`);
 				if (Db.factionCoins.get(user.userid, 0) <= 0) return this.errorReply(`You don't have any coins to donate!`);
 				Db.factionbank.set(toID(getFaction(user.userid)), Db.factionbank.get(toID(getFaction(user.userid)), 0) + Db.factionCoins.get(user.userid, 0));
@@ -839,7 +839,7 @@ exports.commands = {
 		bank: {
 			balance: "atm",
 			bal: "atm",
-			atm: function (target) {
+			atm(target) {
 				if (!this.runBroadcast()) return;
 				if (!target) return this.errorReply("/faction bank atm [faction]");
 				let targetId = toID(target);
@@ -848,7 +848,7 @@ exports.commands = {
 				return this.sendReplyBox(`${factions[targetId].name} has ${bank.toLocaleString()} ${bank === 1 ? `coin` : `coins`} in their reserve.`);
 			},
 
-			give: function (target) {
+			give(target) {
 				let [faction, amount] = target.split(",").map(p => { return p.trim(); });
 				if (!amount) return this.errorReply("/faction bank give [faction], [amount]");
 				let name = toID(faction);
@@ -860,7 +860,7 @@ exports.commands = {
 				return this.sendReply(`You have added ${amount.toLocaleString()} to ${factions[name].name}'s bank!`);
 			},
 
-			take: function (target) {
+			take(target) {
 				let [faction, amount] = target.split(",").map(p => { return p.trim(); });
 				if (!amount) return this.errorReply("/faction bank take [faction], [amount");
 				let name = toID(faction);
@@ -872,7 +872,7 @@ exports.commands = {
 				return this.sendReply(`You have taken ${amount.toLocaleString()} from ${factions[name].name}'s bank!`);
 			},
 
-			ladder: function (target) {
+			ladder(target) {
 				if (!target) target = 100;
 				target = Number(target);
 				if (isNaN(target)) target = 100;
@@ -885,7 +885,7 @@ exports.commands = {
 				this.sendReplyBox(rankLadder("Richest Factions", "Faction Coins", keys.slice(0, target), "coins") + "</div>");
 			},
 
-			reset: function (target) {
+			reset(target) {
 				if (!this.can("faction")) return false;
 				let factionId = toID(target);
 				if (!factions[factionId]) return this.errorReply(`${factionId} is not a faction!`);
@@ -894,7 +894,7 @@ exports.commands = {
 			},
 		},
 
-		promote: function (target, room, user) {
+		promote(target, room, user) {
 			let [targetUser, rank] = target.split(",").map(p => { return p.trim(); });
 			if (!rank) return this.errorReply("Usage: /faction promote [user], [rank]");
 
@@ -925,7 +925,7 @@ exports.commands = {
 			this.sendReply(`You've set ${targetUser.name}'s faction rank to ${rank}.`);
 		},
 
-		demote: function (target, room, user) {
+		demote(target, room, user) {
 			let [targetUser, rank] = target.split(",").map(p => { return p.trim(); });
 			if (!rank) return this.errorReply("Usage: /faction demote [user], [rank]");
 			let factionid = toID(getFaction(user.userid));
@@ -955,7 +955,7 @@ exports.commands = {
 			this.sendReply(`You've removed ${targetUser} from the faction rank ${rank}.`);
 		},
 
-		pending: function () {
+		pending() {
 			if (!this.can("faction")) return false;
 			let output = `<center><table border="1" cellspacing ="0" cellpadding="3"><tr><td>Faction</td><td>Description</td><td>Approve</td></tr>`;
 			for (let faction in factions) {
@@ -971,7 +971,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/help faction");
 		},
 	},
@@ -1007,7 +1007,7 @@ exports.commands = {
 	],
 
 	fvf: {
-		challenge: function (target, room, user) {
+		challenge(target, room, user) {
 			if (!target) return this.errorReply("Usage: /fvf challenge [faction], [mode], [size], [tier]");
 			let [faction, mode, size, tier] = target.split(",").map(p => { return p.trim(); });
 
@@ -1092,7 +1092,7 @@ exports.commands = {
 			room.add(`|uhtml|fvf-${fvfId}|<div class="infobox"><center>${Server.nameColor(user.name, true, true)} has challenged ${factions[targetFactionid].name} to a Faction vs Faction. (${size} v ${size})<br />Waiting for a response...</center></div>`);
 		},
 
-		accept: function (target, room, user) {
+		accept(target, room, user) {
 			if (!getFaction(user.userid)) return this.errorReply("You're not in a faction.");
 			if (toID(getFactionRank(user.userid)) !== "noble" && toID(getFactionRank(user.userid)) !== "owner") return this.errorReply("You don't have permission to accept Faction vs Factions.");
 			let factionId = toID(getFaction(user.userid));
@@ -1109,7 +1109,7 @@ exports.commands = {
 			this.sendReply(`You've accepted the Faction vs Faction against ${factions[targetFactionid].name}.`);
 		},
 
-		deny: function (target, room, user) {
+		deny(target, room, user) {
 			if (!getFaction(user.userid)) return this.errorReply("You're not in a faction.");
 			if (toID(getFactionRank(user.userid)) !== "noble" && toID(getFactionRank(user.userid)) !== "owner") return this.errorReply("You don't have permission to deny Faction vs Factions.");
 			let factionId = toID(getFaction(user.userid));
@@ -1128,7 +1128,7 @@ exports.commands = {
 			this.sendReply(`You've declined the Faction vs Faction against ${factions[targetFactionid].name}.`);
 		},
 
-		invite: function (target, room, user) {
+		invite(target, room, user) {
 			if (!target) return this.errorReply("Usage: /fvf invite [user] - Invites a faction member to the join a Faction vs Faction.");
 			if (!getFaction(user.userid)) return this.errorReply("You're not in a faction.");
 			if (toID(getFactionRank(user.userid)) !== "noble" && toID(getFactionRank(user.userid)) !== "owner") return this.errorReply("You don't have permission to invite users to join a Faction vs Faction.");
@@ -1156,7 +1156,7 @@ exports.commands = {
 			this.sendReply(`You've invited ${targetUser.name} to join the Faction vs Faction.`);
 		},
 
-		join: function (target, room, user) {
+		join(target, room, user) {
 			if (!room.fvf) return this.errorReply("There's no Faction vs Faction in this room.");
 			if (!getFaction(user.userid)) return this.errorReply("You're not in a faction.");
 			if (!room.fvf.accepted) return this.errorReply("This Faction vs Faction hasn't been accepted yet.");
@@ -1177,7 +1177,7 @@ exports.commands = {
 			fvfDisplay(room);
 		},
 
-		leave: function (target, room, user) {
+		leave(target, room, user) {
 			if (!room.fvf) return this.errorReply("There's no Faction vs Faction in this room.");
 			if (!getFaction(user.userid)) return this.errorReply("You're not in a faction.");
 			if (!room.fvf.accepted) return this.errorReply("This Faction vs Faction hasn't been accepted yet.");
@@ -1196,7 +1196,7 @@ exports.commands = {
 			fvfDisplay(room);
 		},
 
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!target) return this.errorReply("Usage: /fvf end [room]");
 			if (!getFaction(user.userid)) return this.errorReply("You're not in a faction.");
 
@@ -1223,7 +1223,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/help fvf");
 		},
 	},

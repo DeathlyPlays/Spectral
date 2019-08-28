@@ -33,11 +33,11 @@ function write() {
 
 exports.commands = {
 	"!shrug": true,
-	shrug: function () {
+	shrug(target, room, user) {
 		this.parse("¯\\_(ツ)_/¯");
 	},
 
-	murder: function (target, room, user) {
+	murder(target, room, user) {
 		if (!target) return this.errorReply(`/murder needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -47,24 +47,24 @@ exports.commands = {
 	},
 
 	"!slap": true,
-	slap: function (target) {
+	slap(target, room, user) {
 		if (!target) return this.errorReply("/slap needs a target.");
 		this.parse(`/me slaps ${target} in the face with a slipper!`);
 	},
 
 	"!eat": true,
-	eat: function (target) {
+	eat(target, room, user) {
 		if (!target) return this.errorReply("/eat needs a target.");
 		this.parse(`/me eats ${target}!`);
 	},
 
 	"!marry": true,
-	marry: function (target, room, user) {
+	marry(target, room, user) {
 		if (!target) return this.errorReply("/marry needs a target.");
 		this.parse(`/me has proposed to ${target}!`);
 	},
 
-	foh: function (target, room, user) {
+	foh(target, room, user) {
 		if (!target) return this.errorReply(`/foh needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -73,13 +73,13 @@ exports.commands = {
 		targetUser.popup("GET THE FUCK OUTTA HERE BOI!");
 	},
 
-	hid: function (target, room, user) {
+	hid(target, room, user) {
 		if (!target) return this.errorReply(`/hid needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		room.addRaw(`${Server.nameColor(user.name, true, true)} has hid behind ${Server.nameColor(target, true, true)}.`);
 	},
 
-	idgaf: function (target, room, user) {
+	idgaf(target, room, user) {
 		if (!target) return this.errorReply(`/idgaf needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -88,7 +88,7 @@ exports.commands = {
 		targetUser.popup("Idgaf!");
 	},
 
-	smash: function (target, room, user) {
+	smash(target, room, user) {
 		if (!target) return this.errorReply(`/smash needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -97,7 +97,7 @@ exports.commands = {
 		targetUser.popup("FUCKING SMASHING!");
 	},
 
-	spank: function (target, room, user) {
+	spank(target, room, user) {
 		if (!target) return this.errorReply(`/spank needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -105,7 +105,7 @@ exports.commands = {
 		room.addRaw(`${Server.nameColor(user.name, true, true)} spanked  ${Server.nameColor(target, true, true)}!`);
 	},
 
-	outrage: function (target, room, user) {
+	outrage(target, room, user) {
 		if (!target) return this.errorReply(`/outrage needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -114,7 +114,7 @@ exports.commands = {
 		targetUser.popup("Watch out for the wrath!");
 	},
 
-	catch: function (target, room, user) {
+	catch(target, room, user) {
 		if (!target) return this.errorReply(`/catch needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -123,7 +123,7 @@ exports.commands = {
 		targetUser.popup("FUCKING SMASHING!");
 	},
 
-	explode: function (target, room, user) {
+	explode(target, room, user) {
 		if (!target) return this.errorReply(`/explode needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -132,7 +132,7 @@ exports.commands = {
 		targetUser.popup("ALLY AKBAR!!!!!!");
 	},
 
-	slam: function (target, room, user) {
+	slam(target, room, user) {
 		if (!target) return this.errorReply(`/slam needs a target.`);
 		if (!this.can("mute", null, room)) return this.errorReply("Boi get slammed!");
 		let targetUser = Users.get(target);
@@ -141,7 +141,7 @@ exports.commands = {
 		targetUser.popup("FUCKING BODIED!");
 	},
 
-	chal: function (target, room, user) {
+	chal(target, room, user) {
 		if (!target) return this.errorReply(`/chal needs a target.`);
 		if (!this.can("mute", null, room)) return this.errorReply("Pffft your challenge meant nothing!");
 		let targetUser = Users.get(target);
@@ -150,7 +150,7 @@ exports.commands = {
 		targetUser.popup("You were just challenged to a battle!");
 	},
 
-	rko: function (target, room, user) {
+	rko(target, room, user) {
 		if (!target) return this.errorReply(`/rko needs a target.`);
 		if (!this.can("mute", null, room)) return this.errorReply(`Hey, you, you aren't tough enough to express the usage of this!`);
 		let targetUser = Users.get(target);
@@ -159,7 +159,7 @@ exports.commands = {
 		targetUser.popup("RKO OUTTA NOWHERE!");
 	},
 
-	whip: function (target, room, user) {
+	whip(target, room, user) {
 		if (!target) return this.errorReply(`/whip needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -168,7 +168,7 @@ exports.commands = {
 		targetUser.popup(`|html|${Server.nameColor(user.name, true, true)} has whipped you.`);
 	},
 
-	smack: function (target, room, user) {
+	smack(target, room, user) {
 		if (!target) return this.errorReply(`/smack needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -177,7 +177,7 @@ exports.commands = {
 		targetUser.popup(`|html|${Server.nameColor(user.name, true, true)} has just smacked you.`);
 	},
 
-	memed: function (target, room, user) {
+	memed(target, room, user) {
 		if (!target) return this.errorReply(`/memed needs a target.`);
 		if (!this.can("declare")) return false;
 		let targetUser = Users.get(target);
@@ -186,7 +186,7 @@ exports.commands = {
 		this.parse("/declare NIIIIICE MEEEEME");
 	},
 
-	banhammer: function (target, room, user) {
+	banhammer(target, room, user) {
 		if (!target) return this.errorReply(`/banhammer needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -199,12 +199,12 @@ exports.commands = {
 	},
 
 	"!rekt": true,
-	rekt: function () {
+	rekt(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<center><img src="http://i.imgur.com/C26ZRE6.gif" width="600" height="300"</center>`);
 	},
 
-	bombing: function (target, room, user) {
+	bombing(target, room, user) {
 		if (!target) return this.errorReply(`/bombing needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -213,12 +213,12 @@ exports.commands = {
 		targetUser.popup("The bomb has exploded");
 	},
 
-	noscope: function () {
+	noscope(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<center><img src=http://stream1.gifsoup.com/view3/20140324/5006332/360-noscope-chicken-o.gif width="600" height="300"</center>`);
 	},
 
-	roflstomp: function (target, room, user) {
+	roflstomp(target, room, user) {
 		if (!target) return this.errorReply(`/roflstomp needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -227,7 +227,7 @@ exports.commands = {
 		targetUser.popup("GIT ROFLSTOMPED BOII!");
 	},
 
-	tip: function (target, room, user) {
+	tip(target, room, user) {
 		if (!target) return this.errorReply(`/tip needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -236,7 +236,7 @@ exports.commands = {
 		targetUser.popup("Someone has tipped their fedora to you.");
 	},
 
-	bow: function (target, room, user) {
+	bow(target, room, user) {
 		if (!target) return this.errorReply(`/bow needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -245,7 +245,7 @@ exports.commands = {
 		targetUser.popup("Someone has bowed to you.");
 	},
 
-	rekted: function (target, room, user) {
+	rekted(target, room, user) {
 		if (!target) return this.errorReply(`/rekted needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -254,7 +254,7 @@ exports.commands = {
 		targetUser.popup("Someone has destroyed you.");
 	},
 
-	smite: function (target, room, user) {
+	smite(target, room, user) {
 		if (!target) return this.errorReply(`/smite needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -263,7 +263,7 @@ exports.commands = {
 		targetUser.popup("A GOD has made you feel their wrath.");
 	},
 
-	fired: function (target, room, user) {
+	fired(target, room, user) {
 		if (!target) return this.errorReply(`/fired needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -272,12 +272,12 @@ exports.commands = {
 		targetUser.popup("YOU HAVE BEEN FIRED!");
 	},
 
-	broke: function () {
+	broke(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<center><video src="http://r4---sn-ab5l6nzs.googlevideo.com/videoplayback?source=youtube&pl=24&mime=video/webm&ip=68.132.51.87&expire=1456788631&id=o-AHMd8ZLgKPboESCKb60dXCAAV6rjEC9Kof3-2-QQfdB8&keepalive=yes&upn=1M4ZMLLmG0w&key=cms1&fexp=9406852,9408491,9412845,9416126,9416985,9418223,9420452,9422596,9423661,9423662,9424037,9424135,9424772,9425780,9427245,9429055,9429087,9429505&clen=170856526&itag=242&dur=35995.760&signature=34DC47CC23F06F6F70A02FD47DE6DA98EE94D7C1.7185593359F397AC90C9498AD91CB6A09211E9E2&ipbits=0&sver=3&sparams=clen,dur,expire,gir,id,initcwndbps,ip,ipbits,itag,keepalive,lmt,mime,mm,mn,ms,mv,nh,pl,source,upn&lmt=1449590895266333&gir=yes&title=Windows-Error-Remix-10-Hours%20[BollyCine.Net]&redirect_counter=1&req_id=a7b35ef98b4ba3ee&cms_redirect=yes&mm=30&mn=sn-ab5l6nzs&ms=nxu&mt=1456766974&mv=m" controls"play/stop" width="400" height="300"></video></center>`);
 	},
 
-	dunked: function (target, room, user) {
+	dunked(target, room, user) {
 		if (!target) return this.errorReply(`/dunked needs a target.`);
 		if (!this.can("mute", null, room)) return user.popup(`NOU! GET DUNKED ON!`);
 		let targetUser = Users.get(target);
@@ -286,7 +286,7 @@ exports.commands = {
 		targetUser.popup("GET DUNKED ON FOOL!!!!");
 	},
 
-	dank: function (target, room, user) {
+	dank(target, room, user) {
 		if (!target) return this.errorReply(`/dank needs a target.`);
 		if (!this.can("mute", null, room)) return this.errorReply(`YOU AREN'T DANK ENOUGH!`);
 		let targetUser = Users.get(target);
@@ -295,21 +295,21 @@ exports.commands = {
 		targetUser.popup("You have received a dank meme (legend of zelda treasure found music plays).");
 	},
 
-	sans: function () {
+	sans(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<center>So I got a question for you.... do you think the worst person.. can change?<br /><img src="http://i.imgur.com/DPr9ifK.gif" height="50" width="50"><br />heh alright I have a better question... DO YOU WANNA HAVE A BAD TIME?!<br /><br /><audio src="https://dl.pushbulletusercontent.com/Jyh0owl5BR8rNmcQjFH9VlrQaDPKWCeT/Megalovania.mp3" controls=""></audio></center>`);
 	},
 
-	trump: function () {
+	trump(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<center><img src="http://cdn.buzzlie.com/wp-content/uploads/2015/11/54a07996c8f1c37f77be418079ae352a.jpg" height="300" width="300"><br /></center>`);
 	},
 
-	lenny: function () {
+	lenny(target, room, user) {
 		this.parse(`( ͡° ͜ʖ ͡°)`);
 	},
 
-	sans2: function (target, room) {
+	sans2(target, room, user) {
 		if (!target) return this.errorReply(`/sans2 needs a target.`);
 		let targetUser = Users.get(target);
 		if (!targetUser || !targetUser.connected) return this.errorReply(`User "${targetUser}" was not found.`);
@@ -317,7 +317,7 @@ exports.commands = {
 		targetUser.popup(`|html|<center><img src="http://lpix.org/2269600/4000.gif" height="300" width="300"</center><br />GEEEEEET DUNKED ON!!!`);
 	},
 
-	break: function (target, room, user) {
+	break(target, room, user) {
 		if (!target) return this.errorReply(`/break needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -326,7 +326,7 @@ exports.commands = {
 		targetUser.popup(`|html|${Server.nameColor(user.name, true, true)} has smashed you 2 bits.`);
 	},
 
-	swat: function (target, room, user) {
+	swat(target, room, user) {
 		if (!target) return this.errorReply(`/swat needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -334,7 +334,7 @@ exports.commands = {
 		room.addRaw(`${Server.nameColor(user.name, true, true)} has swatted ${Server.nameColor(targetUser, true, true)} out of the sky.`);
 	},
 
-	donger: function (target, room, user) {
+	donger(target, room, user) {
 		if (!target) return this.errorReply(`/donger needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -343,7 +343,7 @@ exports.commands = {
 		this.parse(`ᕙ༼ຈل͜ຈ༽ᕗ flex your dongers ᕙ༼ຈل͜ຈ༽ᕗ`);
 	},
 
-	dongers: function (target, room, user) {
+	dongers(target, room, user) {
 		if (!this.can("declare")) return false;
 		if (room.isOfficial) return this.errorReply(`You cannot use this command in Official Chatrooms.`);
 		room.addRaw(`${Server.nameColor(user.name, true, true)} has begun a donger ambush.`);
@@ -369,7 +369,7 @@ exports.commands = {
 		this.parse("/declare ᕙ༼ຈل͜ຈ༽ᕗ flex your dongers ᕙ༼ຈل͜ຈ༽ᕗ");
 	},
 
-	splat: function (target, room, user) {
+	splat(target, room, user) {
 		if (!target) return this.errorReply(`/splat needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -378,7 +378,7 @@ exports.commands = {
 		targetUser.popup("You were splatted by the Aerospray PG.");
 	},
 
-	roasted: function (target, room, user) {
+	roasted(target, room, user) {
 		if (!target) return this.errorReply(`/roasted needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -387,7 +387,7 @@ exports.commands = {
 		targetUser.popup("My nigga you just got roasted.");
 	},
 
-	behave: function (target, room, user) {
+	behave(target, room, user) {
 		if (!target) return this.errorReply(`/behave needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -396,7 +396,7 @@ exports.commands = {
 		targetUser.popup("Nigga Behave!");
 	},
 
-	bhunt: function (target, room, user) {
+	bhunt(target, room, user) {
 		if (!target) return this.errorReply(`/bhunt needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -405,7 +405,7 @@ exports.commands = {
 		targetUser.popup("( ͡° ͜ʖ ͡°)Gimme That Booty( ͡° ͜ʖ ͡°)");
 	},
 
-	senpai: function (target, room, user) {
+	senpai(target, room, user) {
 		if (!target) return this.errorReply(`/senpai needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -414,7 +414,7 @@ exports.commands = {
 		targetUser.popup("Senpai gives no shits about you.");
 	},
 
-	badtime: function (target, room) {
+	badtime(target, room) {
 		if (!target) return this.errorReply(`/badtime needs a target.`);
 		if (!this.can("mute", null, room)) return this.errorReply("kids like you should be burning in hell");
 		let targetUser = Users.get(target);
@@ -423,7 +423,7 @@ exports.commands = {
 		targetUser.popup(`Do you want to have a bad time?`);
 	},
 
-	bop: function (target, room, user) {
+	bop(target, room, user) {
 		if (!target) return this.errorReply(`/bop needs a target.`);
 		if (!this.can("mute", null, room) && user.userid !== "noviex") return false;
 		let targetUser = Users.get(target);
@@ -432,7 +432,7 @@ exports.commands = {
 	},
 
 	burn: "disintegrate",
-	disintegrate: function (target, room, user) {
+	disintegrate(target, room, user) {
 		if (!target) return this.errorReply(`/burn needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -443,7 +443,7 @@ exports.commands = {
 	},
 
 	l: "loss",
-	loss: function (target, room, user) {
+	loss(target, room, user) {
 		if (!target) return this.errorReply(`/loss needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -453,7 +453,7 @@ exports.commands = {
 	},
 
 	shoot: "blast",
-	blast: function (target, room, user) {
+	blast(target, room, user) {
 		if (!target) return this.errorReply(`/shoot needs a target.`);
 		if (!this.can("mute", null, room)) return false;
 		let targetUser = Users.get(target);
@@ -463,7 +463,7 @@ exports.commands = {
 	},
 
 	cyn: "pix",
-	pix: function (target, room, user) {
+	pix(target, room, user) {
 		if (!target) return this.errorReply(`/pix needs a target.`);
 		if (!this.can("mute", null, room) && user.userid !== "littlemisspixiepix") return false;
 		let targetUser = Users.get(target);
@@ -473,7 +473,7 @@ exports.commands = {
 	},
 
 	randaction: "action",
-	action: function (target, room, user) {
+	action(target, room, user) {
 		if (!this.can("broadcast")) return false;
 		let actions = ["slapped", "punched", "kicked", "humped", "fucked", "hugged", "was murdered by", "took an L from", "got an ass-eating from", "dropkicked", "ban-hammered", "got rejected by", "succ'd", "got succ'd by", "pummeled", "got a beating from", "kissed", "winked at", "was pet by", "stabbed", "insulted", "complimented", "furried", "fluffed", "sat on"];
 		if (!target) return this.errorReply(`/action needs a target.`);
@@ -483,7 +483,7 @@ exports.commands = {
 
 	meme: "memes",
 	memes: {
-		add: function (target) {
+		add(target, room, user) {
 			if (!this.can("lock")) return;
 			let [name, img, height, width] = target.split(",").map(p => { return p.trim(); });
 			if (!width) return this.parse(`/memeshelp`);
@@ -505,7 +505,7 @@ exports.commands = {
 
 		delete: "remove",
 		clear: "remove",
-		remove: function (target) {
+		remove(target, room, user) {
 			if (!this.can("lock")) return false;
 			if (!target) return this.errorReply("This command requires a target.");
 			let memeid = toID(target);
@@ -515,7 +515,7 @@ exports.commands = {
 			this.sendReply(`The meme "${target}" has been deleted.`);
 		},
 
-		list: function () {
+		list(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (Object.keys(memes).length < 1) return this.errorReply(`There are no memes on ${Config.serverName}.`);
 			let reply = `<strong><u>Memes (${Object.keys(memes).length.toLocaleString()})</u></strong><br />`;
@@ -524,7 +524,7 @@ exports.commands = {
 		},
 
 		show: "display",
-		display: function (target, room, user) {
+		display(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (Object.keys(memes).length < 1) return this.errorReply(`There are no memes on ${Config.serverName}.`);
 			if (!target) {
@@ -546,7 +546,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/memeshelp`);
 		},
 	},

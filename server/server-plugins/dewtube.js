@@ -91,7 +91,7 @@ function generateComments(favorable, amountOfComments) {
 
 exports.commands = {
 	dewtube: {
-		info: function () {
+		info(target, room, user) {
 			if (!this.runBroadcast()) return;
 			let display = `<div style="padding: 20px 20px"><center><font size="5">DewTube</font></center><br /><center><font size="3">v${config.version}</font></center><br />`;
 			if (config.changes) display += Chat.toListString(config.changes);
@@ -103,7 +103,7 @@ exports.commands = {
 		create: "newchannel",
 		makechannel: "newchannel",
 		register: "newchannel",
-		newchannel: function (target, room, user) {
+		newchannel(target, room, user) {
 			let [name, desc] = target.split(",").map(p => p.trim());
 			if (!name || !desc) return this.parse(`/dewtubehelp`);
 			if (name.length < 1 || name.length > 25) return this.errorReply(`Your channel name must be between 1-25 characters.`);
@@ -145,7 +145,7 @@ exports.commands = {
 		delete: "removechannel",
 		terminatechannel: "removechannel",
 		terminate: "removechannel",
-		removechannel: function (target, room, user) {
+		removechannel(target, room, user) {
 			target = toID(target);
 			if (!target || !channels[target]) return this.errorReply(`The channel "${target}" appears to not exist.`);
 			if (!this.can("ban") && channels[target].owner !== user.userid) return this.errorReply(`You must be the channel owner or a Global Moderator (or higher) to delete a channel.`);
@@ -157,7 +157,7 @@ exports.commands = {
 		"!dashboard": true,
 		channelpage: "dashboard",
 		channel: "dashboard",
-		dashboard: function (target, room, user) {
+		dashboard(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = toID(getChannel(user.userid));
 			let channelId = toID(target);
@@ -183,7 +183,7 @@ exports.commands = {
 
 		aboutme: "desc",
 		description: "desc",
-		desc: function (target, room, user) {
+		desc(target, room, user) {
 			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
 			if (!target || target.length > 300) return this.errorReply("Needs a target; no more than 300 characters.");
@@ -199,7 +199,7 @@ exports.commands = {
 		channels: "discover",
 		socialblade: "discover",
 		list: "discover",
-		discover: function () {
+		discover(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (Object.keys(channels).length < 1) return this.errorReply(`There are currently no DewTube channels on ${Config.serverName}.`);
 			let output = `<div style="max-height: 200px; width: 100%; overflow: scroll;"><center><table border="1" cellspacing ="0" cellpadding="3"><tr><td>Channel Name</td><td>Description</td><td>Views</td><td>Subscribers</td><td>Likes</td><td>Dislikes</td><td>Dashboard</td><td>Owner</td></tr>`;
@@ -227,7 +227,7 @@ exports.commands = {
 
 		film: "record",
 		rec: "record",
-		record: function (target, room, user) {
+		record(target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			let [title, thumbnail] = target.split(",").map(p => p.trim());
 			if (!title) return this.errorReply(`Please title the video you are filming.`);
@@ -258,7 +258,7 @@ exports.commands = {
 		},
 
 		editvideo: "edit",
-		edit: function (target, room, user) {
+		edit(target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			let channelId = toID(getChannel(user.userid));
 			let videoProgress = channels[channelId].vidProgress;
@@ -270,7 +270,7 @@ exports.commands = {
 
 		pub: "publish",
 		upload: "publish",
-		publish: function (target, room, user) {
+		publish(target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			let channelId = toID(getChannel(user.userid));
 			let videoProgress = channels[channelId].vidProgress;
@@ -454,7 +454,7 @@ exports.commands = {
 		demonetize: "monetization",
 		unmonetize: "monetization",
 		monetize: "monetization",
-		monetization: function (target, room, user) {
+		monetization(target, room, user) {
 			let channelId = toID(getChannel(user.userid));
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			if (channels[channelId].subscribers < 1000) return this.errorReply(`Due to recent DewTube partnership guidelines you must have 1,000 subscribers to apply for monetization.`);
@@ -473,7 +473,7 @@ exports.commands = {
 		videonotifications: "notify",
 		toggle: "notify",
 		togglenotifications: "notify",
-		notify: function (target, room, user) {
+		notify(target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			let channelId = toID(getChannel(user.userid));
 			if (channels[channelId].notifications) {
@@ -487,7 +487,7 @@ exports.commands = {
 
 		dramaalert: "drama",
 		expose: "drama",
-		drama: function (target, room, user) {
+		drama(target, room, user) {
 			if (!getChannel(user.userid)) return this.errorReply(`You do not have a DewTube channel yet.`);
 			if (!target) return this.errorReply(`Pick who you want to start drama with.`);
 			let targetId = toID(target);
@@ -560,7 +560,7 @@ exports.commands = {
 
 		disabledrama: "toggledrama",
 		enabledrama: "toggledrama",
-		toggledrama: function (target, room, user) {
+		toggledrama(target, room, user) {
 			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
 			if (!channels[channelId].allowingDrama) {
@@ -573,7 +573,7 @@ exports.commands = {
 		},
 
 		collab: "collaborate",
-		collaborate: function (target, room, user) {
+		collaborate(target, room, user) {
 			if (!target) return this.parse(`/dewtubehelp`);
 			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
@@ -600,7 +600,7 @@ exports.commands = {
 
 		accept: "acceptcollab",
 		collabaccept: "acceptcollab",
-		acceptcollab: function (target, room, user) {
+		acceptcollab(target, room, user) {
 			if (!target) return this.parse(`/dewtubehelp`);
 			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
@@ -733,7 +733,7 @@ exports.commands = {
 		declinecollab: "denycollab",
 		decline: "denycollab",
 		deny: "denycollab",
-		denycollab: function (target, room, user) {
+		denycollab(target, room, user) {
 			if (!target) return this.parse(`/dewtubehelp`);
 			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
@@ -752,7 +752,7 @@ exports.commands = {
 
 		endcollab: "cancelcollab",
 		cancel: "cancelcollab",
-		cancelcollab: function (target, room, user) {
+		cancelcollab(target, room, user) {
 			if (!target) return this.parse(`/dewtubehelp`);
 			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
@@ -769,7 +769,7 @@ exports.commands = {
 		avatar: "pfp",
 		profilepicture: "pfp",
 		profilepic: "pfp",
-		pfp: function (target, room, user) {
+		pfp(target, room, user) {
 			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
 			if (!target) return this.parse(`/dewtubehelp`);
@@ -782,7 +782,7 @@ exports.commands = {
 		channelart: "banner",
 		bg: "banner",
 		background: "banner",
-		banner: function (target, room, user) {
+		banner(target, room, user) {
 			let channelId = toID(getChannel(user.userid));
 			if (!channels[channelId]) return this.errorReply(`You do not currently own a DewTube channel.`);
 			if (!target) return this.parse(`/dewtubehelp`);
@@ -793,7 +793,7 @@ exports.commands = {
 		},
 
 		vids: "videos",
-		videos: function (target, room, user) {
+		videos(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = toID(getChannel(user.userid));
 			let channelId = toID(target);
@@ -823,7 +823,7 @@ exports.commands = {
 
 		viewvideo: "view",
 		videoanalytics: "view",
-		view: function (target) {
+		view(target, room, user) {
 			if (!this.runBroadcast()) return;
 			let [channel, video] = target.split(",").map(p => { return p.trim(); });
 			if (!video) return this.parse("/dewtubehelp");
@@ -845,7 +845,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help() {
 			this.parse("/dewtubehelp");
 		},
 	},

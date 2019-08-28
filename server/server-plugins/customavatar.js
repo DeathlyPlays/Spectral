@@ -52,7 +52,7 @@ loadCustomAvatars();
 exports.commands = {
 	ca: "customavatar",
 	customavatar: {
-		set: function (target, room, user) {
+		set(target, room, user) {
 			if (!this.can("profile")) return false;
 			let parts = target.split(",").map(param => param.trim());
 			if (parts.length < 2) return this.parse("/help customavatar");
@@ -74,7 +74,7 @@ exports.commands = {
 		},
 
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			if (!this.can("profile")) return false;
 
 			let userid = toID(target);
@@ -96,7 +96,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function (target, room, user) {
+		help(target, room, user) {
 			this.parse("/help customavatar");
 		},
 	},

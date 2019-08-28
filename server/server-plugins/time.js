@@ -26,7 +26,7 @@ exports.commands = {
 	"!ontime": true,
 	nolife: "ontime",
 	userontime: "ontime",
-	ontime: function (target, room, user) {
+	ontime(target, room, user) {
 		if (!this.runBroadcast()) return;
 		const userid = target ? toID(target) : user.userid;
 		const currentOntime = Ontime[userid] ? Date.now() - Ontime[userid] : 0;
@@ -48,7 +48,7 @@ exports.commands = {
 
 	nolifeladder: "ontimeladder",
 	mostonline: "ontimeladder",
-	ontimeladder: function () {
+	ontimeladder() {
 		if (!this.runBroadcast()) return;
 		let keys = Db.ontime.keys().map(name => {
 			let currentOntime = 0;

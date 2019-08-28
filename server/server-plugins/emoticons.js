@@ -53,7 +53,7 @@ exports.commands = {
 	blockemotes: "ignoreemotes",
 	blockemoticon: "ignoreemotes",
 	blockemoticons: "ignoreemotes",
-	ignoreemotes: function () {
+	ignoreemotes(target, room, user) {
 		this.parse(`/emoticons ignore`);
 	},
 
@@ -61,7 +61,7 @@ exports.commands = {
 	unblockemotes: "unignoreemotes",
 	unblockemoticon: "unignoreemotes",
 	unblockemoticons: "unignoreemotes",
-	unignoreemotes: function () {
+	unignoreemotes(target, room, user) {
 		this.parse(`/emoticons unignore`);
 	},
 
@@ -69,7 +69,7 @@ exports.commands = {
 	emote: "emoticon",
 	emotes: "emoticon",
 	emoticon: {
-		add: function (target, room, user) {
+		add(target, room, user) {
 			if (!this.can(`emotes`)) return false;
 			if (!target) return this.parse("/emoticonshelp");
 
@@ -96,7 +96,7 @@ exports.commands = {
 		delete: "del",
 		remove: "del",
 		rem: "del",
-		del: function (target, room, user) {
+		del(target, room, user) {
 			if (!this.can(`emotes`)) return false;
 			if (!target) return this.parse("/emoticonshelp");
 			if (!emoticons[target]) return this.errorReply("That emoticon does not exist.");
@@ -109,7 +109,7 @@ exports.commands = {
 			Server.messageSeniorStaff(`/html ${Server.nameColor(user.name, true)} has removed the emoticon ${Chat.escapeHTML(target)}.`);
 		},
 
-		toggle: function (target, room, user) {
+		toggle(target, room, user) {
 			if (!this.can("emotes", null, room)) return false;
 			if (!room.disableEmoticons) {
 				room.disableEmoticons = true;
@@ -125,7 +125,7 @@ exports.commands = {
 		},
 
 		view: "list",
-		list: function (target, room, user) {
+		list(target, room, user) {
 			if (!this.runBroadcast()) return;
 
 			let size = 50;
@@ -138,21 +138,21 @@ exports.commands = {
 			this.sendReply(`|raw|<div class="infobox infobox-limited">${reply}</div>`);
 		},
 
-		ignore: function (target, room, user) {
+		ignore(target, room, user) {
 			if (Server.ignoreEmotes[user.userid]) return this.errorReply(`You are already ignoring emoticons.`);
 			Server.ignoreEmotes[user.userid] = true;
 			FS(`config/ignoreemotes.json`).writeSync(JSON.stringify(Server.ignoreEmotes));
 			this.sendReply(`You are now ignoring emoticons.`);
 		},
 
-		unignore: function (target, room, user) {
+		unignore(target, room, user) {
 			if (!Server.ignoreEmotes[user.userid]) return this.errorReply(`You aren't ignoring emoticons.`);
 			delete Server.ignoreEmotes[user.userid];
 			FS(`config/ignoreemotes.json`).writeSync(JSON.stringify(Server.ignoreEmotes));
 			this.sendReply(`You are no longer ignoring emoticons.`);
 		},
 
-		size: function (target, room, user) {
+		size(target, room, user) {
 			if (room.id === `lobby` && !this.can(`emotes`) || room.id !== `lobby` && !this.can(`emotes`, null, room)) return false;
 			if (!target) return this.sendReply(`Usage: /emoticons size [number]`);
 
@@ -168,7 +168,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/emoticonshelp`);
 		},
 	},
@@ -176,7 +176,7 @@ exports.commands = {
 	randomemoticon: "randemote",
 	randemoticon: "randemoticon",
 	randomemote: "randemote",
-	randemote: function () {
+	randemote(target, room, user) {
 		if (!this.canTalk()) return;
 		let e = Object.keys(emoticons)[Math.floor(Math.random() * Object.keys(emoticons).length)];
 		this.parse(e);

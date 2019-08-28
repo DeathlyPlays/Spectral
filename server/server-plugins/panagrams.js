@@ -85,7 +85,7 @@ class Panagram {
 exports.commands = {
 	panagramrules: 'panagramhelp',
 	phelp: 'panagramhelp',
-	panagramhelp: function (target, room, user) {
+	panagramhelp(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(
 			'<center><strong>Panagram Help</strong><br />' +
@@ -100,7 +100,7 @@ exports.commands = {
 	},
 
 	panagrams: 'panagram',
-	panagram: function (target, room, user, connection, cmd) {
+	panagram(target, room, user, connection, cmd) {
 		if (pGames[room.id]) return this.errorReply("There is currently a game of panagram going on in this room.");
 		if (!this.can('declare', null, room)) return this.errorReply("You must be ranked # or higher to start a game of panagram in this room.");
 		if (room.id !== 'casino') return this.sendReply('|html|You can only start a game of Panagram in the <button name = "send" value = "/join casino">Casino</button>');
@@ -114,7 +114,7 @@ exports.commands = {
 	},
 
 	ph: 'panagramhint',
-	panagramhint: function (target, room, user) {
+	panagramhint(target, room, user) {
 		if (!pGames[room.id]) return this.errorReply("There is no game of panagram going on in this room.");
 		if (!this.runBroadcast()) return;
 
@@ -123,7 +123,7 @@ exports.commands = {
 
 	guesspanagram: 'gp',
 	guessp: 'gp',
-	gp: function (target, room, user, connection, cmd) {
+	gp(target, room, user, connection, cmd) {
 		if (!pGames[room.id]) return this.errorReply("There is no game of panagram going on in this room.");
 		if (!this.canTalk()) return;
 
@@ -140,7 +140,7 @@ exports.commands = {
 	panagramskip: 'panagramend',
 	endp: 'panagramend',
 	panagramsend: 'panagramend',
-	panagramend: function (target, room, user, connection, cmd) {
+	panagramend(target, room, user, connection, cmd) {
 		if (!pGames[room.id]) return this.errorReply("There is no game of panagram going on in this room.");
 		if (!this.can('ban', null, room)) return this.sendReply("You must be ranked @ or higher to end a game of panagram in this room.");
 

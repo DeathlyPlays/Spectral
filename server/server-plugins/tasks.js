@@ -19,7 +19,7 @@ exports.commands = {
 	tasks: {
 		new: "add",
 		issue: "add",
-		add: function (target, room, user) {
+		add(target, room, user) {
 			if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
 			let [issue, priority, ...description] = target.split(",").map(p => p.trim());
 			if (!(issue && priority && description)) return this.parse("/taskshelp");
@@ -38,7 +38,7 @@ exports.commands = {
 		remove: "delete",
 		clear: "delete",
 		fixed: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
 			target = toID(target);
 			let task = Db.tasks.get("development", {issues: {}});
@@ -52,7 +52,7 @@ exports.commands = {
 		"": "list",
 		tasks: "list",
 		task: "list",
-		list: function (target, room, user) {
+		list(target, room, user) {
 			if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
 			if (!this.runBroadcast()) return;
 			if (this.broadcasting && room.id !== "development") return this.errorReply(`You may only broadcast this command in Development.`);
@@ -76,7 +76,7 @@ exports.commands = {
 			return this.sendReplyBox(display);
 		},
 
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/taskshelp`);
 		},
 	},

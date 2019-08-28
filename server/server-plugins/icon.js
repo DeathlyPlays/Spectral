@@ -46,7 +46,7 @@ exports.commands = {
 	userlisticon: "icon",
 	customicon: "icon",
 	icon: {
-		set: function (target, room, user) {
+		set(target, room, user) {
 			if (!this.can("profile")) return false;
 			target = target.split(",");
 			for (let u in target) target[u] = target[u].trim();
@@ -63,7 +63,7 @@ exports.commands = {
 		},
 
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			if (!this.can("profile")) return false;
 			target = toID(target);
 			if (!icons[toID(target)]) return this.errorReply(`/icon - ${target} does not have an icon.`);
@@ -77,7 +77,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function (target, room, user) {
+		help(target, room, user) {
 			this.parse("/iconhelp");
 		},
 	},

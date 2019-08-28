@@ -210,7 +210,7 @@ global.rankLadder = function (title, type, array, prop, group) {
 exports.commands = {
 	"!wallet": true,
 	atm: "wallet",
-	wallet: function (target, room, user) {
+	wallet(target, room, user) {
 		if (!target) target = user.name;
 		if (!this.runBroadcast()) return;
 		let userid = toID(target);
@@ -227,7 +227,7 @@ exports.commands = {
 	givemoney: "givecurrency",
 	gb: "givecurrency",
 	gc: "givecurrency",
-	givecurrency: function (target, room, user, connection, cmd) {
+	givecurrency(target, room, user, connection, cmd) {
 		if (!this.can("money")) return false;
 		let [targetUser, amount, reason] = target.split(",").map(p => { return p.trim(); });
 		if (!reason) return this.errorReply(`Usage: /${cmd} [user], [amount], [reason]`);
@@ -257,7 +257,7 @@ exports.commands = {
 	takebucks: "takecurrency",
 	takemoney: "takecurrency",
 	tc: "takecurrency",
-	takecurrency: function (target, room, user, connection, cmd) {
+	takecurrency(target, room, user, connection, cmd) {
 		if (!this.can("money")) return false;
 		let [targetUser, amount, reason] = target.split(",").map(p => { return p.trim(); });
 		if (!reason) return this.errorReply(`Usage: /${cmd} [user], [amount], [reason]`);
@@ -285,7 +285,7 @@ exports.commands = {
 	transfer: "transfercurrency",
 	transfermoney: "transfercurrency",
 	confirmtransfercurrency: "transfercurrency",
-	transfercurrency: function (target, room, user, connection, cmd) {
+	transfercurrency(target, room, user, connection, cmd) {
 		let [targetUser, amount] = target.split(",").map(p => { return p.trim(); });
 		if (!amount) return this.errorReply(`Usage: /${cmd} [user], [amount]`);
 
@@ -316,7 +316,7 @@ exports.commands = {
 		});
 	},
 
-	moneylog: function (target, room, user) {
+	moneylog(target, room, user) {
 		if (!this.can("money")) return false;
 		if (!target) return this.errorReply("Usage: /moneylog [number] to view the last x lines OR /moneylog [text] to search for text.");
 		let word = false;
@@ -345,7 +345,7 @@ exports.commands = {
 
 	"!richestuser": true,
 	richestusers: "richestuser",
-	richestuser: function (target) {
+	richestuser(target) {
 		if (!target) target = 100;
 		target = Number(target);
 		if (isNaN(target)) target = 100;
@@ -360,7 +360,7 @@ exports.commands = {
 
 	resetbucks: "resetmoney",
 	resetcurrency: "resetmoney",
-	resetmoney: function (target, room, user) {
+	resetmoney(target, room, user) {
 		if (!this.can("money")) return false;
 		if (!target) return this.parse("/help resetmoney");
 		target = toID(target);
@@ -370,7 +370,7 @@ exports.commands = {
 	},
 	resetmoneyhelp: [`/resetmoney [user] - Resets the target user's ATM to 0 ${moneyPlural}. Requires: @, &, or ~.`],
 
-	customsymbol: function (target, room, user) {
+	customsymbol(target, room, user) {
 		let bannedSymbols = ["!", "|", "‽", "\u2030", "\u534D", "\u5350", "\u223C"];
 		for (let u in Config.groups) if (Config.groups[u].symbol) bannedSymbols.push(Config.groups[u].symbol);
 		if (!user.canCustomSymbol && !user.can("profile")) return this.errorReply("You need to buy this item from the shop to use.");
@@ -385,7 +385,7 @@ exports.commands = {
 	},
 
 	removesymbol: "resetsymbol",
-	resetsymbol: function (target, room, user) {
+	resetsymbol(target, room, user) {
 		if (!user.customSymbol) return this.errorReply("You don't have a custom symbol!");
 		delete user.customSymbol;
 		user.updateIdentity();
@@ -395,7 +395,7 @@ exports.commands = {
 	economy: "economystats",
 	currency: "economystats",
 	bucks: "economystats",
-	economystats: function () {
+	economystats(target, room, user) {
 		if (!this.runBroadcast()) return;
 		const users = Db.money.keys().map(curUser => ({amount: Db.money.get(curUser)}));
 		const total = users.reduce((acc, cur) => acc + cur.amount, 0);
@@ -406,13 +406,13 @@ exports.commands = {
 	},
 
 	store: "shop",
-	shop: function () {
+	shop(target, room, user) {
 		if (!this.runBroadcast()) return;
 		return this.sendReplyBox(shopDisplay);
 	},
 	shophelp: [`/shop - Display items you can buy with your ${moneyPlural}.`],
 
-	buy: function (target, room, user) {
+	buy(target, room, user) {
 		if (!target) return this.parse("/help buy");
 		let amount = Db.money.get(user.userid, 0);
 		let cost = findItem.call(this, target, amount);
@@ -432,7 +432,7 @@ exports.commands = {
 	buyhelp: ["/buy [item] - Buys an item from the shop."],
 
 	// Credit to Wavelength
-	usetoken: function (target, room, user) {
+	usetoken(target, room, user) {
 		target = target.split(",");
 		if (target.length < 2) return this.parse("/help usetoken");
 		target[0] = toID(target[0]);
@@ -533,7 +533,7 @@ exports.commands = {
 		/usetoken roomshop, [room name] - Uses a Room Shop token to enable a Room Shop in the room.`,
 	],
 
-	purgeeconomy: function (target, room, user) {
+	purgeeconomy(target, room, user) {
 		if (!this.can("money")) return false;
 		let economy = Db.money.keys();
 		if (!economy) return this.errorReply(`The Economy on ${Config.serverName} appears to be empty.`);

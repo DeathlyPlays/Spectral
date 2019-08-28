@@ -611,8 +611,8 @@ exports.commands = {
 	ssbffa: "ssb",
 	ssb: {
 		edit: {
-			main: "",
-			"": function (target, room, user, connection, cmd, message) {
+			"": "main",
+			main(target, room, user, connection, cmd, message) {
 				if (!user.named) return this.errorReply("You must choose a name first.");
 				if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 				if (!Server.ssb[user.userid]) {
@@ -630,7 +630,7 @@ exports.commands = {
 			},
 
 			speciesq: "species",
-			species: function (target, room, user, connection, cmd, message) {
+			species(target, room, user, connection, cmd, message) {
 				if (!user.named) return this.errorReply("You must choose a name first.");
 				if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 				if (!Server.ssb[user.userid]) {
@@ -652,7 +652,7 @@ exports.commands = {
 			},
 
 			moveq: "move",
-			move: function (target, room, user, connection, cmd, message) {
+			move(target, room, user, connection, cmd, message) {
 				if (!user.named) return this.errorReply("You must choose a name first.");
 				if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 				if (!Server.ssb[user.userid]) {
@@ -696,7 +696,7 @@ exports.commands = {
 			},
 
 			statsq: "stats",
-			stats: function (target, room, user, connection, cmd, message) {
+			stats(target, room, user, connection, cmd, message) {
 				if (!user.named) return this.errorReply("You must choose a name first.");
 				if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 				if (!Server.ssb[user.userid]) {
@@ -766,7 +766,7 @@ exports.commands = {
 			},
 
 			abilityq: "ability",
-			ability: function (target, room, user, connection, cmd, message) {
+			ability(target, room, user, connection, cmd, message) {
 				if (!user.named) return this.errorReply("You must choose a name first.");
 				if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 				if (!Server.ssb[user.userid]) {
@@ -787,7 +787,7 @@ exports.commands = {
 			},
 
 			itemq: "item",
-			item: function (target, room, user, connection, cmd, message) {
+			item(target, room, user, connection, cmd, message) {
 				if (!user.named) return this.errorReply("You must choose a name first.");
 				if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 				if (!Server.ssb[user.userid]) {
@@ -814,7 +814,7 @@ exports.commands = {
 			},
 
 			detailsq: "details",
-			details: function (target, room, user, connection, cmd, message) {
+			details(target, room, user, connection, cmd, message) {
 				if (!user.named) return this.errorReply("You must choose a name first.");
 				if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 				if (!Server.ssb[user.userid]) {
@@ -882,7 +882,7 @@ exports.commands = {
 			},
 		},
 
-		toggle: function (target, room, user, connection, cmd, message) {
+		toggle(target, room, user, connection, cmd, message) {
 			if (!user.named) return this.errorReply("You must choose a name first.");
 			if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 			if (!Server.ssb[user.userid]) {
@@ -896,7 +896,7 @@ exports.commands = {
 
 		custommoves: "custom",
 		cmoves: "custom",
-		custom: function (target, room, user, connection, cmd, message) {
+		custom(target, room, user, connection, cmd, message) {
 			if (!user.named) return this.errorReply("You must choose a name first.");
 			if (user.locked) return this.errorReply("You cannot edit your SSB Pokemon while locked.");
 			if (!Server.ssb[user.userid]) {
@@ -907,7 +907,7 @@ exports.commands = {
 			return user.sendTo(room, `|uhtmlchange|ssb${user.userid}|${customMenu()}`);
 		},
 
-		log: function (target, room, user, connection, cmd, message) {
+		log(target, room, user, connection, cmd, message) {
 			if (!target) target = (user.can("ssbffa") ? `view, all` : `view, ${user.userid}`);
 			target = target.split(",");
 			switch (target[0]) {
@@ -980,7 +980,7 @@ exports.commands = {
 
 		forceupdate: "validate",
 		validateall: "validate",
-		validate: function (target, room, user, connection, cmd, message) {
+		validate(target, room, user, connection, cmd, message) {
 			if (!this.can("ssbffa")) return;
 			if (!target && toID(cmd) !== "validateall") return this.parse("/help ssb validate");
 			let targetUser = Server.ssb[toID(target)];
@@ -1001,7 +1001,7 @@ exports.commands = {
 		setcustommove: "setcmove",
 		givemove: "setcmove",
 		setmove: "setcmove",
-		setcmove: function (target, room, user, connection, message) {
+		setcmove(target, room, user, connection, message) {
 			if (!this.can("ssbffa")) return false;
 			if (!target) return this.parse("/help ssb setcmove");
 			let targets = target.split(",");
@@ -1020,7 +1020,7 @@ exports.commands = {
 		setcustomability: "setcability",
 		giveability: "setcability",
 		setability: "setcability",
-		setcability: function (target, room, user, connection, message) {
+		setcability(target, room, user, connection, message) {
 			if (!this.can("ssbffa")) return false;
 			if (!target) return this.parse("/help ssb setcability");
 			let targets = target.split(",");
@@ -1039,7 +1039,7 @@ exports.commands = {
 		setcustomitem: "setcitem",
 		giveitem: "setcitem",
 		setitem: "setcitem",
-		setcitem: function (target, room, user, connection, cmd, message) {
+		setcitem(target, room, user, connection, cmd, message) {
 			if (!this.can("ssbffa")) return false;
 			if (!target) return this.parse("/help ssb setcitem");
 			let targets = target.split(",");
@@ -1055,7 +1055,8 @@ exports.commands = {
 		},
 		setcitemhelp: [`/ssb setcitem [user], [item]`],
 
-		"": function (target, room, user, connection, cmd, message) {
+		"": "start", // just making it easier due to function changes
+		start(target, room, user, connection, cmd, message) {
 			return this.parse("/help ssb");
 		},
 	},

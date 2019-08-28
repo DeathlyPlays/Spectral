@@ -106,7 +106,7 @@ exports.commands = {
 	gw: {
 		new: "create",
 		make: "create",
-		create: function (target, room, user) {
+		create(target, room, user) {
 			if (room.guesswho) return this.errorReply("A session of Guess Who is already active.");
 			if (room.guessWhoDisabled) return this.errorReply(`Guess Who is currently disabled in ${room.title}.`);
 			if (!this.can("minigame", null, room)) return false;
@@ -116,7 +116,7 @@ exports.commands = {
 		},
 
 		j: "join",
-		join: function (target, room, user) {
+		join(target, room, user) {
 			if (!room.guesswho) return this.errorReply("There is no ongoing Guess Who game going on right now.");
 			if (room.guesswho.state !== "signups") return this.errorReply("This session of Guess Who has already been started.");
 			if (!this.canTalk()) return this.errorReply("You must be able to talk to join a game of Guess Who.");
@@ -126,7 +126,7 @@ exports.commands = {
 
 		part: "leave",
 		l: "leave",
-		leave: function (target, room, user) {
+		leave(target, room, user) {
 			if (!room.guesswho) return this.errorReply("There is no ongoing game of Guess Who in this room.");
 			room.guesswho.leaveGuessWho(user);
 		},
@@ -134,7 +134,7 @@ exports.commands = {
 		checkplayers: "players",
 		list: "players",
 		viewplayers: "players",
-		players: function (target, room, user) {
+		players(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!room.guesswho) return this.errorReply("There is no ongoing game of Guess Who in this room.");
 			return this.sendReplyBox(`<strong>Current Player Count: ${room.guesswho.players.length} ${((room.guesswho.players.length === 1) ? "user is" : "users are")} in this session of Guess Who.<br /> Players: ${room.guesswho.players}.`);
@@ -142,7 +142,7 @@ exports.commands = {
 
 		forcestart: "start",
 		begin: "start",
-		start: function (target, room, user) {
+		start(target, room, user) {
 			if (!this.can("mute", null, room)) return;
 			if (!room.guesswho || room.guesswho.players.length < 2 || room.guesswho.state !== "signups") return this.errorReply("There is not any Guess Who session available to be started.");
 			this.privateModAction(`(The session of Guess Who has been started early.)`);
@@ -153,7 +153,7 @@ exports.commands = {
 		gp: "guess",
 		guessp: "guess",
 		guesspokemon: "guesspokemon",
-		guess: function (target, room, user, connection, cmd) {
+		guess(target, room, user, connection, cmd) {
 			if (!room.guesswho) return this.errorReply("There is no session of Guess Who going on in this room.");
 			if (room.guesswho.state === "signups") return this.errorReply("This session of Guess Who has not been started.");
 			if (!this.canTalk()) return;
@@ -169,7 +169,7 @@ exports.commands = {
 
 		guesscount: "remainingguesses",
 		remaining: "remainingguesses",
-		remainingguesses: function (target, room, user, connection, cmd) {
+		remainingguesses(target, room, user, connection, cmd) {
 			if (!this.runBroadcast()) return;
 			if (!room.guesswho) return this.errorReply("There is no session of Guess Who going on in this room.");
 			if (room.guesswho.state === "signups") return this.errorReply("This session of Guess Who has not been started.");
@@ -180,21 +180,21 @@ exports.commands = {
 		showguesses: "guesses",
 		guessedpokemon: "guesses",
 		guessedpkmn: "guesses",
-		guesses: function (target, room, user) {
+		guesses(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!room.guesswho) return this.errorReply(`There is no ongoing session of Guess Who going on right now.`);
 			if (room.guesswho.guessedPokemon.length < 1) return this.errorReply(`No one has guessed a Pokemon yet.`);
 			return this.sendReplyBox(`<strong>Guessed Pokemon: ${Chat.toListString(room.guesswho.guessedPokemon)}</strong>`);
 		},
 
-		showanswer: function (target, room, user) {
+		showanswer(target, room, user) {
 			if (!room.guesswho) return this.errorReply("There is no session of Guess Who going on in this room.");
 			if (room.guesswho.questionee !== user.userid) return this.errorReply("You must be the questionee to use this.");
 			this.sendReplyBox(`Attention: You must give hints about this Pokemon! Try not to give away too much, because if your Pok&eacute;mon hasn't been guessed after ${guesses} amount of times you win!<br /><strong>Your Pok&eacute;mon is ${room.guesswho.answer.species}</strong>!`);
 		},
 
 		cancel: "end",
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!this.can("mute", null, room)) return;
 			if (!room.guesswho) return this.errorReply("There is no ongoing session of Guess Who going on right now.");
 			this.privateModAction(`(The session of Guess Who was forcefully ended.)`);
@@ -203,7 +203,7 @@ exports.commands = {
 
 		givehints: "gh",
 		givehint: "gh",
-		gh: function (target, room, user) {
+		gh(target, room, user) {
 			if (!room.guesswho) return this.errorReply(`There is no ongoing session of Guess Who going on right now.`);
 			if (room.guesswho.questionee !== user.userid) return this.errorReply(`Only the questionee may provide hints.`);
 			if (!target) return this.errorReply(`You must provide a hint.`);
@@ -214,7 +214,7 @@ exports.commands = {
 
 		showhints: "hints",
 		hint: "hints",
-		hints: function (target, room, user) {
+		hints(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!room.guesswho) return this.errorReply(`There is no ongoing session of Guess Who going on right now.`);
 			if (room.guesswho.hints.length < 1) return this.errorReply(`There are currently no hints in this session of Guess Who, request one from the questionee.`);
@@ -222,7 +222,7 @@ exports.commands = {
 		},
 
 		off: "disable",
-		disable: function (target, room, user) {
+		disable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (room.guessWhoDisabled) {
 				return this.errorReply("Guess Who is already disabled in this room.");
@@ -236,7 +236,7 @@ exports.commands = {
 		},
 
 		on: "enable",
-		enable: function (target, room, user) {
+		enable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (!room.guessWhoDisabled) {
 				return this.errorReply("Guess Who is already enabled in this room.");
@@ -250,7 +250,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function (target, room, user) {
+		help(target, room, user) {
 			this.parse("/guesswhohelp");
 		},
 	},

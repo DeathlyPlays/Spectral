@@ -33,7 +33,7 @@ function write() {
 exports.commands = {
 	quotes: "quote",
 	quote: {
-		add: function (target) {
+		add(target, room, user) {
 			if (!this.can("quotes")) return false;
 			let [name, ...quote] = target.split(",").map(p => p.trim());
 			if (!quote) return this.parse("/quotehelp");
@@ -48,7 +48,7 @@ exports.commands = {
 			return this.sendReply(`Quote ${name} created!\n${name}: ${quote.join(", ")}.`);
 		},
 
-		delete: function (target) {
+		delete(target, room, user) {
 			if (!this.can("quotes")) return false;
 			if (!target) return this.parse("/quotehelp");
 			let quoteid = toID(target);
@@ -61,7 +61,7 @@ exports.commands = {
 		view: "show",
 		display: "show",
 		search: "show",
-		show: function (target) {
+		show(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (Object.keys(quotes).length < 1) return this.errorReply(`There are no quotes on ${Config.serverName}.`);
 			if (!target) {
@@ -78,7 +78,7 @@ exports.commands = {
 
 		listquotes: "viewquotes",
 		list: "viewquotes",
-		viewquotes: function () {
+		viewquotes(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (Object.keys(quotes).length < 1) return this.errorReply(`There are no quotes on ${Config.serverName}.`);
 			let reply = `<strong><u>Quotes (${Object.keys(quotes).length.toLocaleString()})</u></strong><br />`;
@@ -87,7 +87,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse("/help quote");
 		},
 	},

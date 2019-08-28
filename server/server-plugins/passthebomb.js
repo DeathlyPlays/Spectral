@@ -203,7 +203,7 @@ exports.commands = {
 	passthebomb: {
 		new: "create",
 		make: "create",
-		create: function (target, room) {
+		create(target, room, user) {
 			if (room.passthebomb) return this.errorReply("There is already a game of Pass The Bomb going on in this room.");
 			if (room.passTheBombDisabled) return this.errorReply(`Pass the Bomb is currently disabled in ${room.title}.`);
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
@@ -215,7 +215,7 @@ exports.commands = {
 		},
 
 		j: "join",
-		join: function (target, room, user) {
+		join(target, room, user) {
 			if (!room.passthebomb) return this.errorReply("There is no game of Pass The Bomb going on in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 			room.passthebomb.join(user, this);
@@ -223,14 +223,14 @@ exports.commands = {
 
 		part: "leave",
 		l: "leave",
-		leave: function (target, room, user) {
+		leave(target, room, user) {
 			if (!room.passthebomb) return this.errorReply("There is no game of Pass The Bomb going on in this room.");
 			room.passthebomb.leave(user.userid, this);
 		},
 
 		start: "proceed",
 		begin: "start",
-		proceed: function (target, room, user) {
+		proceed(target, room, user) {
 			if (!room.passthebomb) return this.errorReply("There is no game of Pass The Bomb going on in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 			if (!this.can("minigame", null, room)) return false;
@@ -243,7 +243,7 @@ exports.commands = {
 		eliminate: "dq",
 		elim: "dq",
 		disqualify: "dq",
-		dq: function (target, room, user) {
+		dq(target, room, user) {
 			if (!room.passthebomb) return this.errorReply("There is no game of Pass The Bomb going on in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 			if (!this.can("minigame", null, room)) return false;
@@ -251,21 +251,21 @@ exports.commands = {
 		},
 
 		passbomb: "pass",
-		pass: function (target, room, user) {
+		pass(target, room, user) {
 			if (!room.passthebomb) return this.errorReply("There is no game of Pass The Bomb going on in this room.");
 			if (!this.canTalk()) return this.errorReply("You cannot use this while unable to speak.");
 			room.passthebomb.pass(user, target, this);
 		},
 
 		cancel: "end",
-		end: function (target, room, user) {
+		end(target, room, user) {
 			if (!room.passthebomb) return this.errorReply("There is no game of Pass The Bomb going on in this room.");
 			if (!this.can("minigame", null, room)) return false;
 			room.passthebomb.end(user);
 		},
 
 		off: "disable",
-		disable: function (target, room, user) {
+		disable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (room.passTheBombDisabled) {
 				return this.errorReply("Pass the Bomb is already disabled in this room.");
@@ -279,7 +279,7 @@ exports.commands = {
 		},
 
 		on: "enable",
-		enable: function (target, room, user) {
+		enable(target, room, user) {
 			if (!this.can("gamemanagement", null, room)) return;
 			if (!room.passTheBombDisabled) {
 				return this.errorReply("Pass the Bomb is already enabled in this room.");
@@ -294,13 +294,13 @@ exports.commands = {
 
 		// Short-Cut Commands
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse(`/help passthebomb`);
 		},
 	},
 
 	pb: "passbomb",
-	passbomb: function (target) {
+	passbomb(target, room, user) {
 		if (!target) return this.errorReply(`You must specify a target.`);
 		this.parse(`/passthebomb pass ${target}`);
 	},

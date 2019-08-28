@@ -183,7 +183,7 @@ exports.commands = {
 	"!exp": true,
 	level: "exp",
 	xp: "exp",
-	exp: function (target, room, user) {
+	exp(target, room, user) {
 		if (!this.runBroadcast()) return;
 		let targetId = toID(target);
 		if (target || !target && this.broadcasting) {
@@ -210,7 +210,7 @@ exports.commands = {
 	},
 
 	givexp: "giveexp",
-	giveexp: function (target, room) {
+	giveexp(target, room) {
 		if (!this.can("exp")) return false;
 		let [username, amount] = target.split(",").map(p => { return p.trim(); });
 		if (!amount) return this.parse("/help giveexp");
@@ -229,7 +229,7 @@ exports.commands = {
 
 	resetexp: "resetxp",
 	confirmresetexp: "resetxp",
-	resetxp: function (target, room, user, conection, cmd) {
+	resetxp(target, room, user, conection, cmd) {
 		if (!target) return this.errorReply("USAGE: /resetxp (USER)");
 		let targetUser = toID(target);
 		if (!this.can("exp")) return false;
@@ -243,7 +243,7 @@ exports.commands = {
 	},
 
 	doublexp: "doubleexp",
-	doubleexp: function () {
+	doubleexp(target, room, user) {
 		if (!this.can("exp")) return;
 		DOUBLE_XP = !DOUBLE_XP;
 		Rooms.rooms.forEach((curRoom, id) => {
@@ -252,7 +252,7 @@ exports.commands = {
 		return this.sendReply(`Double XP was turned ${(DOUBLE_XP ? "ON" : "OFF")}.`);
 	},
 
-	expunban: function (target, room, user) {
+	expunban(target, room, user) {
 		if (!this.can("exp")) return false;
 		if (!target) return this.parse("/help expunban");
 		let targetId = toID(target);
@@ -264,7 +264,7 @@ exports.commands = {
 	},
 	expunbanhelp: ["/expunban [user] - allows [user] to gain exp, if they were exp banned."],
 
-	expban: function (target, room, user) {
+	expban(target, room, user) {
 		if (!this.can("exp")) return false;
 		if (!target) return this.parse("/help expban");
 		let targetId = toID(target);
@@ -278,7 +278,7 @@ exports.commands = {
 
 	"!xpladder": true,
 	expladder: "xpladder",
-	xpladder: function (target) {
+	xpladder(target,room, user) {
 		if (!target) target = 100;
 		target = Number(target);
 		if (isNaN(target)) target = 100;

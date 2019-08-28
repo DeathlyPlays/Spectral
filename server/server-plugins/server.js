@@ -160,7 +160,7 @@ let messages = [
 
 exports.commands = {
 	useroftheweek: "uotw",
-	uotw: function (target, room, user) {
+	uotw(target, room, user) {
 		if (toID(target.length) >= 19) return this.errorReply("Usernames have to be 18 characters or less");
 		if (!this.can("mute", null, room)) return false;
 		if (!room.chatRoomData) return;
@@ -188,13 +188,13 @@ exports.commands = {
 		/uotw [user] - Set the User of the Week. Requires: % or higher.`,
 	],
 
-	etour: function (target) {
+	etour(target, room, user) {
 		if (!target) return this.parse("/help etour");
 		this.parse(`/tour create ${target}, elimination`);
 	},
 	etourhelp: ["/etour [format] - Creates an elimination tournament."],
 
-	rtour: function (target) {
+	rtour(target, room, user) {
 		if (!target) return this.parse("/help rtour");
 		this.parse(`/tour create ${target}, roundrobin`);
 	},
@@ -205,7 +205,7 @@ exports.commands = {
 	automod: "autorank",
 	autoowner: "autorank",
 	autopromote: "autorank",
-	autorank: function (target, room, user, connection, cmd) {
+	autorank(target, room, user, connection, cmd) {
 		switch (cmd) {
 		case "autovoice":
 			target = "+";
@@ -252,20 +252,20 @@ exports.commands = {
 
 	bonus: "dailybonus",
 	checkbonus: "dailybonus",
-	dailybonus: function (target, room, user) {
+	dailybonus(target, room, user) {
 		let nextBonus = Date.now() - Db.DailyBonus.get(user.userid, [1, Date.now()])[1];
 		if ((86400000 - nextBonus) <= 0) return Server.giveDailyReward(user.userid, user);
 		return this.errorReply(`Your next bonus is ${(Db.DailyBonus.get(user.userid, [1, Date.now()])[0] === 8 ? 7 : Db.DailyBonus.get(user.userid, [1, Date.now()])[0])} ${(Db.DailyBonus.get(user.userid, [1, Date.now()])[0] === 1 ? moneyName : moneyPlural)} in ${Chat.toDurationString(Math.abs(86400000 - nextBonus))}`);
 	},
 
 	"!sota": true,
-	sota: function () {
+	sota(target, room, user) {
 		this.parse("feelssotafeelstinitinitinisotalove");
 	},
 
 	"!define": true,
 	def: "define",
-	define: function (target, room, user) {
+	define(target, room, user) {
 		if (!target) return this.parse("/help define");
 		target = toID(target);
 		if (target > 50) return this.errorReply("/define <word> - word can not be longer than 50 characters.");
@@ -320,7 +320,7 @@ exports.commands = {
 	"!urbandefine": true,
 	u: "urbandefine",
 	ud: "urbandefine",
-	urbandefine: function (target, room) {
+	urbandefine(target, room) {
 		if (!this.runBroadcast()) return;
 		if (!target) return this.parse("/help urbandefine");
 		if (target.toString() > 50) return this.errorReply("Phrase can not be longer than 50 characters.");
@@ -373,7 +373,7 @@ exports.commands = {
 	urbandefinehelp: ["/u [word] - Gives the Urban Definition for a word."],
 
 	rf: "roomfounder",
-	roomfounder: function (target, room, user) {
+	roomfounder(target, room, user) {
 		if (!room.chatRoomData) {
 			return this.errorReply("/roomfounder - This room isn't designed for per-room moderation to be added");
 		}
@@ -405,7 +405,7 @@ exports.commands = {
 	roomfounderhelp: ["/roomfounder [username] - Appoints [username] as a room founder. Requires: & ~"],
 
 	deroomfounder: "roomdefounder",
-	roomdefounder: function (target, room) {
+	roomdefounder(target, room) {
 		if (!room.chatRoomData) {
 			return this.errorReply("/roomdefounder - This room isn't designed for per-room moderation.");
 		}
@@ -420,7 +420,7 @@ exports.commands = {
 	roomdefounderhelp: ["/roomdefounder [username] - Revoke [username]'s room founder position. Requires: &, ~"],
 
 	roomdeowner: "deroomowner",
-	deroomowner: function (target, room, user) {
+	deroomowner(target, room, user) {
 		if (!room.auth) {
 			return this.errorReply("/roomdeowner - This room isn't designed for per-room moderation");
 		}
@@ -445,7 +445,7 @@ exports.commands = {
 	},
 	roomdeownerhelp: ["/roomdeowner [username] - Demotes [username] from Room Owner. Requires: Room Founder, &, ~"],
 
-	roomleader: function (target, room, user) {
+	roomleader(target, room, user) {
 		if (!room.chatRoomData) {
 			return this.errorReply("/roomleader - This room isn't designed for per-room moderation to be added");
 		}
@@ -473,7 +473,7 @@ exports.commands = {
 	roomleaderhelp: ["/roomleader [username] - Appoints [username] as a Room Leader. Requires: Room Founder, &, ~"],
 
 	roomdeleader: "deroomleader",
-	deroomleader: function (target, room, user) {
+	deroomleader(target, room, user) {
 		if (!room.auth) {
 			return this.errorReply("/roomdeleader - This room isn't designed for per-room moderation");
 		}
@@ -499,7 +499,7 @@ exports.commands = {
 	},
 	roomdeleaderhelp: ["/roomdeleader [username] - Demotes [username] from Room Leader. Requires: Room Founder, &, ~"],
 
-	anime: function (target, room) {
+	anime(target, room, user) {
 		if (!this.runBroadcast()) return;
 		if (!target) return this.errorReply("No target.");
 		let targetAnime = Chat.escapeHTML(target.trim());
@@ -538,7 +538,7 @@ exports.commands = {
 	},
 	animehelp: ["/anime [query] - Searches for an anime series based on the given search query."],
 
-	manga: function (target, room) {
+	manga(target, room, user) {
 		if (!this.runBroadcast()) return;
 		if (!target) return this.errorReply("No target.");
 		let targetAnime = Chat.escapeHTML(target.trim());
@@ -577,19 +577,19 @@ exports.commands = {
 	},
 	mangahelp: ["/manga [query] - Searches for a manga series based on the given search query."],
 
-	hc: function () {
+	hc(target, room, user) {
 		return this.parse("/hotpatch chat");
 	},
 
-	hf: function () {
+	hf(target, room, user) {
 		return this.parse("/hotpatch formats");
 	},
 
-	hb: function () {
+	hb(target, room, user) {
 		return this.parse("/hotpatch battles");
 	},
 
-	hv: function () {
+	hv(target, room, user) {
 		return this.parse("/hotpatch validator");
 	},
 
@@ -604,7 +604,7 @@ exports.commands = {
 	nerd: "away",
 	nerding: "away",
 	mimis: "away",
-	away: function (target, room, user, connection, cmd) {
+	away(target, room, user, connection, cmd) {
 		if (!user.isAway && user.name.length > 19 && !user.can("lock")) return this.errorReply("Your username is too long for any kind of use of this command.");
 		if (!this.canTalk()) return false;
 		target = toID(target);
@@ -639,7 +639,7 @@ exports.commands = {
 	},
 	awayhelp: ["/away [message] - Sets a user's away status."],
 
-	back: function (target, room, user) {
+	back(target, room, user) {
 		if (!user.isAway) return this.errorReply("You are not set as away.");
 		user.isAway = false;
 
@@ -662,7 +662,7 @@ exports.commands = {
 	backhelp: ["/back - Sets a users away status back to normal."],
 
 	"!dssb": true,
-	dssb: function (target) {
+	dssb(target, room, user) {
 		if (!this.runBroadcast()) return false;
 		if (!target || target === "help") return this.parse("/help dssb");
 		if (target === "credits") return this.parse("/dssbcredits");
@@ -684,7 +684,7 @@ exports.commands = {
 
 	"!dssbcredits": true,
 	dssbdevelopers: "dssbcredits",
-	dssbcredits: function () {
+	dssbcredits(target, room, user) {
 		if (!this.runBroadcast()) return;
 		let popup = `<font size=5 color=#000080><u><strong>DSSB Credits</strong></u></font><br />` +
 			`<br />` +
@@ -701,7 +701,7 @@ exports.commands = {
 	dub: "dubtrack",
 	radio: "dubtrack",
 	dubtrackfm: "dubtrack",
-	dubtrack: function (target, room) {
+	dubtrack(target, room, user) {
 		if (!this.runBroadcast()) return;
 		let nowPlaying = "";
 		let options = {
@@ -725,7 +725,7 @@ exports.commands = {
 		});
 	},
 
-	clearall: function (target, room, user) {
+	clearall(target, room, user) {
 		if (!this.can("ban")) return false;
 		if (room.battle) return this.errorReply("You cannot clearall in battle rooms.");
 
@@ -735,16 +735,16 @@ exports.commands = {
 	},
 
 	gclearall: "globalclearall",
-	globalclearall: function (user) {
+	globalclearall(target, room, user) {
 		if (!this.can("hotpatch")) return false;
 
-		Rooms.rooms.forEach(room => clearRoom(room));
-		Users.users.forEach(user => user.popup("All rooms have been cleared."));
+		Rooms.rooms.forEach(r => clearRoom(room));
+		Users.users.forEach(u => user.popup("All rooms have been cleared."));
 		this.privateModAction(`(${user.name} used /globalclearall.)`);
 	},
 
 	"!regdate": true,
-	regdate: function (target, user) {
+	regdate(target, room, user) {
 		if (!target) target = user.name;
 		target = toID(target);
 		if (target.length < 1 || target.length > 19) {
@@ -774,7 +774,7 @@ exports.commands = {
 	regdatehelp: ["/regdate - Gets the regdate (register date) of a username."],
 
 	"!seen": true,
-	seen: function (target) {
+	seen(target, room, user) {
 		if (!this.runBroadcast()) return;
 		if (!target) return this.parse("/help seen");
 		let targetUser = Users.get(target);
@@ -790,7 +790,7 @@ exports.commands = {
 	helixfossil: "m8b",
 	helix: "m8b",
 	magic8ball: "m8b",
-	m8b: function () {
+	m8b(target, room, user) {
 		if (!this.runBroadcast()) return;
 		let results = ["Signs point to yes.", "Yes.", "Reply hazy, try again.", "Without a doubt.", "My sources say no.", "As I see it, yes.", "You may rely on it.", "Concentrate and ask again.", "Outlook not so good.", "It is decidedly so.", "Better not tell you now.", "Very doubtful.", "Yes - definitely.", "It is certain.", "Cannot predict now.", "Most likely.", "Ask again later.", "My reply is no.", "Outlook good.", "Don't count on it."];
 		return this.sendReplyBox(results[Math.floor(Math.random() * results.length)]);
@@ -799,7 +799,7 @@ exports.commands = {
 	"!digidex": true,
 	dd: "digidex",
 	dg: "digidex",
-	digidex: function (target) {
+	digidex(target, room, user) {
 		if (!this.runBroadcast()) return;
 		if (!target) return this.parse("/help digidex");
 		if (this.broadcasting) {
@@ -811,7 +811,7 @@ exports.commands = {
 	digidexhelp: ["/digidex [Digimon] - Checks for a Digimon's data from Digimon Showdown."],
 
 	randomsurvey: "randsurvey",
-	randsurvey: function () {
+	randsurvey(target, room, user) {
 		let results = [
 			`/survey create What do you want to see added or updated in ${Config.serverName}?`,
 			`/survey create What's your most memorable experience on ${Config.serverName}?`,
@@ -832,7 +832,7 @@ exports.commands = {
 		return this.parse(results[Math.floor(Math.random() * results.length)]);
 	},
 
-	clearroomauth: function (target, room, user) {
+	clearroomauth(target, room, user) {
 		if (!this.can("declare") && room.founder !== user.userid) return this.errorReply("/clearroomauth - Access denied.");
 		if (!room.auth) return this.errorReply("Room does not have roomauth.");
 		let count;
@@ -931,7 +931,7 @@ exports.commands = {
 	},
 
 	declaregreen: "declarered",
-	declarered: function (target, room, user, connection, cmd) {
+	declarered(target, room, user, connection, cmd) {
 		if (!target) return this.parse("/help declare");
 		if (!this.can("declare", null, room)) return false;
 		if (!this.canTalk() && !user.can("bypassall")) return this.errorReply("You cannot do this while unable to talk.");
@@ -941,7 +941,7 @@ exports.commands = {
 	},
 
 	fj: "forcejoin",
-	forcejoin: function (target, room, user) {
+	forcejoin(target, room, user) {
 		if (!user.can("lock")) return false;
 		if (!target) return this.parse("/help forcejoin");
 		let parts = target.split(",");
@@ -956,7 +956,7 @@ exports.commands = {
 
 	rk: "kick",
 	roomkick: "kick",
-	kick: function (target, room, user) {
+	kick(target, room, user) {
 		if (!target) return this.parse("/help kick");
 		if (!this.canTalk() && !user.can("bypassall")) {
 			return this.errorReply("You cannot do this while unable to talk.");
@@ -976,7 +976,7 @@ exports.commands = {
 	},
 	kickhelp: ["/kick [user], [reason] - Kick a user out of a room [reasons are optional]. Requires: % @ # & ~"],
 
-	kickall: function (target, room, user) {
+	kickall(target, room, user) {
 		if (!this.can("declare") && user.userid !== "insist") return this.errorReply("/kickall - Access denied.");
 		for (let i in room.users) {
 			if (room.users[i] !== user.userid) {
@@ -990,7 +990,7 @@ exports.commands = {
 	staffdeclare: "declaremod",
 	modmsg: "declaremod",
 	moddeclare: "declaremod",
-	declaremod: function (target, room, user) {
+	declaremod(target, room, user) {
 		if (!target) return this.parse("/help declaremod");
 		if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 		if (!this.can("receiveauthmessages", null, room)) return false;
@@ -999,11 +999,11 @@ exports.commands = {
 	declaremodhelp: ["/declaremod [note] - Adds a staff read-able declare. Requires: % @ # & ~"],
 
 	glogs: "globallogs",
-	globallogs: function (target) {
+	globallogs(target, room, user) {
 		return this.parse(`/modlog all, ${target}`);
 	},
 
-	roomlist: function (target, room, user) {
+	roomlist(target, room, user) {
 		let header = [`<strong><font color="#1aff1a" size="2">Total users connected: ${Rooms.global.userCount}</font></strong><br />`],
 			official = [`<strong><font color="#ff9900" size="2"><u>Official Rooms:</u></font></strong><br />`],
 			nonOfficial = [`<hr><strong><u><font color="#005ce6" size="2">Public Rooms:</font></u></strong><br />`],
@@ -1046,7 +1046,7 @@ exports.commands = {
 	},
 
 	masspm: "pmall",
-	pmall: function (target, room, user) {
+	pmall(target, room, user) {
 		if (!this.can("hotpatch")) return false;
 		if (!target) return this.parse("/help pmall");
 		Server.pmAll(target, pmName, user.name);
@@ -1056,7 +1056,7 @@ exports.commands = {
 
 	staffpm: "pmallstaff",
 	pmstaff: "pmallstaff",
-	pmallstaff: function (target, room, user) {
+	pmallstaff(target, room, user) {
 		if (!this.can("hotpatch")) return false;
 		if (!target) return this.parse("/help pmallstaff");
 		Server.pmStaff(target, pmName, user.name);
@@ -1065,7 +1065,7 @@ exports.commands = {
 	pmallstaffhelp: ["/pmallstaff [message] - Sends a PM to every staff member online."],
 
 	pus: "pmupperstaff",
-	pmupperstaff: function (target, room, user) {
+	pmupperstaff(target, room, user) {
 		if (!target) return this.errorReply("/pmupperstaff [message] - Sends a PM to every upper staff");
 		if (!this.can("hotpatch")) return false;
 		if (!target) return this.parse("/help pmupperstaff");
@@ -1076,7 +1076,7 @@ exports.commands = {
 
 	pmroom: "rmall",
 	roompm: "rmall",
-	rmall: function (target, room, user) {
+	rmall(target, room, user) {
 		if (!this.can("declare", null, room)) return this.errorReply("/rmall - Access denied.");
 		if (!target) return this.errorReply("/rmall [message] - Sends a PM to all users in the room.");
 		target = target.replace(/<(?:.|\n)*?>/gm, "");
@@ -1097,7 +1097,7 @@ exports.commands = {
 	forceofflinepermalock: "permalock",
 	offlinepermalock: "permalock",
 	forcepermalock: "permalock",
-	permalock: function (target, room, user, connection, cmd) {
+	permalock(target, room, user, connection, cmd) {
 		if (!this.can("lockdown")) return;
 		if (!toID(target)) return this.parse("/help permalock");
 		let tarUser = Users.get(target);
@@ -1130,7 +1130,7 @@ exports.commands = {
 	},
 	permalockhelp: ["/permalock user - Permalock a user. Requires: ~"],
 
-	unpermalock: function (target, room, user) {
+	unpermalock(target, room, user) {
 		if (!this.can("lockdown")) return;
 		if (!toID(target)) return this.parse("/help unpermalock");
 		target = toID(target);
@@ -1147,7 +1147,7 @@ exports.commands = {
 	forceofflinepermaban: "permaban",
 	offlinepermaban: "permaban",
 	forcepermaban: "permaban",
-	permaban: function (target, room, user, connection, cmd) {
+	permaban(target, room, user, connection, cmd) {
 		if (!this.can("lockdown")) return;
 		if (!toID(target)) return this.parse("/help permaban");
 		let tarUser = Users.get(target);
@@ -1177,7 +1177,7 @@ exports.commands = {
 	},
 	permabanhelp: ["/permaban user - Permaban a user. Requires: ~"],
 
-	unpermaban: function (target, room, user) {
+	unpermaban(target, room, user) {
 		if (!this.can("lockdown")) return;
 		if (!toID(target)) return this.parse("/help unpermaban");
 		target = toID(target);
@@ -1189,7 +1189,7 @@ exports.commands = {
 	},
 	unpermabanhelp: ["/unpermaban user - Unpermaban a user. Requires: ~"],
 
-	timedgdeclare: function (target, room, user) {
+	timedgdeclare(target, room, user) {
 		if (!target || !this.can("declare")) return this.errorReply("/help timedgdeclare");
 		let parts = target.split(",");
 		if (parts.length !== 2) return this.errorReply("/help timedgdeclare");
@@ -1210,7 +1210,7 @@ exports.commands = {
 
 	ad: "advertise",
 	ads: "advertise",
-	advertise: function (target, room, user) {
+	advertise(target, room, user) {
 		let parts = target.split(",");
 		let cmd = parts[0].trim().toLowerCase();
 		switch (cmd) {
@@ -1310,7 +1310,7 @@ exports.commands = {
 	transferauthorityhelp: ["/transferauthority [old alt], [new alt] - Transfers a user's global/room authority onto their new alt. Requires & ~"],
 
 	errorlogs: "crashlogs",
-	crashlogs: function (target, room, user) {
+	crashlogs(target, room, user) {
 		if (!this.can("hotpatch") && !Server.isDev(user.userid)) return false;
 		let crashes = FS("logs/errors.txt").readIfExistsSync().split("\n").splice(-100).join("\n");
 		user.send(`|popup|${crashes}`);
@@ -1340,7 +1340,7 @@ exports.commands = {
 		};
 	})(),
 
-	protectroom: function (target, room, user) {
+	protectroom(target, room, user) {
 		if (!this.can("hotpatch")) return false;
 		if (room.type !== "chat" || room.isOfficial) return this.errorReply("This room does not need to be protected.");
 		if (this.meansNo(target)) {
@@ -1358,7 +1358,7 @@ exports.commands = {
 		}
 	},
 
-	randp: function (target) {
+	randp(target, room, user) {
 		if (!this.runBroadcast()) return;
 		let shinyPoke = "";
 		let x;
@@ -1413,7 +1413,7 @@ exports.commands = {
 	stafflist: "authority",
 	globalauth: "authority",
 	authlist: "authority",
-	authority: function (target, room, user, connection) {
+	authority(target, room, user, connection) {
 		if (target) {
 			let targetRoom = Rooms.search(target);
 			let unavailableRoom = targetRoom && targetRoom.checkModjoin(user);
@@ -1445,7 +1445,7 @@ exports.commands = {
 
 	d: "poof",
 	cpoof: "poof",
-	poof: function (target, room, user) {
+	poof(target, room, user) {
 		if (Config.poofOff) return this.errorReply("Poof is currently disabled.");
 		if (target && !this.can("broadcast")) return false;
 		if (room.id !== "lobby") return false;
@@ -1464,7 +1464,7 @@ exports.commands = {
 	},
 	poofhelp: ["/poof - Disconnects the user and leaves a message in the room."],
 
-	poofon: function () {
+	poofon(target, room, user) {
 		if (!this.can("hotpatch")) return false;
 		Config.poofOff = false;
 		return this.sendReply("Poof is now enabled.");
@@ -1472,14 +1472,14 @@ exports.commands = {
 	poofonhelp: ["/poofon - Enable the use /poof command."],
 
 	nopoof: "poofoff",
-	poofoff: function () {
+	poofoff(target, room, user) {
 		if (!this.can("hotpatch")) return false;
 		Config.poofOff = true;
 		return this.sendReply("Poof is now disabled.");
 	},
 	poofoffhelp: ["/poofoff - Disable the use of the /poof command."],
 
-	tell: function (target, room, user, connection) {
+	tell(target, room, user, connection) {
 		if (!target) return this.parse("/help tell");
 		target = this.splitTarget(target);
 		let targetUser = this.targetUser;
@@ -1517,7 +1517,7 @@ exports.commands = {
 	tellhelp: ["/tell [username], [message] - Send a message to an offline user that will be received when they log in."],
 
 	flogout: "forcelogout",
-	forcelogout: function (target, room, user) {
+	forcelogout(target, room, user) {
 		if (user.userid !== "insist" && user.userid !== "mewth" && user.userid !== "chandie") return false;
 		if (!this.canTalk()) return false;
 		if (!target) return this.parse("/help forcelogout");
@@ -1533,7 +1533,7 @@ exports.commands = {
 	forcelogouthelp: ["/forcelogout [user] - Forcefully logs out [user]."],
 
 	hide: "hideauth",
-	hideauth: function (target, room, user) {
+	hideauth(target, room, user) {
 		if (!this.can("lock")) return false;
 		let tar = " ";
 		if (target) {
@@ -1556,7 +1556,7 @@ exports.commands = {
 	},
 
 	show: "showauth",
-	showauth: function (target, room, user) {
+	showauth(target, room, user) {
 		if (!this.can("lock")) return false;
 		delete user.getIdentity;
 		user.updateIdentity();
@@ -1564,7 +1564,7 @@ exports.commands = {
 	},
 
 	welcome: "wel",
-	wel: function (target, room, user) {
+	wel(target, room, user) {
 		if (!this.canTalk()) return;
 		if (!target) return this.errorReply(`This command requires a target.`);
 		if (toID(target) === user.userid) this.add(`${user.name} is a narcisstic person, but hey they want to be welcomed [I guess].`);
@@ -1572,7 +1572,7 @@ exports.commands = {
 	},
 
 	"!ship": true,
-	ship: function (target, room, user) {
+	ship(target, room, user) {
 		if (!this.canTalk()) return;
 		if (!this.runBroadcast()) return;
 		let [first, ...second] = target.split(",").map(p => p.trim());
@@ -1583,7 +1583,7 @@ exports.commands = {
 	shiphelp: [`/ship [first target], [second target] - Gives the compatibility of the two targets.`],
 
 	revive: "summon",
-	summon: function () {
+	summon(target, room, user) {
 		if (!this.can("hotpatch")) return false;
 		let names = [`~BloodedKitten`, `@Horrific17`, `%Kevso`, `+Chesnaught90000`, `%Wobbleleez`, `&Back At My Day`, `%HoeenHero`, `+EchoSierra`, `%VXN`, `☥Sota Higurashi`, `☥Jigglykong`, `+LinkCode`, `+Execute`, `&Kraken Mare`, `*Stabby the Krabby`, `*The Exiler`, `*Oblivion Furret`, `~Insist`, `~Mewth`, `~AlfaStorm`, `&flufi`, `&Chandie`, `@Noviex`, `@Perison`, `&Bronze0re`, `~Vivid is a God`, `~Gyaratoast`, `~LassNinetales`];
 		names.forEach(revival => {
@@ -1594,7 +1594,7 @@ exports.commands = {
 
 	devmessage: "devpm",
 	devmsg: "devpm",
-	devpm: function (target, room, user) {
+	devpm(target, room, user) {
 		if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
 		if (!target) return this.errorReply(`You need to specify the message.`);
 		if (target.length > 500) return this.errorReply(`Dev PM messages can be a maximum of 500 characters long.`);

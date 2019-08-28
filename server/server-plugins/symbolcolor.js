@@ -47,7 +47,7 @@ exports.commands = {
 	symbolcolor: "sc",
 	sc: {
 		give: "set",
-		set: function (target, room, user) {
+		set(target, room, user) {
 			if (!this.can("profile")) return false;
 			target = target.split(",");
 			for (let u in target) target[u] = target[u].trim();
@@ -64,7 +64,7 @@ exports.commands = {
 
 		take: "delete",
 		remove: "delete",
-		delete: function (target, room, user) {
+		delete(target, room, user) {
 			if (!this.can("profile")) return false;
 			target = toID(target);
 			if (!sc[target]) return this.errorReply(`/sc - ${target} does not have an symbol color.`);
@@ -77,7 +77,7 @@ exports.commands = {
 		},
 
 		'': 'help',
-		help: function (target, room, user) {
+		help(target, room, user) {
 			this.sendReplyBox(
 				'<div style="padding: 3px 5px;"><center>' +
 				'<code>/sc</code> commands.<br />These commands are nestled under the namespace <code>sc</code>.</center>' +

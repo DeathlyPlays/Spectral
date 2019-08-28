@@ -144,7 +144,7 @@ exports.commands = {
 	cards: "psgo",
 	psgo: {
 		display: "card",
-		card: function (target) {
+		card(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) return this.parse(`/help psgo card`);
 			if (!Server.cards[toID(target)]) return this.errorReply(`That card does not exist.`);
@@ -159,7 +159,7 @@ exports.commands = {
 		},
 		cardhelp: ["/psgo card [card id] - Gives information on the card selected."],
 
-		showcase: function (target, room, user) {
+		showcase(target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = user.userid;
 			const cards = Db.cards.get(toID(target), []);
@@ -184,7 +184,7 @@ exports.commands = {
 
 		confirmtransfercard: "transfercard",
 		transfercards: "transfercard",
-		transfercard: function (target, room, user, connection, cmd) {
+		transfercard(target, room, user, connection, cmd) {
 			if (!target) return this.parse(`/help psgo transfercard`);
 			let targets = target.split(`,`).map(x => { return x.trim(); });
 			if (targets.length < 2) return this.parse(`/help psgo transfercard`);
@@ -221,7 +221,7 @@ exports.commands = {
 		cardsearchdisplay: "search",
 		cardsearch: "search",
 		searchchange: "search",
-		search: function (target, room, user, connection, cmd) {
+		search(target, room, user, connection, cmd) {
 			/*
 			/psgo cardsearch Section:value, Section:value
 			/psgo cardsearchdisplay card
@@ -310,7 +310,7 @@ exports.commands = {
 		},
 		cardsearchhelp: ["/psgo cardsearch - sends a display to search for a list of cards."],
 
-		add: function (target) {
+		add(target, room, user) {
 			if (!this.can("psgo")) return false;
 			let [pack, rarity, species, type, image, cardType] = target.split(`,`).map(x => { return x.trim(); });
 
@@ -334,7 +334,7 @@ exports.commands = {
 		addhelp: ["/psgo add [pack], [rarity], [species], [type], [image], [card type] - adds a new card to the PSGO database."],
 
 		remove: "delete",
-		delete: function (target) {
+		delete(target, room, user) {
 			if (!this.can("psgo")) return false;
 			if (!target) return this.parse(`/help psgo delete`);
 			if (!newCards[toID(target)]) return this.errorReply(`The card "${toID(target)}" is not in PSGO database or cannot be deleted.`);
@@ -345,7 +345,7 @@ exports.commands = {
 		},
 		deletehelp: ["/psgo delete [card id] - removes a card from the PSGO database."],
 
-		give: function (target) {
+		give(target, room, user) {
 			if (!this.can("psgo")) return false;
 			if (!target) return this.parse(`/help psgo give`);
 			let targets = target.split(`,`).map(x => {
@@ -365,7 +365,7 @@ exports.commands = {
 
 		confirmtakeall: "take",
 		takeall: "take",
-		take: function (target, room, user, connection, cmd) {
+		take(target, room, user, connection, cmd) {
 			if (!this.can("psgo")) return false;
 			if (!target) return this.parse(`/help psgo take`);
 			let targets = target.split(`,`);
@@ -395,7 +395,7 @@ exports.commands = {
 		],
 
 		shop: {
-			buy: function (target, room, user) {
+			buy(target, room, user) {
 				if (!toID(target)) return this.parse(`/help psgo shop buy`);
 				target = toPackName(target);
 				if (packs.indexOf(target) === -1) return this.parse(`/psgo shop`);
@@ -413,7 +413,7 @@ exports.commands = {
 
 			// All packs are added by default.
 			"": "display",
-			display: function () {
+			display(target, room, user) {
 				if (!this.runBroadcast()) return;
 				let output = `<div style="max-height:200px; width:100%; overflow: scroll;">`;
 				output += `<table><tr><center>Pack Shop</center></tr>`;
@@ -428,7 +428,7 @@ exports.commands = {
 
 		pack: "packs",
 		packs: {
-			give: function (target) {
+			give(target, room, user) {
 				if (!this.can("psgo")) return false;
 				if (!target) return this.parse(`/help psgo packs give`);
 				let targets = target.split(",").map(x => {
@@ -447,7 +447,7 @@ exports.commands = {
 
 			confirmtakeall: "take",
 			takeall: "take",
-			take: function (target, room, user, connection, cmd) {
+			take(target, room, user, connection, cmd) {
 				if (!this.can("psgo")) return false;
 				if (!target) return this.parse(`/help psgo packs take`);
 				let targets = target.split(",").map(x => {
@@ -486,7 +486,7 @@ exports.commands = {
 				/psgo packs takeall [user], (pack) - Takes all packs from a user. If the type of pack is not specified, all packs will be removed. Requires: &, ~.`,
 			],
 
-			open: function (target, room, user) {
+			open(target, room, user) {
 				if (!this.runBroadcast()) return;
 				if (!target) return this.parse(`/help psgo packs open`);
 				target = toPackName(target);
@@ -509,7 +509,7 @@ exports.commands = {
 			unopened: "holding",
 			pending: "holding",
 			stored: "holding",
-			holding: function (target, room, user) {
+			holding(target, room, user) {
 				if (!Db.userpacks.get(user.userid, []).length) return this.errorReply(`You do not have any packs!`);
 				let usedPacks = {};
 				let userPacks = Db.userpacks.get(user.userid, []);
@@ -525,14 +525,14 @@ exports.commands = {
 				}).join("<br />"));
 			},
 
-			list: function (target, room, user) {
+			list(target, room, user) {
 				if (!this.runBroadcast()) return;
 				this.sendReplyBox(`<div style="max-height: 300px; overflow-y: scroll;"><strong>PSGO Packs</strong><br /><br />${packs.join(`<br />`)}</div>`);
 			},
 			listhelp: ["/psgo packs list - displays all PSGO packs."],
 		},
 
-		ladder: function () {
+		ladder(target, room, user) {
 			if (!this.runBroadcast()) return;
 			let values = {Common: 1, Uncommon: 3, Rare: 6, "Ultra Rare": 10, Legendary: 15, Mythic: 20};
 			let keys = Db.cards.keys().map(name => {
@@ -552,7 +552,7 @@ exports.commands = {
 		ladderhelp: ["/psgo ladder - shows the PSGO card point ladder."],
 
 		nuke: "reset",
-		reset: function (target, room, user) {
+		reset(target, room, user) {
 			if (!this.can("psgo")) return;
 			if (!toID(target) || !user.psgoResetCode) {
 				let chars = `abcdefghijklmnopqurstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*`.split(``);
@@ -580,7 +580,7 @@ exports.commands = {
 		resethelp: [`/psgo reset - Wipes the PSGO database (Takes ALL user's cards AND packs). Requires: ~.`],
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			if (!this.runBroadcast()) return;
 			return this.parse("/help psgo");
 		},
@@ -608,29 +608,29 @@ exports.commands = {
 	],
 
 	// Shortcut commands
-	showcase: function (target, room, user) {
+	showcase(target, room, user) {
 		if (!this.runBroadcast()) return;
 		Chat.commands.psgo.showcase.call(this, ...[target, room, user]);
 	},
 
 	showcasehelp: ["/psgo showcase (user) - Show all of the selected user's cards."],
-	cardsearch: function (target, room, user) {
+	cardsearch(target, room, user) {
 		this.parse(`/psgo cardsearch`);
 	},
 
 	cardsearchhelp: ["/psgo cardsearch - sends a display to search for a list of cards."],
-	cardladder: function (target, room, user) {
+	cardladder(target, room, user) {
 		if (!this.runBroadcast()) return;
 		Chat.commands.psgo.ladder.call(this, ...[target, room, user]);
 	},
 
 	cardladderhelp: ["/psgo ladder - show the PSGO card point ladder."],
-	checkpacks: function (target, room, user) {
+	checkpacks(target, room, user) {
 		this.parse(`/psgo packs holding`);
 	},
 
 	checkpackshelp: ["/psgo packs holding - displays PSGO packs you currently hold."],
-	openpack: function (target, room, user) {
+	openpack(target, room, user) {
 		if (!this.runBroadcast()) return;
 		Chat.commands.psgo.packs.open.call(this, ...[target, room, user]);
 	},

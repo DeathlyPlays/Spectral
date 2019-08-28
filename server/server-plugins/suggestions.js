@@ -35,7 +35,7 @@ exports.commands = {
 	suggestion: {
 		suggest: "submit",
 		request: "submit",
-		submit: function (target, room, user) {
+		submit(target, room, user) {
 			let [suggestion, title] = target.split(",").map(p => p.trim());
 			if (!suggestion[1]) return this.errorReply("/suggestion submit [title], [suggestion]");
 			if (title.length > 30) return this.errorReply("Please make sure your suggestion title is 30 characters or less.");
@@ -52,7 +52,7 @@ exports.commands = {
 		},
 
 		remove: "delete",
-		delete: function (target) {
+		delete(target, room, user) {
 			if (!this.can("ban")) return false;
 			if (!target) return this.errorReply("Please enter a valid suggestion ID.");
 			let suggestionid = toID(target);
@@ -65,7 +65,7 @@ exports.commands = {
 		viewindex: "list",
 		index: "list",
 		suggestions: "list",
-		list: function (target, room) {
+		list(target, room, user) {
 			if (!this.can("ban")) return false;
 			if (!this.runBroadcast()) return;
 			if (this.broadcasting && room.id !== "staff") return this.errorReply(`You cannot broadcast the suggestions index outside of the Staff room.`);
@@ -76,7 +76,7 @@ exports.commands = {
 		},
 
 		display: "view",
-		view: function (target, room) {
+		view(target, room, user) {
 			if (!this.can("ban")) return false;
 			if (room && room.id === "staff" && !this.runBroadcast()) return;
 			let suggestion = toID(target);
@@ -85,7 +85,7 @@ exports.commands = {
 		},
 
 		"": "help",
-		help: function () {
+		help(target, room, user) {
 			this.parse("/help suggestion");
 		},
 	},
