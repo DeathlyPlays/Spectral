@@ -634,10 +634,10 @@ exports.BattleMovedex = {
 		flags: {
 			protect: 1,
 		},
-		onHit: function (target, source, move) {
+		onHit(target, source, move) {
 			this.add('c|@Insist|Exiled from all others, we shall become greater than ever before.');
 		},
-		onPrepareHit: function (target, source) {
+		onPrepareHit(target, source) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Hydro Pump", target);
 		},
