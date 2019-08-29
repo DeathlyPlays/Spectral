@@ -378,7 +378,7 @@ export class CommandContext extends MessageContext {
 						}
 						curUser.sendTo(this.room, `${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|/html ${emoticons}`);
 					}
-					//this.room.add(`${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
+					this.room.add(`${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
 				} else {
 					// @ts-ignore
 					if (Users.ShadowBan.checkBanned(this.user)) {
@@ -389,7 +389,7 @@ export class CommandContext extends MessageContext {
 						this.room.add(`${(this.room.type === 'chat' ? (this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`) : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
 					}
 				}
-				this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
+				//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 				if (this.room && this.room.game && this.room.game.onLogMessage) {
 					this.room.game.onLogMessage(message, this.user);
 				}
