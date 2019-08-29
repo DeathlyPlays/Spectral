@@ -558,7 +558,7 @@ exports.commands = {
 		profileData += `<div style="display: inline-block; width: 6.5em; height: 100%; vertical-align: top"><img src="${avatar}" height="80" width="80" align="left"></div>`;
 		profileData += `<div style="display: inline-block">&nbsp;${pColor(userid)}<strong>Name:</strong></font> ${Server.nameColor(username, true)}&nbsp;`;
 		if (Users.get(userid) && ip && ip !== null) {
-			profileData += ` <img src="http://flags.fmcdn.net/data/flags/normal/${ip.country.toLowerCase()}.png" alt="${ip.country}" title="${ip.country}" width="20" height="10">`;
+			profileData += ` <img src="http://flags.fmcdn.net/data/flags/normal/${ip.toLowerCase()}.png" alt="${ip}" title="${ip}" width="20" height="10">`;
 		}
 		if (profile.data.title.title) profileData += ` <font color="${profile.data.title.color}">(<strong>${profile.data.title.title}</strong>)</font>`;
 		profileData += `<br />`;
