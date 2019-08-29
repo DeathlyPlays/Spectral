@@ -1436,8 +1436,6 @@ export const Chat = new class {
 		if (Config.statusfilter) Chat.statusfilters.push(Config.statusfilter);
 
 		// Install plug-in commands and chat filters
-		Object.assign(commands, require('../server/console').commands);
-		Object.assign(pages, require('../server/console').pages);
 
 		// info always goes first so other plugins can shadow it
 		let files = FS('server/chat-plugins/').readdirSync();
@@ -1475,6 +1473,9 @@ export const Chat = new class {
 		}
 
 		// Load games for Console
+		Object.assign(commands, require('../server/console.js').commands);
+		Object.assign(pages, require('../server/console.js').pages);
+		
 		Server.gameList = {};
 		for (let file of FS('game-cards').readdirSync()) {
 			if (file.substr(-3) !== '.js') continue;
