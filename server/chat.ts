@@ -1473,6 +1473,8 @@ export const Chat = new class {
 		}
 
 		// Load games for Console
+		let commands = Chat.commands = Object.assign({}, Chat.baseCommands);
+		let pages = Chat.pages = Object.assign({}, Chat.basePages);
 		Server.gameList = {};
 		for (let file of FS('game-cards').readdirSync()) {
 			if (file.substr(-3) !== '.js') continue;
