@@ -125,21 +125,7 @@ function newTeamTour(room, type, format, size, teamA, teamB, authA, authB) {
 function joinable(room, user) {
 	let roomId = toID(room);
 	let userId = toID(user);
-	let playersA = teamTours[roomId].teamAMembers;
-	let playersB = teamTours[roomId].teamBMembers;
 	if (teamTours[roomId].teamAMembers[userId] || teamTours[roomId].teamBMembers[userId]) return false;
-	if (!Config.tourAllowAlts){
-		for (let i in playersA) {
-			for (let j in Users.get(userId).prevNames) {
-				if (toID(i) == toID(j)) return false;
-			}
-		}
-		for (let i in playersB) {
-			for (let j in Users.get(userId).prevNames) {
-				if (toID(i) == toID(j)) return false;
-			}
-		}
-	}
 	return true;
 }
 
@@ -233,8 +219,8 @@ function leaveTeamTour(room, user) {
 
 function startTeamTour(room) {
 	let roomId = toID(room);
-  let teamAMembers;
-  let teamBMembers;
+	let teamAMembers;
+	let teamBMembers;
 	if (!teamTours[roomId]) return false;
 	if (teamTours[roomId].type === 'lineups') {
 		teamAMembers = getAvailableMembers(teamTours[roomId].teamAMembers);
@@ -348,7 +334,7 @@ function autoEnd(room) {
 	} else if (scoreA === scoreB) {
 		htmlEndTour = '<br><hr /><h2><font color="green"><center>The Team Tournament in format ' + teamTours[roomId].format + ' between <font color="black">' + teamTours[roomId].teamA + '</font> and <font color="black">' + teamTours[roomId].teamB + '</font> has ended in a Draw!</center></font></h2><hr />';
 	}
-	Rooms.get(roomId).addRaw(viewTourStatus(roomId)+ htmlEndTour);
+	Rooms.get(roomId).addRaw(viewTourStatus(roomId) + htmlEndTour);
 	endTeamTour(roomId);
 }
 
@@ -432,14 +418,14 @@ function viewTourStatus(room) {
 	let rawStatus = '';
 	if (teamTours[roomId].tourRound === 0) {
 		switch (teamTours[roomId].type) {
-			case 'standard':
-				rawStatus = '<hr /><h2><font color="green"> Join the Standard Team Tournament of format ' + teamTours[roomId].format + ' between ' + teamTours[roomId].teamA + " and " + teamTours[roomId].teamB +  '.</font></h2> <button name="send" value="/tt join, ' + teamTours[roomId].teamA + '">Join ' + teamTours[roomId].teamA + '</button>&nbsp;<button name="send" value="/tt join, ' + teamTours[roomId].teamB + '">Join ' + teamTours[roomId].teamB + '</button><br /><b><font color="blueviolet">Members per team:</font></b> ' + teamTours[roomId].size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + teamTours[roomId].format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament.</b></font>';
-				break;
-			case 'total':
-				rawStatus = '<hr /><h2><font color="green"> Join the Total Team Tournament of format ' + teamTours[roomId].format + ' between ' + teamTours[roomId].teamA + " and " + teamTours[roomId].teamB +  '.</font></h2> <button name="send" value="/tt join, ' + teamTours[roomId].teamA + '">Join ' + teamTours[roomId].teamA + '</button>&nbsp;<button name="send" value="/tt join, ' + teamTours[roomId].teamB + '">Join ' + teamTours[roomId].teamB + '</button><br /><b><font color="blueviolet">Members per team:</font></b> ' + teamTours[roomId].size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + teamTours[roomId].format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament.</b></font>';
-				break;
-			case 'lineups':
-				rawStatus = '<hr /><h2><font color="green">Team Tournament with Lineups of format ' + teamTours[roomId].format + ' between ' + teamTours[roomId].teamA + " and " + teamTours[roomId].teamB +  '.</font></h2><b><font color="orange">Team Captains: </font>' + teamTours[roomId].authA + ' and ' + teamTours[roomId].authB + '</font></b> <br /><b><font color="blueviolet">Members per team:</font></b> ' + teamTours[roomId].size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + teamTours[roomId].format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament. <br />The captains must use /tt reg, [miembro1], [miembro2]... to register the lineups.</b></font>';
+		case 'standard':
+			rawStatus = '<hr /><h2><font color="green"> Join the Standard Team Tournament of format ' + teamTours[roomId].format + ' between ' + teamTours[roomId].teamA + " and " + teamTours[roomId].teamB + '.</font></h2> <button name="send" value="/tt join, ' + teamTours[roomId].teamA + '">Join ' + teamTours[roomId].teamA + '</button>&nbsp;<button name="send" value="/tt join, ' + teamTours[roomId].teamB + '">Join ' + teamTours[roomId].teamB + '</button><br /><b><font color="blueviolet">Members per team:</font></b> ' + teamTours[roomId].size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + teamTours[roomId].format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament.</b></font>';
+			break;
+		case 'total':
+			rawStatus = '<hr /><h2><font color="green"> Join the Total Team Tournament of format ' + teamTours[roomId].format + ' between ' + teamTours[roomId].teamA + " and " + teamTours[roomId].teamB + '.</font></h2> <button name="send" value="/tt join, ' + teamTours[roomId].teamA + '">Join ' + teamTours[roomId].teamA + '</button>&nbsp;<button name="send" value="/tt join, ' + teamTours[roomId].teamB + '">Join ' + teamTours[roomId].teamB + '</button><br /><b><font color="blueviolet">Members per team:</font></b> ' + teamTours[roomId].size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + teamTours[roomId].format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament.</b></font>';
+			break;
+		case 'lineups':
+			rawStatus = '<hr /><h2><font color="green">Team Tournament with Lineups of format ' + teamTours[roomId].format + ' between ' + teamTours[roomId].teamA + " and " + teamTours[roomId].teamB + '.</font></h2><b><font color="orange">Team Captains: </font>' + teamTours[roomId].authA + ' and ' + teamTours[roomId].authB + '</font></b> <br /><b><font color="blueviolet">Members per team:</font></b> ' + teamTours[roomId].size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + teamTours[roomId].format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament. <br />The captains must use /tt reg, [miembro1], [miembro2]... to register the lineups.</b></font>';
 		}
 		return rawStatus;
 	} else {
@@ -448,28 +434,28 @@ function viewTourStatus(room) {
 		if (teamTours[roomId].type === 'total') htmlSource = '<hr /><h3><center><font color=green><big>Tournament between ' + teamTours[roomId].teamA + " and " + teamTours[roomId].teamB + ' (Total)</big></font></center></h3><center><b>FORMAT:</b> ' + teamTours[roomId].format + "</center><hr /><center><small><font color=red>Red</font> = disqualified or lost battle, <font color=green>Green</font> = won their battle, <a class='ilink'><b>URL</b></a> = battling</small></center><br />";
 		for (let t in teamTours[roomId].byes) {
 			let userFreeBye = Users.getExact(t);
-			if (!userFreeBye) {userFreeBye = t;} else {userFreeBye = userFreeBye.name;}
+			if (!userFreeBye) { userFreeBye = t; } else { userFreeBye = userFreeBye.name; }
 			htmlSource += '<center><small><font color=green>' + userFreeBye + ' has moved on to the next round.</font></small></center><br />';
 		}
 		let matchupsTable = '<table  align="center" border="0" cellpadding="0" cellspacing="0">';
 		for (let i in teamTours[roomId].matchups) {
 			let userk = Users.getExact(teamTours[roomId].matchups[i].from);
-			if (!userk) {userk = teamTours[roomId].matchups[i].from;} else {userk = userk.name;}
+			if (!userk) { userk = teamTours[roomId].matchups[i].from; } else { userk = userk.name; }
 			let userf = Users.getExact(teamTours[roomId].matchups[i].to);
-			if (!userf) {userf = teamTours[roomId].matchups[i].to;} else {userf = userf.name;}
+			if (!userf) { userf = teamTours[roomId].matchups[i].to; } else { userf = userf.name; }
 			switch (teamTours[roomId].matchups[i].result) {
-				case 0:
-					matchupsTable += '<tr><td  align="right"><big>' + userk + '</big></td><td>&nbsp;vs&nbsp;</td><td><big align="left">' + userf + "</big></td></tr>";
-					break;
-				case 1:
-					matchupsTable += '<tr><td  align="right"><a href="/' + teamTours[roomId].matchups[i].battleLink +'" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink"><b><big>' + userk + '</big></b></a></td><td>&nbsp;<a href="/' +  teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink">vs</a>&nbsp;</td><td><a href="/' + teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink"><b><big align="left">' + userf + "</big></b></a></td></tr>";
-					break;
-				case 2:
-					matchupsTable += '<tr><td  align="right"><font color="green"><b><big>' + userk + '</big></b></font></td><td>&nbsp;vs&nbsp;</td><td><font color="red"><b><big align="left">' + userf + "</big></b></font></td></tr>";
-					break;
-				case 3:
-					matchupsTable += '<tr><td  align="right"><font color="red"><b><big>' + userk + '</big></b></font></td><td>&nbsp;vs&nbsp;</td><td><font color="green"><b><big align="left">' + userf + "</big></b></font></td></tr>";
-					break;
+			case 0:
+				matchupsTable += '<tr><td  align="right"><big>' + userk + '</big></td><td>&nbsp;vs&nbsp;</td><td><big align="left">' + userf + "</big></td></tr>";
+				break;
+			case 1:
+				matchupsTable += '<tr><td  align="right"><a href="/' + teamTours[roomId].matchups[i].battleLink +'" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink"><b><big>' + userk + '</big></b></a></td><td>&nbsp;<a href="/' + teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink">vs</a>&nbsp;</td><td><a href="/' + teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink"><b><big align="left">' + userf + "</big></b></a></td></tr>";
+				break;
+			case 2:
+				matchupsTable += '<tr><td  align="right"><font color="green"><b><big>' + userk + '</big></b></font></td><td>&nbsp;vs&nbsp;</td><td><font color="red"><b><big align="left">' + userf + "</big></b></font></td></tr>";
+				break;
+			case 3:
+				matchupsTable += '<tr><td  align="right"><font color="red"><b><big>' + userk + '</big></b></font></td><td>&nbsp;vs&nbsp;</td><td><font color="green"><b><big align="left">' + userf + "</big></b></font></td></tr>";
+				break;
 			}
 		}
 		matchupsTable += '</table><hr />';
@@ -485,7 +471,7 @@ function viewTourStatus(room) {
 let cmds = {
 	teamtournament: 'teamtour',
 	tt: 'teamtour',
-	teamtour: function(target, room, user, connection) {
+	teamtour(target, room, user, connection) {
 		let roomId = room.id;
 		let params;
 		if (!target) {
@@ -494,189 +480,189 @@ let cmds = {
 			params = target.split(',');
 		}
 		switch (toID(params[0])) {
-			case 'search':
-				if (!this.runBroadcast()) return false;
-				this.sendReplyBox(getTours());
+		case 'search':
+			if (!this.runBroadcast()) return false;
+			this.sendReplyBox(getTours());
+			break;
+		case 'help':
+			if (!this.runBroadcast()) return false;
+			this.sendReplyBox(
+				'<font size = 2>Team Tournaments</font><br />' +
+				'This is a tournament system in which one team faces another. This system is available for all rooms and is can be managed by these ranks @, #, & and ~.<br />' +
+				'The commands are found in / teamtour or / tt and are the following:<br />' +
+				'<ul><li>/teamtour new, [standard/total/lineups], [tier/multitier], [size], [teamA], [teamB] - Create a team tournament.</li>' +
+				'<li>/teamtour end - Ends a team tournament.</li>' +
+				'<li>/teamtour join, [team] - Command to join the team tournament.</li>' +
+				'<li>/teamtour leave - Command to leave the tournament.</li>' +
+				'<li>/teamtour o /tt - Shows the status of the team tournament.</li>' +
+				'<li>/teamtour dq, [user] - Command to disqualify.</li>' +
+				'<li>/teamtour replace, [user1], [user2] - Command to replace.</li>' +
+				'<li>/teamtour invalidate, [participant] - Command to invalidate a battle or a result.</li>' +
+				'<li>/teamtour size, [Players per team] - Changes the team tournament size.</li>' +
+				'<li>/teamtour auth, [Captain1], [Captain2] - Set the team captains in a tournament by lineups.</li>' +
+				'<li>/teamtour reg, [P1], [P2]... - Command to register lineups, only usable by the captains.</li>' +
+				'<li>/teamtour start - Starts a tournament once the lineups are registered.</li>' +
+				'<li>/teamtour search - Shows all Team tournaments on the server.</li>' +
+				'</ul>');
+			break;
+		case 'new':
+		case 'create':
+			if (params.length < 6) return this.sendReply("Usage: /teamtour new, [standard/total/lineups], [tier/multitier], [size], [teamA], [teamB]");
+			if (!this.can('ban', room)) return false;
+			if (getTourData(roomId)) return this.sendReply("There was already a team tournament in this room.");
+			let size = parseInt(params[3]);
+			if (size < 1) return this.sendReply("Minimum must be 1 player per team.");
+			let format = tourTiers[toID(params[2])];
+			if (!format) return this.sendReply("Format is not valid.");
+			switch (toID(params[1])) {
+			case 'standard':
+				newTeamTour(room.id, 'standard', format, size, Chat.escapeHTML(params[4]), Chat.escapeHTML(params[5]));
+				this.privateModAction(user.name + " has started a standard tournament between teams " + toID(params[4]) + " and " + toID(params[5]) + " of format " + format + ".");
+				Rooms.get(room.id).addRaw('<hr /><h2><font color="green">' + user.name + ' has started a Standard Team Tournament of format ' + format + ' between ' + Chat.escapeHTML(params[4]) + " and " + Chat.escapeHTML(params[5]) + '.</font></h2> <button name="send" value="/tt join, ' + Chat.escapeHTML(params[4]) + '">Join ' + Chat.escapeHTML(params[4]) + '</button>&nbsp;<button name="send" value="/tt join, ' + Chat.escapeHTML(params[5]) + '">Join ' + Chat.escapeHTML(params[5]) + '</button><br /><b><font color="blueviolet">Members per team:</font></b> ' + size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament.</b></font>');
 				break;
-			case 'help':
-				if (!this.runBroadcast()) return false;
-				this.sendReplyBox(
-					'<font size = 2>Team Tournaments</font><br />' +
-					'This is a tournament system in which one team faces another. This system is available for all rooms and is can be managed by these ranks @, #, & and ~.<br />' +
-					'The commands are found in / teamtour or / tt and are the following:<br />' +
-					'<ul><li>/teamtour new, [standard/total/lineups], [tier/multitier], [size], [teamA], [teamB] - Create a team tournament.</li>' +
-					'<li>/teamtour end - Ends a team tournament.</li>' +
-					'<li>/teamtour join, [team] - Command to join the team tournament.</li>' +
-					'<li>/teamtour leave - Command to leave the tournament.</li>' +
-					'<li>/teamtour o /tt - Shows the status of the team tournament.</li>' +
-					'<li>/teamtour dq, [user] - Command to disqualify.</li>' +
-					'<li>/teamtour replace, [user1], [user2] - Command to replace.</li>' +
-					'<li>/teamtour invalidate, [participant] - Command to invalidate a battle or a result.</li>' +
-					'<li>/teamtour size, [Players per team] - Changes the team tournament size.</li>' +
-					'<li>/teamtour auth, [Captain1], [Captain2] - Set the team captains in a tournament by lineups.</li>' +
-					'<li>/teamtour reg, [P1], [P2]... - Command to register lineups, only usable by the captains.</li>' +
-					'<li>/teamtour start - Starts a tournament once the lineups are registered.</li>' +
-					'<li>/teamtour search - Shows all Team tournaments on the server.</li>' +
-					'</ul>');
+			case 'total':
+				newTeamTour(room.id, 'total', format, size, Chat.escapeHTML(params[4]), Chat.escapeHTML(params[5]));
+				this.privateModAction(user.name + " has started a total tournament between teams " + toID(params[4]) + " and " + toID(params[5]) + " of format " + format + ".");
+				Rooms.get(room.id).addRaw('<hr /><h2><font color="green">' + user.name + ' has started a Total Team Tournament of format ' + format + ' between ' + Chat.escapeHTML(params[4]) + " and " + Chat.escapeHTML(params[5]) + '.</font></h2> <button name="send" value="/tt join, ' + Chat.escapeHTML(params[4]) + '">Join ' + Chat.escapeHTML(params[4]) + '</button>&nbsp;<button name="send" value="/tt join, ' + Chat.escapeHTML(params[5]) + '">Join ' + Chat.escapeHTML(params[5]) + '</button><br /><b><font color="blueviolet">Members per team:</font></b> ' + size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament.</b></font>');
 				break;
-			case 'new':
-			case 'create':
-				if (params.length < 6) return this.sendReply("Usage: /teamtour new, [standard/total/lineups], [tier/multitier], [size], [teamA], [teamB]");
-				if (!this.can('ban', room)) return false;
-				if (getTourData(roomId)) return this.sendReply("There was already a team tournament in this room.");
-				let size = parseInt(params[3]);
-				if (size < 1) return this.sendReply("Minimum must be 1 player per team.");
-				let format = tourTiers[toID(params[2])];
-				if (!format) return this.sendReply("Format is not valid.");
-				switch (toID(params[1])) {
-					case 'standard':
-						newTeamTour(room.id, 'standard', format, size, Chat.escapeHTML(params[4]), Chat.escapeHTML(params[5]));
-						this.privateModAction(user.name + " has started a standard tournament between teams " + toID(params[4]) + " and " + toID(params[5]) + " of format " + format + ".");
-						Rooms.get(room.id).addRaw('<hr /><h2><font color="green">' + user.name + ' has started a Standard Team Tournament of format ' + format + ' between ' + Chat.escapeHTML(params[4]) + " and " + Chat.escapeHTML(params[5]) +  '.</font></h2> <button name="send" value="/tt join, ' + Chat.escapeHTML(params[4]) + '">Join ' + Chat.escapeHTML(params[4]) + '</button>&nbsp;<button name="send" value="/tt join, ' + Chat.escapeHTML(params[5]) + '">Join ' + Chat.escapeHTML(params[5]) + '</button><br /><b><font color="blueviolet">Members per team:</font></b> ' + size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament.</b></font>');
-						break;
-					case 'total':
-						newTeamTour(room.id, 'total', format, size, Chat.escapeHTML(params[4]), Chat.escapeHTML(params[5]));
-						this.privateModAction(user.name + " has started a total tournament between teams " + toID(params[4]) + " and " + toID(params[5]) + " of format " + format + ".");
-						Rooms.get(room.id).addRaw('<hr /><h2><font color="green">' + user.name + ' has started a Total Team Tournament of format ' + format + ' between ' + Chat.escapeHTML(params[4]) + " and " + Chat.escapeHTML(params[5]) +  '.</font></h2> <button name="send" value="/tt join, ' + Chat.escapeHTML(params[4]) + '">Join ' + Chat.escapeHTML(params[4]) + '</button>&nbsp;<button name="send" value="/tt join, ' + Chat.escapeHTML(params[5]) + '">Join ' + Chat.escapeHTML(params[5]) + '</button><br /><b><font color="blueviolet">Members per team:</font></b> ' + size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament.</b></font>');
-						break;
-					case 'lineups':
-						if (params.length < 8) return this.sendReply("Usage: /teamtour new, lineups, [tier/multitier], [size], [teamA], [teamB], [captain1], [captain2]");
-						let userCapA = Users.getExact(params[6]);
-						if (!userCapA) return this.sendReply("The user " + Chat.escapeHTML(params[6]) + " is not available.");
-						let userCapB = Users.getExact(params[7]);
-						if (!userCapB) return this.sendReply("The user " + Chat.escapeHTML(params[7]) + " is not available.");
-						newTeamTour(room.id, 'lineups', format, size, Chat.escapeHTML(params[4]), Chat.escapeHTML(params[5]), userCapA.name, userCapB.name);
-						this.privateModAction(user.name + " has started a tournament with lineups between the teams " + toID(params[4]) + " and " + toID(params[5]) + " of format " + format + ".");
-						Rooms.get(room.id).addRaw('<hr /><h2><font color="green">' + user.name + ' has started a Team Tournament with Lineups of format ' + format + ' between ' + Chat.escapeHTML(params[4]) + " and " + Chat.escapeHTML(params[5]) +  '.</font></h2><b><font color="orange">Team Captains: </font>' + userCapA.name + ' and ' + userCapB.name + '</font></b> <br /><b><font color="blueviolet">Members per team:</font></b> ' + size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament. <br />The captains must use /tt reg, [miembro1], [miembro2]... to register the lineups.</b></font>');
-						break;
-					default:
-						return this.sendReply("The type of tournament should be one of these: [standard/total/lineups]");
-				}
-				break;
-			case 'end':
-			case 'finish':
-			case 'delete':
-				if (!this.can('ban', room)) return false;
-				let tourData = getTourData(roomId);
-				if (!tourData) return this.sendReply("There was no team tournament in this room");
-				this.privateModAction(user.name + " has cancelled the team tournament between " + toID(tourData.teamA) + " and " + toID(tourData.teamB) + ".");
-				Rooms.get(room.id).addRaw('<hr /><center><h2><font color="green">' + user.name + ' has cancelled the tournament between ' + tourData.teamA + " and " + tourData.teamB + '.</h2></font></center><hr />');
-				endTeamTour(roomId);
-				break;
-			case 'j':
-			case 'join':
-				if (params.length < 2) return this.sendReply("Usage: /teamtour join, [team]");
-				let err = joinTeamTour(roomId, user.name, params[1]);
-				if (err) return this.sendReply(err);
-				let tourData2 = getTourData(roomId);
-				let teamJoining = tourData2.teamA.trim();
-				if (toID(params[1]) === toID(tourData2.teamB)) teamJoining = tourData2.teamB.trim();
-				let freePlaces =  getFreePlaces(roomId);
-				if (freePlaces > 0) {
-					Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has joined the team tournament (' + teamJoining + '). There are ' + freePlaces + ' spots left.');
-				} else {
-					Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has joined the team tournament (' + teamJoining + '). Tournament will now begin!');
-					startTeamTour(roomId);
-					Rooms.get(room.id).addRaw(viewTourStatus(roomId));
-				}
-				break;
-			case 'l':
-			case 'leave':
-				let err2 = leaveTeamTour(roomId, user.name);
-				if (err2) return this.sendReply(err2);
-				let freePlaces2 =  getFreePlaces(roomId);
-				Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has left the team tournament. There are ' + freePlaces2 + ' spots left.');
-				break;
-			case 'auth':
-				if (!this.can('ban', room)) return false;
-				if (params.length < 3) return this.sendReply("Usage: /teamtour auth, [Captain1], [Captain2]");
-				let userCapA = Users.getExact(params[1]);
+			case 'lineups':
+				if (params.length < 8) return this.sendReply("Usage: /teamtour new, lineups, [tier/multitier], [size], [teamA], [teamB], [captain1], [captain2]");
+				let userCapA = Users.getExact(params[6]);
 				if (!userCapA) return this.sendReply("The user " + Chat.escapeHTML(params[6]) + " is not available.");
-				let userCapB = Users.getExact(params[2]);
+				let userCapB = Users.getExact(params[7]);
 				if (!userCapB) return this.sendReply("The user " + Chat.escapeHTML(params[7]) + " is not available.");
-				let err3 = setAuth(roomId, params[1], params[2]);
-				if (err3) return this.sendReply(err3);
-				this.privateModCommand('(' + user.name + ' has changed the captains of the team tournament.)');
+				newTeamTour(room.id, 'lineups', format, size, Chat.escapeHTML(params[4]), Chat.escapeHTML(params[5]), userCapA.name, userCapB.name);
+				this.privateModAction(user.name + " has started a tournament with lineups between the teams " + toID(params[4]) + " and " + toID(params[5]) + " of format " + format + ".");
+				Rooms.get(room.id).addRaw('<hr /><h2><font color="green">' + user.name + ' has started a Team Tournament with Lineups of format ' + format + ' between ' + Chat.escapeHTML(params[4]) + " and " + Chat.escapeHTML(params[5]) + '.</font></h2><b><font color="orange">Team Captains: </font>' + userCapA.name + ' and ' + userCapB.name + '</font></b> <br /><b><font color="blueviolet">Members per team:</font></b> ' + size + '<br /><font color="blue"><b>FORMAT:</b></font> ' + format + '<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament. <br />The captains must use /tt reg, [member1], [member2]... to register the lineups.</b></font>');
 				break;
-			case 'lineup':
-			case 'register':
-			case 'reg':
-				let tourData3 = getTourData(roomId);
-				if (!tourData3) return this.sendReply("There was no team tournament in this room");
-				if (toID(user.name) !== toID(tourData3.authA) && toID(user.name) !== toID(tourData3.authB)) return this.sendReply("You must be captain of one of the two teams to do this.");
-				let err4 = regParticipants(roomId, user.name, target);
-				if (err4) return this.sendReply(err4);
-				if (toID(user.name) === toID(tourData3.authA)) Rooms.get(room.id).addRaw(user.name + ' has registered the lineups for ' + tourData3.teamA + '.');
-				if (toID(user.name) === toID(tourData3.authB)) Rooms.get(room.id).addRaw(user.name + ' has registered the lineups for ' + tourData3.teamB + '.');
-				break;
-			case 'begin':
-			case 'start':
-				if (!this.can('ban', room)) return false;
-				let tourData4 = getTourData(roomId);
-				if (!tourData4) return this.sendReply("There was not team tournament in this room");
-				if (tourData4.tourRound !== 0) return this.sendReply("The tournament has already started.");
-				let freePlaces3 =  getFreePlaces(roomId);
-				if (freePlaces3 > 0) return this.sendReply("There are still spots available.");
+			default:
+				return this.sendReply("The type of tournament should be one of these: [standard/total/lineups]");
+			}
+			break;
+		case 'end':
+		case 'finish':
+		case 'delete':
+			if (!this.can('ban', room)) return false;
+			let tourData = getTourData(roomId);
+			if (!tourData) return this.sendReply("There was no team tournament in this room");
+			this.privateModAction(user.name + " has cancelled the team tournament between " + toID(tourData.teamA) + " and " + toID(tourData.teamB) + ".");
+			Rooms.get(room.id).addRaw('<hr /><center><h2><font color="green">' + user.name + ' has cancelled the tournament between ' + tourData.teamA + " and " + tourData.teamB + '.</h2></font></center><hr />');
+			endTeamTour(roomId);
+			break;
+		case 'j':
+		case 'join':
+			if (params.length < 2) return this.sendReply("Usage: /teamtour join, [team]");
+			let err = joinTeamTour(roomId, user.name, params[1]);
+			if (err) return this.sendReply(err);
+			let tourData2 = getTourData(roomId);
+			let teamJoining = tourData2.teamA.trim();
+			if (toID(params[1]) === toID(tourData2.teamB)) teamJoining = tourData2.teamB.trim();
+			let freePlaces = getFreePlaces(roomId);
+			if (freePlaces > 0) {
+				Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has joined the team tournament (' + teamJoining + '). There are ' + freePlaces + ' spots left.');
+			} else {
+				Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has joined the team tournament (' + teamJoining + '). Tournament will now begin!');
 				startTeamTour(roomId);
 				Rooms.get(room.id).addRaw(viewTourStatus(roomId));
-				break;
-			case 'size':
-				if (!this.can('ban', room)) return false;
-				if (params.length < 2) return this.sendReply("Usage: /teamtour size, [size]");
-				let err5 = sizeTeamTour(roomId, params[1]);
-				if (err5) return this.sendReply(err5);
-				let freePlaces4 = getFreePlaces(roomId);
-				if (freePlaces4 > 0) {
-					Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has changed the tournament size to ' + parseInt(params[1]) + '. There are ' + freePlaces4 + ' spots left.');
-				} else {
-					Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has changed the tournament size to ' + parseInt(params[1]) + '. Tournament will not begin!');
-					startTeamTour(roomId);
-					Rooms.get(room.id).addRaw(viewTourStatus(roomId));
-				}
-				break;
-			case 'disqualify':
-			case 'dq':
-				if (!this.can('ban', room)) return false;
-				if (params.length < 2) return this.sendReply("Usage: /teamtour dq, [user]");
-				let tourData5 = getTourData(roomId);
-				if (!tourData5) return this.sendReply("There was no team tournament in this room");
-				if (!dqTeamTour(roomId, params[1], 'cmd')) return this.sendReply("Could not disqualify user.");
-				let userk = Users.getExact(params[1]);
-				if (userk) userk = userk.name; else userk = toID(params[1]);
-				this.addModAction(userk + ' has been disqualified from the team tournament by ' + user.name + '.');
-				if (isRoundEnded(roomId)) {
-					autoEnd(roomId);
-				}
-				break;
-			case 'replace':
-				if (!this.can('ban', room)) return false;
-				if (params.length < 3) return this.sendReply("Usage: /teamtour replace, [userA], [userB]");
-				let usera = Users.getExact(params[1]);
-				if (usera) usera = usera.name; else usera = toID(params[1]);
-				let userb = Users.getExact(params[2]);
-				if (userb) {
-					userb = userb.name;
-				} else {
-					return this.sendReply("The user you are replacing with must be online.");
-				}
-				let err6 = replaceParticipant(roomId, params[1], params[2]);
-				if (err6) return this.sendReply(err6);
-				this.addModAction(user.name + ': ' + usera + ' has been replaced for ' + userb + ' in the team tournament.');
-				break;
-			case 'invalidate':
-				if (!this.can('ban', room)) return false;
-				if (params.length < 2) return this.sendReply("Usage: /teamtour invalidate, [user]");
-				let tourData6 = getTourData(roomId);
-				if (!tourData6) return this.sendReply("There was no team tournament in this room");
-				let matchupId = findMatchup(roomId, params[1]);
-				if (!invalidate(roomId, matchupId)) return this.sendReply("Could not invalidate the result. It is possible a result has not been established yet.");
-				this.addModAction('The battle between ' + tourData6.matchups[matchupId].from + ' and ' + tourData6.matchups[matchupId].to + ' was invalidated by ' + user.name + '.');
-				break;
-			case 'round':
-				if (!this.runBroadcast()) return false;
-				return this.sendReply('|raw|' + viewTourStatus(roomId));
-			default:
-				this.sendReply('This command does not exist. Try using /teamtour help for assistance.');
+			}
+			break;
+		case 'l':
+		case 'leave':
+			let err2 = leaveTeamTour(roomId, user.name);
+			if (err2) return this.sendReply(err2);
+			let freePlaces2 = getFreePlaces(roomId);
+			Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has left the team tournament. There are ' + freePlaces2 + ' spots left.');
+			break;
+		case 'auth':
+			if (!this.can('ban', room)) return false;
+			if (params.length < 3) return this.sendReply("Usage: /teamtour auth, [Captain1], [Captain2]");
+			let userCapA = Users.getExact(params[1]);
+			if (!userCapA) return this.sendReply("The user " + Chat.escapeHTML(params[6]) + " is not available.");
+			let userCapB = Users.getExact(params[2]);
+			if (!userCapB) return this.sendReply("The user " + Chat.escapeHTML(params[7]) + " is not available.");
+			let err3 = setAuth(roomId, params[1], params[2]);
+			if (err3) return this.sendReply(err3);
+			this.privateModCommand('(' + user.name + ' has changed the captains of the team tournament.)');
+			break;
+		case 'lineup':
+		case 'register':
+		case 'reg':
+			let tourData3 = getTourData(roomId);
+			if (!tourData3) return this.sendReply("There was no team tournament in this room");
+			if (toID(user.name) !== toID(tourData3.authA) && toID(user.name) !== toID(tourData3.authB)) return this.sendReply("You must be captain of one of the two teams to do this.");
+			let err4 = regParticipants(roomId, user.name, target);
+			if (err4) return this.sendReply(err4);
+			if (toID(user.name) === toID(tourData3.authA)) Rooms.get(room.id).addRaw(user.name + ' has registered the lineups for ' + tourData3.teamA + '.');
+			if (toID(user.name) === toID(tourData3.authB)) Rooms.get(room.id).addRaw(user.name + ' has registered the lineups for ' + tourData3.teamB + '.');
+			break;
+		case 'begin':
+		case 'start':
+			if (!this.can('ban', room)) return false;
+			let tourData4 = getTourData(roomId);
+			if (!tourData4) return this.sendReply("There was not team tournament in this room");
+			if (tourData4.tourRound !== 0) return this.sendReply("The tournament has already started.");
+			let freePlaces3 = getFreePlaces(roomId);
+			if (freePlaces3 > 0) return this.sendReply("There are still spots available.");
+			startTeamTour(roomId);
+			Rooms.get(room.id).addRaw(viewTourStatus(roomId));
+			break;
+		case 'size':
+			if (!this.can('ban', room)) return false;
+			if (params.length < 2) return this.sendReply("Usage: /teamtour size, [size]");
+			let err5 = sizeTeamTour(roomId, params[1]);
+			if (err5) return this.sendReply(err5);
+			let freePlaces4 = getFreePlaces(roomId);
+			if (freePlaces4 > 0) {
+				Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has changed the tournament size to ' + parseInt(params[1]) + '. There are ' + freePlaces4 + ' spots left.');
+			} else {
+				Rooms.get(room.id).addRaw('<b>' + user.name + '</b> has changed the tournament size to ' + parseInt(params[1]) + '. Tournament will not begin!');
+				startTeamTour(roomId);
+				Rooms.get(room.id).addRaw(viewTourStatus(roomId));
+			}
+			break;
+		case 'disqualify':
+		case 'dq':
+			if (!this.can('ban', room)) return false;
+			if (params.length < 2) return this.sendReply("Usage: /teamtour dq, [user]");
+			let tourData5 = getTourData(roomId);
+			if (!tourData5) return this.sendReply("There was no team tournament in this room");
+			if (!dqTeamTour(roomId, params[1], 'cmd')) return this.sendReply("Could not disqualify user.");
+			let userk = Users.getExact(params[1]);
+			if (userk) userk = userk.name; else userk = toID(params[1]);
+			this.addModAction(userk + ' has been disqualified from the team tournament by ' + user.name + '.');
+			if (isRoundEnded(roomId)) {
+				autoEnd(roomId);
+			}
+			break;
+		case 'replace':
+			if (!this.can('ban', room)) return false;
+			if (params.length < 3) return this.sendReply("Usage: /teamtour replace, [userA], [userB]");
+			let usera = Users.getExact(params[1]);
+			if (usera) usera = usera.name; else usera = toID(params[1]);
+			let userb = Users.getExact(params[2]);
+			if (userb) {
+				userb = userb.name;
+			} else {
+				return this.sendReply("The user you are replacing with must be online.");
+			}
+			let err6 = replaceParticipant(roomId, params[1], params[2]);
+			if (err6) return this.sendReply(err6);
+			this.addModAction(user.name + ': ' + usera + ' has been replaced for ' + userb + ' in the team tournament.');
+			break;
+		case 'invalidate':
+			if (!this.can('ban', room)) return false;
+			if (params.length < 2) return this.sendReply("Usage: /teamtour invalidate, [user]");
+			let tourData6 = getTourData(roomId);
+			if (!tourData6) return this.sendReply("There was no team tournament in this room");
+			let matchupId = findMatchup(roomId, params[1]);
+			if (!invalidate(roomId, matchupId)) return this.sendReply("Could not invalidate the result. It is possible a result has not been established yet.");
+			this.addModAction('The battle between ' + tourData6.matchups[matchupId].from + ' and ' + tourData6.matchups[matchupId].to + ' was invalidated by ' + user.name + '.');
+			break;
+		case 'round':
+			if (!this.runBroadcast()) return false;
+			return this.sendReply('|raw|' + viewTourStatus(roomId));
+		default:
+			this.sendReply('This command does not exist. Try using /teamtour help for assistance.');
 		}
 	},
 };
@@ -700,10 +686,10 @@ Rooms.createBattle = function (formatid, options) {
 	//tour
 	let matchup = findTourFromMatchup(p1name, p2name, options.format, room);
 	if (matchup) {
-			room.teamTour = 1;
-			setActiveMatchup(matchup.tourId, matchup.matchupId, room);
-			Rooms.get(matchup.tourId).addRaw("<a href=\"/" + room + "\" class=\"ilink\"><b>The team tournament battle between " + p1name + " and " + p2name + " has begun.</b></a>");
-			Rooms.get(matchup.tourId).update();
+		room.teamTour = 1;
+		setActiveMatchup(matchup.tourId, matchup.matchupId, room);
+		Rooms.get(matchup.tourId).addRaw("<a href=\"/" + room + "\" class=\"ilink\"><b>The team tournament battle between " + p1name + " and " + p2name + " has begun.</b></a>");
+		Rooms.get(matchup.tourId).update();
 	}
 	//end tour
 
@@ -711,7 +697,7 @@ Rooms.createBattle = function (formatid, options) {
 };
 
 if (!Rooms.RoomBattle.prototype.__onEnd) Rooms.RoomBattle.prototype.__onEnd = Rooms.RoomBattle.prototype.onEnd;
-Rooms.RoomBattle.prototype.onEnd = function(winner) {
+Rooms.RoomBattle.prototype.onEnd = function (winner) {
 	//tour
 	if (Server.teamTours) {
 		let matchup = findTourFromMatchup(this.p1.name, this.p2.name, this.format, this.room);
