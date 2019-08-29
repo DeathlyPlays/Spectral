@@ -535,8 +535,22 @@ exports.commands = {
 		let username = (targetUser ? targetUser.name : target);
 		let userid = (targetUser ? targetUser.userid : toID(target));
 		let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
-		let avatar = (targetUser ? (isNaN(targetUser.avatar) ? `http://${serverIp}:${Config.port}/avatars/${targetUser.avatar}` : `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar}.png`) : (Config.customavatars[userid] ? `http://${serverIp}:${Config.port}/avatars/${Config.customavatars[userid]}` : `http://play.pokemonshowdown.com/sprites/trainers/1.png`));
-		if (targetUser && targetUser.avatar[0] === "#") avatar = `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar.substr(1)}.png`;
+		let avatar;
+		if (targetUser) {
+			if (targetUser.avatar.substring(0, userid) === userid) {
+				avatar = `http://${serverIp}:${Config.port}/avatars/${targetUser.avatar}`;
+			} else if (isNaN(targetUser.avatar)) {
+				avatar = `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar}.png`;
+			} else {
+				avatar = `http://play.pokemonshowdown.com/sprites/trainers-OLD-BACKUP/${targetUser.avatar}.png`;
+		} else {
+			if (Config.customavatars[userid]) {
+		 		avatar = `http://${serverIp}:${Config.port}/avatars/${Config.customavatars[userid]}`;
+			} else {
+				avatar = `http://play.pokemonshowdown.com/sprites/trainers-OLD-BACKUP/1.png`;
+			}
+		}
+		if (targetUser && targetUser.avatar[0] === "#") avatar = `http://play.pokemonshowdown.com/sprites/trainers-OLD-BACKUP/${targetUser.avatar.substr(1)}.png`;
 		let userSymbol = (Users.usergroups[userid] ? Users.usergroups[userid].substr(0, 1) : "Regular User");
 		let userGroup = (Config.groups[userSymbol] ? `Global ${Config.groups[userSymbol].name}` : `Regular User`);
 		let ip = (Users.get(userid) ? geoip.lookupCountry(Users.get(userid).latestIp) : false);
