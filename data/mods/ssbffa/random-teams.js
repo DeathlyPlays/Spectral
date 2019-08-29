@@ -62,17 +62,17 @@ class RandomCustomSSBTeams extends RandomTeams {
 		}
 
 		for (let k in sets) {
-			sets[k].moves = sets[k].moves.map(toId);
-			if (sets[k].baseSignatureMove) sets[k].baseSignatureMove = toId(sets[k].baseSignatureMove);
+			sets[k].moves = sets[k].moves.map(toID);
+			if (sets[k].baseSignatureMove) sets[k].baseSignatureMove = toID(sets[k].baseSignatureMove);
 		}
 
 		// Generate the team randomly.
 		let pool = Object.keys(sets);
 		for (let i = 0; i < (Object.keys(sets).length < 6 ? Object.keys(sets).length : 6); i++) {
 			let name = this.sampleNoReplace(pool);
-			/*if (i === 1 && SSBFFA[toId(side.name)] && SSBFFA[toId(side.name)].active && sets[(SSBFFA[toId(side.name)].symbol + SSBFFA[toId(side.name)].name)] && pool.indexOf((SSBFFA[toId(side.name)].symbol + SSBFFA[toId(side.name)].name)) !== -1) {
+			/*if (i === 1 && SSBFFA[toID(side.name)] && SSBFFA[toID(side.name)].active && sets[(SSBFFA[toID(side.name)].symbol + SSBFFA[toID(side.name)].name)] && pool.indexOf((SSBFFA[toID(side.name)].symbol + SSBFFA[toID(side.name)].name)) !== -1) {
 				pool.push(name); //re-add
-				name = pool[pool.indexOf((SSBFFA[toId(side.name)].symbol + SSBFFA[toId(side.name)].name))];
+				name = pool[pool.indexOf((SSBFFA[toID(side.name)].symbol + SSBFFA[toID(side.name)].name))];
 				pool.splice(pool.indexOf(name), 1);
 			}*/
 			let set = sets[name];
