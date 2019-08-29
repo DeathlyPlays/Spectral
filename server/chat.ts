@@ -378,7 +378,7 @@ export class CommandContext extends MessageContext {
 						}
 						curUser.sendTo(this.room, `${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|/html ${emoticons}`);
 					}
-					this.room.add(`${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
+					this.roomlog(`${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
 				} else {
 					// @ts-ignore
 					if (Users.ShadowBan.checkBanned(this.user)) {
