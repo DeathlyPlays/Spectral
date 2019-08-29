@@ -20,7 +20,7 @@ const BANS = {
 
 global.writeSSB = function () {
 	if (!ssbWrite) return false; //Prevent corruptions
-	FS("config/chat-plugins/ssb.json").write(JSON.stringify(Server.ssb));
+	FS("config/chat-plugins/ssb.json").write(JSON.stringify((Server.ssb ? Server.ssb : {})));
 };
 
 //Shamelessly ripped from teambuilder client.
