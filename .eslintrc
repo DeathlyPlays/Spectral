@@ -17,7 +17,7 @@
 		"Tournaments": false, "IPTools": false, "Sockets": false, "TeamValidator": false,
 		"TeamValidatorAsync": false, "Ladders": false,
 		"Server": false, "Ontime": false, "Db": false, "Economy": false, "writeSSB": false, "Tells": false,
-		"rankLadder": false, "moneyName": false, "moneyPlural": false
+		"rankLadder": false, "moneyName": false, "moneyPlural": false, "Console": false
 	},
 	"extends": "eslint:recommended",
 	"rules": {
