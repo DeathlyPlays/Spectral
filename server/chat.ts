@@ -1481,7 +1481,7 @@ export const Chat = new class {
 			const gamecard = require(`../game-cards/${file}`);
 			Object.assign(commands, gamecard.commands);
 			Object.assign(pages, gamecard.pages);
-			if (gamecard.box && gamecard.box.name) gamecard.box.id = toId(gamecard.box.name);
+			if (gamecard.box && gamecard.box.name) gamecard.box.id = toID(gamecard.box.name);
 			Server.gameList[gamecard.box.id] = gamecard.box;
 		}
 	}
