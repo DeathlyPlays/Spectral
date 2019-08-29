@@ -2084,6 +2084,79 @@ let Formats = [
 		defaultLevel: 100,
 		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
 	},
+	// Our Formats
+	{
+		section: `${Config.serverName}'s Metagames`,
+		column: 5,
+	},
+	{
+		name: "[Gen 7] Double TMS Boss Rush",
+		desc: ["All the bosses from TMS have all came to duke it out in a giant randbats OM to see who can top who and be the best!"],
+
+		mod: 'bossrush',
+		team: 'randomTMS',
+		gameType: 'doubles',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
+		name: "[Gen 7] Legendless",
+		desc: [
+			"Legendaries have been banished from the tier, what are we gonna do now?",
+			"&bullet; <a href=\"http://chandie.boards.net/thread/5/welcome-usm-legendless\">Legendless Bans and Unbans</a>",
+			"&bullet; <a href=\"http://chandie.boards.net/thread/6/usm-legendless-viability-rankings\">Legendless Viability Ranking</a>",
+		],
+		mod: 'gen7',
+		ruleset: ['Sleep Clause Mod', 'Pokemon', 'Standard', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
+		banlist: ["Articuno", "Moltres", "Zapdos", "Mew", "Raikou", "Entei", "Suicune", "Celebi", "Regirock", "Registeel", "Regice", "Latios", "Latias", "Jirachi", "Uxie", "Mesprit", "Azelf", "Heatran", "Regigigas", "Cresselia", "Shaymin", "Manaphy", "Victini", "Cobalion", "Virizion", "Terrakion", "Keldeo", "Keldeo-Resolute", "Tornadus", "Tornadus-Therian", "Thundurus", "Thundurus-Therian", "Landorus-Therian", "Kyurem", "Kyurem-Black", "Meloetta", "Meloetta-Pirouette", "Zygarde", "Diancie", "Hoopa", "Hoopa-Unbound", "Volcanion", "Type:Null", "Silvally", "Tapu Koko", "Tapu Lele", "Tapu Fini", "Tapu Bulu", "Cosmog", "Cosmoem", "Nihilego", "Buzzwole", "Xurkitree", "Celesteela", "Kartana", "Guzzlord", "Magearna", "Necrozma", "Zeraora", "Poipole", "Stakataka", "Blacephalon", "Uber", "Baton Pass", "Shadow Tag"],
+		unbanlist: ["Aegislash", "Metagross-Mega", "Blaziken"],
+	},
+	{
+		name: "[Gen 7] Slowtown",
+		desc: [
+			"Trick room is constantly active for the duration of the battle and will reapply itself every 5 turns. Concept by Lycanium Z. Coded by Insist.",
+			"&bullet; <a href=\"http://exiledps.boards.net/board/22/slowtown\">Slowtown</a>",
+		],
+		mod: "slowtown",
+		ruleset: ['Sleep Clause Mod', 'Pokemon', 'Standard', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
+		banlist: ['Snorlax', 'Uber'],
+		unbanlist: ['Pheromosa', 'Deoxys-Speed', 'Deoxys-Attack', 'Deoxys', 'Shaymin-Sky', 'Blaziken', 'Gengarite', 'Metagrossite', 'Blazikenite'],
+		onBegin: function () {
+			this.trickRoom = ["Trick Room"];
+			this.startNewTrickRoom = this.trickRoom[this.random(1)];
+			this.add(`-message`, `Starting next turn, the set up another 5 rounds of ${this.startNewTrickRoom}!`);
+		},
+		onResidualOrder: 999,
+		onResidual: function () {
+			if (this.turn % 5 === 4) {
+				let startNewTrickRoom = this.trickRoom[this.random(1)];
+				while (startNewTrickRoom === this.trickRoom) startNewTrickRoom = this.trickRoom[this.random(1)];
+				this.startNewTrickRoom = startNewTrickRoom;
+				this.add(`-message`, `Starting next turn, the battle will set another 5 rounds of ${this.startNewTrickRoom}!`);
+			}
+		}
+	},
+	{
+		name: "[Gen 7] Swapping Powers",
+		desc: [
+			"Power trick that's constantly there, not only swapping Attack and Defense, but Special Attack and Special Defense also.",
+			"&bullet; <a href=\"http://exiledps.boards.net/thread/24/welcome-swapping-powers\">Swapping Powers Thread</a>",
+			"Concept by Mewth. Coded by Insist/HoeenHero.",
+		],
+		ruleset: ['Sleep Clause Mod', 'Pokemon', 'Standard', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
+		unbanlist: ['Deoxys-Attack', 'Deoxys', 'Deoxys-Defense', 'Deoxys-Speed', 'Aegislash', 'Aegislash-Blade', 'Darmanitan-Zen', 'Marshadow', 'Genesect', 'Shaymin-Sky', 'Landorus', 'Blaziken', 'Pheromosa'],
+		onSwitchInPriority: 8,
+		onSwitchIn: function (pokemon) {
+			this.useMove("Power Trick", pokemon, pokemon, pokemon);
+		},
+	},
+	{
+		name: "[Gen 7] TMS Boss Rush",
+		desc: ["All the bosses from TMS have all came to duke it out in a giant randbats OM to see who can top who and be the best!"],
+
+		mod: 'bossrush',
+		team: 'randomTMS',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
 ];
 
 exports.Formats = Formats;
