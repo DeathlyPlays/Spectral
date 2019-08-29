@@ -14,7 +14,7 @@ const path = require("path");
 const request = require("request");
 
 // The path where custom avatars are stored.
-const AVATAR_PATH = path.join(__dirname, "../config/avatars/");
+const AVATAR_PATH = path.join(__dirname, "../../config/avatars/");
 
 // The valid file extensions allowed.
 const VALID_EXTENSIONS = [".jpg", ".png", ".gif"];
