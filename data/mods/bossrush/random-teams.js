@@ -725,7 +725,7 @@ class RandomTMSTeams extends RandomTeams {
 		};
 		// convert moves to ids.
 		for (let k in sets) {
-			sets[k].moves = sets[k].moves.map(toId);
+			sets[k].moves = sets[k].moves.map(toID);
 			sets[k].baseSignatureMove = toID(sets[k].baseSignatureMove);
 		}
 
