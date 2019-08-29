@@ -1433,6 +1433,8 @@ export const Chat = new class {
 		if (Config.statusfilter) Chat.statusfilters.push(Config.statusfilter);
 
 		// Install plug-in commands and chat filters
+		Object.assign(commands, require('./console').commands);
+		Object.assign(pages, require('./console').pages);
 
 		// info always goes first so other plugins can shadow it
 		let files = FS('server/chat-plugins/').readdirSync();
@@ -1469,6 +1471,16 @@ export const Chat = new class {
 			if (serverplugin.hostfilter) Chat.hostfilters.push(serverplugin.hostfilter);
 		}
 
+		// Load games for Console
+		Server.gameList = {};
+		for (let file of FS('game-cards').readdirSync()) {
+			if (file.substr(-3) !== '.js') continue;
+			const gamecard = require(`./game-cards/${file}`);
+			Object.assign(commands, gamecard.commands);
+			Object.assign(pages, gamecard.pages);
+			if (gamecard.box && gamecard.box.name) gamecard.box.id = toId(gamecard.box.name);
+			Server.gameList[gamecard.box.id] = gamecard.box;
+		}
 	}
 	destroy() {
 		for (const handler of Chat.destroyHandlers) {
