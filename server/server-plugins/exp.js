@@ -189,7 +189,7 @@ exports.commands = {
 		if (target || !target && this.broadcasting) {
 			if (!target) targetId = user.userid;
 			EXP.readExp(targetId, exp => {
-				this.sendReplyBox(`${Server.nameColor(target, true)} has ${exp.toLocaleString()} exp, and is Level ${Server.ExpControl.level(targetId).toLocaleString()} and needs ${Server.ExpControl.nextLevel(targetId).toLocaleString()} to reach the next level.`);
+				this.sendReplyBox(`${Server.nameColor(targetId, true)} has ${exp.toLocaleString()} exp, and is Level ${Server.ExpControl.level(targetId).toLocaleString()} and needs ${Server.ExpControl.nextLevel(targetId).toLocaleString()} to reach the next level.`);
 			});
 		} else {
 			EXP.readExp(user.userid, exp => {
