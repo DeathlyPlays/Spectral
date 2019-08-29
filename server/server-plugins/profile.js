@@ -543,6 +543,7 @@ exports.commands = {
 				avatar = `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar}.png`;
 			} else {
 				avatar = `http://play.pokemonshowdown.com/sprites/trainers-OLD-BACKUP/${targetUser.avatar}.png`;
+			}
 		} else {
 			if (Config.customavatars[userid]) {
 		 		avatar = `http://${serverIp}:${Config.port}/avatars/${Config.customavatars[userid]}`;
