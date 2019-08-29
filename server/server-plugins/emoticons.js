@@ -138,7 +138,7 @@ exports.commands = {
 				let emote = emoticons[e];
 				return `<button style="border: 1px solid; border-color: skyblue; border-radius: 5px; width: 85px; background-color: transparent"><center><table><tr><td>${'<img src="' + emote + '" title="' + e + '"height="' + size+ '" width="' + size + '">'}</td></tr><tr><td><span style="background-color: #ffffff">${e}</span></td></tr></table></center></button>` + (i % 4 === 3 ? "<br />" : "");
 			});
-			this.sendReply(`|raw|<div class="infobox infobox-limited">${sortedEmotes.join(' ')}</div>`);
+			this.sendReply(`|raw|<div class="infobox infobox-limited">${reply}<br />${sortedEmotes.join(' ')}</div>`);
 		},
 
 		ignore(target, room, user) {
