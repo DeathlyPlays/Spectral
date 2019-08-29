@@ -3,7 +3,7 @@
 const FS = require("../../.lib-dist/fs").FS;
 
 let ssbWrite = true; //if false, do not write to JSON
-//let noRead = false; //if true, do not read from JSON (isn't even used)
+let noRead = false; //if true, do not read from JSON
 
 const MAX_MOVEPOOL_SIZE = 4;
 
@@ -590,18 +590,23 @@ try {
 			console.log("config/chat-plugins/ssb.json not found, creating a new one...");
 		}
 	});
-	//noRead = true;
+	noRead = true;
 }
 
 //We need to load data after the SSB class is declared.
 try {
-	Server.ssb = global.ssb = {};
-	Server.ssb = FS("config/chat-plugins/ssb.json").readIfExistsSync();
-	if (!Server.ssb) {
-		FS("config/chat-plugins/ssb.json").write("{}");
-		Server.ssb = {};
+	if (!noRead) {
+		let raw = JSON.parse(FS("config/chat-plugins/ssb.json").readIfExistsSync());
+		Server.ssb = global.ssb = {};
+		//parse JSON back into the SSB class.
+		for (let key in raw) {
+			Server.ssb[key] = new SSB(raw[key].userid, raw[key].name);
+			for (let key2 in Server.ssb[key]) {
+				Server.ssb[key][key2] = raw[key][key2];
+			}
+		}
 	} else {
-		Server.ssb = JSON.parse(Server.ssb);
+		Server.ssb = global.ssb = {};
 	}
 } catch (e) {
 	console.error(`Error loading SSBFFA: ${e.stack}`);
