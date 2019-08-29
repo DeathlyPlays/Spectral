@@ -92,11 +92,11 @@ exports.commands = {
 		start(target, room, user, connection, cmd, message) {
 			if (user.console && cmd !== 'forcestart') return;
 			if (cmd === 'forcestart') this.parse('/console kill');
-			if (!target || Object.keys(Server.gameList).indexOf(toId(target)) === -1) {
+			if (!target || Object.keys(Server.gameList).indexOf(toID(target)) === -1) {
 				user.console = new Console(user);
 				return user.console.init();
 			}
-			return this.parse(Server.gameList[toId(target)].startCommand);
+			return this.parse(Server.gameList[toID(target)].startCommand);
 		},
 
 		kill(target, room, user) {
