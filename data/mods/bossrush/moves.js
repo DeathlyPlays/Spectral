@@ -15,7 +15,7 @@ let BattleMovedex = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, recharge: 1},
-		onPrepareHit: function (target, source) {
+		onPrepareHit(target, source) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Agility", source);
 			this.add('-anim', source, "Dark Void", target);
