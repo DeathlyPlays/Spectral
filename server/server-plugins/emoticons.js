@@ -136,7 +136,7 @@ exports.commands = {
 			let reply = `<strong><u>Emoticons (${Object.keys(emoticons).length})</u></strong><br />`;
 			let sortedEmotes = Object.keys(emoticons).sort().map((e, i) => {
 				let emote = emoticons[e];
-				return `<button style="border: 1px solid; border-color: skyblue; border-radius: 5px; width: 85px; background-color: transparent"><center><table><tr><td>${'<img src="${emote}" title="${e}"height="${size}" width="${size}">'}</td></tr><tr><td><span style="background-color: #ffffff">${e}</span></td></tr></table></center></button>` + (i % 4 === 3 ? "<br />" : "");
+				return `<button style="border: 1px solid; border-color: skyblue; border-radius: 5px; width: 85px; background-color: transparent"><center><table><tr><td>${'<img src="' + emote + '" title="' + e + '"height="' + size+ '" width="' + size + '">'}</td></tr><tr><td><span style="background-color: #ffffff">${e}</span></td></tr></table></center></button>` + (i % 4 === 3 ? "<br />" : "");
 			});
 			this.sendReply(`|raw|<div class="infobox infobox-limited">${sortedEmotes.join(' ')}</div>`);
 		},
