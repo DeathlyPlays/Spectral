@@ -20,11 +20,11 @@ class Console {
 	}
 
 	init() {
-		Users(this.userid).send(`>view-gameconsole\n|init|html\n|title|${this.title}\n|pagehtml|${this.buildConsole()}`);
+		Users.get(this.userid).send(`>view-gameconsole\n|init|html\n|title|${this.title}\n|pagehtml|${this.buildConsole()}`);
 	}
 
 	update(css, html, bottom) {
-		Users(this.userid).send(`>view-gameconsole\n|pagehtml|${this.buildConsole(css, html, bottom)}`);
+		Users.get(this.userid).send(`>view-gameconsole\n|pagehtml|${this.buildConsole(css, html, bottom)}`);
 		this.prevScreen = this.curScreen;
 		this.curScreen = [(css || null), (html || null), (bottom || null)];
 	}
