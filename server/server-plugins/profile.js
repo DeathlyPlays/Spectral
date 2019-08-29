@@ -9,7 +9,14 @@
 
 "use strict";
 
-let geoip = require("geoip-lite-country");
+let geoip = {};
+
+try {
+	geoip = require('geoip-ultralight');
+	geoip.startWatchingDataUpdate();
+} catch (e) {
+	console.error(e);
+}
 
 // fill your server's IP in your config.js for exports.serverIp
 const serverIp = Config.serverIp;
@@ -532,7 +539,7 @@ exports.commands = {
 		if (targetUser && targetUser.avatar[0] === "#") avatar = `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar.substr(1)}.png`;
 		let userSymbol = (Users.usergroups[userid] ? Users.usergroups[userid].substr(0, 1) : "Regular User");
 		let userGroup = (Config.groups[userSymbol] ? `Global ${Config.groups[userSymbol].name}` : `Regular User`);
-		let ip = (Users.get(userid) ? geoip.lookup(Users.get(userid).latestIp) : false);
+		let ip = (Users.get(userid) ? geoip.lookupCountry(Users.get(userid).latestIp) : false);
 		let regdate = "(Unregistered)";
 		Server.regdate(userid, date => {
 			if (date) {
