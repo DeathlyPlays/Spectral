@@ -64,11 +64,6 @@ function move(user: User, newUserid: ID) {
 	user.userid = newUserid;
 	users.set(newUserid, user);
 
-	if (Ontime[user.userid]) {
-		Db.ontime.set(user.userid, Db.ontime.get(user.userid, 0) + (Date.now() - Ontime[user.userid]));
-		delete Ontime[user.userid];
-	}
-
 	user.forcedPublic = null;
 	if (Config.forcedpublicprefixes) {
 		for (const prefix of Config.forcedpublicprefixes) {
