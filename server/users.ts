@@ -473,6 +473,9 @@ export class User extends Chat.MessageContext {
 	s1: string;
 	s2: string;
 	s3: string;
+	/* our shit */
+	lastPublicMessage: number;
+	/* our shit end */
 
 	blockChallengesNotified: boolean;
 	blockPMsNotified: boolean;
@@ -541,6 +544,9 @@ export class User extends Chat.MessageContext {
 		this.chatQueueTimeout = null;
 		this.lastChatMessage = 0;
 		this.lastCommand = '';
+		/* our shit */
+		this.lastPublicMessage = 0;
+		/* our shit end */
 
 		// for the anti-spamming mechanism
 		this.lastMessage = ``;
