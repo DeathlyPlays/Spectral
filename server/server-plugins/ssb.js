@@ -604,7 +604,9 @@ try {
 		Server.ssb = JSON.parse(Server.ssb);
 	}
 } catch (e) {
-	if (e.code !== "ENOENT") throw e;
+	console.error(`Error loading SSBFFA: ${e.stack}`);
+	Server.ssb = global.ssb = {};
+	ssbWrite = false;
 }
 
 exports.commands = {
