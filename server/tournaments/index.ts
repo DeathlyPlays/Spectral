@@ -1083,10 +1083,11 @@ export class Tournament extends Rooms.RoomGame {
 		// Tournament Winnings
 		//
 
-		let color = '#088cc7';
-		let data = (this.generator.getResults() as TournamentPlayer[][]).map(usersToNames).toString();
+		const color = '#088cc7';
+		const data = (this.generator.getResults() as TournamentPlayer[][]).map(usersToNames).toString();
 		let dataSplit: string[];
-		let winner: any, runnerUp: any;
+		let winner: any;
+		let runnerUp: any;
 
 		if (data.indexOf(',') >= 0) {
 			dataSplit = data.split(',');
@@ -1096,9 +1097,9 @@ export class Tournament extends Rooms.RoomGame {
 			winner = data;
 		}
 
-		let wid = toID(winner);
-		let rid = toID(runnerUp);
-		let tourSize = this.players.length;
+		const wid = toID(winner);
+		const rid = toID(runnerUp);
+		const tourSize = this.players.length;
 
 		if ((tourSize >= 2) && this.room.isOfficial) {
 			let firstMoney = Math.round(tourSize / 2);
@@ -1116,8 +1117,8 @@ export class Tournament extends Rooms.RoomGame {
 			});
 
 			if (Server.getFaction(winner)) {
-				let factionName = Server.getFaction(winner);
-				let factionId = toID(factionName);
+				const factionName = Server.getFaction(winner);
+				const factionId = toID(factionName);
 				Db.factionbank.set(factionId, Db.factionbank.get(factionId, 0) + 10);
 				this.room.addRaw(`<strong>Congratulations to ${factionName}! Your faction has gained 10 faction money (points)! To view it type /faction bank atm (faction).</strong>`);
 			}
