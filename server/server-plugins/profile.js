@@ -537,7 +537,7 @@ exports.commands = {
 		let profile = Db.profile.get(userid, {data: {title: {}, music: {}}});
 		let avatar;
 		if (targetUser) {
-			if (targetUser.avatar.substring(0, userid) === userid) {
+			if (isNaN(targetUser.avatar) && targetUser.avatar.substring(0, userid.length) === userid) {
 				avatar = `http://${serverIp}:${Config.port}/avatars/${targetUser.avatar}`;
 			} else if (isNaN(targetUser.avatar)) {
 				avatar = `http://play.pokemonshowdown.com/sprites/trainers/${targetUser.avatar}.png`;
