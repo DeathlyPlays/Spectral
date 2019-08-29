@@ -303,9 +303,6 @@ function autoEnd(room) {
 		}
 	}
 	if (teamTours[roomId].type === 'total') {
-		for (let f in teamTours[roomId].byes) {
-			++nByes;
-		}
 		if (scoreA === 0 || scoreB === 0) {
 			if (scoreA === 0) {
 				if (toID(teamTours[roomId].teamWithByes) === toID(teamTours[roomId].teamA)) {
