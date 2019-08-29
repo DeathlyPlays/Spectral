@@ -383,7 +383,7 @@ export class CommandContext extends MessageContext {
 					// @ts-ignore
 					if (Users.ShadowBan.checkBanned(this.user)) {
 						// @ts-ignore
-						Users.ShadowBan.addMessage(this.user, `To ${this.room.id}, ${message}`);
+						Users.ShadowBan.addMessage(this.user, `To ${this.room.id}`, message);
 						this.user.sendTo(this.room, `${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
 					} else {
 						this.room.add(`${(this.room.type === 'chat' ? (this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`) : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
@@ -765,7 +765,7 @@ export class CommandContext extends MessageContext {
 			this.broadcastMessage = broadcastMessage;
 
 			if (Users.ShadowBan.checkBanned(this.user)) {
-				Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
+				Users.ShadowBan.addMessage(this.user, `To  + ${this.room.id}`, message);
 				this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
 				this.parse('/' + this.message.substr(1));
 				return false;
@@ -1366,7 +1366,7 @@ export const Chat = new class {
 		if (onlyRecipient) return onlyRecipient.send(buf);
 		user.send(buf);
 		if (Users.ShadowBan.checkBanned(user)) {
-			Users.ShadowBan.addMessage(user, `Private to ${pmTarget.getIdentity()}, ${message}`);
+			Users.ShadowBan.addMessage(user, `Private to ${pmTarget.getIdentity()}`, message);
 		} else if (pmTarget !== user) {
 			pmTarget.send(buf);
 		}
