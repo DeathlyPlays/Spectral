@@ -1421,6 +1421,8 @@ export const Chat = new class {
 
 		// prevent TypeScript from resolving
 		const commandsFile = '../server/chat-commands';
+		let commands = Chat.commands = Object.assign({}, Chat.baseCommands);
+		let pages = Chat.pages = Object.assign({}, Chat.basePages);
 		Chat.baseCommands = require(commandsFile).commands;
 		Chat.basePages = require(commandsFile).pages;
 		Chat.commands = Object.assign({}, Chat.baseCommands);
@@ -1473,10 +1475,8 @@ export const Chat = new class {
 		}
 
 		// Load games for Console
-		let commands = Chat.commands = Object.assign({}, Chat.baseCommands);
-		let pages = Chat.pages = Object.assign({}, Chat.basePages);
 		Server.gameList = {};
-		for (let file of FS('game-cards').readdirSync()) {
+		for (let file of FS('./game-cards').readdirSync()) {
 			if (file.substr(-3) !== '.js') continue;
 			const gamecard = require(`./game-cards/${file}`);
 			Object.assign(commands, gamecard.commands);
