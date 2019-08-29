@@ -360,18 +360,20 @@ export class CommandContext extends MessageContext {
 			}
 
 			message = this.canTalk(message);
-			if (this.room && message && !this.room.battle && !this.room.isPersonal && !this.room.isPrivate) this.user.lastPublicMessage = Date.now();
+			if (this.room && message && !this.room.battle && !this.room.isPersonal && !this.room.isPrivate) {
+				this.user.lastPublicMessage = Date.now();
+			}
 		}
 
 		// Output the message
 		if (message && message !== true && typeof message.then !== 'function') {
-			let emoticons = Server.parseEmoticons(message, this.room);
+			const emoticons = Server.parseEmoticons(message, this.room);
 			if (this.pmTarget) {
 				Chat.sendPM((emoticons ? `/html ${emoticons}` : `${message}`), this.user, this.pmTarget);
 			} else {
 				if (emoticons && !this.room.disableEmoticons) {
-					for (let u in this.room.users) {
-						let curUser = Users.get(u);
+					for (const u in this.room.users) {
+						const curUser = Users.get(u);
 						if (!curUser || !curUser.connected) continue;
 						if (Server.ignoreEmotes[curUser.userid]) {
 							curUser.sendTo(this.room, `${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
@@ -390,7 +392,6 @@ export class CommandContext extends MessageContext {
 						this.room.add(`${(this.room.type === 'chat' ? (this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`) : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
 					}
 				}
-				//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 				if (this.room && this.room.game && this.room.game.onLogMessage) {
 					this.room.game.onLogMessage(message, this.user);
 				}
@@ -767,7 +768,7 @@ export class CommandContext extends MessageContext {
 
 			if (Users.ShadowBan.checkBanned(this.user)) {
 				Users.ShadowBan.addMessage(this.user, `To  + ${this.room.id}`, message);
-				this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+				this.user.sendTo(this.room, `${(this.room.type === 'chat' ? `|c:|${(~~(Date.now() / 1000))}|` : `|c|`)}${this.user.getIdentity(this.room.id)}|${message}`);
 				this.parse('/' + this.message.substr(1));
 				return false;
 			}
@@ -1421,8 +1422,8 @@ export const Chat = new class {
 
 		// prevent TypeScript from resolving
 		const commandsFile = '../server/chat-commands';
-		let commands = Chat.commands = Object.assign({}, Chat.baseCommands);
-		let pages = Chat.pages = Object.assign({}, Chat.basePages);
+		const commands = Chat.commands = Object.assign({}, Chat.baseCommands);
+		const pages = Chat.pages = Object.assign({}, Chat.basePages);
 		Chat.baseCommands = require(commandsFile).commands;
 		Chat.basePages = require(commandsFile).pages;
 		Chat.commands = Object.assign({}, Chat.baseCommands);
@@ -1461,7 +1462,7 @@ export const Chat = new class {
 			if (plugin.statusfilter) Chat.statusfilters.push(plugin.statusfilter);
 		}
 
-		let customfiles = FS('server/server-plugins/').readdirSync();
+		const customfiles = FS('server/server-plugins/').readdirSync();
 
 		for (const customfile of customfiles) {
 			if (customfile.substr(-3) !== '.js') continue;
@@ -1476,7 +1477,7 @@ export const Chat = new class {
 
 		// Load games for Console
 		Server.gameList = {};
-		for (let file of FS('game-cards').readdirSync()) {
+		for (const file of FS('game-cards').readdirSync()) {
 			if (file.substr(-3) !== '.js') continue;
 			const gamecard = require(`../game-cards/${file}`);
 			Object.assign(Chat.commands, gamecard.commands);
