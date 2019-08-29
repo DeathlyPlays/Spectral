@@ -161,7 +161,7 @@ let BattleScripts = {
 				for (let i = 0; i < this.sides.length; i++) {
 					for (let j = 0; j < this.sides[i].pokemon.length; j++) {
 						let pokemon = this.sides[i].pokemon[j];
-						if (toId(pokemon.set.item) === 'leppaberry') {
+						if (toID(pokemon.set.item) === 'leppaberry') {
 							if (leppaPokemon) {
 								leppaPokemon = null; // both sides have Leppa
 								this.add('-message', "Both sides started with a Leppa Berry.");
@@ -207,10 +207,10 @@ let BattleScripts = {
 		}
 		this.add('turn', this.turn);
 		if (this.turn % 5 === 0 || this.turn === 1) {
-			if (this.trickroom) this.removePseudoWeather(toId(this.trickroom));
+			if (this.trickroom) this.removePseudoWeather(toID(this.trickroom));
 			this.add("-message", this.startNewTrickRoom + " started!");
 			if (this.startNewTrickRoom !== "Trick Room") {
-				this.addPseudoWeather(toId(this.startNewTrickRoom), this.p1.pokemon[0], "[move]: " + this.startNewTrickRoom);
+				this.addPseudoWeather(toID(this.startNewTrickRoom), this.p1.pokemon[0], "[move]: " + this.startNewTrickRoom);
 			} else {
 				this.pseudoWeather["trickroom"] = {
 					id: 'trickroom',
