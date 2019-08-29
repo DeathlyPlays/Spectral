@@ -16,8 +16,9 @@ for (let i in Dex.formats) {
 }
 
 function getTours() {
-	if (!teamTours)
+	if (!teamTours) {
 		return 'There is no team tournament in progress.';
+	}
 	let tourList = '';
 	for (let w in teamTours) {
 		if (teamTours[w].tourRound === 0) {
@@ -26,8 +27,9 @@ function getTours() {
 			tourList += '<a class="ilink" href="/' + w + '"> Team Tournament in format ' + teamTours[w].format + ' between  ' + teamTours[w].teamA + ' and ' + teamTours[w].teamB + ' in the room ' + w + ' (Started)</a> <br />';
 		}
 	}
-	if (!tourList || tourList === '')
+	if (!tourList || tourList === '') {
 		return 'There is no team tournament in progress.';
+	}
 	return tourList;
 }
 
@@ -82,8 +84,9 @@ function getTourData(room) {
 
 function getFreePlaces(room) {
 	let roomId = toID(room);
-	if (!teamTours[roomId])
+	if (!teamTours[roomId]) {
 		return 0;
+	}
 	let membersA = teamTours[roomId].size;
 	let membersB = teamTours[roomId].size;
 	let registeredA = Object.keys(teamTours[roomId].teamAMembers);
@@ -282,7 +285,6 @@ function newRound(room) {
 	teamTours[roomId].byes = byes;
 	++teamTours[roomId].tourRound;
 	Rooms.get(roomId).addRaw(viewTourStatus(roomId));
-
 }
 
 function autoEnd(room) {
@@ -342,9 +344,11 @@ function isRoundEnded(room) {
 	let roomId = toID(room);
 	if (!teamTours[roomId]) return false;
 
-	for (let m in teamTours[roomId].matchups)
-		if (teamTours[roomId].matchups[m].result < 2)
+	for (let m in teamTours[roomId].matchups) {
+		if (teamTours[roomId].matchups[m].result < 2) {
 			return false;
+		}
+	}
 	return true;
 }
 
@@ -448,7 +452,7 @@ function viewTourStatus(room) {
 				matchupsTable += '<tr><td  align="right"><big>' + userk + '</big></td><td>&nbsp;vs&nbsp;</td><td><big align="left">' + userf + "</big></td></tr>";
 				break;
 			case 1:
-				matchupsTable += '<tr><td  align="right"><a href="/' + teamTours[roomId].matchups[i].battleLink +'" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink"><b><big>' + userk + '</big></b></a></td><td>&nbsp;<a href="/' + teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink">vs</a>&nbsp;</td><td><a href="/' + teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink"><b><big align="left">' + userf + "</big></b></a></td></tr>";
+				matchupsTable += '<tr><td  align="right"><a href="/' + teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink"><b><big>' + userk + '</big></b></a></td><td>&nbsp;<a href="/' + teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink">vs</a>&nbsp;</td><td><a href="/' + teamTours[roomId].matchups[i].battleLink + '" room ="' + teamTours[roomId].matchups[i].battleLink + '" class="ilink"><b><big align="left">' + userf + "</big></b></a></td></tr>";
 				break;
 			case 2:
 				matchupsTable += '<tr><td  align="right"><font color="green"><b><big>' + userk + '</big></b></font></td><td>&nbsp;vs&nbsp;</td><td><font color="red"><b><big align="left">' + userf + "</big></b></font></td></tr>";
@@ -462,7 +466,6 @@ function viewTourStatus(room) {
 		htmlSource += matchupsTable;
 		return htmlSource;
 	}
-
 }
 
 /*********************************************************
