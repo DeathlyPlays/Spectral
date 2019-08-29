@@ -84,7 +84,7 @@ class PingPong extends Console.Console {
 			this.back = `/pingpong leave`;
 			break;
 		case "pin":
-			html += `<table class="ladder" style="color: #FFF; margin-left: auto; margin-right: auto"><tbody><tr><th colspan="3"><h2 style="margin: 5px auto">${toId(options.cmd).startsWith("pin") ? "Enter the PIN" : "Setup a PIN"}</h2></th></tr>`;
+			html += `<table class="ladder" style="color: #FFF; margin-left: auto; margin-right: auto"><tbody><tr><th colspan="3"><h2 style="margin: 5px auto">${toID(options.cmd).startsWith("pin") ? "Enter the PIN" : "Setup a PIN"}</h2></th></tr>`;
 			html += `<tr><th colspan="3">${options.pin || "-"}</th></tr>`;
 			for (let i = 1; i < 13; i++) {
 				if (i % 3 === 1) html += `<tr>`;
