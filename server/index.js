@@ -95,8 +95,12 @@ if (Config.watchconfig) {
 global.Server = {};
 
 global.Db = require('nef')(require('nef-fs')('config/db'));
+
 global.Ontime = {};
+
 global.Tells = require('./tells');
+
+global.Console = require('./console');
 /* our shit end */
 
 global.Dex = require('../.sim-dist/dex').Dex;
