@@ -534,6 +534,7 @@ let cmds = {
 				newTeamTour(room.id, 'lineups', format, size, Chat.escapeHTML(params[4]), Chat.escapeHTML(params[5]), userCapA.name, userCapB.name);
 				this.privateModAction(`${user.name} has started a tournament with lineups between the teams ${toID(params[4])} and ${toID(params[5])} of format ${format}.`);
 				Rooms.get(room.id).addRaw(`<hr /><h2><font color="green">${user.name} has started a Team Tournament with Lineups of format ${format} between ${Chat.escapeHTML(params[4])} and ${Chat.escapeHTML(params[5])}.</font></h2><b><font color="orange">Team Captains: </font>${userCapA.name} and ${userCapB.name}</font></b> <br /><b><font color="blueviolet">Members per team:</font></b> ${size}<br /><font color="blue"><b>FORMAT:</b></font> ${format}<hr /><br /><font color="red"><b>Remember to keep your name for the entire duration of the tournament. <br />The captains must use /tt reg, [member1], [member2]... to register the lineups.</b></font>`);
+				break;
 			default:
 				return this.sendReply(`The type of tournament should be one of these: [standard/total/lineups]`);
 			}
@@ -687,7 +688,7 @@ Rooms.createBattle = function (formatid, options) {
 	if (matchup) {
 		room.teamTour = 1;
 		setActiveMatchup(matchup.tourId, matchup.matchupId, room);
-		Rooms.get(matchup.tourId).addRaw(`<a href=\"/${room}\" class=\"ilink\"><b>The team tournament battle between ${p1name} and ${p2name} has begun.</b></a>`);
+		Rooms.get(matchup.tourId).addRaw(`<a href="${room}" class="ilink"><b>The team tournament battle between ${p1name} and ${p2name} has begun.</b></a>`);
 		Rooms.get(matchup.tourId).update();
 	}
 	//end tour
