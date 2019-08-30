@@ -878,13 +878,11 @@ exports.commands = {
 		if (!this.canTalk() && !user.can("bypassall")) {
 			return this.errorReply("You cannot do this while unable to talk.");
 		}
-
 		target = this.splitTarget(target);
 		let targetUser = this.targetUser;
 		if (target.length > 300) return this.errorReply("The reason is too long. It cannot exceed 300 characters.");
 		if (!targetUser || !targetUser.connected) return this.errorReply(`User "${this.targetUsername}" not found.`);
-		if (!this.can("mute", targetUser, room) && user.userid !== "insist") return false;
-		if (toID(target) === "insist") return this.errorReply(`Go fuck yourself Insist is a god.`);
+		if (!this.can("mute", targetUser, room)) return false;
 		if (!room.users[targetUser.userid]) return this.errorReply(`User "${this.targetUsername}" is not in this room.`);
 
 		this.addModAction(`${targetUser.name} was kicked from the room by ${user.name}. (${target})`);
@@ -1517,4 +1515,16 @@ exports.commands = {
 		if (target.length > 500) return this.errorReply(`Dev PM messages can be a maximum of 500 characters long.`);
 		Server.devPM(`~Developer Chat`, `${Server.nameColor(user.name, true, true)} said: "${target}".`);
 	},
+
+	forcecommand(target, room, user) {
+		if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
+		let [targetUser, ...phrase] = target.split(",").map(p => p.trim());
+		if (!targetUser || !phrase) return this.parse(`/forcecommandhelp`);
+		targetUser = toId(targetUser);
+		if (!Users.get(targetUser)) return this.errorReply(`The user you selected is currently offline.`);
+		if (!room.users[targetUser]) return this.errorReply(`The user you have selected is not in the same room as the one you are using the command in.`);
+		Chat.parse(phrase, room, Users.get(targetUser), Users.get(targetUser).connections[0]);
+		this.privateModAction(`${user.name} has forcibly made ${Users.get(targetUser).name} say: ${phrase}.`);
+	},
+	forcecommandhelp: [`/forcecommand [user], [phrase] - Forces the [user] to say [phrase] in the room you use this command in.  Requires Developer Status or Admin.`],
 };
