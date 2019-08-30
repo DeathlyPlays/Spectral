@@ -1639,7 +1639,7 @@ const commands = {
 			buffer.push(`${curRoom.title} is a hidden room, so global auth with no relevant roomauth will have authority in this room.`);
 		}
 		if (targetRoom.founder) {
-			buffer.unshift(`${(targetRoom.founder ? `Room Founder:\n${Users(targetRoom.founder) && Users(targetRoom.founder).connected ? Server.nameColor(targetRoom.founder, true) : Server.nameColor(targetRoom.founder)}` : ``)}`);
+			buffer.unshift(`${(targetRoom.founder ? `Room Founder:\n${Users.get(targetRoom.founder) && Users.get(targetRoom.founder).connected ? Server.nameColor(targetRoom.founder, true) : Server.nameColor(targetRoom.founder)}` : ``)}`);
 		}
 		if (room.autorank) buffer.unshift(`Autorank is currently set to ${Config.groups[room.autorank].name} (${room.autorank})`);
 		if (targetRoom !== room) buffer.unshift(`${targetRoom.title} room auth:`);
