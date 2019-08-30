@@ -2169,6 +2169,7 @@ let Formats = [
 		onSwitchIn(pokemon) {
 			this.useMove("Power Trick", pokemon, pokemon, pokemon);
 		},
+		mod: "swappingpowers",
 	},
 	{
 		name: "[Gen 7] TMS Boss Rush",
