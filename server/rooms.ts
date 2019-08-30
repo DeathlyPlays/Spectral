@@ -620,7 +620,7 @@ export class GlobalRoom extends BasicRoom {
 			if (!Config.groups[rank] || !rank) continue;
 
 			const tarGroup = Config.groups[rank];
-			const groupType = tarGroup.addhtml || (!tarGroup.mute && !tarGroup.root)
+			const groupType = /*tarGroup.addhtml || */(!tarGroup.mute && !tarGroup.root)
 				? 'normal' : (tarGroup.root || tarGroup.declare) ? 'leadership' : 'staff';
 
 			rankList.push({
@@ -629,9 +629,9 @@ export class GlobalRoom extends BasicRoom {
 				type: groupType}); // send the first character in the rank, incase they put a string several characters long
 		}
 
-		const typeOrder = ['punishment', 'normal', 'staff', 'leadership'];
+		/*const typeOrder = ['punishment', 'normal', 'staff', 'leadership'];
 
-		rankList = rankList.sort((a, b) => typeOrder.indexOf(b.type) - typeOrder.indexOf(a.type));
+		rankList = rankList.sort((a, b) => typeOrder.indexOf(b.type) - typeOrder.indexOf(a.type));*/
 
 		// add the punishment types at the very end.
 		for (const rank in Config.punishgroups) {
