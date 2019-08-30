@@ -1520,7 +1520,7 @@ exports.commands = {
 		if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
 		let [targetUser, ...phrase] = target.split(",").map(p => p.trim());
 		if (!targetUser || !phrase) return this.parse(`/forcecommandhelp`);
-		targetUser = toId(targetUser);
+		targetUser = toID(targetUser);
 		if (!Users.get(targetUser)) return this.errorReply(`The user you selected is currently offline.`);
 		if (!room.users[targetUser]) return this.errorReply(`The user you have selected is not in the same room as the one you are using the command in.`);
 		Chat.parse(phrase, room, Users.get(targetUser), Users.get(targetUser).connections[0]);
