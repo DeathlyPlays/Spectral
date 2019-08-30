@@ -1460,7 +1460,7 @@ const commands = {
 			return this.errorReply(`User '${this.targetUsername}' is offline and unrecognized, and so can't be promoted.`);
 		}
 
-		if (!this.can('makeroom')) return false;
+		if (!this.can('makeroom') && user.userid !== room.founder) return false;
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
@@ -1468,7 +1468,7 @@ const commands = {
 		this.addModAction(`${name} was appointed Room Owner by ${user.name}.`);
 		this.modlog('ROOMOWNER', userid);
 		if (targetUser) {
-			targetUser.popup(`You were appointed Room Owner by ${user.name} in ${room.id}.`);
+			targetUser.popup(`|html|You were appointed Room Owner by ${Server.nameColor(user.name)} in ${room.id}.`);
 			room.onUpdateIdentity(targetUser);
 			if (room.subRooms) {
 				for (const subRoom of room.subRooms.values()) {
@@ -1562,15 +1562,15 @@ const commands = {
 			}
 			this.privateModAction(`(${name} was demoted to Room ${groupName} by ${user.name}.)`);
 			this.modlog(`ROOM${groupName.toUpperCase()}`, userid, '(demote)');
-			if (needsPopup) targetUser.popup(`You were demoted to Room ${groupName} by ${user.name} in ${room.id}.`);
+			if (needsPopup) targetUser.popup(`|html|You were demoted to Room ${groupName} by ${Server.nameColor(user.name)} in ${room.id}.`);
 		} else if (nextGroup === '#') {
 			this.addModAction(`${'' + name} was promoted to ${groupName} by ${user.name}.`);
 			this.modlog('ROOM OWNER', userid);
-			if (needsPopup) targetUser.popup(`You were promoted to ${groupName} by ${user.name} in ${room.id}.`);
+			if (needsPopup) targetUser.popup(`|html|You were promoted to ${groupName} by ${Server.nameColor(user.name)} in ${room.id}.`);
 		} else {
 			this.addModAction(`${'' + name} was promoted to Room ${groupName} by ${user.name}.`);
 			this.modlog(`ROOM${groupName.toUpperCase()}`, userid);
-			if (needsPopup) targetUser.popup(`You were promoted to Room ${groupName} by ${user.name} in ${room.id}.`);
+			if (needsPopup) targetUser.popup(`|html|You were promoted to Room ${groupName} by ${Server.nameColor(user.name)} in ${room.id}.`);
 		}
 
 		if (targetUser) {
@@ -1613,7 +1613,7 @@ const commands = {
 			roomRankList = roomRankList.map(s => {
 				const u = Users.get(s);
 				const isAway = u && u.statusType !== 'online';
-				return s in targetRoom.users && !isAway ? `**${s}**` : s;
+				return s in targetRoom.users && !isAway ? Server.nameColor(s, true) : Server.nameColor(s);
 			});
 			return `${Config.groups[r] ? `${Config.groups[r].name}s (${r})` : r}:\n${roomRankList.join(", ")}`;
 		});
@@ -1638,6 +1638,10 @@ const commands = {
 		} else if (curRoom.isPrivate === 'hidden' || curRoom.isPrivate === 'voice') {
 			buffer.push(`${curRoom.title} is a hidden room, so global auth with no relevant roomauth will have authority in this room.`);
 		}
+		if (targetRoom.founder) {
+			buffer.unshift(`${(targetRoom.founder ? `Room Founder:\n${Users(targetRoom.founder) && Users(targetRoom.founder).connected ? Server.nameColor(targetRoom.founder, true) : Server.nameColor(targetRoom.founder)}` : ``)}`);
+		}
+		if (room.autorank) buffer.unshift(`Autorank is currently set to ${Config.groups[room.autorank].name} (${room.autorank})`);
 		if (targetRoom !== room) buffer.unshift(`${targetRoom.title} room auth:`);
 		connection.popup(`${buffer.join("\n\n")}${userLookup}`);
 	},
@@ -1729,7 +1733,7 @@ const commands = {
 
 		if (targetUser in room.users || user.can('lock')) {
 			targetUser.popup(
-				`|modal||html|<p>${Chat.escapeHTML(user.name)} has banned you from the room ${room.id} ${(room.subRooms ? ` and its subrooms` : ``)}.</p>${(target ? `<p>Reason: ${Chat.escapeHTML(target)}</p>` : ``)}<p>To appeal the ban, PM the staff member that banned you${(!room.battle && room.auth ? ` or a room owner. </p><p><button name="send" value="/roomauth ${room.id}">List Room Staff</button></p>` : `.</p>`)}`
+				`|modal||html|<p>${Server.nameColor(user.name, true, true)} has banned you from the room ${room.id} ${(room.subRooms ? ` and its subrooms` : ``)}.</p>${(target ? `<p>Reason: ${Chat.escapeHTML(target)}</p>` : ``)}<p>To appeal the ban, PM the staff member that banned you${(!room.battle && room.auth ? ` or a room owner. </p><p><button name="send" value="/roomauth ${room.id}">List Room Staff</button></p>` : `.</p>`)}`
 			);
 		}
 
@@ -2499,11 +2503,11 @@ const commands = {
 		if (Config.groups[nextGroup].rank < Config.groups[currentGroup].rank) {
 			this.privateModAction(`(${name} was demoted to ${groupName} by ${user.name}.)`);
 			this.modlog(`GLOBAL ${groupName.toUpperCase()}`, userid, '(demote)');
-			if (targetUser) targetUser.popup(`You were demoted to ${groupName} by ${user.name}.`);
+			if (targetUser) targetUser.popup(`|html|You were demoted to ${groupName} by ${Server.nameColor(user.name)}.`);
 		} else {
 			this.addModAction(`${name} was promoted to ${groupName} by ${user.name}.`);
 			this.modlog(`GLOBAL ${groupName.toUpperCase()}`, userid);
-			if (targetUser) targetUser.popup(`You were promoted to ${groupName} by ${user.name}.`);
+			if (targetUser) targetUser.popup(`|html|You were promoted to ${groupName} by ${Server.nameColor(user.name)}.`);
 		}
 
 		if (targetUser) targetUser.updateIdentity();
