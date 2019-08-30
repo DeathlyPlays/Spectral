@@ -2087,7 +2087,7 @@ let Formats = [
 	// Our Formats
 	{
 		section: `Spectral's Metagames`,
-		column: 4,
+		column: 5,
 	},
 	{
 		name: "[Gen 7] Double TMS Boss Rush",
@@ -2145,11 +2145,11 @@ let Formats = [
 		team: 'randomCustomSSB',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Freeze Clause Mod', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
 		onBegin() {
-			this.addRaw("<h2>Free for All!</h2>");
-			this.addRaw("<h3>3</h3>");
-			this.addRaw("<h3>2</h3>");
-			this.addRaw("<h3>1</h3>");
-			this.addRaw("<h1>BATTLE!</h1>");
+			this.add("raw|<h2>Free for All!</h2>");
+			this.add("raw|<h3>3</h3>");
+			this.add("raw|<h3>2</h3>");
+			this.add("raw|<h3>1</h3>");
+			this.add("raw|<h1>BATTLE!</h1>");
 		},
 		onSwitchInPriority: 1,
 		onSwitchIn(pokemon) {
