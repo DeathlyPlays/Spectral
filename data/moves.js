@@ -12364,21 +12364,33 @@ let BattleMovedex = {
 				this.add('-start', pokemon, 'Power Trick');
 				let newatk = pokemon.storedStats.def;
 				let newdef = pokemon.storedStats.atk;
+				let newspa = pokemon.storedStats.spd;
+				let newspd = pokemon.storedStats.spa;
 				pokemon.storedStats.atk = newatk;
 				pokemon.storedStats.def = newdef;
+				pokemon.storedStats.spa = newspd;
+				pokemon.storedStats.spd = newspa;
 			},
 			onCopy(pokemon) {
 				let newatk = pokemon.storedStats.def;
 				let newdef = pokemon.storedStats.atk;
+				let newspa = pokemon.storedStats.spd;
+				let newspd = pokemon.storedStats.spa;
 				pokemon.storedStats.atk = newatk;
 				pokemon.storedStats.def = newdef;
+				pokemon.storedStats.spa = newspd;
+				pokemon.storedStats.spd = newspa;
 			},
 			onEnd(pokemon) {
 				this.add('-end', pokemon, 'Power Trick');
 				let newatk = pokemon.storedStats.def;
 				let newdef = pokemon.storedStats.atk;
+				let newspa = pokemon.storedStats.spd;
+				let newspd = pokemon.storedStats.spa;
 				pokemon.storedStats.atk = newatk;
 				pokemon.storedStats.def = newdef;
+				pokemon.storedStats.spa = newspd;
+				pokemon.storedStats.spd = newspa;
 			},
 			onRestart(pokemon) {
 				pokemon.removeVolatile('Power Trick');
