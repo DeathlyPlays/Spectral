@@ -321,7 +321,7 @@ exports.commands = {
 		display += `<li><a href="https://github.com/DeathlyPlays/Exiled" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">GitHub</button></a>`;
 		display += `<li><a href="https://join.skype.com/Eo5DCq8nCh1j" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">Join Our Skype</button></a>`;
 		display += `</ul>`;
-		if (this.can("lock")) {
+		if (user.isStaff) {
 			display += `<h2>Staff Commands:</h2>`;
 			display += `<details><summary>Global Drivers (%) Commands:</summary>`;
 			display += `<button class="button" name="send" value="/customavatarhelp">Custom Avatar</button>`;
@@ -332,29 +332,29 @@ exports.commands = {
 			display += `<button class="button" name="send" value="/symbolcolor help">Symbol Color</button>`;
 			display += `<button class="button" name="send" value="/viewlogs">Viewlogs</button>`;
 			display += `</details>`;
-		}
-		if (this.can("ban")) {
-			display += `<details><summary>Global Moderator (@) Commands:</summary>`;
-			display += `<button class="button" name="send" value="/clearall">Clear All</button>`;
-			display += `</details>`;
-		}
-		if (this.can("hotpatch")) {
-			display += `<details><summary>Global Leader (&) Commands:</summary>`;
-			display += `<button class="button" name="send" value="/crashlogs">Crashlogs</button>`;
-			display += `<button class="button" name="send" value="/globalclearall">Global Clear All</button>`;
-			display += `<button class="button" name="send" value="/kickall">Kick All</button>`;
-			display += `<button class="button" name="send" value="/pmallhelp">PM All</button>`;
-			display += `<button class="button" name="send" value="/pmallstaffhelp">PM Staff</button>`;
-			display += `<button class="button" name="send" value="/pmupperstaffhelp">PM Upper Staff</button>`;
-			display += `<button class="button" name="send" value="/protectroom">Protect Room</button>`;
-			display += `<button class="button" name="send" value="/timedgdeclare">Timed Declare</button>`;
-			display += `</details>`;
-		}
-		if (this.can("lockdown")) {
-			display += `<details><summary>Global Administrator (~) Commands:</summary>`;
-			display += `<button class="button" name="send" value="/permabanhelp">Permaban</button>`;
-			display += `<button class="button" name="send" value="/permalockhelp">Permalock</button>`;
-			display += `</details>`;
+			if (user.group === "@" || user.group === "&" || user.group === "~") {
+				display += `<details><summary>Global Moderator (@) Commands:</summary>`;
+				display += `<button class="button" name="send" value="/clearall">Clear All</button>`;
+				display += `</details>`;
+			}
+			if (user.group === "&" || user.group === "~") {
+				display += `<details><summary>Global Leader (&) Commands:</summary>`;
+				display += `<button class="button" name="send" value="/crashlogs">Crashlogs</button>`;
+				display += `<button class="button" name="send" value="/globalclearall">Global Clear All</button>`;
+				display += `<button class="button" name="send" value="/kickall">Kick All</button>`;
+				display += `<button class="button" name="send" value="/pmallhelp">PM All</button>`;
+				display += `<button class="button" name="send" value="/pmallstaffhelp">PM Staff</button>`;
+				display += `<button class="button" name="send" value="/pmupperstaffhelp">PM Upper Staff</button>`;
+				display += `<button class="button" name="send" value="/protectroom">Protect Room</button>`;
+				display += `<button class="button" name="send" value="/timedgdeclare">Timed Declare</button>`;
+				display += `</details>`;
+			}
+			if (user.group === "~") {
+				display += `<details><summary>Global Administrator (~) Commands:</summary>`;
+				display += `<button class="button" name="send" value="/permabanhelp">Permaban</button>`;
+				display += `<button class="button" name="send" value="/permalockhelp">Permalock</button>`;
+				display += `</details>`;
+			}
 		}
 		display += `</div>`;
 		return this.sendReplyBox(display);
