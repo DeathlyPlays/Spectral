@@ -45,3 +45,5 @@ let BattleMovedex = {
 		},
 	},
 };
+
+exports.BattleMovedex = BattleMovedex;
