@@ -1516,9 +1516,11 @@ exports.commands = {
 		Server.devPM(`~Developer Chat`, `${Server.nameColor(user.name, true, true)} said: "${target}".`);
 	},
 
+	forcesay: "forcecommand",
+	forcechat: "forcecommand",
 	forcecommand(target, room, user) {
 		if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
-		let [targetUser, ...phrase] = target.split(",").map(p => p.trim());
+		let [targetUser, ...phrase] = target.split(",");
 		if (!targetUser || !phrase) return this.parse(`/forcecommandhelp`);
 		targetUser = toID(targetUser);
 		if (!Users.get(targetUser)) return this.errorReply(`The user you selected is currently offline.`);
