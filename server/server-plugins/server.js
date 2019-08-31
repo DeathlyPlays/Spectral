@@ -1520,7 +1520,7 @@ exports.commands = {
 	forcechat: "forcecommand",
 	forcecommand(target, room, user) {
 		if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
-		let [targetUser, ...phrase] = target.split(",");
+		let [targetUser, ...phrase] = target.split(",").map(p => p.trim());
 		if (!targetUser || !phrase) return this.parse(`/forcecommandhelp`);
 		targetUser = toID(targetUser);
 		if (!Users.get(targetUser)) return this.errorReply(`The user you selected is currently offline.`);
