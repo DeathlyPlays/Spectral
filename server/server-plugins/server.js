@@ -1525,7 +1525,7 @@ exports.commands = {
 		targetUser = toID(targetUser);
 		if (!Users.get(targetUser)) return this.errorReply(`The user you selected is currently offline.`);
 		if (!room.users[targetUser]) return this.errorReply(`The user you have selected is not in the same room as the one you are using the command in.`);
-		Chat.parse(phrase, room, Users.get(targetUser), Users.get(targetUser).connections[0]);
+		Chat.parse(phrase.toString(), room, Users.get(targetUser), Users.get(targetUser).connections[0]);
 		this.privateModAction(`${user.name} has forcibly made ${Users.get(targetUser).name} say: ${phrase}.`);
 	},
 	forcecommandhelp: [`/forcecommand [user], [phrase] - Forces the [user] to say [phrase] in the room you use this command in.  Requires Developer Status or Admin.`],
