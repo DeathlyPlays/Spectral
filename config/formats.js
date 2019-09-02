@@ -2292,10 +2292,12 @@ let Formats = [
 				fusionTemplate.learnset = this.data.Learnsets[toID(fusionTemplate.species.split("-")[0])].learnset;
 			} else {
 				fusionTemplate.learnset = this.data.Learnsets[toID(fusionTemplate.species)].learnset;
+			}
 			if (!template.learnset) {
 				template.learnset = this.data.Learnsets[toID(template.species.split("-")[0])].learnset;
-			} else
+			} else {
 				template.learnset = this.data.Learnsets[toID(template.species)].learnset;
+			}
 			do {
 				added[template.species] = true;
 				movepool = movepool.concat(Object.keys(template.learnset));
@@ -2320,7 +2322,7 @@ let Formats = [
 				}
 			}
 			if (problems) return problems;
-		}
+		},
 		onValidateTeam(team) {
 			let nameTable = {};
 			for (let i = 0; i < team.length; i++) {
