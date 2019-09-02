@@ -68,7 +68,7 @@ let BattleItems = {
 	},
 
 	"thickclub": {
-		inherit:true,
+		inherit: true,
 		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
 			if (pokemon.fusion === 'Cubone' || pokemon.baseTemplate.baseSpecies === 'Marowak' || pokemon.baseTemplate.baseSpecies === 'Cubone' || pokemon.fusion === 'Marowak') {
