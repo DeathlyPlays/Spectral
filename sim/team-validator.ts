@@ -143,16 +143,8 @@ export class TeamValidator {
 		}
 
 		const nameTemplate = dex.getTemplate(set.name);
-		if (nameTemplate.exists && nameTemplate.name.toLowerCase() === set.name.toLowerCase()) {
-			// Name must not be the name of another pokemon
-			set.name = '';
-		}
-		set.name = set.name || template.baseSpecies;
-		let name = set.species;
-		if (set.species !== set.name && template.baseSpecies !== set.name) name = `${set.name} (${set.species})`;
 		let isHidden = false;
 		const lsetData: PokemonSources = {sources: [], sourcesBefore: dex.gen};
-
 		const setHas: {[k: string]: true} = {};
 		const ruleTable = this.ruleTable;
 
