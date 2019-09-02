@@ -1532,12 +1532,12 @@ exports.commands = {
 	forcecommandhelp: [`/forcecommand [user], [phrase] - Forces the [user] to say [phrase] in the room you use this command in.  Requires Developer Status or Admin.`],
 
 	'!fuse': true,
-	fuse: function (target) {
+	fuse(target) {
 		if (!this.runBroadcast()) return;
 		if (!target || target === ' ' || !target.includes(',')) return this.errorReply('Error: Invalid Argument(s).');
 		let separated = target.split(",");
 		let templateone = Object.assign({}, Dex.getTemplate(separated[0]));
-		let name = toId(separated[0]), name2 = toId(separated[1]);
+		let name = toID(separated[0]), name2 = toID(separated[1]);
 		if (!Dex.data.Pokedex[name] || !Dex.data.Pokedex[name2] || !templateone.exists) {
 			return this.errorReply("Error: Pokemon not found");
 		}
@@ -1547,7 +1547,7 @@ exports.commands = {
 		});
 		fusedTemplate.baseStats = Object.assign({}, baseStats);
 		fusedTemplate.types = [fusedTemplate.types[0]];
-		let type = (separated[2] && toId(separated[2]) === 'shiny' && template.types[1]) ? 1 : 0;
+		let type = (separated[2] && toID(separated[2]) === 'shiny' && template.types[1]) ? 1 : 0;
 		if (template.types[type] && template.types[type] !== fusedTemplate.types[0]) fusedTemplate.types.push(template.types[type]);
 		let weight = (Dex.data.Pokedex[fusedTemplate.id].weightkg + template.weightkg) / 2;
 		fusedTemplate.weightkg = weight;
