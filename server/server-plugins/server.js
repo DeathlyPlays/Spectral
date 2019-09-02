@@ -1433,7 +1433,7 @@ exports.commands = {
 
 	flogout: "forcelogout",
 	forcelogout(target, room, user) {
-		if (user.userid !== "insist" && user.userid !== "mewth" && user.userid !== "chandie") return false;
+		if (!Server.isDev(user.userid)) return false;
 		if (!this.canTalk()) return false;
 		if (!target) return this.parse("/help forcelogout");
 		target = this.splitTarget(target);
@@ -1478,6 +1478,7 @@ exports.commands = {
 		return this.sendReply("You are now showing your authority!");
 	},
 
+	"!wel": true,
 	welcome: "wel",
 	wel(target, room, user) {
 		if (!this.canTalk()) return;
@@ -1529,4 +1530,54 @@ exports.commands = {
 		this.privateModAction(`${user.name} has forcibly made ${Users.get(targetUser).name} say: ${phrase}.`);
 	},
 	forcecommandhelp: [`/forcecommand [user], [phrase] - Forces the [user] to say [phrase] in the room you use this command in.  Requires Developer Status or Admin.`],
+
+	'!fuse': true,
+	fuse: function (target) {
+		if (!this.runBroadcast()) return;
+		if (!target || target === ' ' || !target.includes(',')) return this.errorReply('Error: Invalid Argument(s).');
+		let separated = target.split(",");
+		let templateone = Object.assign({}, Dex.getTemplate(separated[0]));
+		let name = toId(separated[0]), name2 = toId(separated[1]);
+		if (!Dex.data.Pokedex[name] || !Dex.data.Pokedex[name2] || !templateone.exists) {
+			return this.errorReply("Error: Pokemon not found");
+		}
+		let baseStats = {}, fusedTemplate = Object.assign({}, Dex.getTemplate(name)), template = Object.assign({}, Dex.getTemplate(name2));
+		Object.keys(fusedTemplate.baseStats).forEach(stat => {
+			baseStats[stat] = Math.floor((fusedTemplate.baseStats[stat] + template.baseStats[stat]) / 2);
+		});
+		fusedTemplate.baseStats = Object.assign({}, baseStats);
+		fusedTemplate.types = [fusedTemplate.types[0]];
+		let type = (separated[2] && toId(separated[2]) === 'shiny' && template.types[1]) ? 1 : 0;
+		if (template.types[type] && template.types[type] !== fusedTemplate.types[0]) fusedTemplate.types.push(template.types[type]);
+		let weight = (Dex.data.Pokedex[fusedTemplate.id].weightkg + template.weightkg) / 2;
+		fusedTemplate.weightkg = weight;
+		fusedTemplate.abilities = Object.assign({'S': `<b>${template.abilities['0']}</b>`}, Dex.data.Pokedex[fusedTemplate.id].abilities);
+		this.sendReply(`|html|${Chat.getDataPokemonHTML(fusedTemplate)}`);
+		let details;
+		let weighthit = 20;
+		if (fusedTemplate.weightkg >= 200) {
+			weighthit = 120;
+		} else if (fusedTemplate.weightkg >= 100) {
+			weighthit = 100;
+		} else if (fusedTemplate.weightkg >= 50) {
+			weighthit = 80;
+		} else if (fusedTemplate.weightkg >= 25) {
+			weighthit = 60;
+		} else if (fusedTemplate.weightkg >= 10) {
+			weighthit = 40;
+		}
+		details = {
+			"Dex#": fusedTemplate.num,
+			"Gen": fusedTemplate.gen,
+			"Height": fusedTemplate.heightm + " m",
+			"Weight": fusedTemplate.weightkg + " kg <em>(" + weighthit + " BP)</em>",
+			"Dex Colour": fusedTemplate.color,
+		};
+		details['<font color="#686868">Does Not Evolve</font>'] = "";
+		this.sendReply('|raw|<font size="1">' + Object.keys(details).map(detail => {
+			if (details[detail] === '') return detail;
+			return '<font color="#686868">' + detail + ':</font> ' + details[detail];
+		}).join("&nbsp;|&ThickSpace;") + '</font>');
+	},
+	fusehelp: ["/fuse [Pokemon], [Other Pokemon] - Fuses the two Pokemon together, combining weight, typings, and abilities."],
 };
