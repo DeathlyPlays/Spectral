@@ -2179,6 +2179,13 @@ let Formats = [
 		team: 'randomTMS',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
 	},
+	{
+		name: "[Gen 7] Z-Frenzy",
+		desc: ["Battlers have unlimited Z-Move usage and can use crystals on multiple Pokemon."],
+
+		mod: 'zfrenzy',
+		ruleset: ['[Gen 7] OU'],
+	},
 ];
 
 exports.Formats = Formats;
