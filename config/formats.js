@@ -2320,7 +2320,7 @@ let Formats = [
 				}
 			}
 			if (problems) return problems;
-		},
+		}
 		onValidateTeam(team) {
 			let nameTable = {};
 			for (let i = 0; i < team.length; i++) {
