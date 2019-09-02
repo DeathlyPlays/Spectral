@@ -88,7 +88,7 @@ let BattleScripts = {
 				this.singleEvent('End', this.getAbility('Illusion'), pokemon.abilityData, pokemon);
 			}
 			this.add('-zpower', pokemon);
-			pokemon.side.zMoveUsed = true;
+			pokemon.side.zMoveUsed = false;
 		}
 		let moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove);
 		if (this.activeMove) move = this.activeMove;
