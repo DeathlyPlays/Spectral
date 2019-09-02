@@ -38,6 +38,8 @@ const commands = {
 		let buf = Chat.html`<strong class="username"><small style="display:none">${targetUser.group}</small>${targetUser.name}</strong> `;
 		const ac = targetUser.autoconfirmed;
 		if (ac && showAll) buf += ` <small style="color:gray">(ac${targetUser.userid === ac ? `` : `: ${ac}`})</small>`;
+		const trusted = targetUser.trusted;
+		if (trusted && showAll) buf += ` <small style="color:gray">(trusted${targetUser.userid === trusted ? `` : `: ${trusted}`})</small>`;
 		if (!targetUser.connected) buf += ` <em style="color:gray">(offline)</em>`;
 		let roomauth = '';
 		if (room.auth && targetUser.userid in room.auth) roomauth = room.auth[targetUser.userid];
@@ -190,7 +192,7 @@ const commands = {
 		for (const room of Rooms.rooms.values()) {
 			if (!room.game) continue;
 			if ((targetUser.userid in room.game.playerTable && !targetUser.inRooms.has(room.id)) ||
-				room.auth[targetUser.userid] === Users.PLAYER_SYMBOL) {
+				(room.auth && room.auth[targetUser.userid] === Users.PLAYER_SYMBOL)) {
 				if (room.isPrivate && !canViewAlts) {
 					continue;
 				}
@@ -2497,7 +2499,7 @@ const pages = {
 		if (!this.room.chatRoomData) return;
 		if (!this.can('mute', null, this.room)) return;
 		// Ascending order
-		const sortedPunishments = Array.from(Punishments.getPunishments(this.room.id)).sort((a, b) => a[1].expiresTime - b[1].expiresTime);
+		const sortedPunishments = Array.from(Punishments.getPunishments(this.room.id)).sort((a, b) => a[1].expireTime - b[1].expireTime);
 		buf += Punishments.visualizePunishments(sortedPunishments, user);
 		return buf;
 	},
