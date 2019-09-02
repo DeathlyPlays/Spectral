@@ -610,7 +610,6 @@ export class TeamValidator {
 		let name = set.species;
 		const template = dex.getTemplate(set.species);
 		if (!eventTemplate) eventTemplate = template;
-		if (set.name && set.species !== set.name && template.baseSpecies !== set.name) name = `${set.name} (${set.species})`;
 
 		const fastReturn = !because;
 		if (eventData.from) from = `from ${eventData.from}`;
