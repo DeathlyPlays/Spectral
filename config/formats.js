@@ -2301,7 +2301,8 @@ let Formats = [
 			do {
 				added[template.species] = true;
 				movepool = movepool.concat(Object.keys(template.learnset));
-				movepool = movepool.concat(Object.keys(fusionTemplate.learnset))
+				movepool = movepool.concat(Object.keys(fusionTemplate.learnset));
+				// @eslint-disable
 			} while (template && template.species && !added[template.species]);
 			while (prevo) {
 				movepool = movepool.concat(Object.keys(this.data.Learnsets[prevo].learnset));
