@@ -2298,12 +2298,6 @@ let Formats = [
 			} else {
 				template.learnset = this.data.Learnsets[toID(template.species)].learnset;
 			}
-			do {
-				added[template.species] = true;
-				movepool = movepool.concat(Object.keys(template.learnset));
-				movepool = movepool.concat(Object.keys(fusionTemplate.learnset));
-				// @eslint-disable
-			} while (template && template.species && !added[template.species]);
 			while (prevo) {
 				movepool = movepool.concat(Object.keys(this.data.Learnsets[prevo].learnset));
 				prevo = this.getTemplate(prevo).prevo;
