@@ -2177,7 +2177,7 @@ let Formats = [
 			if (!fusionTemplate.exists) return template;
 			try {
 				mixedTemplate.baseSpecies = mixedTemplate.species = template.species;
-				mixedTemplate.weightkg = Math.max(0.1, (template.weightkg + fusionTemplate.weightkg) / 2)
+				mixedTemplate.weightkg = Math.max(0.1, (template.weightkg + fusionTemplate.weightkg) / 2);
 
 				mixedTemplate.baseStats = {};
 				for (let statid in template.baseStats) {
