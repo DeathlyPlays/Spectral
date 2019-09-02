@@ -65,9 +65,9 @@ export class TeamValidator {
 				problems = problems.concat(setProblems);
 			}
 			if (removeNicknames) {
-				let fusionTemplate: Template;
-				if (format.name === '[Gen 7] Frantic Fusions' && (fusionTemplate = dex.getTemplate(set.name)).exists) {
-					set.name = fusionTemplate.species;
+				let mixedTemplate: Template;
+				if (format.name === '[Gen 7] Frantic Fusions' && (mixedTemplate = dex.getTemplate(set.name)).exists) {
+					set.name = mixedTemplate.species;
 				} else {
 					set.name = dex.getTemplate(set.species).baseSpecies;
 				}
