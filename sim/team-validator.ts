@@ -22,9 +22,9 @@ export class TeamValidator {
 
 	validateTeam(team: PokemonSet[] | null, removeNicknames: boolean = false): string[] | null {
 		if (team && this.format.validateTeam) {
-			return this.format.validateTeam.call(this, team, removeNicknames) || null;
+			return this.format.validateTeam.call(this, team) || null;
 		}
-		return this.baseValidateTeam(team, removeNicknames);
+		return this.baseValidateTeam(team);
 	}
 
 	baseValidateTeam(team: PokemonSet[] | null, removeNicknames = false): string[] | null {
