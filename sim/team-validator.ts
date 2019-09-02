@@ -66,7 +66,7 @@ export class TeamValidator {
 			}
 			if (removeNicknames) {
 				let crossTemplate: Template;
-				if (format.name === '[Gen 7] Frantic Fusions' && (crossTemplate = dex.getTemplate(set.name)).exists) {
+				if (format.name === '[Gen 7] Cross Evolution' && (crossTemplate = dex.getTemplate(set.name)).exists) {
 					set.name = crossTemplate.species;
 				} else {
 					set.name = dex.getTemplate(set.species).baseSpecies;
@@ -143,6 +143,8 @@ export class TeamValidator {
 		}
 
 		const nameTemplate = dex.getTemplate(set.name);
+		if (nameTemplate.exists && nameTemplate.name.toLowerCase() === set.name.toLowerCase()) {
+		}
 		set.name = set.name || template.baseSpecies;
 		let name = set.species;
 		if (set.species !== set.name && template.baseSpecies !== set.name) name = `${set.name} (${set.species})`;
