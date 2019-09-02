@@ -64,6 +64,14 @@ export class TeamValidator {
 			if (setProblems) {
 				problems = problems.concat(setProblems);
 			}
+			if (removeNicknames) {
+				let crossTemplate: Template;
+				if (format.name === '[Gen 7] Cross Evolution' && (crossTemplate = dex.getTemplate(set.name)).exists) {
+					set.name = crossTemplate.species;
+				} else {
+					set.name = dex.getTemplate(set.species).baseSpecies;
+				}
+			}
 		}
 
 		for (const [rule, source, limit, bans] of ruleTable.complexTeamBans) {
@@ -602,6 +610,7 @@ export class TeamValidator {
 		let name = set.species;
 		const template = dex.getTemplate(set.species);
 		if (!eventTemplate) eventTemplate = template;
+		if (set.name && set.species !== set.name && template.baseSpecies !== set.name) name = `${set.name} (${set.species})`;
 
 		const fastReturn = !because;
 		if (eventData.from) from = `from ${eventData.from}`;
