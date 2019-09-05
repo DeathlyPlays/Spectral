@@ -101,8 +101,8 @@ exports.commands = {
 		this.sendReplyBox(
 			`${Config.serverName}'s Github's:<br />` +
 			`- Language: JavaScript (Node.js)<br />` +
-			`- <a href="https://github.com/DeathlyPlays/Exiled">${Config.serverName}'s Server Code</a><br />` +
-			`- <a href="https://github.com/DeathlyPlays/Exiled/commits/master">What's new?</a><br />` +
+			`- <a href="https://github.com/DeathlyPlays/Spectral">${Config.serverName}'s Server Code</a><br />` +
+			`- <a href="https://github.com/DeathlyPlays/Spectral/commits/master">What's new?</a><br />` +
 			`- <a href="https://github.com/Zarel/Pokemon-Showdown">Main's source code</a><br />` +
 			`- <a href="https://github.com/Zarel/Pokemon-Showdown-Client">Client source code</a><br />` +
 			`- <a href="https://github.com/Zarel/Pokemon-Showdown-Dex">Dex source code</a>`
@@ -123,12 +123,6 @@ exports.commands = {
 	suggestions(target, room, user) {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(`<a href="http://exiledps.boards.net/board/3/suggestions">Make a suggestion for ${Config.serverName}</a>`);
-	},
-
-	'!skype': true,
-	skype(target, room, user) {
-		if (!this.runBroadcast()) return;
-		this.sendReplyBox(`<a href="https://join.skype.com/Eo5DCq8nCh1j">The Official Skype Group</a>`);
 	},
 
 	'!discord': true,
@@ -237,16 +231,15 @@ exports.commands = {
 		let popup = `|html|<font size=5 color=#F7189F><u><strong>${Config.serverName} Credits:</strong></u></font><br />` +
 			`<br />` +
 			`<u><strong>Server Maintainers:</u></strong><br />` +
-			`- ${Server.nameColor('Mewth', true)} (Owner, Sysadmin, Developer)<br />` +
-			`- ${Server.nameColor('Insist', true)} (Main Developer)<br />` +
+			`- ${Server.nameColor('Roughskull', true)} (Owner, Sysadmin, Developer)<br />` +
+			`- ${Server.nameColor('Insist', true)} (Owner, Sysadmin, Main Developer)<br />` +
+			`- ${Server.nameColor('Volco', true)} (Sysadmin, and Emergency Developer)<br />` +
 			`<br />` +
 			`<u><strong>Major Contributors:</strong></u><br />` +
 			`- ${Server.nameColor('AlfaStorm', true)} (Developer)<br />` +
 			`- ${Server.nameColor('Back At My Day', true)} (Developer)<br />` +
-			`- ${Server.nameColor('flufi', true)} (Code Breaker, Developer)<br />` +
-			`- ${Server.nameColor('HoeenHero', true)} (Developer)<br />` +
-			`- ${Server.nameColor('megas4ever', true)} (Developer)<br />` +
-			`- ${Server.nameColor('Volco', true)} (Former Owner, and Developer)<br />` +
+			`- ${Server.nameColor('flufi', true)} (Developer)<br />` +
+			`- ${Server.nameColor('Chanter', true)} (Developer of our CSS)<br />` +
 			`<br />` +
 			`<u><strong>Retired Staff:</strong></u><br />` +
 			`- ${Server.nameColor('Alpha Hawk', true)} (Former Developer)<br />` +
@@ -318,10 +311,9 @@ exports.commands = {
 		display += `<h2>Social Medias/Links:</h2><ul>`;
 		display += `<li><a href="https://discord.gg/chfz65A" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">Discord</button></a>`;
 		display += `<li><a href="http://exiledps.boards.net/" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">Forums</button></a>`;
-		display += `<li><a href="https://github.com/DeathlyPlays/Exiled" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">GitHub</button></a>`;
-		display += `<li><a href="https://join.skype.com/Eo5DCq8nCh1j" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">Join Our Skype</button></a>`;
+		display += `<li><a href="https://github.com/DeathlyPlays/Spectral" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">GitHub</button></a>`;
 		display += `</ul>`;
-		if (user.isStaff) {
+		if (user.isStaff && !this.broadcasting) {
 			display += `<h2>Staff Commands:</h2>`;
 			display += `<details><summary>Global Drivers (%) Commands:</summary>`;
 			display += `<button class="button" name="send" value="/customavatarhelp">Custom Avatar</button>`;
