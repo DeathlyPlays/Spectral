@@ -1643,7 +1643,7 @@ const commands = {
 		}
 		if (room.autorank) buffer.unshift(`Autorank is currently set to ${Config.groups[room.autorank].name} (${room.autorank})`);
 		if (targetRoom !== room) buffer.unshift(`${targetRoom.title} room auth:`);
-		connection.popup(`|html|${buffer.join("\n\n")}${userLookup}`);
+		connection.popup(`|html|${buffer.join("<br />")}${userLookup}`);
 	},
 
 	'!userauth': true,
