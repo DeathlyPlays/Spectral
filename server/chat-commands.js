@@ -1615,7 +1615,7 @@ const commands = {
 				const isAway = u && u.statusType !== 'online';
 				return s in targetRoom.users && !isAway ? Server.nameColor(s, true) : Server.nameColor(s);
 			});
-			return `${Config.groups[r] ? `${Config.groups[r].name}s (${r})` : r}:\n${roomRankList.join(", ")}`;
+			return `${Config.groups[r] ? `${Config.groups[r].name}s (${r})` : r}:<br />${roomRankList.join(", ")}`;
 		});
 
 		let curRoom = targetRoom;
@@ -1638,10 +1638,10 @@ const commands = {
 		} else if (curRoom.isPrivate === 'hidden' || curRoom.isPrivate === 'voice') {
 			buffer.push(`${curRoom.title} is a hidden room, so global auth with no relevant roomauth will have authority in this room.`);
 		}
+		if (targetRoom.autorank) buffer.unshift(`Autorank is currently set to ${Config.groups[targetRoom.autorank].name} (${targetRoom.autorank}) in ${targetRoom.title}.`);
 		if (targetRoom.founder) {
-			buffer.unshift(`${(targetRoom.founder ? `Room Founder:\n${Users.get(targetRoom.founder) && Users.get(targetRoom.founder).connected ? Server.nameColor(targetRoom.founder, true) : Server.nameColor(targetRoom.founder)}` : ``)}`);
+			buffer.unshift(`${(targetRoom.founder ? `Room Founder:<br />${Users.get(targetRoom.founder) && Users.get(targetRoom.founder).connected ? Server.nameColor(targetRoom.founder, true) : Server.nameColor(targetRoom.founder)}` : ``)}`);
 		}
-		if (room.autorank) buffer.unshift(`Autorank is currently set to ${Config.groups[room.autorank].name} (${room.autorank})`);
 		if (targetRoom !== room) buffer.unshift(`${targetRoom.title} room auth:`);
 		connection.popup(`|html|${buffer.join("<br />")}${userLookup}`);
 	},
