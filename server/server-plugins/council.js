@@ -44,7 +44,7 @@ let committee = {
 	// The name of the committee
 	name: "Perfected Pokemon",
 	// The owner(s) who can manage anything
-	owners: ["insist", "mewth"],
+	owners: ["ragininfernape"],
 	// VIPs of the committee who can manage anything unless suspended
 	vips: [],
 	// Forums link for the committee
