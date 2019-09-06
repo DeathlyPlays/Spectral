@@ -1638,7 +1638,7 @@ const commands = {
 		} else if (curRoom.isPrivate === 'hidden' || curRoom.isPrivate === 'voice') {
 			buffer.push(`${curRoom.title} is a hidden room, so global auth with no relevant roomauth will have authority in this room.`);
 		}
-		if (targetRoom.autorank) buffer.unshift(`Autorank is currently set to ${Config.groups[targetRoom.autorank].name} (${targetRoom.autorank}) in ${targetRoom.title}.`);
+		if (targetRoom.autorank) buffer.push(`Autorank is currently set to ${Config.groups[targetRoom.autorank].name} (${targetRoom.autorank}) in ${targetRoom.title}.`);
 		if (targetRoom.founder) {
 			buffer.unshift(`${(targetRoom.founder ? `Room Founder:<br />${Users.get(targetRoom.founder) && Users.get(targetRoom.founder).connected ? Server.nameColor(targetRoom.founder, true) : Server.nameColor(targetRoom.founder)}` : ``)}`);
 		}
