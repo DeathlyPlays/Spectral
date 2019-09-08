@@ -815,12 +815,12 @@ export class User extends Chat.MessageContext {
 			return false;
 		}
 
-		/* our stuff */
+		/* our stuff
 		if (Tells.inbox[userid]) Tells.sendTell(userid, this);
 		Ontime[userid] = Date.now();
 		Server.showNews(userid, this);
 		Server.checkFriends(userid, this);
-		/* our stuff end*/
+		our stuff end*/
 
 		const tokenSemicolonPos = token.indexOf(';');
 		const tokenData = token.substr(0, tokenSemicolonPos);
