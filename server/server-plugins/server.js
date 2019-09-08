@@ -1581,3 +1581,4 @@ exports.commands = {
 	},
 	fusehelp: ["/fuse [Pokemon], [Other Pokemon] - Fuses the two Pokemon together, combining weight, typings, and abilities."],
 };
+// It's hip  to fuck bees
