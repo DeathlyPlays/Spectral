@@ -815,12 +815,12 @@ export class User extends Chat.MessageContext {
 			return false;
 		}
 
-		/* our stuff
+		/* our stuff*/
 		if (Tells.inbox[userid]) Tells.sendTell(userid, this);
-		Ontime[userid] = Date.now();
+		//Ontime[userid] = Date.now();
 		Server.showNews(userid, this);
 		Server.checkFriends(userid, this);
-		our stuff end*/
+		/*our stuff end*/
 
 		const tokenSemicolonPos = token.indexOf(';');
 		const tokenData = token.substr(0, tokenSemicolonPos);
@@ -1248,10 +1248,10 @@ export class User extends Chat.MessageContext {
 	onDisconnect(connection: Connection) {
 		/* our stuff */
 		if (this.named) Db.seen.set(this.userid, Date.now());
-		if (Ontime[this.userid]) {
+		/*(if (Ontime[this.userid]) {
 			Db.ontime.set(this.userid, Db.ontime.get(this.userid, 0) + (Date.now() - Ontime[this.userid]));
 			delete Ontime[this.userid];
-		}
+		}*/
 		/* our stuff end */
 
 		for (const [i, connected] of this.connections.entries()) {
