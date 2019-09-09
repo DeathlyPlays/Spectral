@@ -1250,6 +1250,19 @@ export class BasicChatRoom extends BasicRoom {
 			'|init|chat\n|title|' + this.title + '\n' + userList + '\n' + this.log.getScrollback() + this.getIntroMessage(user)
 		);
 		if (this.poll) this.poll.onConnect(user, connection);
+		// @ts-ignore TODO: strongly-typed autorank
+		if (this.autorank) {
+			// @ts-ignore
+			if (!this.auth) {
+				// @ts-ignore
+				this.auth = this.chatRoomData.auth = {};
+				Rooms.global.writeChatRoomData();
+			}
+			// @ts-ignore
+			if (!this.auth[user.userid] && user.registered) this.auth[user.userid] = this.autorank;
+			user.updateIdentity();
+		}
+		if (this.lottery) this.lottery.onConnect(user, connection);
 		if (this.game && this.game.onConnect) this.game.onConnect(user, connection);
 	}
 	onJoin(user: User, connection: Connection) {
@@ -1263,7 +1276,19 @@ export class BasicChatRoom extends BasicRoom {
 		this.users[user.userid] = user;
 		this.userCount++;
 
+		if (this.autorank) {
+			// @ts-ignore
+			if (!this.auth) {
+				// @ts-ignore
+				this.auth = this.chatRoomData.auth = {};
+				Rooms.global.writeChatRoomData();
+			}
+			// @ts-ignore
+			if (!this.auth[user.userid] && user.registered) this.auth[user.userid] = this.autorank;
+			user.updateIdentity();
+		}
 		if (this.poll) this.poll.onConnect(user, connection);
+		if (this.lottery) this.lottery.onConnect(user, connection);
 		if (this.game && this.game.onJoin) this.game.onJoin(user, connection);
 		return true;
 	}
