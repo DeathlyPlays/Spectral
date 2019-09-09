@@ -1,5 +1,5 @@
 /*
-The following commands were coded specifically for Dewdrop
+The following commands were coded specifically for our server
 Made by Insist
 feelscool
 Basically just edits to main's info.js, and adds more, removes stuff, etc.
@@ -113,138 +113,29 @@ exports.commands = {
 		`!opensource - Show everyone that information. Requires: + % @ * # & ~`,
 	],
 
-	'!forums': true,
-	forums(target, room, user) {
-		if (!this.runBroadcast()) return;
-		this.sendReplyBox(`<a href="http://exiledps.boards.net">${Config.serverName} Forums</a>`);
-	},
-
-	'!suggestions': true,
-	suggestions(target, room, user) {
-		if (!this.runBroadcast()) return;
-		this.sendReplyBox(`<a href="http://exiledps.boards.net/board/3/suggestions">Make a suggestion for ${Config.serverName}</a>`);
-	},
-
 	'!discord': true,
 	discord(target, room, user) {
 		if (!this.runBroadcast()) return;
-		this.sendReplyBox(`<a href="https://discord.gg/3UWpXwa">The Official ${Config.serverName} Discord</a>`);
+		this.sendReplyBox(`<a href="https://discord.gg/chZgHQZ">The Official ${Config.serverName} Discord</a>`);
 	},
-
-	'!bugs': true,
-	bugs(target, room, user) {
-		if (!this.runBroadcast()) return;
-		if (room && room.battle) {
-			this.sendReplyBox(`<center><button name="saveReplay"><i class="fa fa-upload"></i> Save Replay</button> &mdash; <a href="https://www.smogon.com/forums/threads/3520646/">Questions</a> &mdash; <a href="https://www.smogon.com/forums/threads/3469932/">Bug Reports</a></center>`);
-		} else {
-			this.sendReplyBox(
-				`Have a replay showcasing a bug on ${Config.serverName}?<br />` +
-				`- <a href="http://exiledps.boards.net/thread/5/bug-reports/">Bug Reports</a>`
-			);
-		}
-	},
-
-	'!roomhelp': true,
-	roomhelp(target, room) {
-		if (!this.canBroadcast('!htmlbox')) return;
-		if (this.broadcastMessage && !this.can('declare', null, room)) return false;
-
-		if (!this.runBroadcast('!htmlbox')) return;
-		this.sendReplyBox(
-			"<strong>Room drivers (%)</strong> can use:<br />" +
-			"- /warn OR /k <em>username</em>: warn a user and show the Pok&eacute;mon Showdown rules<br />" +
-			"- /mute OR /m <em>username</em>: 7 minute mute<br />" +
-			"- /hourmute OR /hm <em>username</em>: 60 minute mute<br />" +
-			"- /unmute <em>username</em>: unmute<br />" +
-			"- /announce OR /wall <em>message</em>: make an announcement<br />" +
-			"- /modlog <em>username</em>: search the moderator log of the room<br />" +
-			"- /modnote <em>note</em>: adds a moderator note that can be read through modlog<br />" +
-			"- /kick <em>username</em>: kicks the user out of the chatroom<br />" +
-			"<br />" +
-			"<strong>Room moderators (@)</strong> can also use:<br />" +
-			"- /roomban OR /rb <em>username</em>: bans user from the room<br />" +
-			"- /roomunban <em>username</em>: unbans user from the room<br />" +
-			"- /roomvoice <em>username</em>: appoint a room voice<br />" +
-			"- /roomdevoice <em>username</em>: remove a room voice<br />" +
-			"- /staffintro <em>intro</em>: sets the staff introduction that will be displayed for all staff joining the room<br />" +
-			"- /roomsettings: change a variety of room settings, namely modchat<br />" +
-			"<br />" +
-			"<strong>Room leaders (&)</strong> can also use: <br />" +
-			"- /roommdriver <em>username</em>: appoints someone to room driver<br />" +
-			"- /roommod <em>username</em>: appoints user to room mod<br />" +
-			"- /roomdedriver /roomdemod <em>username</em>: removes user room driver/moderator<br />" +
-			"<br />" +
-			"<strong>Room owners (#)</strong> can also use:<br />" +
-			"- /roomintro <em>intro</em>: sets the room introduction that will be displayed for all users joining the room<br />" +
-			"- /rules <em>rules link</em>: set the room rules link seen when using /rules<br />" +
-			"- /roomdeauth <em>username</em>: remove all room auth from a user<br />" +
-			"- /declare <em>message</em>: make a large blue declaration to the room<br />" +
-			"- !htmlbox <em>HTML code</em>: broadcasts a box of HTML code to the room<br />" +
-			"- !showimage <em>[url], [width], [height]</em>: shows an image to the room<br />" +
-			"- /roomsettings: change a variety of room settings, including modchat, capsfilter, etc<br />" +
-			"<br />" +
-			"More detailed help can be found in the <a href=\"https://www.smogon.com/forums/threads/3570628/#post-6774654\">roomauth guide</a><br />" +
-			"<br />" +
-			"Tournament Help:<br />" +
-			"- /tour create <em>format</em>, elimination: Creates a new single elimination tournament in the current room.<br />" +
-			"- /tour create <em>format</em>, roundrobin: Creates a new round robin tournament in the current room.<br />" +
-			"- /tour end: Forcibly ends the tournament in the current room<br />" +
-			"- /tour start: Starts the tournament in the current room<br />" +
-			"<br />" +
-			"More detailed help can be found in the <a href=\"https://www.smogon.com/forums/threads/3570628/#post-6777489\">tournaments guide</a><br />" +
-			"</div>"
-		);
-	},
-
-	'!rules': true,
-	rule: 'rules',
-	rules(target, room, user) {
-		if (!target) {
-			if (!this.runBroadcast()) return;
-			this.sendReplyBox("Please follow the rules:<br />" +
-				(room && room.rulesLink ? "- <a href=\"" + Chat.escapeHTML(room.rulesLink) + "\">" + Chat.escapeHTML(room.title) + " room rules</a><br />" : "") +
-				"- <a href=\"https://pastebin.com/4MtrsP8p\">" + (room && room.rulesLink ? "Global rules" : "Rules") + "</a>");
-			return;
-		}
-		if (!room) {
-			this.errorReply("This is not a room you can set the rules of.");
-		}
-		if (!this.can('editroom', null, room)) return;
-		if (target.length > 100) {
-			return this.errorReply("Error: Room rules link is too long (must be under 100 characters). You can use a URL shortener to shorten the link.");
-		}
-
-		room.rulesLink = target.trim();
-		this.privateModAction(`(${user.name} changed the room rules link to: ${target})`);
-
-		if (room.chatRoomData) {
-			room.chatRoomData.rulesLink = room.rulesLink;
-			Rooms.global.writeChatRoomData();
-		}
-	},
-	ruleshelp: ["/rules - Show links to room rules and global rules.",
-		"!rules - Show everyone links to room rules and global rules. Requires: + % @ * # & ~",
-		"/rules [url] - Change the room rules URL. Requires: # & ~"],
 
 	servercredits: 'credits',
 	credits(target, room, user) {
-		let popup = `|html|<font size=5 color=#F7189F><u><strong>${Config.serverName} Credits:</strong></u></font><br />` +
-			`<br />` +
+		if (!this.runBroadcast()) return;
+		let credits = `<font size=5 color=#F7189F><u><strong>${Config.serverName} Credits:</strong></u></font><br />` +
+			`<hr />` +
 			`<u><strong>Server Maintainers:</u></strong><br />` +
 			`- ${Server.nameColor('Roughskull', true)} (Owner, Sysadmin, Developer)<br />` +
-			`- ${Server.nameColor('Insist', true)} (Owner, Sysadmin, Main Developer)<br />` +
+			`- ${Server.nameColor('RaginInfernape', true)} (Host, Main Developer)<br />` +
 			`- ${Server.nameColor('Volco', true)} (Sysadmin, and Emergency Developer)<br />` +
-			`<br />` +
+			`<hr />` +
 			`<u><strong>Major Contributors:</strong></u><br />` +
 			`- ${Server.nameColor('AlfaStorm', true)} (Developer)<br />` +
 			`- ${Server.nameColor('Back At My Day', true)} (Developer)<br />` +
 			`- ${Server.nameColor('flufi', true)} (Developer)<br />` +
 			`- ${Server.nameColor('Chanter', true)} (Developer of our CSS)<br />` +
-			`<br />` +
-			`<u><strong>Retired Staff:</strong></u><br />` +
-			`- ${Server.nameColor('Alpha Hawk', true)} (Former Developer)<br />` +
-			`<br />` +
-			`<u><strong>Special Thanks:</strong></u><br />` +
+			`<hr />` +
+			`<u><strong>Special Thanks:</strong></u><hr />` +
 			`- Our Staff Members<br />` +
 			`- Our Regular Users<br />`;
 		this.sendReplyBox(popup);
@@ -290,7 +181,7 @@ exports.commands = {
 		display += `<li><button class="button" name="send" value="/mangahelp">Manga</button></li>`;
 		display += `<li><button class="button" name="send" value="/meme">Meme Randomizer</button></li>`;
 		display += `<li><button class="button" name="send" value="/serverannouncementshelp">News</button></li>`;
-		display += `<li><button class="button" name="send" value="/ontimehelp">Ontime</button></li>`;
+		//display += `<li><button class="button" name="send" value="/ontimehelp">Ontime</button></li>`;
 		display += `<li><button class="button" name="send" value="/playlisthelp">Playlist</button></li>`;
 		display += `<li><button class="button" name="send" value="/profilehelp">Profile</button></li>`;
 		display += `<li><button class="button" name="send" value="/quotehelp">Quotes</button></li>`;
@@ -309,8 +200,7 @@ exports.commands = {
 		display += `<li><button class="button" name="send" value="/urbandefinehelp">Urban Define</button></li>`;
 		display += `</ul>`;
 		display += `<h2>Social Medias/Links:</h2><ul>`;
-		display += `<li><a href="https://discord.gg/chfz65A" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">Discord</button></a>`;
-		display += `<li><a href="http://exiledps.boards.net/" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">Forums</button></a>`;
+		display += `<li><a href="https://discord.gg/chZgHQZ" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">Discord</button></a>`;
 		display += `<li><a href="https://github.com/DeathlyPlays/Spectral" target="_blank"><button style="cursor: url(&quot;&quot;), auto;">GitHub</button></a>`;
 		display += `</ul>`;
 		if (user.isStaff && !this.broadcasting) {
