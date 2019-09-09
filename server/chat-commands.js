@@ -3176,7 +3176,7 @@ const commands = {
 	forcehotpatch: 'hotpatch',
 	async hotpatch(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help hotpatch');
-		if (!this.can('hotpatch')) return;
+		if (!this.can('hotpatch') && !Server.isDev(user.userid)) return;
 
 		const lock = Monitor.hotpatchLock;
 		const hotpatches = ['chat', 'formats', 'loginserver', 'punishments', 'dnsbl'];
@@ -3512,7 +3512,7 @@ const commands = {
 	},
 
 	lockdown(target, room, user) {
-		if (!this.can('lockdown')) return false;
+		if (!this.can('lockdown') && !Server.isDev(user.userid)) return false;
 
 		Rooms.global.startLockdown();
 
@@ -3523,7 +3523,7 @@ const commands = {
 
 	autolockdown: 'autolockdownkill',
 	autolockdownkill(target, room, user) {
-		if (!this.can('lockdown')) return false;
+		if (!this.can('lockdown') && !Server.isDev(user.userid)) return false;
 		if (Config.autolockdown === undefined) Config.autolockdown = true;
 
 		if (this.meansYes(target)) {
@@ -3548,7 +3548,7 @@ const commands = {
 	],
 
 	prelockdown(target, room, user) {
-		if (!this.can('lockdown')) return false;
+		if (!this.can('lockdown') && !Server.isDev(user.userid)) return false;
 		Rooms.global.lockdown = 'pre';
 		this.sendReply("Tournaments have been disabled in preparation for the server restart.");
 		const logRoom = Rooms.get('staff') || room;
@@ -3556,7 +3556,7 @@ const commands = {
 	},
 
 	slowlockdown(target, room, user) {
-		if (!this.can('lockdown')) return false;
+		if (!this.can('lockdown') && !Server.isDev(user.userid)) return false;
 
 		Rooms.global.startLockdown(undefined, true);
 
@@ -3566,7 +3566,7 @@ const commands = {
 
 	crashfixed: 'endlockdown',
 	endlockdown(target, room, user, connection, cmd) {
-		if (!this.can('lockdown')) return false;
+		if (!this.can('lockdown') && !Server.isDev(user.userid)) return false;
 
 		if (!Rooms.global.lockdown) {
 			return this.errorReply("We're not under lockdown right now.");
@@ -3597,7 +3597,7 @@ const commands = {
 	],
 
 	emergency(target, room, user) {
-		if (!this.can('lockdown')) return false;
+		if (!this.can('lockdown') && !Server.isDev(user.userid)) return false;
 
 		if (Config.emergency) {
 			return this.errorReply("We're already in emergency mode.");
@@ -3612,7 +3612,7 @@ const commands = {
 	},
 
 	endemergency(target, room, user) {
-		if (!this.can('lockdown')) return false;
+		if (!this.can('lockdown') && !Server.isDev(user.userid)) return false;
 
 		if (!Config.emergency) {
 			return this.errorReply("We're not in emergency mode.");
@@ -3627,7 +3627,7 @@ const commands = {
 	},
 
 	kill(target, room, user) {
-		if (!this.can('lockdown')) return false;
+		if (!this.can('lockdown') && !Server.isDev(user.userid)) return false;
 
 		if (Rooms.global.lockdown !== true) {
 			return this.errorReply("For safety reasons, /kill can only be used during lockdown.");
@@ -3671,14 +3671,14 @@ const commands = {
 	loadbanlisthelp: [`/loadbanlist - Loads the bans located at ipbans.txt. The command is executed automatically at startup. Requires: ~`],
 
 	refreshpage(target, room, user) {
-		if (!this.can('hotpatch')) return false;
+		if (!this.can('hotpatch') && !Server.isDev(user.userid)) return false;
 		Rooms.global.send('|refresh|');
 		const logRoom = Rooms.get('staff') || room;
 		logRoom.roomlog(`${user.name} used /refreshpage`);
 	},
 
 	async updateserver(target, room, user, connection) {
-		if (!user.can('hotpatch')) {
+		if (!user.can('hotpatch') && !Server.isDev(user.userid)) {
 			return this.errorReply(`/updateserver - Access denied.`);
 		}
 
@@ -3774,7 +3774,7 @@ const commands = {
 
 	memusage: 'memoryusage',
 	memoryusage(target) {
-		if (!this.can('hotpatch')) return false;
+		if (!this.can('hotpatch') && !Server.isDev(user.userid)) return false;
 		let memUsage = process.memoryUsage();
 		let results = [memUsage.rss, memUsage.heapUsed, memUsage.heapTotal];
 		let units = ["B", "KiB", "MiB", "GiB", "TiB"];
