@@ -4506,11 +4506,17 @@ const commands = {
 			target = '';
 		}
 		if (cmd === 'userdetails') {
+			if (target.length > 18) {
+				connection.send('|queryresponse|userdetails|null');
+				return false;
+			}
+
 			let targetUser = Users.get(target);
 			if (!trustable || !targetUser) {
 				connection.send('|queryresponse|userdetails|' + JSON.stringify({
 					id: target,
 					userid: toID(target),
+					name: target,
 					rooms: false,
 				}));
 				return false;
@@ -4539,6 +4545,7 @@ const commands = {
 			let userdetails = {
 				id: target,
 				userid: targetUser.userid,
+				name: targetUser.name,
 				avatar: targetUser.avatar,
 				group: targetUser.group,
 				autoconfirmed: !!targetUser.autoconfirmed,
@@ -4546,7 +4553,6 @@ const commands = {
 				away: targetUser.away,
 				rooms: roomList,
 			};
-			if (targetUser.userid !== target) userdetails.name = targetUser.name;
 			connection.send('|queryresponse|userdetails|' + JSON.stringify(userdetails));
 		} else if (cmd === 'roomlist') {
 			if (!trustable) return false;
@@ -4566,6 +4572,11 @@ const commands = {
 			});
 		} else if (cmd === 'roominfo') {
 			if (!trustable) return false;
+
+			if (target.length > 225) {
+				connection.end('|queryresponse|roominfo|null');
+				return false;
+			}
 
 			let targetRoom = Rooms.get(target);
 			if (!targetRoom || targetRoom === Rooms.global || (
