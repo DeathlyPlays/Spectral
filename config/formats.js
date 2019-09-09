@@ -2283,6 +2283,8 @@ let Formats = [
 				"hugepower": true,
 				"purepower": true,
 				"kyuremblack": true,
+				"wobbuffet": true,
+				"serperior": true,
 			};
 			if (!fusionTemplate.exists) return;
 			let unobtainable = {
