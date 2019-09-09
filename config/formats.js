@@ -2281,6 +2281,7 @@ let Formats = [
 				"shedinja": true,
 				"hugepower": true,
 				"purepower": true,
+				"kyuremblack": true,
 			};
 			if (!fusionTemplate.exists) return;
 			let unobtainable = {
