@@ -2197,7 +2197,7 @@ let Formats = [
 		],
 		mod: 'franticfusions',
 		ruleset: ['Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'Endless Battle Clause', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
-		banlist: ['Uber', 'Unreleased', 'Shadow Tag', 'Assist', 'Shedinja', 'Medichamite', 'Kyurem-Black'],
+		banlist: ['Uber', 'Unreleased', 'Shadow Tag', 'Assist', 'Shedinja', 'Medichamite', 'Kyurem-Black', 'Serperior'],
 		unbanlist: ['Deoxys-Speed', 'Deoxys-Defense', 'Darkrai', 'Genesect', 'Aegislash'],
 		onModifyTemplate(template, pokemon) {
 			let fusionTemplate = this.getTemplate(pokemon.name), mixedTemplate = Object.assign({}, template);
