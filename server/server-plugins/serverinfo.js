@@ -138,7 +138,7 @@ exports.commands = {
 			`<u><strong>Special Thanks:</strong></u><hr />` +
 			`- Our Staff Members<br />` +
 			`- Our Regular Users<br />`;
-		this.sendReplyBox(popup);
+		this.sendReplyBox(credits);
 	},
 
 	servercommands: 'customcommands',

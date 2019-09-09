@@ -3773,7 +3773,7 @@ const commands = {
 	},
 
 	memusage: 'memoryusage',
-	memoryusage(target) {
+	memoryusage(target, room, user) {
 		if (!this.can('hotpatch') && !Server.isDev(user.userid)) return false;
 		let memUsage = process.memoryUsage();
 		let results = [memUsage.rss, memUsage.heapUsed, memUsage.heapTotal];

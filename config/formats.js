@@ -2328,7 +2328,7 @@ let Formats = [
 			} else {
 				template.learnset = this.data.Learnsets[toID(template.species)].learnset;
 			}
-			do {	
+			do {
 				added[template.species] = true;
 				movepool = movepool.concat(Object.keys(template.learnset));
 				movepool = movepool.concat(Object.keys(fusionTemplate.learnset));
