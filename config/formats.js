@@ -2405,6 +2405,19 @@ let Formats = [
 		},
 	},
 	{
+		name: "[Gen 7] Spectral Super Staff Bros",
+		mod: "sssb",
+		desc: [
+			"The Staff on Spectral all fight it out in a battle of Super Staff Bros."
+		],
+		ruleset: ["Sleep Clause Mod", "Cancel Mod", "HP Percentage Mod"],
+		onBegin() {
+			this.add("raw|<h1>GET READY TO RUMBLE!</h1>");
+			this.add("raw|If you have any questions about the data of a staffmon use /sssb [Pokemon's name]<br />i.e. /sssb [RaginInfernape]");
+		},
+		team: "randomSSSBTeam",
+	},
+	{
 		name: "[Gen 7] Super Staff Bros Free For All",
 		desc: ['Duke it out with other users custom made pokemon.',
 			'Make your own as well! Get started with <button class="button" name="send" value="/ssb edit">/ssb edit</button>.',
