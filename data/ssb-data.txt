@@ -1,0 +1,10 @@
+RaginInfernape
+(Infernape)
+@ Life Orb
+Ability: Raging Spirit
+	- This Pokemon cannot fall asleep, and any moves with a base power of 75 or less get boosted by 1.5x.
+EVs: 252 Atk / 252 Spe / 4 HP
+Moves: Mach Punch, Knock Off, Ice Punch
+Signature Move: Firey Destruction
+	- Fire type, never misses, 15 PP, Physical, Contact, 100 BP, 50% chance to burn the target 
+Jolly Nature
