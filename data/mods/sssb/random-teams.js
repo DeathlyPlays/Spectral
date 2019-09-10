@@ -47,6 +47,20 @@ class RandomSSSBTeams extends RandomTeams {
 			// Players
 			// Drivers
 			// Voices
+			"+Back At My Day": {
+				species: "Zapdos",
+				item: "Life Orb",
+				ability: "Peal of Thunder",
+				moves: ["Aeroblast", "Earth Power", "Secret Sword"],
+				baseSignatureMove: "bigthunder",
+				signatureMove: "Big Thunder",
+				evs: {
+					spa: 252,
+					spe: 252,
+					def: 4,
+				},
+				nature: "Timid",
+			},
 		};
 		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */
