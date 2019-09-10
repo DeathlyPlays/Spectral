@@ -44,13 +44,13 @@ let BattleMovedex = {
 		category: "Special",
 		shortDesc: "50% chance to target self or foe.",
 		desc: "50% chance to target user or the opponent.",
-		pp: 16,
+		pp: 10,
 		secondary: {
 				let newTarget = this.random(2);
 				if (newTarget === 1) {
 				target = "normal";
-			} else {
-			target = "self";
+				} else {
+				target = "self";
 		},
 		flags: {protect: 1, mirror: 1},
 		priority: 0,
