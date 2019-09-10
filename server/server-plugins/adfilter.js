@@ -2,7 +2,7 @@
 
 const FS = require("../../.lib-dist/fs").FS;
 
-let adWhitelist = ["dewdrop"]; //Put your Server name here!
+let adWhitelist = [toID(Config.serverName)];
 
 let adRegex = new RegExp("(play.pokemonshowdown.com\\/~~)(?!(" + adWhitelist.join("|") + "))", "g");
 
