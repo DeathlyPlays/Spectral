@@ -44,11 +44,11 @@ let committee = {
 	// The name of the committee
 	name: "Perfected Pokemon",
 	// The owner(s) who can manage anything
-	owners: ["ragininfernape"],
+	owners: ["ragininfernape", "backatmyday"],
 	// VIPs of the committee who can manage anything unless suspended
 	vips: [],
 	// Forums link for the committee
-	forums: null,
+	forums: "https://docs.google.com/document/d/10UeZXi9q1zqXIXjTRwp0ZysSdGsy4HdraD3iGQL0k6g/edit?usp=sharing",
 	// Room of the Committee
 	room: "perfectedpokemon",
 };
@@ -219,7 +219,7 @@ exports.commands = {
 			if (committee.vips.includes(user.userid) && !Db.councilmember.has(user.userid)) return this.errorReply(`Sorry, you have been suspended and cannot unsuspend users.`);
 			if (committee.vips.includes(user.userid) && committee.vips.includes(targetUser)) return this.errorReply(`You cannot suspend fellow VIPs.`);
 			if (!committee.owners.includes(user.userid) && !committee.vips.includes(user.userid)) return this.errorReply(`This command is reserved for the ${committee.name} Council Owners.`);
-			this.sendReply(`You have successfully unsuspended "${target}"" from participating in ${committee.name} Committee proposals.`);
+			this.sendReply(`You have successfully unsuspended "${target}" from participating in ${committee.name} Committee proposals.`);
 			Db.councilmember.set(targetUser, 1);
 		},
 
