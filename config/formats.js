@@ -2415,7 +2415,7 @@ let Formats = [
 			this.add("raw|<h1>GET READY TO RUMBLE!</h1>");
 			this.add("raw|If you have any questions about the data of a staffmon use /sssb [Pokemon's name]<br />i.e. /sssb [RaginInfernape]");
 		},
-		team: "randomSSSBTeam",
+		team: "randomSSSB",
 	},
 	{
 		name: "[Gen 7] Super Staff Bros Free For All",
