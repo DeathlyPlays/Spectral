@@ -2332,7 +2332,7 @@ let Formats = [
 				added[template.species] = true;
 				movepool = movepool.concat(Object.keys(template.learnset));
 				movepool = movepool.concat(Object.keys(fusionTemplate.learnset));
-			} while (template && template.species && !added[template.species]);
+			} while (!added[template.species]);
 			while (prevo) {
 				movepool = movepool.concat(Object.keys(this.data.Learnsets[prevo].learnset));
 				prevo = this.getTemplate(prevo).prevo;
@@ -2408,7 +2408,7 @@ let Formats = [
 		name: "[Gen 7] Spectral Super Staff Bros",
 		mod: "sssb",
 		desc: [
-			"The Staff on Spectral all fight it out in a battle of Super Staff Bros."
+			"The Staff on Spectral all fight it out in a battle of Super Staff Bros.",
 		],
 		ruleset: ["Sleep Clause Mod", "Cancel Mod", "HP Percentage Mod"],
 		onBegin() {
