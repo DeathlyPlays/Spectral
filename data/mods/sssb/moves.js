@@ -48,9 +48,9 @@ let BattleMovedex = {
 		secondary: {
 				let newTarget = this.random(2);
 				if (newTarget === 1) {
-				target = "normal";
+					target = "normal";
 				} else {
-				target = "self";
+					target = "self";
 		},
 		flags: {protect: 1, mirror: 1},
 		priority: 0,
