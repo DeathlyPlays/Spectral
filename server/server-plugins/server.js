@@ -495,19 +495,19 @@ exports.commands = {
 	roomdeleaderhelp: ["/roomdeleader [username] - Demotes [username] from Room Leader. Requires: Room Founder, &, ~"],
 
 	hc(target, room, user) {
-		return this.parse("/hotpatch chat");
+		this.parse("/hotpatch chat");
 	},
 
 	hf(target, room, user) {
-		return this.parse("/hotpatch formats");
+		this.parse("/hotpatch formats");
 	},
 
 	hb(target, room, user) {
-		return this.parse("/hotpatch battles");
+		this.parse("/hotpatch battles");
 	},
 
 	hv(target, room, user) {
-		return this.parse("/hotpatch validator");
+		this.parse("/hotpatch validator");
 	},
 
 	afk: "away",
@@ -578,41 +578,18 @@ exports.commands = {
 	},
 	backhelp: ["/back - Sets a users away status back to normal."],
 
-	"!dssb": true,
-	dssb(target, room, user) {
+	"!sssb": true,
+	sssb(target, room, user) {
 		if (!this.runBroadcast()) return false;
 		if (!target || target === "help") return this.parse("/help dssb");
-		if (target === "credits") return this.parse("/dssbcredits");
 		if (toID(target) === "bamd") target = "backatmyday";
 		if (toID(target) === "c7") target = "c733937123";
 		if (toID(target) === "as") target = "alfastorm";
-		if (toID(target) === "aj") target = "almightyjudgment";
-		if (toID(target) === "ciel") target = "cieltsnow";
-		if (toID(target) === "exiler") target = "theexiler";
-		if (toID(target) === "str") target = "snorlaxtherain";
 		let targetData = getMonData(toID(target));
 		if (!targetData) return this.errorReply(`The staffmon "${target}" could not be found.`);
 		return this.sendReplyBox(targetData);
 	},
-	dssbhelp: [
-		`/dssb [staff member's name] - displays data for a staffmon's movepool, custom move, and custom ability.
-		/dssbcredits - Displays the credits of the primary creators of DSSB.`,
-	],
-
-	"!dssbcredits": true,
-	dssbdevelopers: "dssbcredits",
-	dssbcredits(target, room, user) {
-		if (!this.runBroadcast()) return;
-		let popup = `<font size=5 color=#000080><u><strong>DSSB Credits</strong></u></font><br />` +
-			`<br />` +
-			`<u><strong>Programmers:</u></strong><br />` +
-			`- ${Server.nameColor("Insist", true)} (Head Developer, Idea, Balancer, Concepts, Entries)<br />` +
-			`- ${Server.nameColor("Back At My Day", true)} (Entries, Developments)<br />` +
-			`- ${Server.nameColor("flufi", true)} (Development)<br />` +
-			`<u><strong>Special Thanks:</strong></u><br />` +
-			`- Our Staff Members for their cooperation in making this.<br />`;
-		this.sendReplyBox(popup);
-	},
+	dssbhelp: [`/dssb [staff member's name] - displays data for a staffmon's movepool, custom move, and custom ability.`],
 
 	"!dub": true,
 	dub: "dubtrack",
@@ -734,17 +711,17 @@ exports.commands = {
 			`/survey create What's your most memorable experience on ${Config.serverName}?`,
 			`/survey create How much time do you spend on ${Config.serverName} daily?`,
 			`/survey create What is your favorite custom mechanic on ${Config.serverName}?`,
-			`/survey create Was ${Config.serverName} your first Pokemon Showdown side-server?`, //5
+			`/survey create Was ${Config.serverName} your first Pokemon Showdown side-server?`,
 			`/survey create Do you like the league system?`,
 			`/survey create Do you like the idea of us adding custom megas on ${Config.serverName} that you can use in regular formats? (OU, UU, Ubers, Etc)`,
 			`/survey create What was your worst experience so far on ${Config.serverName}?`,
 			`/survey create What's your favorite food?`,
-			`/survey create What's your favorite activity on a hot summer day?`, //10
-			`/survey create What's your favorite drink`,
+			`/survey create What's your favorite activity on a hot summer day?`,
+			`/survey create What's your favorite drink?`,
 			`/survey create What's your favorite color?`,
 			`/survey create What's the most embarrassing thing that's ever happened to you in real life?`,
 			`/survey create Have you ever been banned/locked on main? (play.pokemonshowdown.com)`,
-			`/survey create Do you want to see more events on ${Config.serverName}?`, //15
+			`/survey create Do you want to see more events on ${Config.serverName}?`,
 		];
 		return this.parse(results[Math.floor(Math.random() * results.length)]);
 	},
@@ -892,7 +869,7 @@ exports.commands = {
 	kickhelp: ["/kick [user], [reason] - Kick a user out of a room [reasons are optional]. Requires: % @ # & ~"],
 
 	kickall(target, room, user) {
-		if (!this.can("declare") && user.userid !== "insist") return this.errorReply("/kickall - Access denied.");
+		if (!this.can("declare")) return this.errorReply("/kickall - Access denied.");
 		for (let i in room.users) {
 			if (room.users[i] !== user.userid) {
 				room.users[i].leaveRoom(room.id);
@@ -1517,20 +1494,6 @@ exports.commands = {
 		Server.devPM(`~Developer Chat`, `${Server.nameColor(user.name, true, true)} said: "${target}".`);
 	},
 
-	forcesay: "forcecommand",
-	forcechat: "forcecommand",
-	forcecommand(target, room, user) {
-		if (!Server.isDev(user.userid) && !this.can("bypassall")) return false;
-		let [targetUser, ...phrase] = target.split(",").map(p => p.trim());
-		if (!targetUser || !phrase) return this.parse(`/forcecommandhelp`);
-		targetUser = toID(targetUser);
-		if (!Users.get(targetUser)) return this.errorReply(`The user you selected is currently offline.`);
-		if (!room.users[targetUser]) return this.errorReply(`The user you have selected is not in the same room as the one you are using the command in.`);
-		Chat.parse(phrase.toString(), room, Users.get(targetUser), Users.get(targetUser).connections[0]);
-		this.privateModAction(`${user.name} has forcibly made ${Users.get(targetUser).name} say: ${phrase}.`);
-	},
-	forcecommandhelp: [`/forcecommand [user], [phrase] - Forces the [user] to say [phrase] in the room you use this command in.  Requires Developer Status or Admin.`],
-
 	'!fuse': true,
 	fuse(target) {
 		if (!this.runBroadcast()) return;
@@ -1581,4 +1544,3 @@ exports.commands = {
 	},
 	fusehelp: ["/fuse [Pokemon], [Other Pokemon] - Fuses the two Pokemon together, combining weight, typings, and abilities."],
 };
-// It's hip  to fuck bees
