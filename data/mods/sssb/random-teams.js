@@ -6,10 +6,8 @@ class RandomSSSBTeams extends RandomTeams {
 	randomSSSBTeam() {
 		let team = [];
 		let sets = {
-			// Administrators
-			// Leaders
-			// Moderators
-			"@RaginInfernape": {
+			// Breaking Gods
+			"☢RaginInfernape": {
 				species: "Infernape",
 				item: "Life Orb",
 				ability: "Raging Spirit",
@@ -23,6 +21,10 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
+			// Fixing Gods
+			// Administrators
+			// Leaders
+			// Moderators
 			// Bots
 			// Players
 			// Drivers
