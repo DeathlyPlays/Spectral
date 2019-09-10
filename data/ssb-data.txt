@@ -3,8 +3,19 @@ RaginInfernape
 @ Life Orb
 Ability: Raging Spirit
 	- This Pokemon cannot fall asleep, and any moves with a base power of 75 or less get boosted by 1.5x.
-EVs: 252 Atk / 252 Spe / 4 HP
+EVs: 252 Atk / 252 Spe / 4 Def
 Moves: Mach Punch, Knock Off, Ice Punch
 Signature Move: Firey Destruction
 	- Fire type, never misses, 15 PP, Physical, Contact, 100 BP, 50% chance to burn the target 
 Jolly Nature
+
+Back At My Day
+(Zapdos)
+@ Life Orb
+Ability: Peal of Thunder
+	- Volt Absorb and Motor Drive.
+EVs: 252 SpA / 252 Spe / 4 Def
+Moves: Aeroblast, Earth Power, Secret Sword
+Signature Move: Big Thunder
+	- Electric Type, never misses, 16 PP, Special, 120 BP, 50% chance to target self or foe.
+Timid Nature
