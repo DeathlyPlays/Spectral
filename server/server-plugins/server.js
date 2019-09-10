@@ -576,12 +576,12 @@ exports.commands = {
 		if (user.can("mute", null, room)) this.add(`|raw|-- ${Server.nameColor(user.userid, true)} is no longer ${status.toLowerCase()}.`);
 		if (user.can("lock")) this.parse("/show");
 	},
-	backhelp: ["/back - Sets a users away status back to normal."],
+	backhelp: ["/back - Sets a user's away status back to normal."],
 
 	"!sssb": true,
 	sssb(target, room, user) {
 		if (!this.runBroadcast()) return false;
-		if (!target || target === "help") return this.parse("/help dssb");
+		if (!target || target === "help") return this.parse("/help sssb");
 		if (toID(target) === "bamd") target = "backatmyday";
 		if (toID(target) === "c7") target = "c733937123";
 		if (toID(target) === "as") target = "alfastorm";
@@ -589,9 +589,9 @@ exports.commands = {
 		if (!targetData) return this.errorReply(`The staffmon "${target}" could not be found.`);
 		return this.sendReplyBox(targetData);
 	},
-	dssbhelp: [`/dssb [staff member's name] - displays data for a staffmon's movepool, custom move, and custom ability.`],
+	sssbhelp: [`/${Config.serverName.substr(0, 1).toLowerCase()}ssb [staff member's name] - displays data for a staffmon's movepool, custom move, and custom ability.`],
 
-	"!dub": true,
+	"!dubtrack": true,
 	dub: "dubtrack",
 	radio: "dubtrack",
 	dubtrackfm: "dubtrack",
@@ -601,7 +601,7 @@ exports.commands = {
 		let options = {
 			host: "api.dubtrack.fm",
 			port: 443,
-			path: "/room/exiled_147873230374424",
+			path: "/room/spectral",
 			method: "GET",
 		};
 		https.get(options, res => {
@@ -613,7 +613,7 @@ exports.commands = {
 					data = JSON.parse(data);
 					if (data["data"] && data["data"]["currentSong"]) nowPlaying = `<br /><strong>Now Playing:</strong> ${data["data"]["currentSong"].name}`;
 				}
-				this.sendReplyBox(`Join our dubtrack.fm room <a href="https://www.dubtrack.fm/join/exiled_147873230374424">here!</a>${nowPlaying}`);
+				this.sendReplyBox(`Join our dubtrack.fm room <a href="https://www.dubtrack.fm/join/spectral">here!</a>${nowPlaying}`);
 				room.update();
 			});
 		});
