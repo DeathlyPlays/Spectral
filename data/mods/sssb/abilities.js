@@ -39,11 +39,6 @@ let BattleAbilities = {
 				if (!this.heal(target.maxhp / 4)) {
 					this.add('-immune', target, '[from] ability: Peal of Thunder');
 				}
-				return null;
-			}
-		},
-		onTryHit(target, source, move) {
-			if (target !== source && move.type === 'Electric') {
 				if (!this.boost({spe: 1})) {
 					this.add('-immune', target, '[from] ability: Peal of Thunder');
 				}
