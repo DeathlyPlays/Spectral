@@ -58,7 +58,7 @@ function devPM(user, message) {
 	let developers = Db.devs.keys();
 	for (const name of developers) {
 		const u = Users.get(name);
-		if (!(u && u.connected)) continue;
+		if (!(u && u.connected) || (u.userid !== name)) continue;
 		u.send(`|pm|${user}|${u.group}${u.name}|/raw ${message}\n<small style="font-style="italic">You can message DEV chat by using /devmsg [msg].</small>`);
 	}
 }
