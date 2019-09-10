@@ -19,6 +19,16 @@ let BattleMovedex = {
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Fiery Dance', source);
 			this.add('-anim', source, 'Flare Blitz', source);
+			this.add(`c|☢RaginInfernape|!git gud nerd`);
+			let gitGud =
+				 `${Config.serverName}'s Github's:<br />` +
+				 `- Language: JavaScript (Node.js)<br />` +
+				`- <a href="https://github.com/DeathlyPlays/Spectral">${Config.serverName}'s Server Code</a><br />` +
+				`- <a href="https://github.com/DeathlyPlays/Spectral/commits/master">What's new?</a><br />` +
+				`- <a href="https://github.com/Zarel/Pokemon-Showdown">Main's source code</a><br />` +
+				`- <a href="https://github.com/Zarel/Pokemon-Showdown-Client">Client source code</a><br />` +
+				`- <a href="https://github.com/Zarel/Pokemon-Showdown-Dex">Dex source code</a>`
+			this.add(`raw|${gitGud}`);
 		},
 		priority: 0,
 		target: "normal",
