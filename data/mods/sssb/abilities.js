@@ -50,6 +50,7 @@ let BattleAbilities = {
 				return null;
 			}
 		},
+	},
 };
 
 exports.BattleAbilities = BattleAbilities;
