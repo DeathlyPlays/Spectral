@@ -30,6 +30,7 @@ let BattleMovedex = {
 				`- <a href="https://github.com/Zarel/Pokemon-Showdown-Dex">Dex source code</a>`
 			this.add(`raw|${gitGud}`);
 		},
+		flags: {protect: 1, mirror: 1, contact: 1},
 		priority: 0,
 		target: "normal",
 		type: "Fire",
