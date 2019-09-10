@@ -28,6 +28,29 @@ let BattleAbilities = {
 			return false;
 		},
 	},
+	// Back At My Day
+	"pealofthunder": {
+		id: "pealofthunder",
+		name: "Peal of Thunder",
+		desc: "Volt Absorb and Motor Drive.",
+		shortDesc: "Volt Absorb, Motor Drive.",
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Electric') {
+				if (!this.heal(target.maxhp / 4)) {
+					this.add('-immune', target, '[from] ability: Peal of Thunder');
+				}
+				return null;
+			}
+		},
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Electric') {
+				if (!this.boost({spe: 1})) {
+					this.add('-immune', target, '[from] ability: Peal of Thunder');
+				}
+				return null;
+			}
+		},
+	},
 };
 
 exports.BattleAbilities = BattleAbilities;
