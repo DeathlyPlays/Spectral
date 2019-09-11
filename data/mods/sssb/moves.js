@@ -55,7 +55,6 @@ let BattleMovedex = {
 		secondary: false,
 		flags: {protect: 1, mirror: 1},
 		priority: 0,
-		target: "normal"
 		type: "Electric",
 	},
 };
