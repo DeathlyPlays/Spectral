@@ -30,6 +30,7 @@ let BattlePokedex = {
 	frostorus: {
 		num: 3,
 		species: "Frostorus",
+		baseForme: "Incarnate",
 		types: ["Ice", "Flying"],
 		gender: "M",
 		baseStats: {hp: 89, atk: 90, def: 82, spa: 120, spd: 100, spe: 111},
