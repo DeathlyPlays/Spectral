@@ -301,8 +301,10 @@ const commands = {
 			if (room.battle) return this.errorReply("Battles do not support polls.");
 
 			/** @type {string} */
+			/*
 			let text = Chat.filter.call(this, target, user, room, connection);
 			if (target !== text) return this.errorReply("You are not allowed to use filtered words in polls.");
+			*/
 
 			const supportHTML = cmd === 'htmlcreate';
 			if (room.poll && room.poll.pollArray.length >= 5) return this.errorReply('There can only be up to 5 polls at a time.');
