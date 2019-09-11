@@ -30,7 +30,6 @@ let BattlePokedex = {
 	frostorus: {
 		num: 3,
 		species: "Frostorus",
-		baseForme: "Incarnate",
 		types: ["Ice", "Flying"],
 		gender: "M",
 		baseStats: {hp: 89, atk: 90, def: 82, spa: 120, spd: 100, spe: 111},
@@ -39,12 +38,10 @@ let BattlePokedex = {
 		weightkg: 162,
 		color: "White",
 		eggGroups: ["Undiscovered"],
-		otherFormes: ["frostorustherian"],
 	},
 	frostorustherian: {
-		num: 3,
+		num: 4,
 		species: "Frostorus-Therian",
-		baseSpecies: "Frostorus",
 		types: ["Ice", "Flying"],
 		gender: "M",
 		baseStats: {hp: 79, atk: 102, def: 72, spa: 130, spd: 88, spe: 122},
