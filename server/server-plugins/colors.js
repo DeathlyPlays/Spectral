@@ -52,6 +52,7 @@ exports.commands = {
 			for (let u = 0; u < target.length; u++) target[u] = target[u].trim();
 			if (!target[1]) return this.parse("/help customcolor");
 			if (toID(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
+			if (target[1].charAt(0) !== "#") return this.errorReply(`The color needs to be a hex starting with "#".`);
 			this.sendReply(`|raw|You have given <strong><font color=${target[1]}>${Chat.escapeHTML(target[0])}</font></strong> a custom color.`);
 			this.modlog(`CUSTOMCOLOR`, target[0], `gave color ${target[1]}`);
 			this.privateModAction(`(${target[0]} has received custom color: "${target[1]}" from ${user.name}.)`);
