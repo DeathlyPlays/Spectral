@@ -51,6 +51,17 @@ let BattlePokedex = {
 		color: "White",
 		eggGroups: ["Undiscovered"],
 	},
+	semighoul: {
+		num: 5,
+		species: "Semighoul",
+		types: ["Ghost", "Normal"],
+		baseStats: {hp: 50, atk: 80, def: 80, spa: 114, spd: 130, spe: 118},
+		abilities: {0: "Mummy", H: "Shadow Tag"},
+		heightm: 0.3,
+		weightkg: 12.2,
+		color: "Gray",
+		eggGroups: ["Amorphous"],
+	},
 };
 
 exports.BattlePokedex = BattlePokedex;
