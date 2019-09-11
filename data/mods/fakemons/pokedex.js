@@ -38,6 +38,7 @@ let BattlePokedex = {
 		weightkg: 162,
 		color: "White",
 		eggGroups: ["Undiscovered"],
+		otherFormes: ["frostorustherian"],
 	},
 	frostorustherian: {
 		num: 3,
