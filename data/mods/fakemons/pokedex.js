@@ -45,8 +45,6 @@ let BattlePokedex = {
 		num: 3,
 		species: "Frostorus-Therian",
 		baseSpecies: "Frostorus",
-		forme: "Therian",
-		formeLetter: "T",
 		types: ["Ice", "Flying"],
 		gender: "M",
 		baseStats: {hp: 79, atk: 102, def: 72, spa: 130, spd: 88, spe: 122},
