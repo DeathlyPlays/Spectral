@@ -46,8 +46,7 @@ let BattleMovedex = {
 		desc: "50% chance to target user or the opponent.",
 		pp: 10,
 		onModifyMove(move, pokemon, target) {
-			let newTarget = this.random(2);
-			if (newTarget === 1) {
+			if (this.random()) {
 				move.target = "normal";
 			} else {
 				move.target = "self";
