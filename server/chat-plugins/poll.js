@@ -299,9 +299,6 @@ const commands = {
 			target = target.trim();
 			if (target.length > 1024) return this.errorReply("Poll too long.");
 			if (room.battle) return this.errorReply("Battles do not support polls.");
-
-			/** @type {string} */
-			
 			let text = Chat.filter(this, target, user, room, connection);
 			if (target !== text) return this.errorReply("You are not allowed to use filtered words in polls.");
 
