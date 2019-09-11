@@ -62,7 +62,7 @@ class Survey {
 	}
 
 	generateQuestion(number) {
-		let output = `<div class="infobox"><details><summary style="margin: 2px 0 5px 0"><span style="border:1px solid #6A6;color:#484;border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> Survey-${this.surveyArray[number].surveyNum}</span> <strong style="font-size:11pt">${(this.surveyArray[number].allowHTML ? this.surveyArray[number].question : Chat.escapeHTML(this.surveyArray[number].question))}</strong><psicon pokemon="masquerain"></summary>`;
+		let output = `<div class="infobox"><details><summary style="margin: 2px 0 5px 0"><span style="border:1px solid #6A6;color:#484;border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> Survey-${this.surveyArray[number].surveyNum}</span> <strong style="font-size:11pt">${(this.surveyArray[number].allowHTML ? this.surveyArray[number].question : Chat.escapeHTML(this.surveyArray[number].question))}</strong><psicon pokemon="magearna"></summary>`;
 		output += `<div style="margin-top: 3px">Please note that anyone can see what you reply.</div>`;
 		output += `<div style="margin-top: 5px"><button class="button" value="/survey answer" name="send" title="Answer the survey."><strong>Answer the survey</strong></button></div>`;
 		output += `<div style="margin-top: 7px; padding-left: 12px"><button class="button" value="/survey results ${this.surveyArray[number].surveyNum}" name="send" title="View results - you will not be able to answer the survey after viewing results"><small>(View Results)</small></button><small>(you will not be able to answer the survey after viewing results)</small></div>`;
@@ -136,7 +136,7 @@ class Survey {
 	generateResults(ended, number) {
 		let icon = `<span style="border: 1px solid #${(ended ? '777;color:#555' : '6A6;color:#484')}; border-radius: 4px; padding: 3px"><i class="fa fa-bar-chart"></i> ${(ended ? `Survey-${this.surveyArray[number].surveyNum} ended` : `Survey-${this.surveyArray[number].surveyNum}`)}</span>`;
 		let totalReplies = `<br /><span style="font-style: italic; font-size: 9pt; color: #79330A;">[Total Replies: ${this.surveyArray[number].totalReplies}] (Started by ${this.surveyArray[number].startedUser} Started on: ${new Date(this.surveyArray[number].startTime)})</span>`;
-		let output = `<div class="infobox"><details open><summary style="margin: 2px 0 5px 0">${icon} <strong style="font-size: 11pt">${(this.surveyArray[number].allowHTML ? this.surveyArray[number].question : Chat.escapeHTML(this.surveyArray[number].question))}</strong><psicon pokemon="araquanid"></summary>`;
+		let output = `<div class="infobox"><details open><summary style="margin: 2px 0 5px 0">${icon} <strong style="font-size: 11pt">${(this.surveyArray[number].allowHTML ? this.surveyArray[number].question : Chat.escapeHTML(this.surveyArray[number].question))}</strong><psicon pokemon="marshadow"></summary>`;
 		output += totalReplies;
 		for (let i in this.surveyArray[number].repliers) {
 			if (this.surveyArray[number].repliers[i]) output += `<div>${Server.nameColor(i, true)}: <i>"${Chat.formatText(this.surveyArray[number].repliers[i])}"</i></div><br />`;
