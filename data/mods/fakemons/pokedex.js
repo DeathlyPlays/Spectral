@@ -27,6 +27,33 @@ let BattlePokedex = {
 		evoLevel: 16,
 		eggGroups: ["Flying", "Monster"],
 	},
+	frostorus: {
+		num: 3,
+		species: "Frostorus",
+		types: ["Ice", "Flying"],
+		gender: "M",
+		baseStats: {hp: 89, atk: 90, def: 82, spa: 120, spd: 100, spe: 111},
+		abilities: {0: "Snow Warning", H: "Defiant"},
+		heightm: 1.5,
+		weightkg: 162,
+		color: "White",
+		eggGroups: ["Undiscovered"],
+	},
+	frostorustherian: {
+		num: 3,
+		species: "Frostorus-Therian",
+		baseSpecies: "Frostorus",
+		forme: "Therian",
+		formeLetter: "T",
+		types: ["Ice", "Flying"],
+		gender: "M",
+		baseStats: {hp: 79, atk: 102, def: 72, spa: 130, spd: 88, spe: 122},
+		abilities: {0: "Refrigerate"},
+		heightm: 0.8,
+		weightkg: 137,
+		color: "White",
+		eggGroups: ["Undiscovered"],
+	},
 };
 
 exports.BattlePokedex = BattlePokedex;
