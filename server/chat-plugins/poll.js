@@ -79,7 +79,7 @@ class Poll {
 	 * @param {number} num
 	 */
 	generateVotes(num) {
-		let output = `<div class="infobox"><details><summary style="margin: 2px 0 5px 0"><span style="border:1px solid #6A6;color:#484;border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> Poll-${this.pollArray[num].pollNum}</span> <strong style="font-size:11pt">${this.getQuestionMarkup(num)}</strong><psicon pokemon=""></summary>`;
+		let output = `<div class="infobox"><details><summary style="margin: 2px 0 5px 0"><span style="border:1px solid #6A6;color:#484;border-radius:4px;padding:0 3px"><i class="fa fa-bar-chart"></i> Poll-${this.pollArray[num].pollNum}</span> <strong style="font-size:11pt">${this.getQuestionMarkup(num)}</strong><psicon pokemon="magearna"></summary>`;
 		this.pollArray[num].options.forEach((option, number) => {
 			output += `<div style="margin-top: 5px"><button class="button" style="text-align: left" value="/poll vote ${number}, ${this.pollArray[num].pollNum}" name="send" title="Vote for ${number}. ${Chat.escapeHTML(option.name)}">${number}. <strong>${this.getOptionMarkup(option, num)}</strong></button></div>`;
 		});
@@ -97,7 +97,7 @@ class Poll {
 	generateResults(ended = false, option = 0, num) {
 		let icon = `<span style="border: 1px solid #${(ended ? '777;color:#555' : '6A6;color:#484')}; border-radius: 4px; padding: 3px"><i class="fa fa-bar-chart"></i> ${(ended ? `Poll-${this.pollArray[num].pollNum} ended` : `Poll-${this.pollArray[num].pollNum}`)}</span>`;
 		let totalVotes = `<br /><span style="font-style: italic; font-size: 9pt; color: #79330A;">[Total Votes: ${this.pollArray[num].totalVotes}] (Started by ${this.pollArray[num].startedUser} Started on: ${new Date(this.pollArray[num].startTime)})</span>`;
-		let output = `<div class="infobox"><details open><summary style="margin: 2px 0 5px 0">${icon} <strong style="font-size: 11pt">${this.getQuestionMarkup(num)}</strong><psicon pokemon=""></summary>`;
+		let output = `<div class="infobox"><details open><summary style="margin: 2px 0 5px 0">${icon} <strong style="font-size: 11pt">${this.getQuestionMarkup(num)}</strong><psicon pokemon="marshadow"></summary>`;
 		output += totalVotes;
 		output += `<div style="padding: 8px 15px;"><font color="red"><small><center>(Options with 0 votes are not shown)</center></small></font>`;
 		output += `<table cellspacing="0" style="width: 100%; margin-top: 3px;">`;
