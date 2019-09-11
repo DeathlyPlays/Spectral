@@ -520,6 +520,7 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		let targetUser = Users.get(toID(target));
 		if (!targetUser || !targetUser.connected) return this.errorReply(`${target} is not online. Use /seen to find out how long ago they left.`);
+		if (!targetUser.lastPublicMessage) return this.errorReply(`${target} has not sent a message yet since they have been online.`);
 		return this.sendReplyBox(`${Server.nameColor(targetUser, true, true)} was last active <strong>${Chat.toDurationString(Date.now() - targetUser.lastPublicMessage)} ago.</strong>`);
 	},
 	lastactivehelp: ["/lastactive - Shows how long ago it has been since a user has posted a message."],
