@@ -5,7 +5,7 @@ let BattlePokedex = {
 	talow: {
 		num: 1,
 		species: "Talow",
-		types: ["Flying"],
+		types: ["Flying", "Poison"],
 		baseStats: {hp: 40, atk: 60, def: 32, spa: 50, spd: 36, spe: 82},
 		abilities: {0: "Keen Eye", H: "Poison Heal"},
 		heightm: 0.3,
