@@ -35,7 +35,7 @@ let BattleAbilities = {
 		desc: "Volt Absorb and Motor Drive.",
 		shortDesc: "Volt Absorb, Motor Drive.",
 		onTryHit(target, source, move) {
-			if (target !== source && move.type === 'Electric') {
+			if (move.type === 'Electric') {
 				if (!this.heal(target.maxhp / 4)) {
 					this.add('-immune', target, '[from] ability: Peal of Thunder');
 				}
