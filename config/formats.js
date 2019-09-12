@@ -2476,7 +2476,6 @@ let Formats = [
 		team: 'randomFakemons',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
 	},
-	{
 ];
 
 exports.Formats = Formats;
