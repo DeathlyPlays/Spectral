@@ -4,3 +4,5 @@ dev-tools/globals.js
 node_modules/
 .*-dist/
 server/server-plugins/hex.js
+tools/set-import/importer.js
+tools/set-import/sets
