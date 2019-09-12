@@ -107,17 +107,20 @@ let BattlePokedex = {
 		heightm: 0.5,
 		weightkg: 23,
 		color: "Gray",
+		evos: ["protokkol"],
 		eggGroups: ["Mineral"],
 	},
-	protokol: {
+	protokkol: {
 		num: 10,
-		species: "Protokol",
+		species: "Protokkol",
 		types: ["Steel"],
 		baseStats: {hp: 80, atk: 60, def: 110, spa: 105, spd: 94, spe: 40},
 		abilities: {0: "Magnet Pull", H: "Galvanize"},
 		heightm: 1.2,
 		weightkg: 162,
 		color: "Gray",
+		prevo: "protok",
+		evoLevel: 24,
 		eggGroups: ["Mineral"],
 	},
 };
