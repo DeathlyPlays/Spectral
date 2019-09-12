@@ -2468,6 +2468,15 @@ let Formats = [
 		mod: 'zfrenzy',
 		ruleset: ['[Gen 7] OU'],
 	},
+	{
+		name: "[Gen 7] Fakemons Random Battle",
+		desc: ["Randomized Fakemons."],
+
+		mod: 'fakemons',
+		team: 'randomFakemons',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
 ];
 
 exports.Formats = Formats;
