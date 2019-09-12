@@ -106,7 +106,7 @@ exports.commands = {
 		if (!this.can('declare', null, room)) return this.errorReply("You must be ranked # or higher to start a game of panagram in this room.");
 		if (room.id !== 'casino') return this.sendReply('|html|You can only start a game of Panagram in the <button name = "send" value = "/join casino">Casino</button>');
 		if (!target || isNaN(target)) return this.errorReply("Usage: /panagram [number of sessions]");
-		if (target < 150) return this.errorReply("The minimum number of sessions you can have at a time is 150.");
+		if (target < 4) return this.errorReply("The minimum number of sessions you can have at a time is 4.");
 		if (~target.indexOf('.')) return this.errorReply("The number of sessions cannot be a decimal value.");
 		this.privateModAction(`${user.name} has started a game of panagrams set for ${target} sessions.`);
 		Rooms.get(`lobby`).add(`|raw|<div class="broadcast-purple"><center>A session of <strong>Panagrams</strong> in <button name="joinRoom" value="${room.id}">"${room.title}"</button> has commenced for "${target}" games!</center></div>`);
