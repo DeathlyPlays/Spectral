@@ -41,6 +41,20 @@ class RandomSSSBTeams extends RandomTeams {
 			},
 			// Fixing Gods
 			// Administrators
+			"~Zakuree": {
+				species: "Gallade",
+				item: "Soul Orb",
+				ability: "Silver Spirit",
+				moves: ["Cross Chop", "Psycho Cut", "Blaze Kick"],
+				baseSignatureMove: "16years",
+				signatureMove: "16 Years",
+				evs: {
+					atk: 160,
+					spa: 96,
+					spe: 252,
+				},
+				nature: "Jolly",
+			},
 			// Leaders
 			// Moderators
 			// Bots
