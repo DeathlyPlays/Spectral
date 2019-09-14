@@ -51,8 +51,6 @@ let BattleMovedex = {
 			if (newTarget > 50) {
 				move.target = "normal";
 			} else {
-				move.category = "Status";
-				move.basePower = 0;
 				move.target = "self";
 			}
 		},
