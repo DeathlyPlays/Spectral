@@ -2476,6 +2476,14 @@ let Formats = [
 		team: 'randomFakemons',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
 	},
+	{
+		name: "[Gen 7] Deltamons",
+		desc: ["Pet randomized Pokemon by Roughskull!"],
+
+		mod: 'pet',
+		team: 'randomPetmons',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
 ];
 
 exports.Formats = Formats;
