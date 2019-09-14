@@ -30,3 +30,17 @@ Moves: Cross Chop, Psycho Cut, Blaze Kick
 Signature Move: 16 Years
 	- Dark Type, never misses, Special, 200 BP. Fails if user has more than 1 HP. User faints.
 Jolly Nature
+
+Chandie
+(Marshadow)
+@ Void Heart (When used with Sharp Shadow, allows Marshadow to use Embrace the Void.)
+Ability: Shade Seeker
+	- Unaware + If the user or opposing Pokémon have stat changes, this Pokémon's Ghost moves have +1 priority.
+EVs: 252 Atk / 4 SpD / 252 Spe 
+Moves: Close Combat, Spectral Thief, Ice Punch
+Signature Move: Sharp Shadow
+	- Ghost Type, never misses, 32 PP, Physical, 40 BP. User switches out after damaging the target.
+Z-Move: Embrace the Void
+	- Ghost Type, Physical, 120 BP. Sets up Magic Room, switches out the opposing Pokémon and raises the user's Attack by 1 stage.
+Jolly Nature
+
