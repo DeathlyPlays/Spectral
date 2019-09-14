@@ -1036,14 +1036,10 @@ export class BasicChatRoom extends BasicRoom {
 	game: RoomGame | null;
 	battle: RoomBattle | null;
 	tour: Tournament | null;
-<<<<<<< HEAD
 	/* our stuff */
 	disableEmoticons: boolean;
 	/* our stuff end*/
-	constructor(roomid: string, title?: string, options: AnyObject = {}) {
-=======
 	constructor(roomid: RoomID, title?: string, options: AnyObject = {}) {
->>>>>>> a60dd6fb11775edcea61eea396e134ddaa3c51ad
 		super(roomid, title);
 
 		if (options.logTimes === undefined) options.logTimes = true;
