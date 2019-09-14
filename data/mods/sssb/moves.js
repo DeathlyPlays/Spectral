@@ -17,8 +17,8 @@ let BattleMovedex = {
 			status: "brn",
 		},
 		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Fiery Dance', source);
-			this.add('-anim', source, 'Flare Blitz', source);
+			this.add('-anim', source, 'Fiery Dance', target);
+			this.add('-anim', source, 'Flare Blitz', target);
 			this.add(`c|☢RaginInfernape|!git gud nerd`);
 			let gitGud =
 				 `${Config.serverName}'s Github's:<br />` +
@@ -54,6 +54,9 @@ let BattleMovedex = {
 				move.target = "self";
 			}
 		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Thunder', target);
+		},
 		secondary: null,
 		flags: {protect: 1, mirror: 1},
 		priority: 0,
@@ -80,42 +83,7 @@ let BattleMovedex = {
 		contestType: "Cool",
 	},
 
-	// Horrific17
-	"meteorcharge": {
-		id: "meteorcharge",
-		name: "Meteor Charge",
-		desc: "Sets the weather to Sunny Day, and deals 1/3rd of the user's maximum health in recoil.",
-		shortDesc: "Weather becomes sunny, 1/3 recoil of max HP.",
-		bp: 100,
-		accuracy: 100,
-		pp: 5,
-		priority: 0,
-		recoil: [1, 3],
-		flags: {protect: 1, mirror: 1, contact: 1, defrost: 1},
-		weather: "sunnyday",
-		category: "Physical",
-		type: "Fire",
-		secondary: null,
-		target: "normal",
-	},
-
-	// Horrific17
-	"eternalflames": {
-		id: "eternalflames",
-		name: "Eternal Flames",
-		shortDesc: "Burns and traps the target.",
-		basePower: 120,
-		accuracy: true,
-		isZ: "arcaniumz",
-		pp: 1,
-		priority: 0,
-		secondary: null,
-		category: "Physical",
-		type: "Fire",
-		volatileStatus: "partiallytrapped",
-		status: "brn",
-		target: "normal",
-	},
+	// Chandie
 	"embracethevoid": {
 		id: "embracethevoid",
 		name: "Embrace the Void",
@@ -139,6 +107,74 @@ let BattleMovedex = {
 		forceSwitch: true,
 		category: "Physical",
 		type: "Ghost",
+	},
+
+	// Horrific17
+	"meteorcharge": {
+		id: "meteorcharge",
+		name: "Meteor Charge",
+		desc: "Sets the weather to Sunny Day, and deals 1/3rd of the user's maximum health in recoil.",
+		shortDesc: "Weather becomes sunny, 1/3 recoil of max HP.",
+		bp: 100,
+		accuracy: 100,
+		pp: 5,
+		priority: 0,
+		recoil: [1, 3],
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Wild Charge', target);
+			this.add('-anim', source, 'Flame Charge', target);
+		},
+		flags: {protect: 1, mirror: 1, contact: 1, defrost: 1},
+		weather: "sunnyday",
+		category: "Physical",
+		type: "Fire",
+		secondary: null,
+		target: "normal",
+	},
+
+	// Horrific17
+	"eternalflames": {
+		id: "eternalflames",
+		name: "Eternal Flames",
+		shortDesc: "Burns and traps the target.",
+		basePower: 120,
+		accuracy: true,
+		isZ: "arcaniumz",
+		pp: 1,
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Flare Blitz', target);
+		},
+		priority: 0,
+		secondary: null,
+		category: "Physical",
+		type: "Fire",
+		volatileStatus: "partiallytrapped",
+		status: "brn",
+		target: "normal",
+	},
+
+	// Zakuree
+	"16years": {
+		id: "16years",
+		name: "16 Years",
+		shortDesc: "Only works at 1 HP, user faints after usage.",
+		basePower: 200,
+		onTryHit(pokemon) {
+			if (pokemon.hp !== 1) return false;
+			this.hint(`This move may be only used once the user has 1 HP.`);
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Hex', source);
+			this.add('-anim', source, 'Hyper Beam', target);
+		},
+		accuracy: true,
+		pp: 5,
+		priority: 0,
+		secondary: null,
+		selfdestruct: "ifHit",
+		category: "Special",
+		type: "Dark",
+		target: "normal",
 	},
 };
 
