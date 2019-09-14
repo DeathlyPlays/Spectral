@@ -25,7 +25,7 @@ Zakuree
 @ Soul Orb
 	- Attacks do x1.5, loses 1/10th HP when attacking
 Ability: Heart of Steel
-	- When hit by an attack that would K.O, lives on 1 HP and doubles Atk/SpAtk.
+	- When hit by an attack that would K.O, lives on 1 HP and boosts Atk, SpA and Spe by 1 stage.
 EVs: 160 Atk / 96 SpA / 252 Spe
 Moves: Cross Chop, Psycho Cut, Blaze Kick
 Signature Move: 16 Years
