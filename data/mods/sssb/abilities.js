@@ -101,7 +101,19 @@ let BattleAbilities = {
 				boosts['spa'] = 0;
 				boosts['accuracy'] = 0;
 			}
-			//if (source.boosts['atk'] > 0 || source.boosts['def'] > 0 || source.boosts['spa'] > 0 || source.boosts['spd'] > 0 || source.boosts['spe'] > 0 || source.boosts['accuracy'] > 0 || source.boosts['evasion'] > 0 || target.boosts['atk'] > 0 || target.boosts['def'] > 0 || target.boosts['spa'] > 0 || target.boosts['spd'] > 0 || target.boosts['spe'] > 0 || target.boosts['accuracy'] > 0 || target.boosts['evasion'] > 0) return move.priority + 1;
+		},
+		onModifyPriority(priority, pokemon, target, move) {
+			let changed = false;
+			for (let stats in pokemon.boosts) {
+				if (pokemon.boosts[stats] !== 0 || target.boosts[stats] !== 0) { // if it doesn't work change || to &&
+					changed = true;
+					break;
+				}
+			}
+			if (changed && move && move.type === 'Ghost') {
+				move.pranksterBoosted = true;
+				return priority + 1;
+			}
 		},
 	},
 };
