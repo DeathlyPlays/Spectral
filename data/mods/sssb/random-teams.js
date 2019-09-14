@@ -88,8 +88,7 @@ class RandomSSSBTeams extends RandomTeams {
 			// Bots
 			// Players
 			// Drivers
-			// Voices
-			"+Back At My Day": {
+			"%Back At My Day": {
 				species: "Zapdos",
 				item: "Life Orb",
 				ability: "Peal of Thunder",
@@ -103,6 +102,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Timid",
 			},
+			// Voices
 		};
 		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */
