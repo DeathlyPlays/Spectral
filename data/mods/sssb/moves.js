@@ -77,11 +77,40 @@ let BattleMovedex = {
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Sucker Punch', target);
 		},
-
 		target: "normal",
 		type: "Ghost",
 		zMovePower: 100,
 		contestType: "Cool",
+	},
+
+	// Chandie
+	"embracethevoid": {
+		id: "embracethevoid",
+		name: "Embrace the Void",
+		shortDesc: "Switches out opponent. Summons Magic Room. Gives user +1 Attack.",
+		basePower: 120,
+		accuracy: true,
+		isZ: "voidheart",
+		pp: 1,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Dark Void', target);
+			this.add('-anim', source, 'Never-Ending Nightmare', target);
+		},
+		pseudoWeather: "magicroom",
+		secondary: {
+			chance: 100,
+			self: {
+				boosts: {
+					atk: 1,
+				},
+			},
+		},
+		target: "normal",
+		forceSwitch: true,
+		category: "Physical",
+		type: "Ghost",
 	},
 
 	// Horrific17
@@ -119,34 +148,6 @@ let BattleMovedex = {
 		volatileStatus: "partiallytrapped",
 		status: "brn",
 		target: "normal",
-	},
-	"embracethevoid": {
-		id: "embracethevoid",
-		name: "Embrace the Void",
-		shortDesc: "Switches out opponent. Summons Magic Room. Gives user +1 Attack.",
-		basePower: 120,
-		accuracy: true,
-		isZ: "voidheart",
-		pp: 1,
-		priority: 0,
-		flags: {protect: 1, mirror: 1},
-		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Dark Void', target);
-			this.add('-anim', source, 'Never-Ending Nightmare', target);
-		},
-		pseudoWeather: "magicroom",
-		secondary: {
-			chance: 100,
-			self: {
-				boosts: {
-					atk: 1,
-				},
-			},
-		},
-		target: "normal",
-		forceSwitch: true,
-		category: "Physical",
-		type: "Ghost",
 	},
 };
 
