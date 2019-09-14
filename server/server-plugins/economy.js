@@ -405,12 +405,14 @@ exports.commands = {
 		this.sendReplyBox(output);
 	},
 
+/*
 	store: "shop",
 	shop(target, room, user) {
 		if (!this.runBroadcast()) return;
 		return this.sendReplyBox(shopDisplay);
 	},
 	shophelp: [`/shop - Display items you can buy with your ${moneyPlural}.`],
+*/
 
 	buy(target, room, user) {
 		if (!target) return this.parse("/help buy");
