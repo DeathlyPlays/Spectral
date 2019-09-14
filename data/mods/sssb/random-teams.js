@@ -56,6 +56,20 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Jolly",
 			},
 			// Leaders
+			"&Chandie": {
+				species: "Marshadow",
+				item: "Void Heart",
+				ability: "Shade Seeker",
+				moves: ["Close Combat", "Spectral Thief", "Ice Punch"],
+				baseSignatureMove: "sharpshadow",
+				signatureMove: "Sharp Shadow",
+				evs: {
+					atk: 252,
+					def: 4,
+					spe: 252,
+				},
+				nature: "Jolly",
+			},
 			// Moderators
 			"@Horrific17": {
 				species: "Arcanine",
