@@ -12,7 +12,7 @@ let BattleItems = {
 		zMoveUser: ["Arcanine"],
 		desc: "If held by an Arcanine with Meteor Charge, it can use Eternal Flames.",
 	},
-		"voidheart": {
+	"voidheart": {
 		id: "voidheart",
 		name: "Void Heart",
 		spritenum: 689,
