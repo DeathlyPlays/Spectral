@@ -5,7 +5,7 @@ let BattleAbilities = {
 	// RaginInfernape
 	"ragingspirit": {
 		id: "ragingspirit",
-		name: "Raging Spirits",
+		name: "Raging Spirit",
 		desc: "Any moves that have 75 or less base power get boosted by 1.5x, cannot fall asleep.",
 		shortDesc: "Moves that have <= 75 BP get 1.5x damage, cannot fall asleep.",
 		onBasePowerPriority: 8,
