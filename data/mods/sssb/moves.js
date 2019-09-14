@@ -183,6 +183,22 @@ let BattleMovedex = {
 		type: "Dark",
 		target: "normal",
 	},
+	// AlfaStorm
+	"doomstrike": {
+		id: "doomstrike",
+		name: "Doom Strike",
+		desc: "User switches out after damaging the target.",
+		shortDesc: "Switches out after damaging.",
+		basePower: 90,
+		accuracy: 100,
+		pp: 16,
+		priority: 0,
+		selfSwitch: true,
+		secondary: null,
+		category: "Special",
+		type: "Dark",
+		target: "normal",
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;
