@@ -19,3 +19,14 @@ Moves: Aeroblast, Earth Power, Secret Sword
 Signature Move: Big Thunder
 	- Electric Type, never misses, 16 PP, Special, 120 BP, 50% chance to target self or foe.
 Timid Nature
+
+Zakuree
+(Gallade)
+@ Soul Orb (Attacks do x1.5, loses 1/10th HP when attacking)
+Ability: Heart of Steel
+	- When hit by an attack that would K.O, lives on 1 HP and doubles Atk/SpAtk.
+EVs: 160 Atk / 96 SpA / 252 Spe
+Moves: Cross Chop, Psycho Cut, Blaze Kick
+Signature Move: 16 Years
+	- Dark Type, never misses, Special, 200 BP. Fails if user has more than 1 HP. User faints.
+Jolly Nature
