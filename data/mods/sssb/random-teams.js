@@ -44,7 +44,7 @@ class RandomSSSBTeams extends RandomTeams {
 			"~Zakuree": {
 				species: "Gallade",
 				item: "Soul Orb",
-				ability: "Silver Spirit",
+				ability: "Heart of Steel",
 				moves: ["Cross Chop", "Psycho Cut", "Blaze Kick"],
 				baseSignatureMove: "16years",
 				signatureMove: "16 Years",
