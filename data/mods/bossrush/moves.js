@@ -39,6 +39,42 @@ let BattleMovedex = {
 		zMovePower: 200,
 		contestType: "Tough",
 	},
+	"distortion": {
+		num: -547,
+		accuracy: 100,
+		basePower: 75,
+		category: "Special",
+		desc: "Has a 20% chance to cause the target to fall asleep. If this move is successful on at least one target and the user is a Meloetta, it changes to Pirouette Forme if it is currently in Aria Forme, or changes to Aria Forme if it is currently in Pirouette Forme. This forme change does not happen if the Meloetta has the Sheer Force Ability. The Pirouette Forme reverts to Aria Forme when Meloetta is not active.",
+		shortDesc: "20% chance to freeze foe(s). Giratina transforms.",
+		id: "distortion",
+		name: "Distortion",
+		pp: 10,
+		priority: 1,
+		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
+	},
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Explosion", target);
+		},
+		secondary: {
+			chance: 20,
+			status: 'frz',
+		},
+		onHit(target, pokemon, move) {
+			if (pokemon.baseTemplate.baseSpecies === 'Giratina' && !pokemon.transformed) {
+				move.willChangeForme = true;
+			}
+		},
+		onAfterMoveSecondarySelf(pokemon, target, move) {
+			if (move.willChangeForme) {
+				pokemon.formeChange(pokemon.template.speciesid === 'giratinaorigin' ? 'Giratina' : 'Giratina-Origin', this.effect, false, '[msg]');
+			}
+		},
+		target: "allAdjacentFoes",
+		type: "Ghost",
+		zMovePower: 140,
+		contestType: "Beautiful",
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;
