@@ -70,6 +70,20 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
+			"&AlfaStorm": {
+				species: "Yveltal",
+				item: "Life Orb",
+				ability: "Dark Aura",
+				moves: ["Oblivion Wing", "Ice Beam", "Earth Power"],
+				baseSignatureMove: "doomstrike",
+				signatureMove: "Doom Strike",
+				evs: {
+					def: 4,
+					spa: 252,
+					spe: 252,
+				},
+				nature: "Modest",
+			},
 			// Moderators
 			"@Horrific17": {
 				species: "Arcanine",
