@@ -8,6 +8,8 @@ Moves: Mach Punch, Knock Off, Ice Punch
 Signature Move: Firey Destruction
 	- Fire type, never misses, 15 PP, Physical, Contact, 100 BP, 50% chance to burn the target, Defrosts user if frozen.
 Jolly Nature
+Notes: Insanely powerful Knock Off and Mach Punch, sweeper, revenge killer and counters Zakuree.
+Rank: N/A
 
 Back At My Day
 (Zapdos)
@@ -19,6 +21,8 @@ Moves: Aeroblast, Earth Power, Secret Sword
 Signature Move: Big Thunder
 	- Electric Type, never misses, 16 PP, Special, 120 BP, 50% chance to target self or foe.
 Timid Nature
+Notes: Big Thunder counters Life Orb recoil and can sweep if Peal of Thunder activates.
+Rank: N/A
 
 Zakuree
 (Gallade)
@@ -31,6 +35,8 @@ Moves: Cross Chop, Psycho Cut, Blaze Kick
 Signature Move: 16 Years
 	- Dark Type, never misses, Special, 200 BP. Fails if user has more than 1 HP. User faints.
 Jolly Nature
+Notes: Suicide Lead, gets hard countered by priority moves.
+Rank: N/A
 
 Chandie
 (Marshadow)
@@ -45,6 +51,8 @@ Signature Move: Sharp Shadow
 Z-Move: Embrace the Void
 	- Ghost Type, Physical, 120 BP. Sets up Magic Room, switches out the opposing Pokémon and raises the user's Attack by 1 stage.
 Jolly Nature
+Notes: Spectral Thief and Embrace the Void is sorta wasted due to Unaware.
+Rank: N/A
 
 Horrific17
 (Arcanine)
@@ -59,3 +67,5 @@ Signature Move: Meteor Charge
 Z-Move: Eternal Flames
 	- Burns and traps the target, 120 BP, Fire type, Physical.
 Jolly Nature
+Notes: Short lifespan due to recoil, revenge killer and counters Zakuree.
+Rank: N/A
