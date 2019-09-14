@@ -116,6 +116,30 @@ let BattleMovedex = {
 		status: "brn",
 		target: "normal",
 	},
+	"embracethevoid": {
+		id: "embracethevoid",
+		name: "Embrace the Void",
+		shortDesc: "Switches out opponent. Summons Magic Room. Gives user +1 Attack.",
+		basePower: 120,
+		accuracy: true,
+		isZ: "voidheart",
+		pp: 1,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		pseudoWeather: "magicroom",
+		secondary: {
+			chance: 100,
+			self: {
+				boosts: {
+					atk: 1,
+				},
+			},
+		},
+		target: "normal",
+		forceSwitch: true,
+		category: "Physical",
+		type: "Ghost",
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;
