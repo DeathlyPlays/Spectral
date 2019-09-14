@@ -60,7 +60,7 @@ let BattleMovedex = {
 		priority: 0,
 		type: "Electric",
 	},
-		"sharpshadow": {
+	"sharpshadow": {
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
