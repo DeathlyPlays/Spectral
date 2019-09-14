@@ -122,7 +122,7 @@ let BattleMovedex = {
 		name: "Meteor Charge",
 		desc: "Sets the weather to Sunny Day, and deals 1/3rd of the user's maximum health in recoil.",
 		shortDesc: "Weather becomes sunny, 1/3 recoil of max HP.",
-		bp: 100,
+		basePower: 100,
 		accuracy: 100,
 		pp: 5,
 		priority: 0,
