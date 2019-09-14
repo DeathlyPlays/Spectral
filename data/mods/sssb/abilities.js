@@ -37,7 +37,7 @@ let BattleAbilities = {
 		shortDesc: "If hit with an attack that would K.O, survives on 1 HP and raises Spe/Atk/SpA by 1.",
 		onDamagePriority: -100,
 		onDamage(damage, target, source, effect) {
-			if (damage >= target.hp && effect && effect.effectType === 'Move') {
+			if (damage >= target.hp && effect && effect.effectType === 'Move' && target.hp !== 1) {
 				this.boost({atk: 1}, target, target, null, true);
 				this.boost({spa: 1}, target, target, null, true);
 				this.boost({spe: 1}, target, target, null, true);
@@ -66,6 +66,7 @@ let BattleAbilities = {
 		},
 	},
 
+	// Horrific17
 	"reversecard": {
 		id: "reversecard",
 		name: "Reverse Card",
