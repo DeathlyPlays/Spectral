@@ -104,13 +104,13 @@ let BattleAbilities = {
 		},
 		onModifyPriority(priority, pokemon, target, move) {
 			let changed = false;
-			for (let stats in pokemon.boosts === 0 ) {
-			if (pokemon.boosts[stats] !== 0 && target.boosts[stats] !== 0) { // if it doesn't work change || to &&
+			for (let stats in pokemon.boosts) {
+				if (pokemon.boosts[stats] !== 0 && target.boosts[stats] !== 0) { // if it doesn't work change || to &&
 					changed = true;
 					break;
 				}
 			}
-			if (changed === true && move.type === 'Ghost') {
+			if (changed && move && move.type === 'Ghost') {
 				move.pranksterBoosted = true;
 				return priority + 1;
 			}
