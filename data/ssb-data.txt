@@ -67,5 +67,5 @@ Ability: Dark Aura
 EVs: 252 SpA / 4 Def / 252 Spe
 Moves: Oblivion Wing, Ice Beam, Earth Power
 Signature Move: Doom Strike
-	- Dark Type, Special, 100% Accuracy, 100 BP, 16 PP, user switches out after damaging the target.
+	- Dark Type, Special, 100% Accuracy, 90 BP, 16 PP, user switches out after damaging the target.
 Modest Nature
