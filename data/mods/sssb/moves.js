@@ -30,11 +30,12 @@ let BattleMovedex = {
 				`- <a href="https://github.com/Zarel/Pokemon-Showdown-Dex">Dex source code</a>`;
 			this.add(`raw|${gitGud}`);
 		},
-		flags: {protect: 1, mirror: 1, contact: 1},
+		flags: {protect: 1, mirror: 1, contact: 1, defrost: 1},
 		priority: 0,
 		target: "normal",
 		type: "Fire",
 	},
+
 	// Back At My Day
 	"bigthunder": {
 		id: "bigthunder",
@@ -55,11 +56,13 @@ let BattleMovedex = {
 				move.target = "self";
 			}
 		},
-		secondary: false,
+		secondary: null,
 		flags: {protect: 1, mirror: 1},
 		priority: 0,
 		type: "Electric",
 	},
+
+	// Chandie
 	"sharpshadow": {
 		accuracy: 100,
 		basePower: 40,
@@ -77,6 +80,43 @@ let BattleMovedex = {
 		type: "Ghost",
 		zMovePower: 100,
 		contestType: "Cool",
+	},
+
+	// Horrific17
+	"meteorcharge": {
+		id: "meteorcharge",
+		name: "Meteor Charge",
+		desc: "Sets the weather to Sunny Day, and deals 1/3rd of the user's maximum health in recoil.",
+		shortDesc: "Weather becomes sunny, 1/3 recoil of max HP.",
+		bp: 100,
+		accuracy: 100,
+		pp: 5,
+		priority: 0,
+		recoil: [1, 3],
+		flags: {protect: 1, mirror: 1, contact: 1, defrost: 1},
+		weather: "sunnyday",
+		category: "Physical",
+		type: "Fire",
+		secondary: null,
+		target: "normal",
+	},
+
+	// Horrific17
+	"eternalflames": {
+		id: "eternalflames",
+		name: "Eternal Flames",
+		shortDesc: "Burns and traps the target.",
+		basePower: 120,
+		accuracy: true,
+		isZ: "arcaniumz",
+		pp: 1,
+		priority: 0,
+		secondary: null,
+		category: "Physical",
+		type: "Fire",
+		volatileStatus: "partiallytrapped",
+		status: "brn",
+		target: "normal",
 	},
 };
 
