@@ -6,7 +6,7 @@ Ability: Raging Spirit
 EVs: 252 Atk / 252 Spe / 4 Def
 Moves: Mach Punch, Knock Off, Ice Punch
 Signature Move: Firey Destruction
-	- Fire type, never misses, 15 PP, Physical, Contact, 100 BP, 50% chance to burn the target 
+	- Fire type, never misses, 15 PP, Physical, Contact, 100 BP, 50% chance to burn the target, Defrosts user if frozen.
 Jolly Nature
 
 Back At My Day
@@ -22,7 +22,8 @@ Timid Nature
 
 Zakuree
 (Gallade)
-@ Soul Orb (Attacks do x1.5, loses 1/10th HP when attacking)
+@ Soul Orb
+	- Attacks do x1.5, loses 1/10th HP when attacking
 Ability: Heart of Steel
 	- When hit by an attack that would K.O, lives on 1 HP and doubles Atk/SpAtk.
 EVs: 160 Atk / 96 SpA / 252 Spe
@@ -33,7 +34,8 @@ Jolly Nature
 
 Chandie
 (Marshadow)
-@ Void Heart (When used with Sharp Shadow, allows Marshadow to use Embrace the Void.)
+@ Void Heart
+	- When used with Sharp Shadow, allows Marshadow to use Embrace the Void.
 Ability: Shade Seeker
 	- Unaware + If the user or opposing Pokémon have stat changes, this Pokémon's Ghost moves have +1 priority.
 EVs: 252 Atk / 4 SpD / 252 Spe 
@@ -44,3 +46,16 @@ Z-Move: Embrace the Void
 	- Ghost Type, Physical, 120 BP. Sets up Magic Room, switches out the opposing Pokémon and raises the user's Attack by 1 stage.
 Jolly Nature
 
+Horrific17
+(Arcanine)
+@ Arcanium Z
+	- When used with Meteor Charge, allows Arcanine to use Eternal Flames.
+Ability: Reverse Card
+	- Sets up Magic Room, and when the user's maximum HP is less than 25% its Attack is raised two stages.
+EVs: 252 Atk / 4 Def / 252 Spe
+Moves: Wild Charge, Close Combat, Extreme Speed
+Signature Move: Meteor Charge
+	- Sets Sunny Day, Fire type, Physical, Contact, 100% accuracy, 100 BP, Defrosts user if frozen, 5 PP, Damages the user by 1/3rd of their maximum HP in recoil.
+Z-Move: Eternal Flames
+	- Burns and traps the target, 120 BP, Fire type, Physical.
+Jolly Nature

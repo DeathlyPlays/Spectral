@@ -28,6 +28,7 @@ let BattleAbilities = {
 			return false;
 		},
 	},
+
 	// Zakuree
 	"heartofsteel": {
 		id: "heartofsteel",
@@ -40,11 +41,12 @@ let BattleAbilities = {
 				this.boost({atk: 1}, target, target, null, true);
 				this.boost({spa: 1}, target, target, null, true);
 				this.boost({spe: 1}, target, target, null, true);
-				this.add('-ability', target, 'Sturdy');
+				this.add('-ability', target, 'Heart of Steel');
 				return target.hp - 1;
 			}
 		},
 	},
+
 	// Back At My Day
 	"pealofthunder": {
 		id: "pealofthunder",
@@ -60,6 +62,21 @@ let BattleAbilities = {
 					this.add('-immune', target, '[from] ability: Peal of Thunder');
 				}
 				return null;
+			}
+		},
+	},
+
+	"reversecard": {
+		id: "reversecard",
+		name: "Reverse Card",
+		desc: "Sets up Magic Room, and when the user's health drops below 25% of its maximum HP the user's Attack raises two stages.",
+		shortDesc: "Sets up Magic Room & user's Atk +2 when max HP < 25%.",
+		onStart(pokemon) {
+			this.useMove("magicroom", pokemon);
+		},
+		onModifyDamage(pokemon) {
+			if (pokemon.hp <= pokemon.maxhp / 4) {
+				return this.boost({atk: 2});
 			}
 		},
 	},

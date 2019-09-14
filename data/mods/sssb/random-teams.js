@@ -57,6 +57,20 @@ class RandomSSSBTeams extends RandomTeams {
 			},
 			// Leaders
 			// Moderators
+			"@Horrific17": {
+				species: "Arcanine",
+				item: "Arcanium Z",
+				ability: "Reverse Card",
+				moves: ["Wild Charge", "Extreme Speed", "Close Combat"],
+				baseSignatureMove: "meteorcharge",
+				signatureMove: "Meteor Charge",
+				evs: {
+					atk: 252,
+					spe: 252,
+					def: 4,
+				},
+				nature: "Jolly",
+			},
 			// Bots
 			// Players
 			// Drivers
