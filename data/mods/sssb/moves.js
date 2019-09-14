@@ -77,6 +77,9 @@ let BattleMovedex = {
 		flags: {protect: 1, mirror: 1},
 		selfSwitch: true,
 		secondary: null,
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Sucker Punch', target);
+		},
 		target: "normal",
 		type: "Ghost",
 		zMovePower: 100,
@@ -94,6 +97,10 @@ let BattleMovedex = {
 		pp: 1,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Dark Void', target);
+			this.add('-anim', source, 'Never-Ending Nightmare', target);
+		},
 		pseudoWeather: "magicroom",
 		secondary: {
 			chance: 100,
