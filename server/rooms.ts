@@ -618,7 +618,7 @@ export class GlobalRoom extends BasicRoom {
 		if (Config.rankList) {
 			return Config.rankList;
 		}
-		let rankList = [];
+		const rankList = [];
 
 		for (const rank in Config.groups) {
 			if (!Config.groups[rank] || !rank) continue;
@@ -1321,8 +1321,8 @@ export class BasicChatRoom extends BasicRoom {
 			this.reportJoin('n', user.getIdentityWithStatus(this.id) + '|' + oldid, user);
 		}
 		if (this.poll) {
-			for (let u in this.poll.pollArray) {
-				if (user.userid in this.poll.pollArray[u].voters) this.poll.updateFor(user);
+			for (const poll of this.poll.pollArray) {
+				if (user.userid in poll.voters) poll.updateFor(user);
 			}
 		}
 		return true;
