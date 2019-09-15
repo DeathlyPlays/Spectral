@@ -2415,6 +2415,22 @@ let Formats = [
 			this.add("raw|<h1>GET READY TO RUMBLE!</h1>");
 			this.add("raw|If you have any questions about the data of a staffmon use /sssb [Pokemon's name]<br />i.e. /sssb [RaginInfernape]");
 		},
+		onSwitchIn(pokemon) {
+			let name = toID(pokemon.illusion ? pokemon.illusion.name : pokemon.name);
+			if (this.getTemplate(name).exists) {
+				// Certain pokemon have volatiles named after their speciesid
+				// To prevent overwriting those, and to prevent accidentaly leaking
+				// that a pokemon is on a team through the onStart even triggering
+				// at the start of a match, users with pokemon names will need their
+				// statuse's to end in "user".
+				name = /** @type {ID} */(name + 'user');
+			}
+			// Add the mon's status effect to it as a volatile.
+			let status = this.getEffect(name);
+			if (status && status.exists) {
+				pokemon.addVolatile(name, pokemon);
+			}
+		},
 		team: "randomSSSB",
 	},
 	{
