@@ -128,8 +128,7 @@ let BattleMovedex = {
 		priority: 0,
 		recoil: [1, 3],
 		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Wild Charge', target);
-			this.add('-anim', source, 'Flame Charge', target);
+			this.add('-anim', source, 'Flare Blitz', target);
 		},
 		flags: {protect: 1, mirror: 1, contact: 1, defrost: 1},
 		weather: "sunnyday",
@@ -149,7 +148,9 @@ let BattleMovedex = {
 		isZ: "arcaniumz",
 		pp: 1,
 		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Extreme Evoboost', source);
 			this.add('-anim', source, 'Flare Blitz', target);
+			this.add('-anim', source, 'Magma Storm', target);
 		},
 		priority: 0,
 		secondary: null,
@@ -166,11 +167,9 @@ let BattleMovedex = {
 		name: "16 Years",
 		shortDesc: "Only works at 1 HP, user faints after usage.",
 		basePower: 200,
-		onTryHit(pokemon) {
-			if (pokemon.hp !== 1) return false;
-			this.hint(`This move may be only used once the user has 1 HP.`);
-		},
 		onPrepareHit(target, source) {
+			if (source.hp !== 1) return false;
+			this.hint(`This move may be only used once the user has 1 HP.`);
 			this.add('-anim', source, 'Hex', source);
 			this.add('-anim', source, 'Hyper Beam', target);
 		},
@@ -183,6 +182,7 @@ let BattleMovedex = {
 		type: "Dark",
 		target: "normal",
 	},
+
 	// AlfaStorm
 	"doomstrike": {
 		id: "doomstrike",
@@ -191,13 +191,47 @@ let BattleMovedex = {
 		shortDesc: "Switches out after damaging.",
 		basePower: 90,
 		accuracy: 100,
-		pp: 16,
+		pp: 10,
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Shadow Strike', target);
+			this.add('-anim', source, 'U-Turn', target);
+		},
 		priority: 0,
 		selfSwitch: true,
 		secondary: null,
 		category: "Special",
 		type: "Dark",
 		target: "normal",
+	},
+
+	// Roughskull
+	"radiationstench": {
+		accuracy: 85,
+		basePower: 120,
+		category: "Special",
+		desc: "Power doubles if the target is poisoned, and has a 30% chance to cause the target to flinch.",
+		shortDesc: "Power doubles if the target is poisoned. 30% chance to flinch.",
+		id: "radiationstench",
+		name: "Radiation Stench",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onBasePower(basePower, pokemon, target) {
+			if (target.status === 'psn' || target.status === 'tox') {
+				return this.chainModify(2);
+			}
+		},
+		secondary: {
+			chance: 30,
+			volatileStatus: 'flinch',
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Acid Downpour', target);
+		},
+		target: "normal",
+		type: "Poison",
+		zMovePower: 120,
+		contestType: "Beautiful",
 	},
 };
 
