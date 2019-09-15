@@ -6,3 +6,4 @@ node_modules/
 server/server-plugins/hex.js
 tools/set-import/importer.js
 tools/set-import/sets
+config/formats.js
