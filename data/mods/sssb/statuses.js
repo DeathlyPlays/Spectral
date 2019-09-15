@@ -35,6 +35,18 @@ let BattleStatuses = {
 			this.add(`c|~Satori Komeiji|Yes, of course.`);
 		},
 	},
+	alfastorm: {
+		noCopy: true,
+		onStart() {
+			this.add(`c|&AlfaStorm|Hello, prepare to face my wrath!`);
+		},
+		onSwitchOut() {
+			this.add(`c|&AlfaStorm|You haven't defeated me yet!`);
+		},
+		onFaint() {
+			this.add(`c|&AlfaStorm|You'll regret doing this to me!`);
+		},
+	},
 };
 
 exports.BattleStatuses = BattleStatuses;
