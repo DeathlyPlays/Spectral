@@ -63,7 +63,7 @@ class Panagram {
 	guess(user, guess) {
 		if (guess.species === this.answer.species) {
 			this.room.add(`|html|${Server.nameColor(user.name, true)} guessed <strong>${guess.species}</strong>, which was the correct answer! This user has also won .25 ${moneyPlural}!`);
-			Economy.writeMoney(user.userid, .25);
+			Economy.writeMoney(user.userid, 0.25);
 			Economy.logTransaction(`${user.name} won .25 ${moneyPlural} by correctly guessing the Pokemon in Panagrams.`);
 			this.end();
 		} else {
