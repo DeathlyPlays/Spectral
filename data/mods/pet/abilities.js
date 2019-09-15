@@ -95,7 +95,7 @@ exports.BattleAbilities = {
 	    num: -1013,
 	},
 
-	"spiritualjudgment": {
+	"spiritualjudgement": {
 		desc: "When this Pokemon faints, attacker is Cursed.",
 		shortDesc: "When this Pokemon faints, attacker is Cursed.",
 		onFaint(target, source, effect) {
@@ -103,8 +103,8 @@ exports.BattleAbilities = {
 				source.addVolatile('curse');
 			}
 		},
-		id: "spiritualjudgment",
-		name: "Spiritual Judgment",
+		id: "spiritualjudgement",
+		name: "Spiritual Judgement",
 		rating: 3,
 		num: -1014,
 	},
