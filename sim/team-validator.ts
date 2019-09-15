@@ -144,6 +144,7 @@ export class TeamValidator {
 
 		const nameTemplate = dex.getTemplate(set.name);
 		if (nameTemplate.exists && nameTemplate.name.toLowerCase() === set.name.toLowerCase()) {
+			// Placeholder
 		}
 		set.name = set.name || template.baseSpecies;
 		let name = set.species;
