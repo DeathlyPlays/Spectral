@@ -143,7 +143,7 @@ let BattleMovedex = {
 		id: "eternalflames",
 		name: "Eternal Flames",
 		shortDesc: "Burns and traps the target.",
-		basePower: 120,
+		basePower: 150,
 		accuracy: true,
 		isZ: "arcaniumz",
 		pp: 1,
