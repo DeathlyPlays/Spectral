@@ -1053,6 +1053,7 @@ export class BasicChatRoom extends BasicRoom {
 		this.log = Roomlogs.create(this, options);
 
 		this.poll = null;
+		this.survey = null;
 
 		// room settings
 		this.desc = '';
@@ -1254,6 +1255,11 @@ export class BasicChatRoom extends BasicRoom {
 			'|init|chat\n|title|' + this.title + '\n' + userList + '\n' + this.log.getScrollback() + this.getIntroMessage(user)
 		);
 		if (this.poll) this.poll.onConnect(user, connection);
+		if (this.survey) {
+			for (const survey of this.survey.surveyArray) {
+				if (survey) this.survey.onConnect(user, connection, this.survey.obtain(survey.surveyNum));
+			}
+		}
 		// @ts-ignore TODO: strongly-typed autorank
 		if (this.autorank) {
 			// @ts-ignore
@@ -1322,7 +1328,12 @@ export class BasicChatRoom extends BasicRoom {
 		}
 		if (this.poll) {
 			for (const poll of this.poll.pollArray) {
-				if (user.userid in poll.voters) poll.updateFor(user);
+				if (user.userid in poll.voters) this.poll.updateFor(user);
+			}
+		}
+		if (this.survey) {
+			for (const survey of this.survey.surveyArray) {
+				if (survey && user.userid in survey.repliers) this.survey.updateFor(user, this.survey.obtain(survey.surveyNum), false);
 			}
 		}
 		return true;
