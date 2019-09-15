@@ -77,7 +77,7 @@ let BattleMovedex = {
 		flags: {protect: 1, mirror: 1},
 		selfSwitch: true,
 		secondary: null,
-		onPrepareHit(target, target) {
+		onPrepareHit(target, source) {
 			this.add('-anim', target, 'Sucker Punch', target);
 		},
 		target: "normal",
@@ -97,7 +97,7 @@ let BattleMovedex = {
 		pp: 1,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onPrepareHit(target, target) {
+		onPrepareHit(target, source) {
 			this.add('-anim', target, 'Dark Void', target);
 			this.add('-anim', target, 'Black Hole Eclipse', target);
 		},
