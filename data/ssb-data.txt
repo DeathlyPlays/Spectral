@@ -44,7 +44,7 @@ Signature Move: Sharp Shadow
 	- Ghost Type, never misses, 32 PP, Physical, 40 BP. User switches out after damaging the target.
 Z-Move: Embrace the Void
 	- Ghost Type, Physical, 120 BP. Sets up Magic Room, switches out the opposing Pokémon.
-Jolly Nature
+Adamant Nature
 
 Horrific17
 (Arcanine)
