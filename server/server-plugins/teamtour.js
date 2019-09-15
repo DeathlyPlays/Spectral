@@ -1,10 +1,10 @@
-'use strict';
+//'use strict';
 
 /*********************************************************
    * Team Tournaments Chat-plugin
    * Made by: Ecuacion, Updated and Translated by: AlfaStorm
    *********************************************************/
-
+/*
 let teamTours = {};
 Server.teamTours = teamTours;
 let tourTiers = {};
@@ -465,9 +465,6 @@ function viewTourStatus(room) {
 	}
 }
 
-/*********************************************************
- * Commands
- *********************************************************/
 let cmds = {
 	teamtournament: 'teamtour',
 	tt: 'teamtour',
@@ -669,10 +666,6 @@ let cmds = {
 
 exports.commands = cmds;
 
-/*********************************************************
- * Events
- *********************************************************/
-
 if (!Rooms.__createBattle) Rooms.__createBattle = Rooms.createBattle;
 Rooms.createBattle = function (formatid, options) {
 	let room = this.__createBattle(formatid, options);
@@ -720,3 +713,5 @@ Rooms.RoomBattle.prototype.onEnd = function (winner) {
 	//end tour
 	this.__onEnd(winner);
 };
+
+*/
