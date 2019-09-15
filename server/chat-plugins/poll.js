@@ -18,7 +18,6 @@ class Poll {
 			room.pollNumber = 1;
 		}
 		this.room = room;
-<<<<<<< HEAD
 		this.pollArray = [{
 			room: room,
 			pollNum: room.pollNumber,
@@ -39,32 +38,6 @@ class Poll {
 		}];
 		for (let i = 0; i < options.length; i++) {
 			this.pollArray[0].options.set(i + 1, {name: options[i], votes: 0});
-=======
-		this.question = questionData.source;
-		this.supportHTML = questionData.supportHTML;
-		/** @type {{[k: string]: number}} */
-		this.voters = {};
-		/** @type {{[k: string]: number}} */
-		this.voterIps = {};
-		this.totalVotes = 0;
-		/** @type {NodeJS.Timer?} */
-		this.timeout = null;
-		this.timeoutMins = 0;
-		/** @type {boolean} */
-		this.isQuiz = false;
-
-		/** @type {Map<number, Option>} */
-		this.options = new Map();
-		for (const [i, option] of options.entries()) {
-			/** @type {Option} */
-			const info = {name: option, votes: 0};
-			if (option.startsWith('+')) {
-				this.isQuiz = true;
-				info.correct = true;
-				info.name = info.name.slice(1);
-			}
-			this.options.set(i + 1, info);
->>>>>>> 55d39e5067bcba336298fb710043974f6c0cc2d0
 		}
 	}
 
@@ -102,7 +75,6 @@ class Poll {
 		this.updateTo(user, number);
 	}
 
-<<<<<<< HEAD
 	/**
 	 * @param {number} num
 	 */
@@ -113,17 +85,6 @@ class Poll {
 		});
 		output += `<div style="margin-top: 7px; padding-left: 12px"><button value="/poll results ${this.pollArray[num].pollNum}" name="send" title="View results - you will not be able to vote after viewing results"><small>(View results)</small></button></div>`;
 		output += `</details></div>`;
-=======
-	generateVotes() {
-		const iconText = this.isQuiz ? '<i class="fa fa-question"></i> Quiz' : '<i class="fa fa-bar-chart"></i> Poll';
-		let output = `<div class="infobox"><p style="margin: 2px 0 5px 0"><span style="border:1px solid #6A6;color:#484;border-radius:4px;padding:0 3px">${iconText}</span> <strong style="font-size:11pt">${this.getQuestionMarkup()}</strong></p>`;
-		for (const [number, option] of this.options) {
-			output += `<div style="margin-top: 5px"><button class="button" style="text-align: left" value="/poll vote ${number}" name="send" title="Vote for ${number}. ${Chat.escapeHTML(option.name)}">${number}. <strong>${this.getOptionMarkup(option)}</strong></button></div>`;
-		}
-		output += `<div style="margin-top: 7px; padding-left: 12px"><button value="/poll results" name="send" title="View results - you will not be able to vote after viewing results"><small>(View results)</small></button></div>`;
-		output += `</div>`;
->>>>>>> 55d39e5067bcba336298fb710043974f6c0cc2d0
-
 		return output;
 	}
 
@@ -132,7 +93,6 @@ class Poll {
 	 * @param {number?} [option]
 	 * @param {number} num
 	 */
-<<<<<<< HEAD
 	generateResults(ended = false, option = 0, num) {
 		let icon = `<span style="border: 1px solid #${(ended ? '777;color:#555' : '6A6;color:#484')}; border-radius: 4px; padding: 3px"><i class="fa fa-bar-chart"></i> ${(ended ? `Poll-${this.pollArray[num].pollNum} ended` : `Poll-${this.pollArray[num].pollNum}`)}</span>`;
 		let totalVotes = `<br /><span style="font-style: italic; font-size: 9pt; color: #79330A;">[Total Votes: ${this.pollArray[num].totalVotes}] (Started by ${this.pollArray[num].startedUser} Started on: ${new Date(this.pollArray[num].startTime)})</span>`;
@@ -141,28 +101,15 @@ class Poll {
 		output += `<div style="padding: 8px 15px;"><font color="red"><small><center>(Options with 0 votes are not shown)</center></small></font>`;
 		output += `<table cellspacing="0" style="width: 100%; margin-top: 3px;">`;
 		let iter = this.pollArray[num].options.entries();
-=======
-	generateResults(ended = false, option = 0) {
-		const iconText = this.isQuiz ? '<i class="fa fa-question"></i> Quiz' : '<i class="fa fa-bar-chart"></i> Poll';
-		const icon = `<span style="border:1px solid #${ended ? '777;color:#555' : '6A6;color:#484'};border-radius:4px;padding:0 3px">${iconText}${ended ? " ended" : ""}</span>`;
-		let output = `<div class="infobox"><p style="margin: 2px 0 5px 0">${icon} <strong style="font-size:11pt">${this.getQuestionMarkup()}</strong></p>`;
-		let iter = this.options.entries();
->>>>>>> 55d39e5067bcba336298fb710043974f6c0cc2d0
 
 		let i = iter.next();
 		let c = 0;
 		let colors = ['#00FFFF', '#66CCCC', '#388E8E'];
 		while (!i.done) {
-<<<<<<< HEAD
 			if (i.value[1].votes && i.value[1].votes !== 0) {
 				let percentage = Math.round((i.value[1].votes * 100) / (this.pollArray[num].totalVotes || 1));
 				output += `<tr><td><strong>${(i.value[0] === option ? '<em>' : '')} ${Chat.escapeHTML(i.value[1].name)} ${(i.value[0] === option ? '</em>' : '')}</strong> <small>(${i.value[1].votes} vote${(i.value[1].votes === 1 ? '' : 's')})</small></td><td><span style="font-size: 7pt; background: ${colors[c % 3]}; padding-right: ${(percentage * 3)}px; border-radius: 20px;"></span><small>&nbsp;${percentage}%</small></td></tr>`;
 			}
-=======
-			let percentage = Math.round((i.value[1].votes * 100) / (this.totalVotes || 1));
-			const answerMarkup = this.isQuiz ? `<span style="color:${i.value[1].correct ? 'green' : 'red'};">${i.value[1].correct ? '' : '<s>'}${this.getOptionMarkup(i.value[1])}${i.value[1].correct ? '' : '</s>'}</span>` : this.getOptionMarkup(i.value[1]);
-			output += `<div style="margin-top: 3px">${i.value[0]}. <strong>${i.value[0] === option ? '<em>' : ''}${answerMarkup}${i.value[0] === option ? '</em>' : ''}</strong> <small>(${i.value[1].votes} vote${i.value[1].votes === 1 ? '' : 's'})</small><br /><span style="font-size:7pt;background:${colors[c % 3]};padding-right:${percentage * 3}px"></span><small>&nbsp;${percentage}%</small></div>`;
->>>>>>> 55d39e5067bcba336298fb710043974f6c0cc2d0
 			i = iter.next();
 			c++;
 		}
@@ -413,14 +360,7 @@ const commands = {
 			this.modlog('POLL');
 			return this.privateModAction(`(A poll was started by ${user.name}.)`);
 		},
-<<<<<<< HEAD
 		newhelp: [`/poll create [question], [option1], [option2], [...] - Creates a poll. Allows up to 5 polls at once. Requires: % @ * # & ~`],
-=======
-		newhelp: [
-			`/poll create [question], [option1], [option2], [...] - Creates a poll. Requires: % @ # & ~`,
-			`Polls can be used as quiz questions. To do this, prepend all correct answers with a +.`,
-		],
->>>>>>> 55d39e5067bcba336298fb710043974f6c0cc2d0
 
 		vote(target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
@@ -538,12 +478,7 @@ const commands = {
 	},
 
 	pollhelp: [
-<<<<<<< HEAD
 		`/poll allows rooms to run their own polls. These polls are limited to five polls at a time per room.`,
-=======
-		`/poll allows rooms to run their own polls. These polls are limited to one poll at a time per room.`,
-		`Polls can be used as quiz questions. To do this, prepend all correct answers with a +.`,
->>>>>>> 55d39e5067bcba336298fb710043974f6c0cc2d0
 		`Accepts the following commands:`,
 		`/poll create [question], [option1], [option2], [...] - Allows up to 5 polls at once per room. Creates a poll. Requires: % @ * # & ~`,
 		`/poll htmlcreate [question], [option1], [option2], [...] - Allows up to 5 polls at once per room. Creates a poll, with HTML allowed in the question and options. Requires: # & ~`,
