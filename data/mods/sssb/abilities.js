@@ -105,7 +105,7 @@ let BattleAbilities = {
 		onModifyPriority(priority, pokemon, target, move) {
 			let changed = false;
 			for (let stats in pokemon.boosts) {
-				for (const target of pokemon.foe.side.active) {
+				for (const target of pokemon.side.foe.active) {
 						if (pokemon.boosts[stats] !== 0 || target.boosts[stats] !== 0) { // if it doesn't work change || to &&
 							changed = true;
 							break;
