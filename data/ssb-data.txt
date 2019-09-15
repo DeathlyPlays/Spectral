@@ -81,11 +81,3 @@ Moves: Sucker Punch, Flame Charge, Thousand Waves
 Signature Move: Radiation Stench
 	- Poison type, Physical, 120 BP, 85% accuracy, 10 PP, doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch.
 Adamant Nature
-
-Tsar dragon
-(Unown)
-@ Choice Scarf
-Ability: Adaptability
-EVs: 252 SpA / 4 HP / 252 Spe
-Moves: Psystrike, Ice Beam, Moonblast, Focus Blast
-Timid Nature
