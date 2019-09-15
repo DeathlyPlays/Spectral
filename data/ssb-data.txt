@@ -69,3 +69,16 @@ Moves: Oblivion Wing, Ice Beam, Earth Power
 Signature Move: Doom Strike
 	- Dark Type, Special, 100% Accuracy, 90 BP, 16 PP, user switches out after damaging the target.
 Modest Nature
+
+Roughskull
+(Skuntank)
+@ Crown of TMS
+	- On switch-in, raises the user's Attack or Special Attack based on the target's weaker Defense.  Also, on switch-in, the user raises its Defense or Special Defense to protect itself from the target's stronger Attack stat.  If this Pokemon is at full HP, the opponent's Attack damage is halved
+Ability: Venom Shock
+	- Every move has a 30% chance to either badly poison or paralyze its target.
+EVs: 252 Atk / 4 Spe / 252 HP
+Moves: Sucker Punch, Flame Charge, Thousand Waves
+Signature Move: Radiation Stench
+	- Poison type, Physical, 120 BP, 85% accuracy, 10 PP, doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch.
+Adamant Nature
+
