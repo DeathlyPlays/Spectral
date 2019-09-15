@@ -23,7 +23,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Mimikyu-Totem',
 				ability: 'Magic Guard',
 				item: 'Life Orb',
-				moves: ['fusionbolt', 'swordsdance', 'shadowclaw', 'shadowsneak', 'boltstrike', 'playrough', 'outrage', 'roost', 'earthquake'],
+				moves: ['swordsdance', 'shadowclaw', 'shadowsneak', 'boltstrike', 'playrough', 'outrage', 'roost', 'earthquake'],
 				signatureMove: 'Fusion Bolt',
 				evs: {
 					atk: 252,
@@ -36,7 +36,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Mimikyu',
 				ability: 'Flame Fence',
 				item: 'Life Orb',
-				moves: ['fusionflare', 'shadowball', 'chargebeam', 'blueflare', 'roost', 'earthpower','dazzlinggleam', 'thunderbolt', 'dracometeor'],
+				moves: ['shadowball', 'chargebeam', 'blueflare', 'roost', 'earthpower','dazzlinggleam', 'thunderbolt', 'dracometeor'],
 				signatureMove: 'Fusion Flare',
 				evs: {
 					spa: 252,
@@ -49,7 +49,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Armaldo',
 				ability: 'Strong Jaw',
 				item: 'Leftovers',
-				moves: ['uturn', 'crunch', 'bugbite', 'ironhead', 'honeclaws', 'earthquake','stoneedge','psychicfangs','wildcharge','ironhead','rockpolish'],
+				moves: ['uturn', 'crunch', 'bugbite', 'honeclaws', 'earthquake','stoneedge','psychicfangs','wildcharge','ironhead','rockpolish'],
 				signatureMove: 'Iron Head',
 				evs: {
 					atk: 252,
@@ -62,7 +62,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Krabby',
 				ability: 'Imposter',
 				item: 'Eviolite',
-				moves: ['toxic', 'protect', 'substitute', 'transform'],
+				moves: ['toxic', 'protect', 'substitute'],
 				signatureMove: 'Transform',
 				evs: {
 					spa: 252,
@@ -75,7 +75,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Crawdaunt',
 				ability: 'Toxic Claw',
 				item: 'Leftovers',
-				moves: ['poisonjab', 'crabhammer', 'aquajet', 'xscissor', 'clamp', 'bodyslam'],
+				moves: ['crabhammer', 'aquajet', 'xscissor', 'clamp', 'bodyslam'],
 				signatureMove: 'Poison Jab',
 				evs: {
 					atk: 252,
@@ -88,7 +88,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Whirlipede',
 				ability: 'Core Shield',
 				item: 'Leftovers',
-				moves: ['doubleironbash', 'shiftgear', 'ironhead', 'poisonjab', 'earthquake', 'kingsshield', 'megahorn'],
+				moves: ['doubleironbash', 'shiftgear', 'ironhead', 'earthquake', 'kingsshield', 'megahorn'],
 				signatureMove: 'Poison Jab',
 				evs: {
 					atk: 252,
@@ -96,6 +96,58 @@ class RandomPetmonsTeams extends RandomTeams {
 					spd: 4,
 				},
 				nature: 'Adamant',
+			},
+			'Spirisoul': {
+				species: 'Banette',
+				ability: 'Spiritual Judgement',
+				item: 'Eviolite',
+				moves: ['aurasphere', 'focusblast', 'dazzlinggleam', 'calmmind', 'kingsshield', 'psychic', 'voltswitch', 'thunderbolt', 'nastyplot', 'willowisp', 'energyball', 'spectralthief'],
+				signatureMove: 'Shadow Ball',
+				evs: {
+					spa: 252,
+					spe: 252,
+					spd: 4,
+				},
+				nature: 'Timid',
+			},
+			'Spirialisys': {
+				species: 'Marshadow',
+				ability: 'Spirit Hold',
+				item: 'Fightinium Z',
+				moves: ['aurasphere', 'focusblast', 'dazzlinggleam', 'calmmind', 'kingsshield', 'psychic', 'voltswitch', 'thunderbolt', 'nastyplot', 'willowisp', 'energyball', 'spectralthief'],
+				signatureMove: 'Shadow Ball',
+				evs: {
+					spa: 252,
+					spe: 252,
+					spd: 4,
+				},
+				nature: 'Timid',
+			},
+			'Hummingret': {
+				species: 'Pidgeotto',
+				ability: 'Delta Stream',
+				item: 'Leftovers',
+				moves: ['extremespeed', 'closecombat', 'moonblast', 'calmmind', 'swordsdance', 'bravebird', 'hurricane', 'drillrun', 'hypervoice', 'fpcusblast', 'uturn', 'roost'],
+				signatureMove: 'Chatter',
+				evs: {
+					spa: 252,
+					atk: 252,
+					spe: 4,
+				},
+				nature: 'Hasty',
+			},
+			'Nightingemon': {
+				species: 'Hypno',
+				ability: 'Nighttime Horror',
+				item: 'Leftovers',
+				moves: ['nightdaze', 'recover', 'calmmind', 'moonblast', 'hypnosis'],
+				signatureMove: 'Trick-or-Treat',
+				evs: {
+					spa: 252,
+					spe: 252,
+					hp: 4,
+				},
+				nature: 'Timid',
 			},
 		};
 		// convert moves to ids.
