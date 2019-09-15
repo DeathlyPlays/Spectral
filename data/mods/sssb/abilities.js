@@ -106,15 +106,15 @@ let BattleAbilities = {
 			let changed = false;
 			for (let stats in pokemon.boosts) {
 				for (const target of pokemon.side.foe.active) {
-						if (pokemon.boosts[stats] !== 0 || target.boosts[stats] !== 0) { // if it doesn't work change || to &&
-							changed = true;
-							break;
-						}
+					if (pokemon.boosts[stats] !== 0 || target.boosts[stats] !== 0) {
+						changed = true;
+						break;
+					}
 				}
 				if (changed) break;
 			}
 			if (changed && move && move.type === 'Ghost') {
-				move.pranksterBoosted = true;
+				move.shadeSeekerBoosted = true;
 				return priority + 1;
 			}
 		},
