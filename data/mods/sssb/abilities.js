@@ -77,7 +77,7 @@ let BattleAbilities = {
 		},
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, pokemon) {
-			if (pokemon.hp <= pokemon.maxhp / 4) {
+			if (pokemon.hp <= pokemon.maxhp / 2) {
 				return this.chainModify(2);
 			}
 		},
