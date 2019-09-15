@@ -151,6 +151,7 @@ let BattleMovedex = {
 			this.add('-anim', source, 'Extreme Evoboost', source);
 			this.add('-anim', source, 'Flare Blitz', target);
 			this.add('-anim', source, 'Magma Storm', target);
+			this.add(`c|@Horrific17|See you in the Eternal Flames.`);
 		},
 		priority: 0,
 		secondary: null,
