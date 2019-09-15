@@ -56,7 +56,7 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Adamant",
 			},
 			"~Zakuree": {
-				species: "Gallade",
+				species: "Gallade-Mega",
 				item: "Soul Orb",
 				ability: "Heart of Steel",
 				moves: ["Cross Chop", "Psycho Cut", "Blaze Kick"],
