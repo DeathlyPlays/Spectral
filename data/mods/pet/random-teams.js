@@ -149,6 +149,19 @@ class RandomPetmonsTeams extends RandomTeams {
 				},
 				nature: 'Timid',
 			},
+			'Porcupid': {
+				species: 'Shaymin',
+				ability: 'Beast Boost',
+				item: 'Leftovers',
+				moves: ['energyball', 'seedflare', 'calmmind', 'psychic', 'earthpower', 'fleurcannon', 'sparklingaria', 'glitzyglow', 'pollenpuff'],
+				signatureMove: 'Moonblast',
+				evs: {
+					spa: 252,
+					spe: 252,
+					hp: 4,
+				},
+				nature: 'Timid',
+			},
 		};
 		// convert moves to ids.
 		for (let k in sets) {
