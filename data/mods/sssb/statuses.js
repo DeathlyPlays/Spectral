@@ -14,6 +14,7 @@ let BattleStatuses = {
 			this.add(`c|☢RaginInfernape|Well, now I'm dead... That's the perfect excuse to not fix that yet.`);
 		},
 	},
+
 	horrific17: {
 		noCopy: true,
 		onStart() {
@@ -33,6 +34,26 @@ let BattleStatuses = {
 			this.add(`c|~Satori Komeiji|Never! That I would never allow! You must not die, milord...`);
 			this.add(`c|@Horrific17|And neither should you, my wife. Lend me your shoulder, would you?`);
 			this.add(`c|~Satori Komeiji|Yes, of course.`);
+		},
+	},
+
+	tsardragon: {
+		noCopy: true,
+		onStart() {
+			this.add(`|raw||html|<div class="broadcast-red"><strong>Well, if I have to be added I might as well make the server crash and burn.</strong></div>`);
+		},
+		onSwitchOut() {
+			this.add(`c|~RaginInfernape|So you are using Unown Obama`);
+			this.add(`c|+Tsar dragon|what`);
+			this.add(`c|~RaginInfernape|No info = Unown`);
+			this.add(`c|+Tsar dragon|im not taking part whatsoever`);
+			this.add(`c|+Tsar dragon|no mon`);
+			this.add(`c|~RaginInfernape|So thats Unown man`);
+			this.add(`c|+Tsar dragon|its`);
+			this.add(`c|+Tsar dragon|nothing`);
+		},
+		onFaint() {
+			this.add(`c|+Tsar dragon|Oh well, I told Insist I didn't want to be added anyways.`);
 		},
 	},
 };
