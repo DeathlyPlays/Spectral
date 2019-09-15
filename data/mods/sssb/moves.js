@@ -77,7 +77,7 @@ let BattleMovedex = {
 		flags: {protect: 1, mirror: 1},
 		selfSwitch: true,
 		secondary: null,
-		onPrepareHit(target, source) {
+		onPrepareHit(target, target) {
 			this.add('-anim', target, 'Sucker Punch', target);
 		},
 		target: "normal",
@@ -90,26 +90,19 @@ let BattleMovedex = {
 	"embracethevoid": {
 		id: "embracethevoid",
 		name: "Embrace the Void",
-		shortDesc: "Switches out opponent. Summons Magic Room. Gives user +1 Attack.",
+		shortDesc: "Summons Magic Room. Switches out opponent.",
 		basePower: 120,
 		accuracy: true,
 		isZ: "voidheart",
 		pp: 1,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onPrepareHit(target, source) {
+		onPrepareHit(target, target) {
 			this.add('-anim', target, 'Dark Void', target);
-			this.add('-anim', target, 'Never-Ending Nightmare', target);
+			this.add('-anim', target, 'Black Hole Eclipse', target);
 		},
 		pseudoWeather: "magicroom",
-		secondary: {
-			chance: 100,
-			self: {
-				boosts: {
-					atk: 1,
-				},
-			},
-		},
+		secondary: null,
 		target: "normal",
 		forceSwitch: true,
 		category: "Physical",
