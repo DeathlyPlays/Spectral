@@ -75,9 +75,10 @@ let BattleAbilities = {
 		onStart(pokemon) {
 			this.useMove("magicroom", pokemon);
 		},
-		onModifyDamage(pokemon) {
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, pokemon) {
 			if (pokemon.hp <= pokemon.maxhp / 4) {
-				return this.boost({atk: 2});
+				return this.chainModify(2);
 			}
 		},
 	},
