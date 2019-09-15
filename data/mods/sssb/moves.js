@@ -160,11 +160,12 @@ let BattleMovedex = {
 		id: "16years",
 		name: "16 Years",
 		shortDesc: "Only works at 1 HP, user faints after usage.",
-		basePower: 200,
+		basePower: 180,
 		onPrepareHit(target, source) {
 			if (source.hp !== 1) return false;
 			this.hint(`This move may be only used once the user has 1 HP.`);
 			this.add('-anim', source, 'Hex', source);
+			this.add('-anim', source, 'Spectral Thief', source);
 			this.add('-anim', source, 'Hyper Beam', target);
 		},
 		accuracy: true,
@@ -172,7 +173,7 @@ let BattleMovedex = {
 		priority: 0,
 		secondary: null,
 		selfdestruct: "ifHit",
-		category: "Special",
+		category: "Physical",
 		type: "Dark",
 		target: "normal",
 	},
