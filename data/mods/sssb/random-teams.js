@@ -63,8 +63,8 @@ class RandomSSSBTeams extends RandomTeams {
 				baseSignatureMove: "16years",
 				signatureMove: "16 Years",
 				evs: {
-					atk: 160,
-					spa: 96,
+					atk: 252,
+					spd: 4,
 					spe: 252,
 				},
 				nature: "Jolly",
