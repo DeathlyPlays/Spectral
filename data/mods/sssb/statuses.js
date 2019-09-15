@@ -53,7 +53,7 @@ let BattleStatuses = {
 	tsardragon: {
 		noCopy: true,
 		onStart() {
-			this.add(`|raw||html|<div class="broadcast-red"><strong>Well, if I have to be added I might as well make the server crash and burn.</strong></div>`);
+			this.add(`|html|<div class="broadcast-red"><strong>Well, if I have to be added I might as well make the server crash and burn.</strong></div>`);
 		},
 		onSwitchOut() {
 			this.add(`c|~RaginInfernape|So you are using Unown Obama`);
