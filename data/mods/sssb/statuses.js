@@ -49,26 +49,6 @@ let BattleStatuses = {
 			this.add(`c|&AlfaStorm|You'll regret doing this to me!`);
 		},
 	},
-
-	tsardragon: {
-		noCopy: true,
-		onStart() {
-			this.add(`|html|<div class="broadcast-red"><strong>Well, if I have to be added I might as well make the server crash and burn.</strong></div>`);
-		},
-		onSwitchOut() {
-			this.add(`c|~RaginInfernape|So you are using Unown Obama`);
-			this.add(`c|+Tsar dragon|what`);
-			this.add(`c|~RaginInfernape|No info = Unown`);
-			this.add(`c|+Tsar dragon|im not taking part whatsoever`);
-			this.add(`c|+Tsar dragon|no mon`);
-			this.add(`c|~RaginInfernape|So thats Unown man`);
-			this.add(`c|+Tsar dragon|its`);
-			this.add(`c|+Tsar dragon|nothing`);
-		},
-		onFaint() {
-			this.add(`c|+Tsar dragon|Oh well, I told Insist I didn't want to be added anyways.`);
-		},
-	},
 };
 
 exports.BattleStatuses = BattleStatuses;
