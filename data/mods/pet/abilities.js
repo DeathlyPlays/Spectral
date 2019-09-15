@@ -126,7 +126,7 @@ exports.BattleAbilities = {
 	},
 	"coreshield": {
 		desc: "",
-		shortDesc: "",
+		shortDesc: "Immunte to Ground-type attacks.",
 		onTryHit: function (target, source, move) {
 			if (target !== source && move.type === 'Ground') {
 				this.add('-immune', target, '[msg]', '[from] ability: Core Shield');
