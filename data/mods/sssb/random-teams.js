@@ -131,6 +131,19 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Timid",
 			},
 			// Voices
+			"+Tsar dragon": {
+				species: "Unown",
+				item: "Choice Scarf",
+				ability: "Adaptability",
+				moves: ["Moonblast", "Focus Blast", "Ice Beam"],
+				signatureMove: "Psystrike",
+				evs: {
+					spa: 252,
+					hp: 4,
+					spe: 252,
+				},
+				nature: "Timid",
+			},
 		};
 		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */
