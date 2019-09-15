@@ -2483,6 +2483,9 @@ let Formats = [
 		mod: 'pet',
 		team: 'randomPetmons',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+		onSwitchIn(pokemon) {
+			this.add("-start", pokemon, 'typechange', pokemon.types[0] + (pokemon.types[1] ? '/' + pokemon.types[1] : ''));
+		},
 	},
 ];
 
