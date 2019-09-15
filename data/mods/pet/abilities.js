@@ -126,7 +126,7 @@ exports.BattleAbilities = {
 	},
 	"coreshield": {
 		desc: "",
-		shortDesc: "Immunte to Ground-type attacks.",
+		shortDesc: "Immunte to Ground-type attacks. Fire-type moves against this Pokemon take 1/4 damage.",
 		onTryHit: function (target, source, move) {
 			if (target !== source && move.type === 'Ground') {
 				this.add('-immune', target, '[msg]', '[from] ability: Core Shield');
@@ -135,7 +135,7 @@ exports.BattleAbilities = {
 		},
 		onAfterDamageOrder: 1,
 		onAfterDamage: function (damage, target, source, move) {
-			if (source && source !== target && move && move.type === 'Ground') {
+			if (source && source !== target && move && move.type === 'Fire') {
 				this.damage(source.maxhp / 4, source, target);
 			}
 		},
