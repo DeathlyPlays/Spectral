@@ -41,6 +41,20 @@ class RandomSSSBTeams extends RandomTeams {
 			},
 			// Fixing Gods
 			// Administrators
+			"~Roughskull": {
+				species: "Skuntank",
+				item: "Crown of TMS",
+				ability: "Venom Shock",
+				moves: ["Sucker Punch", "Flame Charge", "Thousand Waves"],
+				baseSignatureMove: "radiationstench",
+				signatureMove: "Radiation Stench",
+				evs: {
+					atk: 252,
+					hp: 252,
+					spe: 4,
+				},
+				nature: "Adamant",
+			},
 			"~Zakuree": {
 				species: "Gallade",
 				item: "Soul Orb",
