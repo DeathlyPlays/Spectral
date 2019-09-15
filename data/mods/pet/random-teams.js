@@ -49,7 +49,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Armaldo',
 				ability: 'Strong Jaw',
 				item: 'Leftovers',
-				moves: ['uturn', 'crunch', 'bugbite', 'honeclaws', 'earthquake', 'stoneedge', 'psychicfangs', 'wildcharge', 'ironhead', 'rockpolish'],
+				moves: ['uturn', 'crunch', 'bugbite', 'honeclaws', 'earthquake', 'stoneedge', 'psychicfangs', 'wildcharge', 'rockpolish'],
 				signatureMove: 'Iron Head',
 				evs: {
 					atk: 252,

@@ -8,15 +8,16 @@ let BattleAbilities = {
 		desc: "Uses Metronome automatically each turn.",
 		onResidualOrder: 26,
 		onResidualSubOrder: 1,
-		onResidual: function (pokemon) {
+		onResidual(pokemon) {
 			this.useMove('Metronome', pokemon, pokemon);
 		},
 	},
+
 	"ceasarswish": {
 		desc: "If this Pokemon is a Gallade, it changes to Mega Forme when it has 1/2 or less of its maximum HP at the end of the turn.",
 		shortDesc: "If Gallade, changes to Mega if at 1/2 max HP or less at end of turn.",
 		onResidualOrder: 27,
-		onResidual: function (pokemon) {
+		onResidual(pokemon) {
 			if (pokemon.baseTemplate.baseSpecies !== 'Gallade' || pokemon.transformed || !pokemon.hp) return;
 			if (pokemon.template.speciesid === 'gallademega' || pokemon.hp > pokemon.maxhp / 2) return;
 			this.add('-activate', pokemon, 'ability: Ceasars Wish');

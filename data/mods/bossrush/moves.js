@@ -39,6 +39,7 @@ let BattleMovedex = {
 		zMovePower: 200,
 		contestType: "Tough",
 	},
+
 	"distortion": {
 		num: -547,
 		accuracy: 100,
@@ -51,8 +52,7 @@ let BattleMovedex = {
 		pp: 10,
 		priority: 1,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-	},
-		onPrepareHit: function (target, source) {
+		onPrepareHit(target, source) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Explosion", target);
 		},

@@ -14,7 +14,7 @@ let BattlePokedex = {
 		evos: ["talograw"],
 		eggGroups: ["Flying"],
 	},
-   talograw: {
+	talograw: {
 		num: 2,
 		species: "Talograw",
 		types: ["Flying", "Poison"],

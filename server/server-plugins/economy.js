@@ -6,8 +6,8 @@ const FS = require("../../.lib-dist/fs").FS;
 // Ideally, this should be zero.
 const DEFAULT_AMOUNT = 0;
 
-global.moneyName = "Soul Dew";
-global.moneyPlural = "Soul Dews";
+global.moneyName = "Dank Meme";
+global.moneyPlural = "Dank Memes";
 
 let shop = [
 	["Ability", "Purchases a custom ability for your SSBFFA account.", 50],
@@ -405,14 +405,14 @@ exports.commands = {
 		this.sendReplyBox(output);
 	},
 
-/*
+	/*
 	store: "shop",
 	shop(target, room, user) {
 		if (!this.runBroadcast()) return;
 		return this.sendReplyBox(shopDisplay);
 	},
 	shophelp: [`/shop - Display items you can buy with your ${moneyPlural}.`],
-*/
+	*/
 
 	buy(target, room, user) {
 		if (!target) return this.parse("/help buy");
