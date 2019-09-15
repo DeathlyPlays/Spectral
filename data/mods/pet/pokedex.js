@@ -180,4 +180,15 @@ exports.BattlePokedex = {
 		color: "Black",
 		eggGroups: ["Undiscovered"],
 	},
+	shaymin: {
+		num: -354,
+		species: "Shaymin",
+		types: ["Grass", "Fairy"],
+		baseStats: {hp: 75, atk: 60, def: 90, spa: 140, spd: 90, spe: 115},
+		abilities: {0: "Beast Boost"},
+		heightm: 0.8,
+		weightkg: 21.3,
+		color: "Green",
+		eggGroups: ["Undiscovered"],
+	},
 };
