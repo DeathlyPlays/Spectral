@@ -51,13 +51,13 @@ Horrific17
 @ Arcanium Z
 	- When used with Meteor Charge, allows Arcanine to use Eternal Flames.
 Ability: Reverse Card
-	- Sets up Magic Room, and when the user's maximum HP is less than 25% its Attack is raised two stages.
+	- Sets up Magic Room, and when the user's maximum HP is less than 50% its Attack is raised two stages.
 EVs: 252 Atk / 4 Def / 252 Spe
 Moves: Wild Charge, Close Combat, Extreme Speed
 Signature Move: Meteor Charge
 	- Sets Sunny Day, Fire type, Physical, Contact, 100% accuracy, 100 BP, Defrosts user if frozen, 5 PP, Damages the user by 1/3rd of their maximum HP in recoil.
 Z-Move: Eternal Flames
-	- Burns and traps the target, 120 BP, Fire type, Physical.
+	- Burns and traps the target, 150 BP, Fire type, Physical.
 Jolly Nature
 
 AlfaStorm
