@@ -82,7 +82,7 @@ class RandomSSSBTeams extends RandomTeams {
 					def: 4,
 					spe: 252,
 				},
-				nature: "Jolly",
+				nature: "Adamant",
 			},
 			"&AlfaStorm": {
 				species: "Yveltal",
