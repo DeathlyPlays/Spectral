@@ -410,6 +410,21 @@ exports.disablehotpatchall = false;
  */
 exports.forcedpublicprefixes = [];
 
+// Special Operators (System Operators) easier to modify
+exports.special = ["volco", "roughskull", "ragininfernape", "flufi"];
+
+// Saves a lot of time adjusting to your server this is used in instances to prevent it just saying Spectral Server
+exports.serverName = "Spectral";
+
+// Your server IP
+exports.serverIp = "";
+
+// Time for tells to expire if unopened (defaults to 7 days)
+exports.tellsexpiryage = 1000 * 60 * 60 * 24 * 7;
+
+// Enables or disabled /poof messages
+exports.poofOff = false;
+
 /**
  * permissions and groups:
  *   Each entry in `grouplist' is a seperate group. Some of the members are "special"
@@ -463,6 +478,21 @@ exports.forcedpublicprefixes = [];
  *     - minigame: make minigames (hangman, polls, etc.).
  *     - game: make games.
  */
+// Our Permissions:
+// - exp: Allows to manage exp.
+// - ssbffa: Allows to manage SSBFFA.
+// - news: Allows to create/delete news announcements.
+// - profile: Allows to manage profile setting/deletions, as well as things like $
+// - money: Allows to manage the server's currency.
+// - psgo: Allows to manage/create packs/etc for the card system.
+// - emotes: Allows to manage emoticons.
+// - factions: Allows to manage factions.
+// - quotes - Allows to manage quotes.
+// - genrequest - Allows to approve/disapprove genners.
+// - roomshop - Allows the user to manage room shops.
+// - sban - Allows the user to use shadow ban commands.
+// - draft - Allows the user to start drafts.
+
 exports.grouplist = [
 	{
 		symbol: '~',
@@ -547,6 +577,13 @@ exports.grouplist = [
 		alts: '@u',
 		tournaments: true,
 		game: true,
+		psgo: true,
+		ssbffa: true,
+		news: true,
+		exp: true,
+		money: true,
+		roomshop: true,
+		draft: true,
 	},
 	{
 		symbol: '%',
@@ -569,6 +606,10 @@ exports.grouplist = [
 		jeopardy: true,
 		joinbattle: true,
 		minigame: true,
+		profile: true,
+		quotes: true,
+		genrequests: true,
+		sban: true,
 	},
 	{
 		symbol: '\u2606',
