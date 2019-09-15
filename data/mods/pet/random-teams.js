@@ -11,6 +11,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				ability: 'Frostbite',
 				item: 'Leftovers',
 				moves: ['blizzard', 'recover', 'earthpower', 'toxic', 'hail', 'auroraveil', 'surf'],
+				signatureMove: 'Substitute',
 				evs: {
 					def: 252,
 					spd: 252,
@@ -23,6 +24,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				ability: 'Magic Guard',
 				item: 'Life Orb',
 				moves: ['fusionbolt', 'swordsdance', 'shadowclaw', 'shadowsneak', 'boltstrike', 'playrough', 'outrage', 'roost', 'earthquake'],
+				signatureMove: 'Fusion Bolt',
 				evs: {
 					atk: 252,
 					spd: 4,
@@ -35,6 +37,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				ability: 'Flame Fence',
 				item: 'Life Orb',
 				moves: ['fusionflare', 'shadowball', 'chargebeam', 'blueflare', 'roost', 'earthpower','dazzlinggleam', 'thunderbolt', 'dracometeor'],
+				signatureMove: 'Fusion Flare',
 				evs: {
 					spa: 252,
 					spe: 252,
@@ -47,6 +50,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				ability: 'Strong Jaw',
 				item: 'Leftovers',
 				moves: ['uturn', 'crunch', 'bugbite', 'ironhead', 'honeclaws', 'earthquake','stoneedge','psychicfangs','wildcharge','ironhead','rockpolish'],
+				signatureMove: 'Iron Head',
 				evs: {
 					atk: 252,
 					spe: 252,
@@ -59,6 +63,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				ability: 'Imposter',
 				item: 'Eviolite',
 				moves: ['toxic', 'protect', 'substitute', 'transform'],
+				signatureMove: 'Transform',
 				evs: {
 					spa: 252,
 					spd: 4,
@@ -71,6 +76,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				ability: 'Toxic Claw',
 				item: 'Leftovers',
 				moves: ['poisonjab', 'crabhammer', 'aquajet', 'xscissor', 'clamp', 'bodyslam'],
+				signatureMove: 'Poison Jab',
 				evs: {
 					atk: 252,
 					hp: 252,
@@ -83,6 +89,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				ability: 'Core Shield',
 				item: 'Leftovers',
 				moves: ['doubleironbash', 'shiftgear', 'ironhead', 'poisonjab', 'earthquake', 'kingsshield', 'megahorn'],
+				signatureMove: 'Poison Jab',
 				evs: {
 					atk: 252,
 					spe: 252,
