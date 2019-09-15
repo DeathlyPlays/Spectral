@@ -36,7 +36,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Mimikyu',
 				ability: 'Flame Fence',
 				item: 'Life Orb',
-				moves: ['shadowball', 'chargebeam', 'blueflare', 'roost', 'earthpower','dazzlinggleam', 'thunderbolt', 'dracometeor'],
+				moves: ['shadowball', 'chargebeam', 'blueflare', 'roost', 'earthpower', 'dazzlinggleam', 'thunderbolt', 'dracometeor'],
 				signatureMove: 'Fusion Flare',
 				evs: {
 					spa: 252,
@@ -49,7 +49,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Armaldo',
 				ability: 'Strong Jaw',
 				item: 'Leftovers',
-				moves: ['uturn', 'crunch', 'bugbite', 'honeclaws', 'earthquake','stoneedge','psychicfangs','wildcharge','ironhead','rockpolish'],
+				moves: ['uturn', 'crunch', 'bugbite', 'honeclaws', 'earthquake', 'stoneedge', 'psychicfangs', 'wildcharge', 'ironhead', 'rockpolish'],
 				signatureMove: 'Iron Head',
 				evs: {
 					atk: 252,
