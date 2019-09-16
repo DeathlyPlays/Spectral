@@ -302,8 +302,8 @@ let BattleMovedex = {
 		target: "normal",
 		type: "Dark",
 	},
+
 	// Revival Clair
-	
 	"dragonblitz": {
 		id: "dragonblitz",
 		name: "Dragon Blitz",
@@ -326,7 +326,7 @@ let BattleMovedex = {
 			chance: 50,
 			self: {
 				boosts: {
-					spa: 1,
+					atk: 1,
 					spe: 1,
 				},
 			},
