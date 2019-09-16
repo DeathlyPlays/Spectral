@@ -113,8 +113,21 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
+			"@Tactician Loki": {
+				species: "Liepard",
+				item: "Thokk",
+				ability: "Chaotic Aura",
+				moves: ["Copycat", "Ice Beam", "Spiky Shield"],
+				baseSignatureMove: "bloomingchaos",
+				signatureMove: "Blooming Chaos",
+				evs: {
+					spa: 252,
+					spe: 252,
+					def: 4,
+				},
+				nature: "Timid",
+			},
 			// Bots
-			// Players
 			// Drivers
 			"%Back At My Day": {
 				species: "Zapdos",
