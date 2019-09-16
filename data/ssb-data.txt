@@ -21,9 +21,9 @@ Signature Move: Big Thunder
 Timid Nature
 
 Zakuree
-(Gallade)
+(Gallade-Mega)
 @ Soul Orb
-	- Attacks do x1.5, loses 1/10th HP when attacking
+	- Attacks do x1.5, loses 1/10th of its max HP when attacking (except when at 1 HP)
 Ability: Heart of Steel
 	- When hit by an attack that would K.O, lives on 1 HP and boosts Atk, SpA and Spe by 1 stage.
 EVs: 160 Atk / 96 SpA / 252 Spe
