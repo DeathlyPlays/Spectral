@@ -30,7 +30,6 @@ let shop = [
 	["Room", "Buys a chatroom for you to own. [Within reason, can be denied].", 30],
 	["Roomshop", "Buys a Roomshop for your League or Room. [Will be removed if abused].", 50],
 	["Shiny", "Purchases the ability for your SSBFFA Pokemon to become shiny.", 5],
-	["Staffmon", "Buys a Pokemon with your name on it to be added in the Super Staff Bros Metagame. [Can be denied/edited]", 100],
 	["Symbol", "Buys a custom symbol to go infront of your username and puts you at top of userlist. [Temporary until restart,certain symbols are blocked]", 5],
 ];
 
@@ -43,17 +42,17 @@ let shopDisplay = getShopDisplay(shop);
  * @return {String} display
  */
 function getShopDisplay(shop) {
-	let display = `<center><img src=https://play.pokemonshowdown.com/sprites/xyani/masquerain.gif><img src=http://i.imgur.com/7jnZePO.png width=300> <img src=https://play.pokemonshowdown.com/sprites/xyani/masquerain.gif></center><br /><div class="infobox-limited"><table style="background: #2ae10e; border-color: #2e6dd8; border-radius: 8px" border="1" cellspacing="0" cellpadding="5" width="100%"><tbody><tr><th><font color=#2e6dd8 face=courier>Item</font></th><th><font color=#2e6dd8 face=courier>Description</font></th><th><font color=#2e6dd8 face=courier>Price</font></th></tr>`;
+	let display = `<center><img src="https://play.pokemonshowdown.com/sprites/xyani/marshadow.gif" width="80" height="80"><psicon pokemon="Marshadow"><img src="https://i.imgur.com/mOvsRJL.png" width="200" height="100"><psicon pokemon="Magearna"><img src="https://play.pokemonshowdown.com/sprites/xyani/magearna.gif" width="80" height="80"></center><br /><div class="infobox-limited"><table style="background: #000080; border-color: #C0C0C0; border-radius: 8px" border="1" cellspacing="0" cellpadding="5" width="100%"><tbody><tr><th><font color=#FFDF00 face=courier>Item</font></th><th><font color=#FFDF00 face=courier>Description</font></th><th><font color=#FFDF00 face=courier>Price</font></th></tr>`;
 	let start = 0;
 	while (start < shop.length) {
 		display += `<tr>`;
-		display += `<td align="center"><button name="send" style="background: #2ae10e; border-radius: 5px; border: solid, 1px, #2e6dd8; font-size: 11px; padding: 5px 10px" value="/buy ${shop[start][0]}"><font color=#2e6dd8 face=courier><strong>${shop[start][0]}</strong></font></button></td>`;
-		display += `<td align="center"><font color=#2e6dd8 face=courier>${shop[start][1]}</font></td>`;
-		display += `<td align="center"><font color=#2e6dd8 face=courier>${shop[start][2].toLocaleString()}</font></td>`;
+		display += `<td align="center"><button name="send" style="background: #000080; border-radius: 5px; border: solid, 1px, #C0C0C0; font-size: 11px; padding: 5px 10px" value="/buy ${shop[start][0]}"><font color=#FFDF00 face=courier><strong>${shop[start][0]}</strong></font></button></td>`;
+		display += `<td align="center"><font color=#FFDF00 face=courier>${shop[start][1]}</font></td>`;
+		display += `<td align="center"><font color=#FFDF00 face=courier>${shop[start][2].toLocaleString()}</font></td>`;
 		display += `</tr>`;
 		start++;
 	}
-	display += `</tbody></table></div><br><center><font color=#2ae10e face=courier>To buy an item from the shop, use /buy <em>Item</em>.</font></center>`;
+	display += `</tbody></table></div><br /><center><font color=#000080 face=courier>To buy an item from the shop, use /buy <em>Item</em>.</font></center>`;
 	return display;
 }
 
@@ -405,14 +404,12 @@ exports.commands = {
 		this.sendReplyBox(output);
 	},
 
-	/*
 	store: "shop",
 	shop(target, room, user) {
 		if (!this.runBroadcast()) return;
 		return this.sendReplyBox(shopDisplay);
 	},
 	shophelp: [`/shop - Display items you can buy with your ${moneyPlural}.`],
-	*/
 
 	buy(target, room, user) {
 		if (!target) return this.parse("/help buy");
