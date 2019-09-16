@@ -352,7 +352,7 @@ let BattleMovedex = {
 				function setMove(oldMove, moveid) {
 					let index = pokemon.moves.indexOf(oldMove);
 					if (index === -1) return;
-					let move = Dex.getMove(moveid);
+					let move = this.getMove(moveid);
 					let sketchedMove = {
 						move: move.name,
 						id: move.id,
@@ -363,7 +363,7 @@ let BattleMovedex = {
 						used: false,
 					};
 					pokemon.moveset[index] = sketchedMove;
-					pokemon.moves[index] = toID(move.name);
+					pokemon.moves[index] = move.id;
 				}
 				let subs = [
 					["playrough", "closecombat"],
@@ -403,7 +403,7 @@ let BattleMovedex = {
 				function setMove(oldMove, moveid) {
 					let index = pokemon.moves.indexOf(oldMove);
 					if (index === -1) return;
-					let move = Dex.getMove(moveid);
+					let move = this.getMove(moveid);
 					let sketchedMove = {
 						move: move.name,
 						id: move.id,
@@ -414,7 +414,7 @@ let BattleMovedex = {
 						used: false,
 					};
 					pokemon.moveset[index] = sketchedMove;
-					pokemon.moves[index] = toID(move.name);
+					pokemon.moves[index] = move.id;
 				}
 				let subs = [
 					["closecombat", "playrough"],
