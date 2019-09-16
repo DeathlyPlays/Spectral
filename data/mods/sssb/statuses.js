@@ -13,6 +13,9 @@ let BattleStatuses = {
 		onFaint() {
 			this.add(`c|☢RaginInfernape|Well, now I'm dead... That's the perfect excuse to not fix that yet.`);
 		},
+		onSourceFaint() {
+			this.add(`c|☢RaginInfernape|Well, if I kill everyone then no one has to know I procrastinated.`);
+		},
 	},
 
 	horrific17: {
@@ -34,6 +37,9 @@ let BattleStatuses = {
 			this.add(`c|~Satori Komeiji|Never! That I would never allow! You must not die, milord...`);
 			this.add(`c|@Horrific17|And neither should you, my wife. Lend me your shoulder, would you?`);
 			this.add(`c|~Satori Komeiji|Yes, of course.`);
+		},
+		onSourceFaint() {
+			this.add(`c|@Horrific17|You? Defeat Me? Laughable.`);
 		},
 	},
 
@@ -61,7 +67,25 @@ let BattleStatuses = {
 		onFaint() {
 			this.add(`c|@Tactician Loki|No...more...`);
 		},
+		onSourceFaint() {
+			this.add(`c|@Tactician Loki|Darn, someone else who couldn't handle me, what a pity~`);
+		},
 	},
+
+	backatmyday: {
+		noCopy: true,
+		onStart() {
+			this.add(`c|%Back At My Day|back`);
+		},
+		onSwitchOut() {
+			this.add(`c|%Back At My Day|brb`);
+		},
+		onFaint() {
+			this.add(`c|%Back At My Day|gtg`);
+		},
+		onSourceFaint() {
+			this.add(`c|%Back At My Day|Guess I gotta nerf myself now.`);
+		},
 };
 
 exports.BattleStatuses = BattleStatuses;
