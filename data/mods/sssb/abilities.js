@@ -144,6 +144,48 @@ let BattleAbilities = {
 			});
 		},
 	},
+
+	// Tactician Loki
+	"chaoticaura": {
+		id: "chaoticaura",
+		name: "Chaotic Aura",
+		desc: "Status moves are given +1 priority, and every turn at the end the user raises one stat up by two stages and lowers one stat by one stage.",
+		shortDesc: "Status moves are given +1 priority, every turn +2 random stat & -1 random stat.",
+		onResidualOrder: 26,
+		onResidualSubOrder: 1,
+		onResidual(pokemon) {
+			let stats = [];
+			let boost = {};
+			for (let statPlus in pokemon.boosts) {
+				// @ts-ignore
+				if (pokemon.boosts[statPlus] < 6) {
+					stats.push(statPlus);
+				}
+			}
+			let randomStat = stats.length ? this.sample(stats) : "";
+			// @ts-ignore
+			if (randomStat) boost[randomStat] = 2;
+
+			stats = [];
+			for (let statMinus in pokemon.boosts) {
+				// @ts-ignore
+				if (pokemon.boosts[statMinus] > -6 && statMinus !== randomStat) {
+					stats.push(statMinus);
+				}
+			}
+			randomStat = stats.length ? this.sample(stats) : "";
+			// @ts-ignore
+			if (randomStat) boost[randomStat] = -1;
+
+			this.boost(boost);
+		},
+		onModifyPriority(priority, pokemon, target, move) {
+			if (move && move.category === 'Status') {
+				move.chaoticAuraBoosted = true;
+				return priority + 1;
+			}
+		},
+	},
 };
 
 exports.BattleAbilities = BattleAbilities;
