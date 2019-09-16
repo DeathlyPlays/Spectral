@@ -104,3 +104,15 @@ Moves: Outrage, Earthquake, Stone Edge
 Signature Move: Dragon Blitz
 	- Dragon type, Physical, 5 PP, never misses, 80 BP, does neutral damage to Fairies, Contact move, 50% chance to raise Attack and Speed by 1 stage.
 Jolly Nature
+
+Auroura
+(Oricorio-Sensu)
+@ Ghoulish Rag
+	- Doubles the holder's Defense and Sp. Def, and Weaknesses/Resistances of the holder are swapped.
+Ability: Unholy Preservation
+	- Magic Guard + Unaware.
+EVs: 252 HP / 4 SpD / 252 Spe
+Moves: Parting Shot, Roost, Teeter Dance
+Signature Move: Spiritual Hex
+	- Ghost type, Special, 24 PP, 90% accuracy, 80 BP, power is doubled if both user and opponent are burned.
+Timid Nature
