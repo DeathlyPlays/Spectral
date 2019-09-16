@@ -162,8 +162,7 @@ let BattleMovedex = {
 		shortDesc: "Only works at 1 HP, user faints after usage.",
 		basePower: 180,
 		onPrepareHit(target, source) {
-			if (source.hp !== 1) return false;
-			this.hint(`This move may be only used once the user has 1 HP.`);
+			if (source.hp !== 1) return this.hint(`This move may be only used once the user has 1 HP.`);
 			this.add('-anim', source, 'Hex', source);
 			this.add('-anim', source, 'Spectral Thief', source);
 			this.add('-anim', source, 'Hyper Beam', target);
@@ -278,11 +277,6 @@ let BattleMovedex = {
 				chance: 10,
 				volatileStatus: "confusion",
 			}, {
-				self: {
-					chance: 10,
-					volatileStatus: "confusion",
-				},
-			}, {
 				chance: 10,
 				volatileStatus: "attract",
 			}, {
@@ -293,6 +287,10 @@ let BattleMovedex = {
 				volatileStatus: "flinch",
 			},
 		],
+		self: {
+			chance: 10,
+			volatileStatus: "confusion",
+		},
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Black Hole Eclipse', target);
 			this.add(`c|@Tactician Loki|I love sending people into a tizzy.`);
