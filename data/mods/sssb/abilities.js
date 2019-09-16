@@ -106,7 +106,7 @@ let BattleAbilities = {
 			let changed = false;
 			for (let stats in pokemon.boosts) {
 				for (const target of pokemon.side.foe.active) {
-					if (pokemon.boosts[stats] >== 0 || target.boosts[stats] >== 0) {
+					if (pokemon.boosts[stats] > 0 || target.boosts[stats] > 0) {
 						changed = true;
 						break;
 					}
