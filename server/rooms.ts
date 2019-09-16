@@ -1336,7 +1336,7 @@ export class BasicChatRoom extends BasicRoom {
 		}
 		if (this.survey) {
 			for (const survey of this.survey.surveyArray) {
-				if (survey && user.userid in survey.repliers) this.survey.updateFor(user, this.survey.obtain(survey.surveyNum), false);
+				if (survey && user.userid in survey.repliers) this.survey.updateTo(user, this.survey.obtain(survey.surveyNum), false);
 			}
 		}
 		return true;
