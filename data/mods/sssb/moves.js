@@ -352,7 +352,7 @@ let BattleMovedex = {
 				function setMove(oldMove, moveid) {
 					let index = pokemon.moves.indexOf(oldMove);
 					if (index === -1) return;
-					let move = this.getMove(moveid);
+					let move = Dex.getMove(moveid);
 					let sketchedMove = {
 						move: move.name,
 						id: move.id,
@@ -403,7 +403,7 @@ let BattleMovedex = {
 				function setMove(oldMove, moveid) {
 					let index = pokemon.moves.indexOf(oldMove);
 					if (index === -1) return;
-					let move = this.getMove(moveid);
+					let move = Dex.getMove(moveid);
 					let sketchedMove = {
 						move: move.name,
 						id: move.id,
