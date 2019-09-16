@@ -349,29 +349,13 @@ let BattleMovedex = {
 		self: {
 			onHit(pokemon) {
 				// substitute moves
-				function setMove(oldMove, moveid) {
-					let index = pokemon.moves.indexOf(oldMove);
-					if (index === -1) return;
-					let move = this.getMove(moveid);
-					let sketchedMove = {
-						move: move.name,
-						id: move.id,
-						pp: move.pp,
-						maxpp: move.pp,
-						target: move.target,
-						disabled: false,
-						used: false,
-					};
-					pokemon.moveset[index] = sketchedMove;
-					pokemon.moves[index] = move.id;
-				}
 				let subs = [
 					["playrough", "closecombat"],
 					["sunsteelstrike", "shadowsneak"],
 					["icepunch", "iciclecrash"],
 					["angelicspectral", "spectralsangel"],
 				];
-				subs.forEach(s => setMove(s[0], s[1]));
+				subs.forEach(s => setMove(pokemon, s[0], s[1]));
 				this.add("-formechange", pokemon, "Marshadow", "[msg]");
 			},
 		},
@@ -399,30 +383,13 @@ let BattleMovedex = {
 		basePower: 60,
 		self: {
 			onHit(pokemon) {
-				// substitute moves
-				function setMove(oldMove, moveid) {
-					let index = pokemon.moves.indexOf(oldMove);
-					if (index === -1) return;
-					let move = this.getMove(moveid);
-					let sketchedMove = {
-						move: move.name,
-						id: move.id,
-						pp: move.pp,
-						maxpp: move.pp,
-						target: move.target,
-						disabled: false,
-						used: false,
-					};
-					pokemon.moveset[index] = sketchedMove;
-					pokemon.moves[index] = move.id;
-				}
 				let subs = [
 					["closecombat", "playrough"],
 					["shadowsheak", "sunsteelstrike"],
 					["iciclecrash", "icepunch"],
 					["spectralsangel", "angelicspectral"],
 				];
-				subs.forEach(s => setMove(s[0], s[1]));
+				subs.forEach(s => setMove(pokemon, s[0], s[1]));
 				this.add("-formechange", pokemon, "Magearna", "[msg]");
 			},
 		},
