@@ -86,8 +86,8 @@ let BattleAbilities = {
 	"shadeseeker": {
 		id: "shadeseeker",
 		name: "Shade Seeker",
-		desc: "The user ignores target's stat changes, and their Ghost type moves get +1 priority if the user or target have any stat changes.",
-		shortDesc: "Ignores target's stat changes, Ghost moves get +1 priority if user/target have stat changes.",
+		desc: "The user ignores target's stat changes, and their Ghost type moves get +1 priority if the user or target have any stat boosts.",
+		shortDesc: "Ignores target's stat changes, Ghost moves get +1 priority if user/target have stat boosts.",
 		onAnyModifyBoost(boosts, target, move) {
 			let source = this.effectData.target;
 			if (source === target) return;
@@ -106,7 +106,7 @@ let BattleAbilities = {
 			let changed = false;
 			for (let stats in pokemon.boosts) {
 				for (const target of pokemon.side.foe.active) {
-					if (pokemon.boosts[stats] !== 0 || target.boosts[stats] !== 0) {
+					if (pokemon.boosts[stats] >== 0 || target.boosts[stats] >== 0) {
 						changed = true;
 						break;
 					}
