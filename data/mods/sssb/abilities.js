@@ -33,13 +33,12 @@ let BattleAbilities = {
 	"heartofsteel": {
 		id: "heartofsteel",
 		name: "Heart of Steel",
-		desc: "If the user is hit with an attack that would knock it out, they will survive the hit with 1 HP and receive +1 to Atk, SpA, and Spe.",
-		shortDesc: "If hit with an attack that would K.O, survives on 1 HP and raises Spe/Atk/SpA by 1.",
+		desc: "If the user is hit with an attack that would knock it out, they will survive the hit with 1 HP and receive +1 to Atk and Spe.",
+		shortDesc: "If hit with an attack that would K.O, survives on 1 HP and raises Spe/Atk by 1.",
 		onDamagePriority: -100,
 		onDamage(damage, target, source, effect) {
 			if (damage >= target.hp && effect && effect.effectType === 'Move' && target.hp !== 1) {
 				this.boost({atk: 1}, target, target, null, true);
-				this.boost({spa: 1}, target, target, null, true);
 				this.boost({spe: 1}, target, target, null, true);
 				this.add('-ability', target, 'Heart of Steel');
 				return target.hp - 1;
