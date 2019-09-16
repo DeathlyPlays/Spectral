@@ -2451,10 +2451,11 @@ let Formats = [
 	},
 	{
 		name: "[Gen 7] Super Staff Bros Free For All",
-		desc:
+		desc: [
 			'Duke it out with other users custom made pokemon.',
 			'Make your own as well! Get started with <button class="button" name="send" value="/ssb edit">/ssb edit</button>.',
 			'Use <button class="button" name="send" value="/ssb">/ssb</button> for the commands you can use.',
+		],
 		mod: 'ssbffa',
 		team: 'randomCustomSSB',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Freeze Clause Mod', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
