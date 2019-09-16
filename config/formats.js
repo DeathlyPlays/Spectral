@@ -2182,8 +2182,19 @@ let Formats = [
 		column: 5,
 	},
 	{
+		name: "[Gen 7] Deltamons",
+		desc: "Pet randomized Pokemon by Roughskull!",
+
+		mod: 'pet',
+		team: 'randomPetmons',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+		onSwitchIn(pokemon) {
+			this.add("-start", pokemon, 'typechange', `${pokemon.types[0]} ${(pokemon.types[1] ? `/${pokemon.types[1]}` : ``)}`);
+		},
+	},
+	{
 		name: "[Gen 7] Double TMS Boss Rush",
-		desc: ["All the bosses from TMS have all came to duke it out in a giant randbats OM to see who can top who and be the best!"],
+		desc: "All the bosses from TMS have all came to duke it out in a giant randbats OM to see who can top who and be the best!",
 
 		mod: 'bossrush',
 		team: 'randomTMS',
@@ -2191,8 +2202,15 @@ let Formats = [
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
 	},
 	{
+		name: "[Gen 7] Fakemons Random Battle",
+		desc: "Randomized Fakemons.",
+		mod: 'fakemons',
+		team: 'randomFakemons',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
 		name: "[Gen 7] Frantic Fusions",
-		desc: [
+		threads: [
 			"&bullet; <a href=https://github.com/XpRienzo/DragonHeaven/blob/master/mods/franticfusions/README.md>Frantic Fusions</a> <br> &bullet; A metagame where you are able to fuse two Pokemon. <BR /> &bullet; The resultant Pokemon has the primary type of the base mon. If the base mon is shiny, it will get the secondary type of the second mon, else the primary type of the second mon. It will get the averaged stats.<br />&bullet;You can choose any ability from the original Pokemon, and you also get the primary ability of the second Pokemon (The one you put in the nickname). <br />&bullet; Use !fuse for theorymonning purposes",
 		],
 		mod: 'franticfusions',
@@ -2369,10 +2387,10 @@ let Formats = [
 	},
 	{
 		name: "[Gen 7] Legendless",
-		desc: [
-			"Legendaries have been banished from the tier, what are we gonna do now?",
-			"&bullet; <a href=\"http://chandie.boards.net/thread/5/welcome-usm-legendless\">Legendless Bans and Unbans</a>",
-			"&bullet; <a href=\"http://chandie.boards.net/thread/6/usm-legendless-viability-rankings\">Legendless Viability Ranking</a>",
+		desc: `Legendaries have been banished from the tier, what are we gonna do now?`,
+		threads: [
+			`&bullet; <a href="http://chandie.boards.net/thread/5/welcome-usm-legendless">Legendless Bans and Unbans</a>,
+			&bullet; <a href="http://chandie.boards.net/thread/6/usm-legendless-viability-rankings">Legendless Viability Ranking</a>`,
 		],
 		mod: 'gen7',
 		ruleset: ['Sleep Clause Mod', 'Pokemon', 'Standard', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
@@ -2381,9 +2399,9 @@ let Formats = [
 	},
 	{
 		name: "[Gen 7] Slowtown",
-		desc: [
-			"Trick room is constantly active for the duration of the battle and will reapply itself every 5 turns. Concept by Lycanium Z. Coded by Insist.",
-			"&bullet; <a href=\"http://exiledps.boards.net/board/22/slowtown\">Slowtown</a>",
+		desc: `Trick room is constantly active for the duration of the battle and will reapply itself every 5 turns. Concept by Lycanium Z. Coded by Insist.`,
+		threads: [
+			`&bullet; <a href="http://exiledps.boards.net/board/22/slowtown">Slowtown</a>`,
 		],
 		mod: "slowtown",
 		ruleset: ['Sleep Clause Mod', 'Pokemon', 'Standard', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
@@ -2407,9 +2425,7 @@ let Formats = [
 	{
 		name: "[Gen 7] Spectral Super Staff Bros",
 		mod: "sssb",
-		desc: [
-			"The Staff on Spectral all fight it out in a battle of Super Staff Bros.",
-		],
+		desc: "The Staff on Spectral all fight it out in a battle of Super Staff Bros.",
 		ruleset: ["Sleep Clause Mod", "Cancel Mod", "HP Percentage Mod"],
 		onBegin() {
 			this.add("raw|<h1>GET READY TO RUMBLE!</h1>");
@@ -2435,10 +2451,10 @@ let Formats = [
 	},
 	{
 		name: "[Gen 7] Super Staff Bros Free For All",
-		desc: ['Duke it out with other users custom made pokemon.',
+		desc:
+			'Duke it out with other users custom made pokemon.',
 			'Make your own as well! Get started with <button class="button" name="send" value="/ssb edit">/ssb edit</button>.',
 			'Use <button class="button" name="send" value="/ssb">/ssb</button> for the commands you can use.',
-		],
 		mod: 'ssbffa',
 		team: 'randomCustomSSB',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Freeze Clause Mod', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
@@ -2456,10 +2472,9 @@ let Formats = [
 	},
 	{
 		name: "[Gen 7] Swapping Powers",
-		desc: [
-			"Power trick that's constantly there, not only swapping Attack and Defense, but Special Attack and Special Defense also.",
-			"&bullet; <a href=\"http://exiledps.boards.net/thread/24/welcome-swapping-powers\">Swapping Powers Thread</a>",
-			"Concept by Mewth. Coded by Insist/HoeenHero.",
+		desc: `Power trick that's constantly there, not only swapping Attack and Defense, but Special Attack and Special Defense also.`,
+		threads: [
+			`&bullet; <a href="http://exiledps.boards.net/thread/24/welcome-swapping-powers">Swapping Powers Thread</a>`,
 		],
 		ruleset: ['Sleep Clause Mod', 'Pokemon', 'Standard', 'HP Percentage Mod', 'Cancel Mod', 'Team Preview'],
 		unbanlist: ['Deoxys-Attack', 'Deoxys', 'Deoxys-Defense', 'Deoxys-Speed', 'Aegislash', 'Aegislash-Blade', 'Darmanitan-Zen', 'Marshadow', 'Genesect', 'Shaymin-Sky', 'Landorus', 'Blaziken', 'Pheromosa'],
@@ -2471,7 +2486,7 @@ let Formats = [
 	},
 	{
 		name: "[Gen 7] TMS Boss Rush",
-		desc: ["All the bosses from TMS have all came to duke it out in a giant randbats OM to see who can top who and be the best!"],
+		desc: "All the bosses from TMS have all came to duke it out in a giant randbats OM to see who can top who and be the best!",
 
 		mod: 'bossrush',
 		team: 'randomTMS',
@@ -2479,29 +2494,10 @@ let Formats = [
 	},
 	{
 		name: "[Gen 7] Z-Frenzy",
-		desc: ["Battlers have unlimited Z-Move usage and can use crystals on multiple Pokemon."],
+		desc: "Battlers have unlimited Z-Move usage and can use crystals on multiple Pokemon.",
 
 		mod: 'zfrenzy',
 		ruleset: ['[Gen 7] OU'],
-	},
-	{
-		name: "[Gen 7] Fakemons Random Battle",
-		desc: ["Randomized Fakemons."],
-
-		mod: 'fakemons',
-		team: 'randomFakemons',
-		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
-		name: "[Gen 7] Deltamons",
-		desc: ["Pet randomized Pokemon by Roughskull!"],
-
-		mod: 'pet',
-		team: 'randomPetmons',
-		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
-		onSwitchIn(pokemon) {
-			this.add("-start", pokemon, 'typechange', pokemon.types[0] + (pokemon.types[1] ? '/' + pokemon.types[1] : ''));
-		},
 	},
 ];
 
