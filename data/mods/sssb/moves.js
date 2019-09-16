@@ -318,6 +318,9 @@ let BattleMovedex = {
 			this.add('-anim', source, 'Dragon Rush', target);
 			this.add(`c|+Revival Clair|Good game, too easy.`);
 		},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Fairy') return 0;
+		},
 		flags: {protect: 1, mirror: 1, contact: 1},
 		secondary: {
 			chance: 50,
