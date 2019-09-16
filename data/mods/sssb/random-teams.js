@@ -142,6 +142,7 @@ class RandomSSSBTeams extends RandomTeams {
 				species: "Zapdos",
 				item: "Life Orb",
 				ability: "Peal of Thunder",
+				shiny: true,
 				gender: "M",
 				moves: ["Aeroblast", "Earth Power", "Secret Sword"],
 				baseSignatureMove: "bigthunder",
@@ -154,6 +155,21 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Timid",
 			},
 			// Voices
+			"+Revival Clair": {
+				species: "Garchomp",
+				item: "Focus Sash",
+				ability: "Tough Skin",
+				gender: "F",
+				moves: ["Earthquake", "Outrage", "Stone Edge"],
+				baseSignatureMove: "dragonblitz",
+				signatureMove: "Dragon Blitz",
+				evs: {
+					atk: 252,
+					spd: 4,
+					spe: 252,
+				},
+				nature: "Jolly",
+			},
 		};
 		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */

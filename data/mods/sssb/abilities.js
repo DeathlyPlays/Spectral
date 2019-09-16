@@ -185,6 +185,28 @@ let BattleAbilities = {
 			}
 		},
 	},
+	
+	// Revival Clair
+	"toughskin": {
+		id: "toughskin",
+		name: "Tough Skin",
+		desc: "Neutral damage from Ice attacks.",
+		shortDesc: "1x damage from Ice.",
+		onSourceModifyAtkPriority: 6,
+		onSourceModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Ice') {
+				this.debug('Tough Skin weaken');
+				return this.chainModify(0.25);
+			}
+		},
+		onSourceModifySpAPriority: 5,
+		onSourceModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Ice') {
+				this.debug('Tough Skin weaken');
+				return this.chainModify(0.25);
+			}
+		},
+	},
 };
 
 exports.BattleAbilities = BattleAbilities;

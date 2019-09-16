@@ -302,6 +302,38 @@ let BattleMovedex = {
 		target: "normal",
 		type: "Dark",
 	},
+
+	// Revival Clair
+	"dragonblitz": {
+		id: "dragonblitz",
+		name: "Dragon Blitz",
+		basePower: 80,
+		accuracy: true,
+		desc: "Nearly always goes first and has 50% chance of boosting Spe and Atk by 1 stage.",
+		shortDesc: "Almost always goes first and 50% chance of boosting Spe/Atk by 1 stage.",
+		pp: 5,
+		priority: 2,
+		category: "Physical",
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Dragon Rush', target);
+			this.add(`c|+Revival Clair|Good game, too easy.`);
+		},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Fairy') return 0;
+		},
+		flags: {protect: 1, mirror: 1, contact: 1},
+		secondary: {
+			chance: 50,
+			self: {
+				boosts: {
+					atk: 1,
+					spe: 1,
+				},
+			},
+		},
+		target: "normal",
+		type: "Dragon",
+	},		
 };
 
 exports.BattleMovedex = BattleMovedex;
