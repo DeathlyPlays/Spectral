@@ -137,6 +137,21 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Timid",
 			},
 			// Bots
+			"*Spectral Bot": {
+				species: "Magearna",
+				item: "Assault Vest",
+				ability: "Spectral's Thief",
+				gender: "N",
+				moves: ["Play Rough", "Sunsteel Strike", "Ice Punch"],
+				baseSignatureMove: "angelicspectral",
+				signatureMove: "Angelic Spectral",
+				evs: {
+					atk: 252,
+					spd: 4,
+					spe: 252,
+				},
+				nature: "Jolly",
+			},
 			// Drivers
 			"%Back At My Day": {
 				species: "Zapdos",
