@@ -86,6 +86,7 @@ let BattleStatuses = {
 		onSourceFaint() {
 			this.add(`c|%Back At My Day|Guess I gotta nerf myself now.`);
 		},
+	},
 };
 
 exports.BattleStatuses = BattleStatuses;

@@ -25,11 +25,11 @@ Zakuree
 @ Soul Orb
 	- Attacks do x1.5, loses 1/10th of its max HP when attacking (except when at 1 HP)
 Ability: Heart of Steel
-	- When hit by an attack that would K.O, lives on 1 HP and boosts Atk, SpA and Spe by 1 stage.
-EVs: 160 Atk / 96 SpA / 252 Spe
+	- When hit by an attack that would K.O, lives on 1 HP and boosts Atk and Spe by 1 stage.
+EVs: 252 Atk / 4 SpD / 252 Spe
 Moves: Cross Chop, Psycho Cut, Blaze Kick
 Signature Move: 16 Years
-	- Dark Type, never misses, Special, 200 BP. Fails if user has more than 1 HP. User faints.
+	- Dark Type, never misses, Physical, 180 BP, 5 PP, fails if user has more than 1 HP. User faints.
 Jolly Nature
 
 Chandie
