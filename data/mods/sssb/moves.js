@@ -235,6 +235,8 @@ let BattleMovedex = {
 		name: "Blooming Chaos",
 		basePower: 100,
 		accuracy: true,
+		desc: "Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.",
+		shortDesc: "A variety of curses begin.",
 		pp: 20,
 		priority: 0,
 		category: "Special",
