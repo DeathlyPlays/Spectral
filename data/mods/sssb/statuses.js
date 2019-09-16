@@ -87,6 +87,21 @@ let BattleStatuses = {
 			this.add(`c|%Back At My Day|Guess I gotta nerf myself now.`);
 		},
 	},
+	revivalclair: {
+		noCopy: true,
+		onStart() {
+			this.add(`c|+Revival Clair|Good game, too easy.`);
+		},
+		onSwitchOut() {
+			this.add(`c|+Revival Clair|Good game, too easy.`);
+		},
+		onFaint() {
+			this.add(`c|+Revival Clair|Good game, too easy.`);
+		},
+		onSourceFaint() {
+			this.add(`c|+Revival Clair|Good game, too easy.`);
+		},
+	},
 };
 
 exports.BattleStatuses = BattleStatuses;
