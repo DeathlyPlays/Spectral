@@ -333,7 +333,109 @@ let BattleMovedex = {
 		},
 		target: "normal",
 		type: "Dragon",
-	},		
+	},
+
+	// Spectral Bot
+	"angelicspectral": {
+		isNonstandard: true,
+		accuracy: 100,
+		category: "Physical",
+		id: "angelicspectral",
+		desc: "Changes forme to Marshadow and substitutes moves.",
+		name: "Angelic Spectral",
+		pp: 10,
+		priority: 0,
+		basePower: 60,
+		self: {
+			onHit(pokemon) {
+				// substitute moves
+				function setMove(oldMove, moveid) {
+					let index = pokemon.moves.indexOf(oldMove);
+					if (index === -1) return;
+					let move = this.getMove(moveid);
+					let sketchedMove = {
+						move: move.name,
+						id: move.id,
+						pp: move.pp,
+						maxpp: move.pp,
+						target: move.target,
+						disabled: false,
+						used: false,
+					};
+					pokemon.moveset[index] = sketchedMove;
+					pokemon.moves[index] = toID(move.name);
+				}
+				let subs = [
+					["playrough", "closecombat"],
+					["sunsteelstrike", "shadowsneak"],
+					["icepunch", "iciclecrash"],
+					["angelicspectral", "spectralsangel"],
+				];
+				subs.forEach(s => setMove(s[0], s[1]));
+				this.add("-formechange", pokemon, "Marshadow", "[msg]");
+			},
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Spectral Thief', target);
+		},
+		flags: {
+			protect: 1,
+			distance: 1,
+		},
+		target: "any",
+		type: "Ghost",
+	},
+
+	// Spectral Bot
+	"spectralsangel": {
+		isNonstandard: true,
+		accuracy: 100,
+		category: "Physical",
+		id: "spectralsangel",
+		desc: "Changes forme to Magearna and substitutes moves.",
+		name: "Spectral's Angel",
+		pp: 10,
+		priority: 0,
+		basePower: 60,
+		self: {
+			onHit(pokemon) {
+				// substitute moves
+				function setMove(oldMove, moveid) {
+					let index = pokemon.moves.indexOf(oldMove);
+					if (index === -1) return;
+					let move = this.getMove(moveid);
+					let sketchedMove = {
+						move: move.name,
+						id: move.id,
+						pp: move.pp,
+						maxpp: move.pp,
+						target: move.target,
+						disabled: false,
+						used: false,
+					};
+					pokemon.moveset[index] = sketchedMove;
+					pokemon.moves[index] = toID(move.name);
+				}
+				let subs = [
+					["closecombat", "playrough"],
+					["shadowsheak", "sunsteelstrike"],
+					["iciclecrash", "icepunch"],
+					["spectralsangel", "angelicspectral"],
+				];
+				subs.forEach(s => setMove(s[0], s[1]));
+				this.add("-formechange", pokemon, "Magearna", "[msg]");
+			},
+		},
+		flags: {
+			protect: 1,
+			distance: 1,
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Fleur Cannon', target);
+		},
+		target: "any",
+		type: "Fairy",
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;

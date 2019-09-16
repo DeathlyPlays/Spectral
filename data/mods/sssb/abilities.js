@@ -185,7 +185,7 @@ let BattleAbilities = {
 			}
 		},
 	},
-	
+
 	// Revival Clair
 	"toughskin": {
 		id: "toughskin",
@@ -204,6 +204,30 @@ let BattleAbilities = {
 			if (move.type === 'Ice') {
 				this.debug('Tough Skin weaken');
 				return this.chainModify(0.25);
+			}
+		},
+	},
+
+	// Spectral Bot
+	"spectralsthief": {
+		id: "spectralsthief",
+		name: "Spectral's Thief",
+		desc: "Before every move, the user checks if the user has any positive boosts, if so, the user steals said stats.",
+		shortDesc: "The user steals the target's boosts, if any, before every move.",
+		onBeforeMovePriority: 0.5,
+		onBeforeMove(attacker, defender, move) {
+			if (!defender) return;
+			let steal = [];
+			for (let stats in defender.boosts) {
+				for (const target of defender.side.foe.active) {
+					if (defender.boosts[stats] > 0 || target.boosts[stats] > 0) {
+						steal.push(stats);
+						defender.boosts[stats] = 0;
+					}
+				}
+				if (steal.length > 0) {
+					this.boost(steal);
+				}
 			}
 		},
 	},
