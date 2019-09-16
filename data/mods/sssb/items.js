@@ -75,6 +75,61 @@ let BattleItems = {
 			}
 		},
 	},
+
+	// Tactician Loki
+	"thokk": {
+		id: "thokk",
+		name: "Thokk",
+		desc: "If held by Tactician Loki gives 50% chance to heal by 1/4th HP, 30% chance to increase a random stat by 1, 10% chance to decrease a random stat by 1, 10% chance to cast Focus Energy. If knocked off heals the holder by 50%, if tricked and is held by another pokemon damages pokemon by 1/8th every turn.",
+		shortDesc: "A variety of effects begin to occur every turn.",
+		onResidualOrder: 26,
+		onResidualSubOrder: 2,
+		onResidual(pokemon) {
+			if (pokemon.baseTemplate.num === 493) {
+				if (this.randomChance(1, 2)) {
+					this.heal(pokemon.maxhp / 4);
+				}
+				if (this.randomChance(3, 10)) {
+					let stats = [];
+					/**@type {{[k: string]: number}} */
+					let boost = {};
+					for (let stat in pokemon.boosts) {
+						// @ts-ignore
+						if (pokemon.boosts[stat] < 6) {
+							stats.push(stat);
+						}
+					}
+					let randomStat = stats.length ? this.sample(stats) : "";
+					if (stats.length) {
+						boost[randomStat] = 2;
+						this.boost(boost);
+					}
+					stats = [];
+					for (let statMinus in pokemon.boosts) {
+						// @ts-ignore
+						if (pokemon.boosts[statMinus] > -6 && statMinus !== randomStat) {
+							stats.push(statMinus);
+						}
+					}
+					randomStat = stats.length ? this.sample(stats) : "";
+					// @ts-ignore
+					if (randomStat) boost[randomStat] = -1;
+
+					this.boost(boost);
+				}
+				if (this.randomChance(1, 10)) {
+					pokemon.addVolatile('focusenergy');
+				}
+			} else {
+				this.damage(pokemon.maxhp / 8);
+			}
+		},
+		onTakeItem(item, pokemon, source) {
+			if ((source && source.baseTemplate.num === 510) || pokemon.baseTemplate.num === 510) {
+				this.heal(pokemon.maxhp / 2);
+			}
+		},
+	},
 };
 
 exports.BattleItems = BattleItems;

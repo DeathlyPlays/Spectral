@@ -49,6 +49,19 @@ let BattleStatuses = {
 			this.add(`c|&AlfaStorm|You'll regret doing this to me!`);
 		},
 	},
+
+	tacticianloki: {
+		noCopy: true,
+		onStart() {
+			this.add(`c|@Tactician Loki|Did you...need something?~`);
+		},
+		onSwitchOut() {
+			this.add(`c|@Tactician Loki|It's your turn dear~`);
+		},
+		onFaint() {
+			this.add(`c|@Tactician Loki|No...more...`);
+		},
+	},
 };
 
 exports.BattleStatuses = BattleStatuses;

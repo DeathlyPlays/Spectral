@@ -228,6 +228,79 @@ let BattleMovedex = {
 		zMovePower: 120,
 		contestType: "Beautiful",
 	},
+
+	// Tactician Loki
+	"bloomingchaos": {
+		id: "bloomingchaos",
+		name: "Blooming Chaos",
+		basePower: 100,
+		accuracy: true,
+		desc: "Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.",
+		shortDesc: "A variety of curses begin.",
+		pp: 20,
+		priority: 0,
+		category: "Special",
+		onHit(target, source) {
+			let targetBoosts = {};
+			let sourceBoosts = {};
+
+			for (let i in target.boosts) {
+				// @ts-ignore
+				targetBoosts[i] = target.boosts[i];
+				// @ts-ignore
+				sourceBoosts[i] = source.boosts[i];
+			}
+
+			target.setBoost(sourceBoosts);
+			source.setBoost(targetBoosts);
+
+			this.add('-swapboost', source, target, '[from] move: Blooming Chaos');
+
+			let success = false;
+			for (let i in target.boosts) {
+				// @ts-ignore
+				if (target.boosts[i] === 0) continue;
+				// @ts-ignore
+				target.boosts[i] = -target.boosts[i];
+				success = true;
+			}
+			if (!success) return false;
+			this.add('-invertboost', target, '[from] move: Blooming Chaos');
+		},
+		secondaries: [
+			{
+				chance: 30,
+				status: "brn",
+			}, {
+				chance: 30,
+				status: "tox",
+			}, {
+				chance: 10,
+				volatileStatus: "confusion",
+			}, {
+				self: {
+					chance: 10,
+					volatileStatus: "confusion",
+				},
+			}, {
+				chance: 10,
+				volatileStatus: "attract",
+			}, {
+				chance: 10,
+				status: "frz",
+			}, {
+				chance: 10,
+				volatileStatus: "flinch",
+			},
+		],
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Black Hole Eclipse', target);
+			this.add(`c|@Tactician Loki|I love sending people into a tizzy.`);
+		},
+		flags: {reflectable: 1, protect: 1, mirror: 1},
+		target: "normal",
+		type: "Dark",
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;
