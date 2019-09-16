@@ -52,7 +52,7 @@ function getShopDisplay(shop) {
 		display += `</tr>`;
 		start++;
 	}
-	display += `</tbody></table></div><br /><center><font color=#000080 face=courier>To buy an item from the shop, use /buy <em>Item</em>.</font></center>`;
+	display += `</tbody></table></div><br /><center><font color=#FFDF00 face=courier>To buy an item from the shop, use /buy <em>Item</em>.</font></center>`;
 	return display;
 }
 
