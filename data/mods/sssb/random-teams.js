@@ -124,6 +124,7 @@ class RandomSSSBTeams extends RandomTeams {
 				species: "Liepard",
 				item: "Thokk",
 				ability: "Chaotic Aura",
+				shiny: true,
 				gender: "F",
 				moves: ["Copycat", "Ice Beam", "Spiky Shield"],
 				baseSignatureMove: "bloomingchaos",
