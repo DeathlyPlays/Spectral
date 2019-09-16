@@ -85,7 +85,7 @@ let BattleItems = {
 		onResidualOrder: 26,
 		onResidualSubOrder: 2,
 		onResidual(pokemon) {
-			if (pokemon.baseTemplate.num === 493) {
+			if (pokemon.baseTemplate.num === 510) {
 				if (this.randomChance(1, 2)) {
 					this.heal(pokemon.maxhp / 4);
 				}
