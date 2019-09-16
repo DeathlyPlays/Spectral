@@ -81,3 +81,15 @@ Moves: Sucker Punch, Flame Charge, Thousand Waves
 Signature Move: Radiation Stench
 	- Poison type, Physical, 120 BP, 85% accuracy, 10 PP, doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch.
 Adamant Nature
+
+Tactician Loki
+(Liepard)
+@ Thokk
+	- If held by Tactician Loki gives 50% chance to heal by 1/4th HP, 30% chance to increase a random stat by 1, 10% chance to decrease a random stat by 1, 10% chance to cast Focus Energy. If knocked off heals the holder by 50%, if tricked and is held by another pokemon damages pokemon by 1/8th every turn.
+Ability: Chaotic Aura
+	- Status moves receive +1 priority and a random stat is raised every turn by two stages and one random stat is lowered by one stage at the end of every turn.
+EVs: 252 SpA / 4 Def / 252 Spe
+Moves: Copycat, Spiky Shield, Ice Beam
+Signature Move: Blooming Chaos
+	- 20PP, 100BP, Never Misses, Dark Type, Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
+Timid Nature
