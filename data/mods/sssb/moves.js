@@ -355,7 +355,7 @@ let BattleMovedex = {
 					["icepunch", "iciclecrash"],
 					["angelicspectral", "spectralsangel"],
 				];
-				subs.forEach(s => setMove(pokemon, s[0], s[1]));
+				subs.forEach(s => this.setMove(pokemon, s[0], s[1]));
 				this.add("-formechange", pokemon, "Marshadow", "[msg]");
 			},
 		},
@@ -389,7 +389,7 @@ let BattleMovedex = {
 					["iciclecrash", "icepunch"],
 					["spectralsangel", "angelicspectral"],
 				];
-				subs.forEach(s => setMove(pokemon, s[0], s[1]));
+				subs.forEach(s => this.setMove(pokemon, s[0], s[1]));
 				this.add("-formechange", pokemon, "Magearna", "[msg]");
 			},
 		},
