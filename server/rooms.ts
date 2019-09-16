@@ -1234,7 +1234,7 @@ export class BasicChatRoom extends BasicRoom {
 		}
 		message += `</div>`;
 		if (this.introMessage) {
-			message += `\n|raw|<div class="infobox infobox-roomintro"><div ${(!this.isOfficial ? 'class="infobox-limited"' : '')}>` +
+			message += `\n|raw|<div class="infobox infobox-roomintro"><div ${(!this.isOfficial ? 'class="infobox"' : '')}>` +
 				this.introMessage.replace(/\n/g, '') +
 				`</div></div>`;
 		}
