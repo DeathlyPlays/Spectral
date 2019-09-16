@@ -162,7 +162,10 @@ let BattleMovedex = {
 		shortDesc: "Only works at 1 HP, user faints after usage.",
 		basePower: 180,
 		onPrepareHit(target, source) {
-			if (source.hp !== 1) return this.hint(`This move may be only used once the user has 1 HP.`);
+			if (source.hp !== 1) {
+				this.hint(`This move may be only used once the user has 1 HP.`);
+				return false;
+			}
 			this.add('-anim', source, 'Hex', source);
 			this.add('-anim', source, 'Spectral Thief', source);
 			this.add('-anim', source, 'Hyper Beam', target);
