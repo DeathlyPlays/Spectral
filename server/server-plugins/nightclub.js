@@ -10,7 +10,7 @@ Server.nightclub = {};
 function colorify(given_text) {
 	if (!given_text) return false;
 	//given_text = Dex.escapeHTML(given_text);
-	let sofar = "";
+	let sofar = ``;
 	let splitting = given_text.split("");
 	let colorification = true;
 	let beginningofend = false;
@@ -35,9 +35,9 @@ function colorify(given_text) {
 		}
 		if (colorification) {
 			if (splitting[i] === " ") {
-				sofar += " ";
+				sofar += ` `;
 			} else {
-				sofar += "<font color='" + "#" + color + "'>" + splitting[i] + "</font>";
+				sofar += `<font color="#${color}">${splitting[i]}</font>`;
 			}
 		} else {
 			sofar += splitting[i];
@@ -59,16 +59,17 @@ function colorify(given_text) {
 Server.nightclubify = colorify;
 
 exports.commands = {
-	nightclub: function (target, room, user, connection) {
+	nightclub(target, room, user) {
 		if (!this.can('declare', null, room)) return false;
-		if (Server.nightclub[room.id]) return this.sendReply('This room is already engulfed in nightclubness.');
+		if (Server.nightclub[room.id]) return this.errorReply('This room is already engulfed in nightclubness.');
 		Server.nightclub[room.id] = true;
-		room.addRaw('<div class="nightclub"><font size=6>' + Server.nightclubify('LETS GET FITZY!! nightclub mode: ON!!!') + '</font><font size="2"> started by: ' + user.userid + '</font></div>');
+		room.addRaw(`<div class="nightclub"><font size="6">${Server.nightclubify(`LETS GET FITZY!! nightclub mode: ON!!!`)}</font><font size="2"> started by: ${Server.nameColor(user.name, true, true)}</font></div>`);
 	},
-	dayclub: function (target, room, user, connection) {
+
+	dayclub(target, room, user) {
 		if (!this.can('declare', null, room)) return false;
-		if (!Server.nightclub[room.id]) return this.sendReply('This room is already in broad daylight.');
+		if (!Server.nightclub[room.id]) return this.errorReply('This room is already in broad daylight.');
 		delete Server.nightclub[room.id];
-		room.addRaw('<div class="nightclub"><font size=6>' + Server.nightclubify('sizzle down now... nightclub mode: off.') + '</font><font size="2"> ended by: ' + user.userid + '</font></font>');
+		room.addRaw(`<div class="nightclub"><font size="6">${Server.nightclubify(`sizzle down now... nightclub mode: off.`)}</font><font size="2"> ended by: ${Server.nameColor(user.name, true, true)}</font></div>`);
 	},
 };
