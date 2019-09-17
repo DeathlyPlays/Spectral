@@ -328,8 +328,8 @@ const commands = {
 			if (params.some(parameter => !parameter)) return;
 
 			const options = params.splice(1);
-			if (options.length > 8) {
-				return this.errorReply("Too many options for poll (maximum is 8).");
+			if (options.length > 16) {
+				return this.errorReply("Too many options for poll (maximum is 16).");
 			}
 			if (room.poll && room.pollNumber) room.pollNumber++;
 			if (room.poll) {
