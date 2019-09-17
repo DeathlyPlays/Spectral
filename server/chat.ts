@@ -365,6 +365,22 @@ export class CommandContext extends MessageContext {
 			}
 		}
 
+		if (this.room && Server.nightclub[this.room.id] && message) {
+			if (Users.ShadowBan.checkBanned(this.user)) {
+				if (this.user.blockEmoticons !== true) {
+					if (Server.parseEmoticons(message)) return;
+					Users.ShadowBan.addMessage(this.user, `To ${this.room.id}`, message);
+					this.user.sendTo(this.room.id, '|raw|<div style="background-color: rgba(0, 0, 0, 0.85); margin:-3px; text-shadow:0px 0px 2px #000;"><font size="3"><small>' + Server.nightclubify((this.room.auth ? (this.room.auth[this.user.userid] || this.user.group) : this.user.group)) + "</small><b>" + Server.nightclubify(Chat.escapeHTML(this.user.name) + ":") + "</b> " + Server.nightclubify((message)) + '</font></div>').update();
+				} else if (this.user.blockEmoticons === true) {
+					Users.ShadowBan.addMessage(this.user, `To ${this.room.id}`, message);
+					this.user.sendTo(this.room.id, '|raw|<div style="background-color: rgba(0, 0, 0, 0.85); margin:-3px; text-shadow:0px 0px 2px #000;"><font size="3"><small>' + Server.nightclubify((this.room.auth ? (this.room.auth[this.user.userid] || this.user.group) : this.user.group)) + "</small><b>" + Server.nightclubify(Chat.escapeHTML(this.user.name) + ":") + "</b> " + Server.nightclubify((message)) + '</font></div>').update();
+				}
+			} else {
+				this.room.add('|raw|<div style="background-color: rgba(0, 0, 0, 0.85); margin:-3px; text-shadow:0px 0px 2px #000;"><font size="3"><small>' + Server.nightclubify((this.room.auth ? (this.room.auth[this.user.userid] || this.user.group) : this.user.group)) + "</small><b>" + Server.nightclubify(Chat.escapeHTML(this.user.name) + ":") + "</b> " + Server.nightclubify((message)) + '</font></div>').update();
+				return null;
+			}
+		}
+
 		// Output the message
 		if (message && message !== true && typeof message.then !== 'function') {
 			const emoticons = Server.parseEmoticons(message, this.room);
