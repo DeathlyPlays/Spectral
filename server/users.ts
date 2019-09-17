@@ -1556,6 +1556,12 @@ export class User extends Chat.MessageContext {
 		this.userMessage = '';
 		this.updateIdentity();
 	}
+	getAccountStatusString() {
+		return this.trusted === this.userid ? `[trusted]`
+			: this.autoconfirmed === this.userid ? `[ac]`
+			: this.registered ? `[registered]`
+			: `[unregistered]`;
+	}
 	destroy() {
 		// deallocate user
 		for (const roomid of this.games) {

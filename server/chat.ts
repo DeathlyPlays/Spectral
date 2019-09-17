@@ -732,6 +732,13 @@ export class CommandContext extends MessageContext {
 	update() {
 		if (this.room) this.room.update();
 	}
+	filter(message: string, targetUser: User | null = null) {
+		if (!this.room || this.room.id === 'global') return null;
+		return Chat.filter(this, message, this.user, this.room as GameRoom | ChatRoom, this.connection, targetUser);
+	}
+	statusfilter(status: string) {
+		return Chat.statusfilter(status, this.user);
+	}
 	can(permission: string, target: string | User | null = null, room: BasicChatRoom | null = null) {
 		if (!this.user.can(permission, target, room)) {
 			this.errorReply(this.cmdToken + this.fullCmd + " - Access denied.");
@@ -1874,9 +1881,9 @@ export const Chat = new class {
 	monitors: {[k: string]: Monitor} = {};
 	namefilterwhitelist = new Map<string, string>();
 	/**
-	 * Inappropriate userid : forcerenaming staff member's userid
+	 * Inappropriate userid : number of times the name has been forcerenamed
 	 */
-	forceRenames = new Map<ID, string>();
+	forceRenames = new Map<ID, number>();
 
 	registerMonitor(id: string, entry: Monitor) {
 		if (!Chat.filterWords[id]) Chat.filterWords[id] = [];

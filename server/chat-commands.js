@@ -704,7 +704,7 @@ const commands = {
 
 		const maxLength = 32;
 		if (target.length > maxLength) return this.errorReply(this.tr `Your status is too long; it must be under ${maxLength} characters.`);
-		target = Chat.statusfilter(target, user);
+		target = this.statusfilter(target);
 		if (!target) return this.errorReply(this.tr("Your status contains a banned word."));
 
 		user.setUserMessage(target);
@@ -1061,6 +1061,9 @@ const commands = {
 			if (!room.isPrivate) {
 				return this.errorReply(`This room is already public.`);
 			}
+			if (room.parent && room.parent.isPrivate) {
+				return this.errorReply(`This room's parent ${room.parent.title} must be public for this room to be public.`);
+			}
 			if (room.isPersonal) return this.errorReply(`This room can't be made public.`);
 			if (room.privacySetter && user.can('nooverride', null, room) && !user.can('makeroom')) {
 				if (!room.privacySetter.has(user.userid)) {
@@ -1083,7 +1086,12 @@ const commands = {
 			}
 		} else {
 			const settingName = (setting === true ? 'secret' : setting);
-			if (room.subRooms) return this.errorReply("Private rooms cannot have subrooms.");
+			if (room.subRooms) {
+				if (settingName === 'secret') return this.errorReply("Secret rooms cannot have subrooms.");
+				for (const subRoom of room.subRooms.values()) {
+					if (!subRoom.isPrivate) return this.errorReply(`Subroom ${subRoom.title} must be private to make this room private.`);
+				}
+			}
 			if (room.isPrivate === setting) {
 				if (room.privacySetter && !room.privacySetter.has(user.userid)) {
 					room.privacySetter.add(user.userid);
@@ -1164,7 +1172,10 @@ const commands = {
 		const main = Rooms.search(target);
 
 		if (!main) return this.errorReply(`The room '${target}' does not exist.`);
-		if (main.isPrivate || !main.chatRoomData) return this.errorReply(`Only public rooms can have subrooms.`);
+		if (main.parent) return this.errorReply(`Subrooms cannot have subrooms.`);
+		if (main.isPrivate === true) return this.errorReply(`Only public and hidden rooms can have subrooms.`);
+		if (main.isPrivate && !room.isPrivate) return this.errorReply(`Private rooms cannot have public subrooms.`);
+		if (!main.chatRoomData) return this.errorReply(`Temporary rooms cannot be parent rooms.`);
 		if (room === main) return this.errorReply(`You cannot set a room to be a subroom of itself.`);
 
 		room.parent = main;
@@ -1502,7 +1513,7 @@ const commands = {
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
 		let userid = toID(this.targetUsername);
-		let name = targetUser ? targetUser.name : Chat.filter(this, this.targetUsername, user, room, connection);
+		let name = targetUser ? targetUser.name : this.filter(this.targetUsername);
 		if (!name) return;
 		name = name.slice(0, 18);
 
@@ -1853,8 +1864,8 @@ const commands = {
 			if (!targetUser || !globalWarn) return this.errorReply(`User '${this.targetUsername}' not found.`);
 
 			this.addModAction(`${targetUser.name} would be warned by ${user.name} but is offline.${(target ? ` (${target})` : ``)}`);
-			this.modlog('WARN', targetUser, target, {noalts: 1});
-			this.globalModlog('WARN', targetUser, ` by ${user.userid}${(target ? `: ${target}` : ``)}`);
+			this.modlog('WARN OFFLINE', targetUser, target, {noalts: 1});
+			this.globalModlog('WARN OFFLINE', targetUser, ` by ${user.userid}${(target ? `: ${target}` : ``)}`);
 			return;
 		}
 		if (!(targetUser in room.users) && !globalWarn) {
@@ -2098,21 +2109,7 @@ const commands = {
 			message += `\n\nYour lock will expire in a few days.`;
 			targetUser.send(message);
 
-			let roomauth = [];
-			for (const [id, curRoom] of Rooms.rooms) {
-				if (id === 'global' || !curRoom.auth) continue;
-				// Destroy personal rooms of the locked user.
-				if (curRoom.isPersonal && curRoom.auth[userid] === Users.HOST_SYMBOL) {
-					curRoom.destroy();
-				} else {
-					if (curRoom.isPrivate || curRoom.battle) continue;
-
-					let group = curRoom.auth[userid];
-
-					if (group) roomauth.push(`${group}${id}`);
-				}
-			}
-
+			const roomauth = Rooms.global.destroyPersonalRooms(userid);
 			if (roomauth.length) Monitor.log(`[CrisisMonitor] Locked user ${name} has public roomauth (${roomauth.join(', ')}), and should probably be demoted.`);
 		}
 
@@ -2247,14 +2244,8 @@ const commands = {
 			return this.errorReply(`Use /globalban; ${name} is not a trusted user.`);
 		}
 
-		// Destroy personal rooms of the banned user.
-		for (const roomid of targetUser.inRooms) {
-			if (roomid === 'global') continue;
-			let targetRoom = Rooms.get(roomid);
-			if (targetRoom.isPersonal && targetRoom.auth[userid] === Users.HOST_SYMBOL) {
-				targetRoom.destroy();
-			}
-		}
+		const roomauth = Rooms.global.destroyPersonalRooms(userid);
+		if (roomauth.length) Monitor.log(`[CrisisMonitor] Globally banned user ${name} has public roomauth (${roomauth.join(', ')}), and should probably be demoted.`);
 
 		let proof = '';
 		let userReason = target;
@@ -2568,7 +2559,7 @@ const commands = {
 		// warning: never document this command in /help
 		if (!this.can('forcepromote')) return false;
 		target = this.splitTarget(target, true);
-		let name = Chat.filter(this, this.targetUsername, user, room, connection);
+		let name = this.filter(this.targetUsername);
 		if (!name) return;
 		name = name.slice(0, 18);
 		let nextGroup = target;
@@ -2729,13 +2720,27 @@ const commands = {
 		}
 		if (!this.can('forcerename', targetUser)) return false;
 
-		this.privateModAction(`(${targetUser.name} was forced to choose a new name by ${user.name}${(reason ? `: ${reason}` : ``)})`);
-		this.globalModlog('FORCERENAME', targetUser, ` by ${user.name}${(reason ? `: ${reason}` : ``)}`);
-		this.modlog('FORCERENAME', targetUser, reason, {noip: 1, noalts: 1});
-		Chat.forceRenames.set(targetUser.userid, user.userid);
-		Ladders.cancelSearches(targetUser);
+		let forceRenameMessage;
+		if (targetUser.connected) {
+			forceRenameMessage = `was forced to choose a new name by ${user.name}${(reason ? `: ${reason}` : ``)}`;
+			this.globalModlog('FORCERENAME', targetUser, ` by ${user.name}${(reason ? `: ${reason}` : ``)}`);
+			this.modlog('FORCERENAME', targetUser, reason, {noip: 1, noalts: 1});
+			Chat.forceRenames.set(targetUser.userid, (Chat.forceRenames.get(targetUser.userid) || 0) + 1);
+			Ladders.cancelSearches(targetUser);
+			targetUser.send(`|nametaken||${user.name} considers your name inappropriate${(reason ? `: ${reason}` : ".")}`);
+		} else {
+			forceRenameMessage = `would be forced to choose a new name by ${user.name} but is offline${(reason ? `: ${reason}` : ``)}`;
+			this.globalModlog('FORCERENAME OFFLINE', targetUser, ` by ${user.name}${(reason ? `: ${reason}` : ``)}`);
+			this.modlog('FORCERENAME OFFLINE', targetUser, reason, {noip: 1, noalts: 1});
+			if (!Chat.forceRenames.has(targetUser.userid)) Chat.forceRenames.set(targetUser.userid, 0);
+		}
+
+		if (room.id !== 'staff') this.privateModAction(`(${targetUser.name} ${forceRenameMessage})`);
+		const roomMessage = room.id !== 'staff' ? `«<a href="/${room.id}" target="_blank">${room.id}</a>» ` : '';
+		const rankMessage = targetUser.getAccountStatusString();
+		Rooms.global.notifyRooms(['staff'], `|html|${roomMessage}` + Chat.html`<span class="username">${targetUser.name}</span> ${rankMessage} ${forceRenameMessage}`);
+
 		targetUser.resetName(true);
-		targetUser.send(`|nametaken||${user.name} considers your name inappropriate${(reason ? `: ${reason}` : ".")}`);
 		return true;
 	},
 	forcerenamehelp: [
@@ -2769,10 +2774,16 @@ const commands = {
 			Rooms.get('staff').addByUser(user, `<<${room.id}>> ${lockMessage}`);
 		}
 
+		const roomauth = Rooms.global.destroyPersonalRooms(targetUser.userid);
+		if (roomauth.length) Monitor.log(`[CrisisMonitor] Namelocked user ${targetUser.name} has public roomauth (${roomauth.join(', ')}), and should probably be demoted.`);
+
 		this.globalModlog("NAMELOCK", targetUser, ` by ${user.userid}${reasonText}`);
 		Ladders.cancelSearches(targetUser);
 		Punishments.namelock(targetUser, null, null, reason);
 		targetUser.popup(`|modal|${user.name} has locked your name and you can't change names anymore${reasonText}`);
+		// Automatically upload replays as evidence/reference to the punishment
+		if (room.battle) this.parse('/savereplay forpunishment');
+
 		return true;
 	},
 	namelockhelp: [`/namelock OR /nl [username], [reason] - Name locks a user and shows them the [reason]. Requires: % @ & ~`],
