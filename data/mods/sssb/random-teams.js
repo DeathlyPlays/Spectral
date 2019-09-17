@@ -137,6 +137,7 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Timid",
 			},
 			// Bots
+			/*
 			"*Spectral Bot": {
 				species: "Magearna",
 				item: "Assault Vest",
@@ -152,6 +153,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
+			*/
 			// Drivers
 			"%Back At My Day": {
 				species: "Zapdos",
