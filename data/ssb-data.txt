@@ -125,6 +125,6 @@ Ability: Spectral's Thief
 EVs: 252 Atk / 4 SpD / 252 Spe
 Moves: Sunsteel Strike, Play Rough, Ice Punch
 Signature Move: Angelic Spectral
-	- 60 BP, Ghost type, Physical, 10 PP, the user transforms into Marshadow and substitutes its moves for: Icicle Crash, Shadow Sneak, Close Combat and Spectral's Angel
+	- 60 BP, Ghost type, Physical, 16 PP, the user transforms into Marshadow and substitutes its moves for: Icicle Crash, Shadow Sneak, Close Combat and Spectral's Angel
 	- Spectral's Angel - transforms back into Magearna and re-substitutes the moves to the original set.
 Jolly Nature
