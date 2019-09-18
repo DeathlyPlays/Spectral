@@ -109,6 +109,7 @@ class RandomSSSBTeams extends RandomTeams {
 				species: "Arcanine",
 				item: "Arcanium Z",
 				ability: "Reverse Card",
+				shiny: true,
 				gender: "M",
 				moves: ["Wild Charge", "Extreme Speed", "Close Combat"],
 				baseSignatureMove: "meteorcharge",
