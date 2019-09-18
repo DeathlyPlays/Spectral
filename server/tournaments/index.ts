@@ -1631,30 +1631,30 @@ const commands: {basic: TourCommands, creation: TourCommands, moderation: TourCo
 			this.privateModAction(`${typeof targetUser !== 'string' ? targetUser.name : targetUserid} was unbanned from joining tournaments by ${user.name}.`);
 			this.modlog('TOUR UNBAN', targetUser, null, {noip: 1, noalts: 1});
 		},
-	},
-	remind(tournament, user) {
-		let users = tournament.generator.getAvailableMatches().toString().split(',');
-		let offlineUsers = [];
-		for (let u = 0; u < users.length; u++) {
-			let targetUser = Users.get(users[u]);
-			if (!targetUser) {
-				offlineUsers.push(users[u]);
-				continue;
-			} else if (!targetUser.connected) {
-				offlineUsers.push(targetUser.userid);
-				continue;
-			} else {
-				let pmName = `~${Config.serverName} Server`;
-				let message = `|pm|${pmName}|${user.getIdentity()}|You have a tournament battle in the room "${tournament.room.title}". If you do not start soon you may be disqualified.`;
-				targetUser.send(message);
+		remind(tournament, user) {
+			let users = tournament.generator.getAvailableMatches().toString().split(',');
+			let offlineUsers = [];
+			for (let u = 0; u < users.length; u++) {
+				let targetUser = Users.get(users[u]);
+				if (!targetUser) {
+					offlineUsers.push(users[u]);
+					continue;
+				} else if (!targetUser.connected) {
+					offlineUsers.push(targetUser.userid);
+					continue;
+				} else {
+					let pmName = `~${Config.serverName} Server`;
+					let message = `|pm|${pmName}|${user.getIdentity()}|You have a tournament battle in the room "${tournament.room.title}". If you do not start soon you may be disqualified.`;
+					targetUser.send(message);
+				}
 			}
-		}
-		if (tournament.isTournamentStarted) {
-			tournament.room.addRaw(`<strong>Players have been reminded of their tournament battles by</strong> ${Server.nameColor(user.name, true)}.`);
-			if (offlineUsers.length > 0 && offlineUsers !== '') tournament.room.addRaw(`<strong>The following users are currently offline: ${Chat.toListString(offlineUsers.map(p => { return Server.nameColor(p, true, true)}))}.</strong>`);
-		} else {
-			this.errorReply(`The tournament hasn't started yet.`);
-		}
+			if (tournament.isTournamentStarted) {
+				tournament.room.addRaw(`<strong>Players have been reminded of their tournament battles by</strong> ${Server.nameColor(user.name, true)}.`);
+				if (offlineUsers.length > 0 && offlineUsers !== '') tournament.room.addRaw(`<strong>The following users are currently offline: ${Chat.toListString(offlineUsers.map(p => { return Server.nameColor(p, true, true)}))}.</strong>`);
+			} else {
+				this.errorReply(`The tournament hasn't started yet.`);
+			}
+		},
 	},
 };
 
@@ -1844,6 +1844,7 @@ const chatCommands: ChatCommands = {
 			`- off/disable: Disables allowing drivers and mods to start tournaments in the current room.<br />` +
 			`- announce/announcements &lt;on|off>: Enables/disables tournament announcements for the current room.<br />` +
 			`- banuser/unbanuser &lt;user>: Bans/unbans a user from joining tournaments in this room. Lasts 2 weeks.<br />` +
+			`- remind: Reminds the user's that are online about the tournament in this room.  Sends a list of the offline users as well.<br />` +
 			`- sub/replace &lt;olduser>, &lt;newuser>: Substitutes a new user for an old one<br />` +
 			`More detailed help can be found <a href="https://www.smogon.com/forums/threads/3570628/#post-6777489">here</a>`
 		);
