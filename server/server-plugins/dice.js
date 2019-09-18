@@ -101,8 +101,8 @@ class Dice {
 						Economy.writeMoney(loser.userid, -this.bet, () => {
 							Economy.readMoney(winner.userid, winnerMoney => {
 								Economy.readMoney(loser.userid, loserMoney => {
-									Economy.logDice(`${winner.userid} has won a dice against ${loser.userid}. They now have ${winnerMoney.toLocaleString()} ${(winnerMoney === 1 ? moneyName : moneyPlural)}.`);
-									Economy.logDice(`${loser.userid} has lost a dice against ${winner.userid}. They now have ${loserMoney.toLocaleString()} ${(loserMoney === 1 ? moneyName : moneyPlural)}.`);
+									Economy.logTransaction(`${winner.name} has won a dice against ${loser.name}. They now have ${winnerMoney.toLocaleString()} ${(winnerMoney === 1 ? moneyName : moneyPlural)}.`);
+									Economy.logTransaction(`${loser.name} has lost a dice against ${winner.name}. They now have ${loserMoney.toLocaleString()} ${(loserMoney === 1 ? moneyName : moneyPlural)}.`);
 									this.end();
 								});
 							});
@@ -166,34 +166,6 @@ exports.commands = {
 		room.dice.end(user);
 	},
 
-	viewdice: "dicelog",
-	dicelog(target, room, user) {
-		if (!this.can("money")) return false;
-		if (!target) return this.sendReply("Usage: /dicelog [number] to view the last x lines OR /dicelog [text] to search for text.");
-		let word = false;
-		if (isNaN(Number(target))) word = true;
-		let lines = FS("logs/dice.log").readIfExistsSync().split("\n").reverse();
-		let output = "";
-		let count = 0;
-		let regex = new RegExp(target.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), "gi"); // eslint-disable-line no-useless-escape
-
-		if (word) {
-			output += `Displaying last 50 lines containing "${target}":\n`;
-			for (let line in lines) {
-				if (count >= 50) break;
-				if (!~lines[line].search(regex)) continue;
-				output += `${lines[line]}\n`;
-				count++;
-			}
-		} else {
-			if (target > 100) target = 100;
-			output = lines.slice(0, (lines.length > target ? target : lines.length));
-			output.unshift(`Displaying the last ${lines.length > target ? target : lines.length} lines:`);
-			output = output.join(`\n`);
-		}
-		user.popup(`|wide|${output}`);
-	},
-
 	disabledice: "dicedisable",
 	diceoff: "dicedisable",
 	dicedisable(target, room, user) {
@@ -230,7 +202,6 @@ exports.commands = {
 		/joindice - Joins the game of dice. You cannot use this command if you don't have the number of ${global.moneyPlural} the game is for.
 		/leavedice - Leaves the game of dice.
 		/enddice - Ends the game of dice. Requires + or higher to use.
-		/dicelog - Views Dice-related logs. Requires @, &, ~
 		/disabledice - Disables Dice Games in the room, if enabled. Requires &, #, ~
 		/enabledice - Enables Dice Games in the room, if disabled. Requires &, #, ~`,
 	],
