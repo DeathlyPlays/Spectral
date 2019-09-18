@@ -95,7 +95,7 @@ let BattleMovedex = {
 		accuracy: true,
 		isZ: "voidheart",
 		pp: 1,
-		priority: 0,
+		priority: -1,
 		flags: {protect: 1, mirror: 1},
 		onPrepareHit(target, source) {
 			this.add('-anim', target, 'Dark Void', target);
