@@ -1,16 +1,16 @@
 RaginInfernape
-(Infernape)
+(Shiny Infernape)
 @ Life Orb
 Ability: Raging Spirit
 	- This Pokemon cannot fall asleep, and any moves with a base power of 75 or less get boosted by 1.5x.
 EVs: 252 Atk / 252 Spe / 4 Def
 Moves: Mach Punch, Knock Off, Ice Punch
 Signature Move: Firey Destruction
-	- Fire type, never misses, 15 PP, Physical, Contact, 100 BP, 50% chance to burn the target, Defrosts user if frozen.
+	- Fire type, never misses, 24 PP, Physical, Contact, 100 BP, 50% chance to burn the target, Defrosts user if frozen.
 Jolly Nature
 
 Back At My Day
-(Zapdos)
+(Shiny Zapdos)
 @ Life Orb
 Ability: Peal of Thunder
 	- Volt Absorb and Motor Drive.
@@ -29,7 +29,7 @@ Ability: Heart of Steel
 EVs: 252 Atk / 4 SpD / 252 Spe
 Moves: Cross Chop, Psycho Cut, Blaze Kick
 Signature Move: 16 Years
-	- Dark Type, never misses, Physical, 180 BP, 5 PP, fails if user has more than 1 HP. User faints.
+	- Dark Type, never misses, Physical, 180 BP, 8 PP, fails if user has more than 1 HP. User faints.
 Jolly Nature
 
 Chandie
@@ -47,7 +47,7 @@ Z-Move: Embrace the Void
 Adamant Nature
 
 Horrific17
-(Arcanine)
+(Shiny Arcanine)
 @ Arcanium Z
 	- When used with Meteor Charge, allows Arcanine to use Eternal Flames.
 Ability: Reverse Card
@@ -55,7 +55,7 @@ Ability: Reverse Card
 EVs: 252 Atk / 4 Def / 252 Spe
 Moves: Wild Charge, Close Combat, Extreme Speed
 Signature Move: Meteor Charge
-	- Sets Sunny Day, Fire type, Physical, Contact, 100% accuracy, 100 BP, Defrosts user if frozen, 5 PP, Damages the user by 1/3rd of their maximum HP in recoil.
+	- Sets Sunny Day, Fire type, Physical, Contact, 100% accuracy, 100 BP, Defrosts user if frozen, 8 PP, Damages the user by 1/3rd of their maximum HP in recoil.
 Z-Move: Eternal Flames
 	- Burns and traps the target, 150 BP, Fire type, Physical.
 Jolly Nature
@@ -79,11 +79,11 @@ Ability: Venom Shock
 EVs: 252 Atk / 4 Spe / 252 HP
 Moves: Sucker Punch, Flame Charge, Thousand Waves
 Signature Move: Radiation Stench
-	- Poison type, Physical, 120 BP, 85% accuracy, 10 PP, doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch.
+	- Poison type, Physical, 120 BP, 85% accuracy, 16 PP, doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch.
 Adamant Nature
 
 Tactician Loki
-(Liepard)
+(Shiny Liepard)
 @ Thokk
 	- If held by Tactician Loki gives 50% chance to heal by 1/4th HP, 30% chance to increase a random stat by 1, 10% chance to decrease a random stat by 1, 10% chance to cast Focus Energy. If knocked off heals the holder by 50%, if tricked and is held by another pokemon damages pokemon by 1/8th every turn.
 Ability: Chaotic Aura
@@ -91,7 +91,7 @@ Ability: Chaotic Aura
 EVs: 252 SpA / 4 Def / 252 Spe
 Moves: Copycat, Spiky Shield, Ice Beam
 Signature Move: Blooming Chaos
-	- 20PP, 100BP, Never Misses, Dark Type, Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
+	- 32PP, 100BP, Never Misses, Dark Type, Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
 Timid Nature
 
 Revival Clair
@@ -102,7 +102,7 @@ Ability: Tough Skin
 EVs: 252 Atk / 4 SpD / 252 Spe
 Moves: Outrage, Earthquake, Stone Edge
 Signature Move: Dragon Blitz
-	- Dragon type, Physical, 5 PP, never misses, 80 BP, does neutral damage to Fairies, Contact move, 50% chance to raise Attack and Speed by 1 stage.
+	- Dragon type, Physical, 8 PP, never misses, 80 BP, 2 Priority, does neutral damage to Fairies, Contact move, 50% chance to raise Attack and Speed by 1 stage.
 Jolly Nature
 
 Auroura
