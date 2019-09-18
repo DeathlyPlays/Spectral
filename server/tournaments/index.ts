@@ -1101,7 +1101,7 @@ export class Tournament extends Rooms.RoomGame {
 		const rid = toID(runnerUp);
 		const tourSize = this.players.length;
 
-		if ((tourSize >= 2) && this.room.isOfficial) {
+		if (tourSize >= 2 && this.room.isOfficial) {
 			let firstMoney = Math.round(tourSize / 2);
 			let secondMoney = Math.round(firstMoney / 2);
 			if (firstMoney < 2) firstMoney = 2;
@@ -1631,6 +1631,30 @@ const commands: {basic: TourCommands, creation: TourCommands, moderation: TourCo
 			this.privateModAction(`${typeof targetUser !== 'string' ? targetUser.name : targetUserid} was unbanned from joining tournaments by ${user.name}.`);
 			this.modlog('TOUR UNBAN', targetUser, null, {noip: 1, noalts: 1});
 		},
+	},
+	remind(tournament, user) {
+		let users = tournament.generator.getAvailableMatches().toString().split(',');
+		let offlineUsers = [];
+		for (let u = 0; u < users.length; u++) {
+			let targetUser = Users.get(users[u]);
+			if (!targetUser) {
+				offlineUsers.push(users[u]);
+				continue;
+			} else if (!targetUser.connected) {
+				offlineUsers.push(targetUser.userid);
+				continue;
+			} else {
+				let pmName = `~${Config.serverName} Server`;
+				let message = `|pm|${pmName}|${user.getIdentity()}|You have a tournament battle in the room "${tournament.room.title}". If you do not start soon you may be disqualified.`;
+				targetUser.send(message);
+			}
+		}
+		if (tournament.isTournamentStarted) {
+			tournament.room.addRaw(`<strong>Players have been reminded of their tournament battles by</strong> ${Server.nameColor(user.name, true)}.`);
+			if (offlineUsers.length > 0 && offlineUsers !== '') tournament.room.addRaw(`<strong>The following users are currently offline: ${Chat.toListString(offlineUsers.map(p => { return Server.nameColor(p, true, true)}))}.</strong>`);
+		} else {
+			this.errorReply(`The tournament hasn't started yet.`);
+		}
 	},
 };
 
