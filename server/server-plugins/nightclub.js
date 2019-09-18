@@ -9,7 +9,7 @@ Server.nightclub = {};
 
 function colorify(given_text) {
 	if (!given_text) return false;
-	//given_text = Dex.escapeHTML(given_text);
+	given_text = Chat.escapeHTML(given_text);
 	let sofar = ``;
 	let splitting = given_text.split("");
 	let colorification = true;
