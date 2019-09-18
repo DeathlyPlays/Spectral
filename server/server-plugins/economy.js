@@ -15,7 +15,7 @@ let shop = [
 	["Background", "Purchases a profile background. [Can be denied].", 25],
 	["Custom Color", "Changes the color of your name. [Can be denied].", 25],
 	["Custom Emoticon", "You provide an image (50x50 Pixels) to be added as an emote on the server. [Can be denied]", 40],
-	["Custom PM Box", "A Custom Designed Personal Messaging Box. [Can be denied]", 75],
+	["Custom PM Box", "You supply the code for a Custom PM box for people to see when they PM you.  [Can be denied]", 75],
 	["Custom Title", "Buys a title to be added on to your profile. [Can be denied].", 10],
 	["Declare", "Purchases a Global Declare to announce your message.", 15],
 	["FFA Symbol", "Purchases the ability to have a custom symbol for your SSBFFA Pokemon.", 15],
@@ -30,7 +30,7 @@ let shop = [
 	["Room", "Buys a chatroom for you to own. [Within reason, can be denied].", 30],
 	["Roomshop", "Buys a Roomshop for your League or Room. [Will be removed if abused].", 50],
 	["Shiny", "Purchases the ability for your SSBFFA Pokemon to become shiny.", 5],
-	["Symbol", "Buys a custom symbol to go infront of your username and puts you at top of userlist. [Temporary until restart,certain symbols are blocked]", 5],
+	["Symbol", "Buys a custom symbol to go infront of your username and puts you at top of userlist. [Temporary until restart, certain symbols are blocked]", 5],
 ];
 
 let shopDisplay = getShopDisplay(shop);
@@ -119,11 +119,6 @@ let Economy = global.Economy = {
 		if (!message) return false;
 		FS("logs/transactions.log").append(`[${new Date().toUTCString()}] ${message}\n`);
 	},
-
-	logDice(message) {
-		if (!message) return false;
-		FS("logs/dice.log").append(`[${new Date().toUTCString()}] ${message}\n`);
-	},
 };
 
 function findItem(item, money) {
@@ -144,6 +139,7 @@ function findItem(item, money) {
 }
 
 function handleBoughtItem(item, user, cost) {
+	if (!user.tokens) user.tokens = {};
 	if (item === "symbol") {
 		user.canCustomSymbol = true;
 		this.sendReply("You have purchased a custom symbol. You can use /customsymbol to get your custom symbol.");
@@ -165,13 +161,9 @@ function handleBoughtItem(item, user, cost) {
 		Server.ssb[user.userid].canShiny = true;
 		writeSSB();
 	} else {
-		if (!user.tokens) user.tokens = {};
-		if (item) {
-			user.tokens[item] = true;
-		} else {
-			Server.pmStaff(`${user.name} has purchased a "${item}" from the shop.`);
-		}
+		user.tokens[item] = true;
 	}
+	Server.pmStaff(`${user.name} has purchased a "${item}" from the shop.`);
 }
 
 global.rankLadder = function (title, type, array, prop, group) {
@@ -422,6 +414,7 @@ exports.commands = {
 				Economy.readMoney(user.userid, amount => {
 					Economy.logTransaction(`${user.name} has purchased a ${target} for ${cost.toLocaleString()} ${(cost === 1 ? moneyName : moneyPlural)}. They now have ${amount.toLocaleString()} ${(money === 1 ? moneyName : moneyPlural)}.`);
 					this.sendReply(`You have bought ${target} for ${cost.toLocaleString()} ${(cost === 1 ? moneyName : moneyPlural)}. You now have ${amount.toLocaleString()} ${(money === 1 ? moneyName : moneyPlural)} left.`);
+					this.sendReply(`If a global staff member does not reach out to you, please contact a staff member within a few minutes.`);
 					room.addRaw(`${Server.nameColor(user.name, true)} has bought <strong>"${target}"</strong> from the shop.`);
 					handleBoughtItem.call(this, target.toLowerCase(), user, cost);
 				});
