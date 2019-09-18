@@ -47,7 +47,7 @@ Z-Move: Embrace the Void
 Adamant Nature
 
 Horrific17
-(Shiny Arcanine)
+(Arcanine)
 @ Arcanium Z
 	- When used with Meteor Charge, allows Arcanine to use Eternal Flames.
 Ability: Reverse Card
