@@ -163,7 +163,6 @@ function handleBoughtItem(item, user, cost) {
 	} else {
 		user.tokens[item] = true;
 	}
-	Server.pmStaff(`${user.name} has purchased a "${item}" from the shop.`);
 }
 
 global.rankLadder = function (title, type, array, prop, group) {
@@ -416,6 +415,7 @@ exports.commands = {
 					this.sendReply(`You have bought ${target} for ${cost.toLocaleString()} ${(cost === 1 ? moneyName : moneyPlural)}. You now have ${amount.toLocaleString()} ${(money === 1 ? moneyName : moneyPlural)} left.`);
 					this.sendReply(`If a global staff member does not reach out to you, please contact a staff member within a few minutes.`);
 					room.addRaw(`${Server.nameColor(user.name, true)} has bought <strong>"${target}"</strong> from the shop.`);
+					Server.pmStaff(`${user.name} has purchased "${target}" from the shop.`);
 					handleBoughtItem.call(this, target.toLowerCase(), user, cost);
 				});
 			});
