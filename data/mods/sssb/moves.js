@@ -460,7 +460,10 @@ let BattleMovedex = {
 			this.add(`c|+La Rascasse|You must be 6 feet tall to ride this ride.`);
 		},
 		flags: {protect: 1, mirror: 1},
-		heal: [15, 100],
+		
+		self: {
+			heal: [15, 100],
+		},
 		target: "normal",
 		type: "Dragon", // please make first hit ghost type and second hit dragon type
 	},
