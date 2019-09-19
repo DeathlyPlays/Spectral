@@ -146,7 +146,7 @@ let BattleItems = {
 					pokemon.disableMove(moveSlot.id);
 				}
 			}
-		}
+		},
 	},
 };
 
