@@ -19,7 +19,11 @@
 const RandomTeams = require('../../random-teams');
 
 class RandomSSSBTeams extends RandomTeams {
-	randomSSSBTeam() {
+	randomSSSBTeam(side) {
+		let userid = toID(side.name);
+		/* alts start */
+		if (userid === 'arrays') userid = 'volco';
+		/* alts ends */
 		/** @type {PokemonSet[]} */
 		let team = [];
 		/** @type {SSBSets} */
@@ -42,6 +46,24 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Jolly",
 			},
 			// Fixing Gods
+			"⚔Volco": {
+				species: "Volcanion",
+				item: "Barrage Vest",
+				ability: "Emergency Actions",
+				gender: "M",
+				moves: [["Ice Beam", "Earth Power"], "Giga Drain", "Steam Eruption"],
+				baseSignatureMove: "volcanicflares",
+				signatureMove: "Volcanic Flares",
+				evs: {
+					hp: 4,
+					spa: 252,
+					spe: 252,
+				},
+				ivs: {
+					atk: 0,
+				},
+				nature: "Timid",
+			},
 			// Administrators
 			"~Roughskull": {
 				species: "Skuntank",
@@ -191,8 +213,25 @@ class RandomSSSBTeams extends RandomTeams {
 		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */
 		let typePool = {};
+		let included = false;
 		while (pool.length && team.length < 6) {
 			let name = this.sampleNoReplace(pool);
+			if (team.length === 5) {
+				for (const pkmn of team) {
+					if (toID(pkmn.name.toString()) === toID(userid.toString())) {
+						included = true;
+						break;
+					}
+				}
+				for (let mon in sets) {
+					if (toID(mon.toString()) === userid && !included) {
+						let arr = [];
+						arr.push(mon);
+						name = this.sampleNoReplace(arr);
+						break;
+					}
+				}
+			}
 			let ssbSet = sets[name];
 			// Enforce typing limits
 			let types = this.getTemplate(ssbSet.species).types;

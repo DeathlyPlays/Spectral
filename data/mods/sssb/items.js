@@ -130,6 +130,24 @@ let BattleItems = {
 			}
 		},
 	},
+	// Volco
+	barragevest: {
+		id: "barragevest",
+		name: "Barrage Vest",
+		desc: "Boosts the defense of the holder by 1.5x. Holder cannot use status moces.",
+		shortDesc: "Defense boost of 1.5x. Disables Status moves.",
+		onModifyDefPriority: 1,
+		onModifyDef(def) {
+			return this.chainModify(1.5);
+		},
+		onDisableMove(pokemon) {
+			for (const moveSlot of pokemon.moveSlots) {
+				if (this.getMove(moveSlot.move).category === 'Status') {
+					pokemon.disableMove(moveSlot.id);
+				}
+			}
+		}
+	},
 };
 
 exports.BattleItems = BattleItems;
