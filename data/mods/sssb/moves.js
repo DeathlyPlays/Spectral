@@ -36,6 +36,44 @@ let BattleMovedex = {
 		type: "Fire",
 	},
 
+	// Volco
+	"volcanicflares": {
+		id: "volcanicflares",
+		name: "Volcanic Flares",
+		basePower: 130,
+		accuracy: 95,
+		category: "Special",
+		shortDesc: "30% to burn the foe or self-boost SpA / SpD by 1 stage.",
+		desc: "Has 30% chance of burning the foe or boosting the user's SpA / SpD by 1 stage.",
+		pp: 10,
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Eruption', target);
+			this.add('-anim', source, 'Rock Tomb', target);
+			this.add('-anim', source, 'Blue Flare', target);
+		},
+		onHit(target, source) {
+			let rand = this.random(100);
+			if (rand <= 30) {
+				let effect = this.random(1);
+				if (effect === 0) {
+					target.trySetStatus('brn');
+				} else {
+					let stat = this.random(1);
+					if (stat === 0) {
+						this.boost({spa: 1}, source);
+					} else {
+						this.boost({spd: 1}, source);
+					}
+				}
+			}
+		},
+		secondary: false,
+		flags: {protect: 1, mirror: 1},
+		priority: 0,
+		target: "normal",
+		type: "Fire",
+	},
+
 	// Back At My Day
 	"bigthunder": {
 		id: "bigthunder",
