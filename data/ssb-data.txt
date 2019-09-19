@@ -53,7 +53,7 @@ Horrific17
 Ability: Reverse Card
 	- Sets up Magic Room, and when the user's maximum HP is less than 50% its Attack is raised two stages.
 EVs: 252 Atk / 4 Def / 252 Spe
-Moves: Wild Charge, Close Combat, Extreme Speed
+Moves: Wild Charge, Play Rough, Extreme Speed
 Signature Move: Meteor Charge
 	- Sets Sunny Day, Fire type, Physical, Contact, 100% accuracy, 100 BP, Defrosts user if frozen, 8 PP, Damages the user by 1/3rd of their maximum HP in recoil.
 Z-Move: Eternal Flames
