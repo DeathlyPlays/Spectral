@@ -132,7 +132,7 @@ class RandomSSSBTeams extends RandomTeams {
 				item: "Arcanium Z",
 				ability: "Reverse Card",
 				gender: "M",
-				moves: ["Wild Charge", "Extreme Speed", "Close Combat"],
+				moves: ["Wild Charge", "Extreme Speed", "Play Rough"],
 				baseSignatureMove: "meteorcharge",
 				signatureMove: "Meteor Charge",
 				evs: {
