@@ -1,27 +1,27 @@
 RaginInfernape
-(Shiny Infernape)
+(Shiny Male Infernape)
 @ Life Orb
 Ability: Raging Spirit
-	- This Pokemon cannot fall asleep, and any moves with a base power of 75 or less get boosted by 1.5x.
-EVs: 252 Atk / 252 Spe / 4 Def
+	- This Pokemon cannot fall asleep and any moves with a base power of 75 or less get boosted by 1.5x.
+EVs: 252 Atk / 4 Def / 252 Spe
 Moves: Mach Punch, Knock Off, Ice Punch
 Signature Move: Firey Destruction
-	- Fire type, never misses, 24 PP, Physical, Contact, 100 BP, 50% chance to burn the target, Defrosts user if frozen.
+	- Fire Type, Physical, 100 BP, never misses, 24 PP, Contact, 100 BP, thaws user. 50% chance to burn the target.
 Jolly Nature
 
 Back At My Day
-(Shiny Zapdos)
+(Shiny Male Zapdos)
 @ Life Orb
 Ability: Peal of Thunder
 	- Volt Absorb and Motor Drive.
-EVs: 252 SpA / 252 Spe / 4 Def
+EVs: 4 Def / 252 SpA / 252 Spe
 Moves: Aeroblast, Earth Power, Secret Sword
 Signature Move: Big Thunder
-	- Electric Type, never misses, 16 PP, Special, 120 BP, 50% chance to target self or foe.
+	- Electric Type, Special, 120 BP, never misses, 16 PP. 50% chance to target self or foe.
 Timid Nature
 
 Zakuree
-(Gallade-Mega)
+(Male Gallade-Mega)
 @ Soul Orb
 	- Attacks do x1.5, loses 1/10th of its max HP when attacking (except when at 1 HP)
 Ability: Heart of Steel
@@ -29,11 +29,11 @@ Ability: Heart of Steel
 EVs: 252 Atk / 4 SpD / 252 Spe
 Moves: Cross Chop, Psycho Cut, Blaze Kick
 Signature Move: 16 Years
-	- Dark Type, never misses, Physical, 180 BP, 8 PP, fails if user has more than 1 HP. User faints.
+	- Dark Type, Physical, 180 BP, never misses, 8 PP. Fails if user has more than 1 HP, user faints.
 Jolly Nature
 
 Chandie
-(Marshadow)
+(Male Marshadow)
 @ Void Heart
 	- When used with Sharp Shadow, allows Marshadow to use Embrace the Void.
 Ability: Shade Seeker
@@ -41,13 +41,13 @@ Ability: Shade Seeker
 EVs: 252 Atk / 4 SpD / 252 Spe 
 Moves: Close Combat, Spectral Thief, Ice Punch
 Signature Move: Sharp Shadow
-	- Ghost Type, never misses, 32 PP, Physical, 40 BP. User switches out after damaging the target.
+	- Ghost Type, Physical, 40 BP, never misses, 32 PP. User switches out after damaging the target.
 Z-Move: Embrace the Void
-	- Ghost Type, Physical, 120 BP. Sets up Magic Room, switches out the opposing Pokémon.
+	- Ghost Type, Physical, 120 BP, never misses, 1 PP. Sets up Magic Room, switches out the opposing Pokémon.
 Adamant Nature
 
 Horrific17
-(Arcanine)
+(Male Arcanine)
 @ Arcanium Z
 	- When used with Meteor Charge, allows Arcanine to use Eternal Flames.
 Ability: Reverse Card
@@ -55,54 +55,54 @@ Ability: Reverse Card
 EVs: 252 Atk / 4 Def / 252 Spe
 Moves: Wild Charge, Close Combat, Extreme Speed
 Signature Move: Meteor Charge
-	- Sets Sunny Day, Fire type, Physical, Contact, 100% accuracy, 100 BP, Defrosts user if frozen, 8 PP, Damages the user by 1/3rd of their maximum HP in recoil.
+	- Fire Type, Physical, 100 BP, 100% Accuracy, Contact, 8 PP, thaws user. Damages the user by 1/3rd of their maximum HP in recoil and sets Sunny Day.
 Z-Move: Eternal Flames
-	- Burns and traps the target, 150 BP, Fire type, Physical.
+	- Fire Type, Physical, 150 BP, never misses, 1 PP. Burns and traps the target.
 Jolly Nature
 
 AlfaStorm
-(Yveltal)
+(Male Yveltal)
 @ Life Orb
 Ability: Dark Aura
-EVs: 252 SpA / 4 Def / 252 Spe
+EVs: 4 Def / 252 SpA / 252 Spe
 Moves: Oblivion Wing, Ice Beam, Earth Power
 Signature Move: Doom Strike
-	- Dark Type, Special, 100% Accuracy, 90 BP, 16 PP, user switches out after damaging the target.
+	- Dark Type, Special, 90 BP, 100% Accuracy, 16 PP. User switches out after damaging the target.
 Modest Nature
 
 Roughskull
-(Skuntank)
+(Male Skuntank)
 @ Crown of TMS
 	- On switch-in, raises the user's Attack or Special Attack based on the target's weaker Defense.  Also, on switch-in, the user raises its Defense or Special Defense to protect itself from the target's stronger Attack stat.  If this Pokemon is at full HP, the opponent's Attack damage is halved
 Ability: Venom Shock
 	- Every move has a 30% chance to either badly poison or paralyze its target.
-EVs: 252 Atk / 4 Spe / 252 HP
+EVs: 252 HP / 252 Atk / 4 Spe
 Moves: Sucker Punch, Flame Charge, Thousand Waves
 Signature Move: Radiation Stench
-	- Poison type, Physical, 120 BP, 85% accuracy, 16 PP, doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch.
+	- Poison Type, Physical, 120 BP, 85% accuracy, 16 PP. Doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch.
 Adamant Nature
 
 Tactician Loki
-(Shiny Liepard)
+(Shiny Female Liepard)
 @ Thokk
 	- If held by Tactician Loki gives 50% chance to heal by 1/4th HP, 30% chance to increase a random stat by 1, 10% chance to decrease a random stat by 1, 10% chance to cast Focus Energy. If knocked off heals the holder by 50%, if tricked and is held by another pokemon damages pokemon by 1/8th every turn.
 Ability: Chaotic Aura
-	- Status moves receive +1 priority and a random stat is raised every turn by two stages and one random stat is lowered by one stage at the end of every turn.
-EVs: 252 SpA / 4 Def / 252 Spe
+	- Status moves receive +1 priority, a random stat is raised every turn by two stages and one random stat is lowered by one stage at the end of every turn.
+EVs: 4 Def / 252 SpA / 252 Spe
 Moves: Copycat, Spiky Shield, Ice Beam
 Signature Move: Blooming Chaos
-	- 32PP, 100BP, Never Misses, Dark Type, Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
+	- Dark Type, Special, 100 BP, never misses, 32 PP. Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
 Timid Nature
 
 Revival Clair
-(Garchomp)
+(Female Garchomp)
 @ Focus Sash
 Ability: Tough Skin
 	- Reduces Ice type attacks by 0.25x.
 EVs: 252 Atk / 4 SpD / 252 Spe
 Moves: Outrage, Earthquake, Stone Edge
 Signature Move: Dragon Blitz
-	- Dragon type, Physical, 8 PP, never misses, 80 BP, 2 Priority, does neutral damage to Fairies, Contact move, 50% chance to raise Attack and Speed by 1 stage.
+	- Dragon Type, Physical, 80 BP, 100% Accuracy, 8 PP, 2 Priority, Contact. Does neutral damage to Fairy Type and has 33% chance to raise Attack by 1 stage.
 Jolly Nature
 
 Auroura
@@ -114,7 +114,7 @@ Ability: Unholy Preservation
 EVs: 252 HP / 4 SpD / 252 Spe
 Moves: Parting Shot, Roost, Teeter Dance
 Signature Move: Spiritual Hex
-	- Ghost type, Special, 24 PP, 90% accuracy, 80 BP, power is doubled if both user and opponent are burned.
+	- Ghost Type, Special, 80 BP, 90% accuracy, 24 PP. Power is doubled if both user and opponent are burned.
 Timid Nature
 
 Spectral Bot
@@ -125,6 +125,18 @@ Ability: Spectral's Thief
 EVs: 252 Atk / 4 SpD / 252 Spe
 Moves: Sunsteel Strike, Play Rough, Ice Punch
 Signature Move: Angelic Spectral
-	- 60 BP, Ghost type, Physical, 16 PP, the user transforms into Marshadow and substitutes its moves for: Icicle Crash, Shadow Sneak, Close Combat and Spectral's Angel
-	- Spectral's Angel - transforms back into Magearna and re-substitutes the moves to the original set.
+	- Ghost Type, Physical, 60 BP, 100% Accuracy, 16 PP. Changes forme to Marshadow and substitutes moves for Icicle Crash, Shadow Sneak, Close Combat and Spectral's Angel.
+2nd Signature Move: Spectral's Angel
+	- Fairy Type, Physical, 60 BP, 100% Accuracy, 16 PP. Changes forme to Magearna and substitutes moves for Sunsteel Strike, Play Rough, Ice Punch and Angelic Spectral.
 Jolly Nature
+
+La Rascasse
+(Shiny Female Giratina)
+@ Heart of Darkness
+	- Reduces 75% of opponent's HP on KO.
+Ability: Guardian of Sinnoh
+	- 0.5x damage from Dark and Psychic, 20% chance to use Wish and Heal Bell on switch in.
+EVs: 4 Def / 252 SpA / 252 SpD
+Moves: Calm Mind, Moonblast, Focus Blast
+Signature Move: Distortion Destruction
+	- Special, 65 BP, 100% Accuracy, 16 PP. First hit is Ghost Type, second hit is Dragon Type and heals itself by 15% of its max HP.
