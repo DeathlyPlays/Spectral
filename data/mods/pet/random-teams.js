@@ -127,7 +127,7 @@ class RandomPetmonsTeams extends RandomTeams {
 				species: 'Pidgeotto',
 				ability: 'Delta Stream',
 				item: 'Leftovers',
-				moves: ['extremespeed', 'closecombat', 'moonblast', 'calmmind', 'swordsdance', 'bravebird', 'hurricane', 'drillrun', 'hypervoice', 'fpcusblast', 'uturn', 'roost'],
+				moves: ['extremespeed', 'closecombat', 'moonblast', 'calmmind', 'swordsdance', 'bravebird', 'hurricane', 'drillrun', 'hypervoice', 'focusblast', 'uturn', 'roost'],
 				signatureMove: 'Chatter',
 				evs: {
 					spa: 252,
