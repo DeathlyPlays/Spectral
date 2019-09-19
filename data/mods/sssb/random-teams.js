@@ -213,10 +213,10 @@ class RandomSSSBTeams extends RandomTeams {
 		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */
 		let typePool = {};
-		let included = false;
 		while (pool.length && team.length < 6) {
 			let name = this.sampleNoReplace(pool);
 			if (team.length === 5) {
+				let included = false;
 				for (const pkmn of team) {
 					if (toID(pkmn.name.toString()) === toID(userid.toString())) {
 						included = true;
