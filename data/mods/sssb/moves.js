@@ -160,6 +160,7 @@ let BattleMovedex = {
 		recoil: [1, 3],
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Flare Blitz', target);
+			this.add(`c|@Horrific17|Pick a God and pray!`);
 		},
 		flags: {protect: 1, mirror: 1, contact: 1, defrost: 1},
 		weather: "sunnyday",
@@ -346,9 +347,9 @@ let BattleMovedex = {
 		id: "dragonblitz",
 		name: "Dragon Blitz",
 		basePower: 80,
-		accuracy: true,
-		desc: "Nearly always goes first and has 50% chance of boosting Spe and Atk by 1 stage.",
-		shortDesc: "Almost always goes first and 50% chance of boosting Spe/Atk by 1 stage.",
+		accuracy: 100,
+		desc: "Nearly always goes first and has 33% chance of boosting Atk by 1 stage.",
+		shortDesc: "Almost always goes first and 33% chance of boosting Atk by 1 stage.",
 		pp: 5,
 		priority: 2,
 		category: "Physical",
@@ -361,11 +362,10 @@ let BattleMovedex = {
 		},
 		flags: {protect: 1, mirror: 1, contact: 1},
 		secondary: {
-			chance: 50,
+			chance: 33,
 			self: {
 				boosts: {
 					atk: 1,
-					spe: 1,
 				},
 			},
 		},
