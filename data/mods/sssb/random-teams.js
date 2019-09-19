@@ -191,6 +191,7 @@ class RandomSSSBTeams extends RandomTeams {
 				species: "Giratina-Origin",
 				item: "Heart of Darkness",
 				ability: "Guardian of Sinnoh",
+				shiny: true,
 				gender: "F",
 				moves: ["Calm Mind", "Moonblast", "Focus Blast"],
 				baseSignatureMove: "distortiondestruction",
