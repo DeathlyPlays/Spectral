@@ -2307,6 +2307,13 @@ let Formats = [
 				"wobbuffet": true,
 				"serperior": true,
 			};
+			let unbanlist = {
+				"Deoxys-Speed": true,
+				"Deoxys-Defense": true,
+				"Darkrai": true,
+				"Genesect": true,
+				"Aegislash": true,
+			};
 			if (!fusionTemplate.exists) return;
 			let unobtainable = {
 				'Darmanitan-Zen': true,
@@ -2326,7 +2333,7 @@ let Formats = [
 			let canHaveAbility = false;
 			if (fusionTemplate.isUnreleased) problems.push(`You cannot fuse with a Unreleased Pokemon. (${set.species} has nickname ${set.name}, which is unreleased)`);
 			if (fusionTemplate.isMega) problems.push(`You cannot fuse with a Mega Pokemon. (${set.species} has nickname ${set.name})`);
-			if (toID(fusionTemplate.tier).includes("uber") && !unbanlist.includes(template.species)) problems.push(`You cannot fuse with an Uber. (${template.species} has nickname ${fusionTemplate.species})`);
+			if (toID(fusionTemplate.tier).includes("uber") && !unbanlist[template.species]) problems.push(`You cannot fuse with an Uber. (${template.species} has nickname ${fusionTemplate.species})`);
 			if (toID(fusionTemplate.tier) === "cap" || toID(template.tier) === "cap") problems.push(`You cannot fuse with an fake Pokemon. (${template.species} has nickname ${fusionTemplate.species})`);
 			if (banlist[toID(fusionTemplate.species)]) problems.push(`Fusing with ${fusionTemplate.species} is banned. (${template.species} has nickname ${fusionTemplate.species})`);
 			for (let a in template.abilities) {
