@@ -419,7 +419,7 @@ let BattleMovedex = {
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Shadow Ball', target);
 			this.add('-anim', source, 'Dragon Pulse', target);
-			this.add(`c|+La Rascasse|`);
+			this.add(`c|+La Rascasse|You must be 6 feet tall to ride this ride.`);
 		},
 		flags: {protect: 1, mirror: 1},
 		target: "normal",
