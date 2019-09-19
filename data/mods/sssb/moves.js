@@ -403,6 +403,28 @@ let BattleMovedex = {
 		target: "any",
 		type: "Fairy",
 	},
+	
+	// La Rascasse
+	"distortiondestruction": {
+		id: "distortiondestruction",
+		name: "Distortion Destruction",
+		basePower: 65,
+		accuracy: 100,
+		desc: "First hit is Ghost Type, second hit is Dragon Type and user restores 15% of its max HP.",
+		shortDesc: "First hit Ghost, second hit Dragon, 15% of max HP recovery.",
+		pp: 10,
+		priority: 0,
+		multihit: 2,
+		category: "Special",
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Shadow Ball', target);
+			this.add('-anim', source, 'Dragon Pulse', target);
+			this.add(`c|+La Rascasse|`);
+		},
+		flags: {protect: 1, mirror: 1},
+		target: "normal",
+		type: "Dragon", // please make first hit ghost type and second hit dragon type
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;
