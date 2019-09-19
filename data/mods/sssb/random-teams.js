@@ -187,6 +187,21 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
+			"+La Rascasse": {
+				species: "Giratina-Origin",
+				item: "Heart of Darkness",
+				ability: "Guardian of Sinnoh",
+				gender: "F",
+				moves: ["Calm Mind", "Moonblast", "Focus Blast"],
+				baseSignatureMove: "distortiondestruction",
+				signatureMove: "Distortion Destruction",
+				evs: {
+					def: 4,
+					spa: 252,
+					spd: 252,
+				},
+				nature: "Modest",
+			},
 		};
 		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */
