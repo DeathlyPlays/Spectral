@@ -231,6 +231,28 @@ let BattleAbilities = {
 			}
 		},
 	},
+	
+	// La Rascasse
+	"guardianofsinnoh": {
+		id: "guardianofsinnoh",
+		name: "Guardian of Sinnoh",
+		desc: "0.5x damage from Dark and Psychic and 20% chance to use Wish and Heal Bell after switching in.",
+		shortDesc: "Half damage from Dark and Psychic, 20% chance to use Wish and Heal Bell after switching in.",
+		onSourceModifyAtkPriority: 6,
+		onSourceModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Dark' || move.type === 'Psychic') {
+				this.debug('Thick Fat weaken');
+				return this.chainModify(0.5);
+			}
+		},
+		onSourceModifySpAPriority: 5,
+		onSourceModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Dark' || move.type === 'Psychic') {
+				this.debug('Thick Fat weaken');
+				return this.chainModify(0.5);
+			}
+		},
+	}, // 20% chance to use wish and heal bell after switching in
 };
 
 exports.BattleAbilities = BattleAbilities;
