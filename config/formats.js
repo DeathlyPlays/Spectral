@@ -2530,7 +2530,7 @@ let Formats = [
 		validateSet(set, teamHas) {
 			const restrictedMoves = this.format.restrictedMoves || [];
 			let move = this.dex.getMove(set.ability);
-			if (move.category !== 'Status' || move.status === 'slp' || restrictedMoves.includes(move.name) || set.moves.map(toId).includes(move.id)) return this.validateSet(set, teamHas);
+			if (move.category !== 'Status' || move.status === 'slp' || restrictedMoves.includes(move.name) || set.moves.map(toID).includes(move.id)) return this.validateSet(set, teamHas);
 			let TeamValidator = /** @type {new(format: string | Format) => Validator} */ (this.constructor);
 			let validator = new TeamValidator(Dex.getFormat(this.format.id + '@@@ignoreillegalabilities'));
 			let moves = set.moves;
@@ -2547,7 +2547,7 @@ let Formats = [
 		},
 		battle: {
 			getAbility(name) {
-				let move = this.getMove(toId(name));
+				let move = this.getMove(toID(name));
 				if (!move.exists) return Object.getPrototypeOf(this).getAbility.call(this, name);
 				return {
 					id: move.id,
