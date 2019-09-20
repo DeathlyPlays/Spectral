@@ -2511,6 +2511,58 @@ let Formats = [
 		ruleset: ['[Gen 7] OU'],
 		banlist: ['Kommonium Z'],
 	},
+	{
+		name: "[Gen 7] Trademarked",
+		desc: `Pok&eacute;mon may use any Status move as an Ability, excluding those that are banned.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3647897/">Trademarked</a>`,
+		],
+
+		mod: 'gen7',
+		ruleset: ['[Gen 7] OU'],
+		banlist: ['Slaking', 'Regigigas'],
+		restrictedMoves: ['Assist', 'Baneful Bunker', 'Block', 'Copycat', 'Destiny Bond', 'Detect', 'Mat Block', 'Mean Look', 'Nature Power', 'Protect', 'Roar', 'Skill Swap', 'Spider Web', 'Spiky Shield', 'Whirlwind'],
+		onValidateTeam(team, format, teamHas) {
+			for (let trademark in teamHas.trademarks) {
+				if (teamHas.trademarks[trademark] > 1) return [`You are limited to 1 of each Trademark. (You have ${teamHas.trademarks[trademark]} of ${trademark}).`];
+			}
+		},
+		validateSet(set, teamHas) {
+			const restrictedMoves = this.format.restrictedMoves || [];
+			let move = this.dex.getMove(set.ability);
+			if (move.category !== 'Status' || move.status === 'slp' || restrictedMoves.includes(move.name) || set.moves.map(toId).includes(move.id)) return this.validateSet(set, teamHas);
+			let TeamValidator = /** @type {new(format: string | Format) => Validator} */ (this.constructor);
+			let validator = new TeamValidator(Dex.getFormat(this.format.id + '@@@ignoreillegalabilities'));
+			let moves = set.moves;
+			set.moves = [set.ability];
+			set.ability = '';
+			let problems = validator.validateSet(set, {}) || [];
+			set.moves = moves;
+			set.ability = '';
+			problems = problems.concat(validator.validateSet(set, teamHas) || []);
+			set.ability = move.id;
+			if (!teamHas.trademarks) teamHas.trademarks = {};
+			teamHas.trademarks[move.name] = (teamHas.trademarks[move.name] || 0) + 1;
+			return problems.length ? problems : null;
+		},
+		battle: {
+			getAbility(name) {
+				let move = this.getMove(toId(name));
+				if (!move.exists) return Object.getPrototypeOf(this).getAbility.call(this, name);
+				return {
+					id: move.id,
+					name: move.name,
+					onStart(pokemon) {
+						this.add('-activate', pokemon, 'ability: ' + move.name);
+						this.useMove(move.id, pokemon);
+					},
+					toString() {
+						return ""; // for useMove
+					},
+				};
+			},
+		},
+	},
 ];
 
 exports.Formats = Formats;
