@@ -45,6 +45,19 @@ class RandomPetmonsTeams extends RandomTeams {
 				},
 				nature: 'Jolly',
 			},
+			'Mimishad': {
+				species: 'Mimikyu-Totem',
+				ability: 'Volt Fence',
+				item: 'Life Orb',
+				moves: ['swordsdance', 'shadowclaw', 'shadowsneak', 'boltstrike', 'playrough', 'outrage', 'roost', 'earthquake'],
+				signatureMove: 'Fusion Bolt',
+				evs: {
+					atk: 252,
+					spd: 4,
+					spe: 252,
+				},
+				nature: 'Jolly',
+			},
 			'Mimisun': {
 				species: 'Mimikyu',
 				ability: 'Flame Fence',
