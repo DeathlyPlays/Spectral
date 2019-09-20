@@ -94,6 +94,7 @@ let BattleMovedex = {
 		},
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Thunder', target);
+			this.add(`c|%Back At My Day|Who's gonna get hit?`);
 		},
 		secondary: null,
 		flags: {protect: 1, mirror: 1},
