@@ -55,14 +55,14 @@ class RandomSSSBTeams extends RandomTeams {
 				baseSignatureMove: "volcanicflares",
 				signatureMove: "Volcanic Flares",
 				evs: {
-					hp: 4,
-					spa: 252,
-					spe: 252,
+					hp: 76,
+					spa: 212,
+					spe: 220,
 				},
 				ivs: {
 					atk: 0,
 				},
-				nature: "Timid",
+				nature: "Modest",
 			},
 			// Administrators
 			"~Roughskull": {
