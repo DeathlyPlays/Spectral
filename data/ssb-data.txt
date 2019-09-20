@@ -13,7 +13,7 @@ Back At My Day
 (Shiny Male Zapdos)
 @ Life Orb
 Ability: Peal of Thunder
-	- Volt Absorb and Motor Drive.
+	- Electric immunity, 25% of max HP recovery and boosts Speed by 1 stage if hit by an Electric attack.
 EVs: 4 Def / 252 SpA / 252 Spe
 Moves: Aeroblast, Earth Power, Secret Sword
 Signature Move: Big Thunder
@@ -43,7 +43,7 @@ Moves: Close Combat, Spectral Thief, Ice Punch
 Signature Move: Sharp Shadow
 	- Ghost Type, Physical, 40 BP, never misses, 32 PP. User switches out after damaging the target.
 Z-Move: Embrace the Void
-	- Ghost Type, Physical, 120 BP, never misses, 1 PP. Sets up Magic Room, switches out the opposing Pokémon.
+	- Ghost Type, Physical, 120 BP, never misses, 1 PP, -1 Priority. Sets up Magic Room, switches out the opposing Pokémon.
 Adamant Nature
 
 Horrific17
@@ -160,5 +160,5 @@ Revival xFloatz
 Ability: XFZ
 	- Fire immunity, 1.5x damage with Steel attacks if hit by Fire, +1 priority to Status.
 EVs: 252 HP, 40 Def, 216 SpD
-Moves: Rest, Toxic, Calm Mind, Iron Head
+Moves: Rest, Toxic, Cosmic Power, Iron Head
 Impish Nature
