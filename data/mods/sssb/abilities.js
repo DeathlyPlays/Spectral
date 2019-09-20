@@ -33,13 +33,13 @@ let BattleAbilities = {
 	"emergencyactions": {
 		id: "emergencyactions",
 		name: "Emergency Actions",
-		desc: "Grants a silent speed boost of 1.5x and STAB moves have a boost of 2x instead of 1.5x",
-		shortDesc: "Silent 1.5x spe & STAB is 2x instead of 1.5x",
+		desc: "Grants a silent speed boost of 1.5x and SpA moves have a 1.3x boost",
+		shortDesc: "Silent 1.5x spe & SpA boost of 1.3x",
 		onStart(pokemon) {
 			this.add('-message', pokemon.name + "'s Emergency Actions has multiplied their speed by 1.5x (silently) and boosted their STAB bonus to 2x.");
 		},
-		onModifyMove(move) {
-			move.stab = 2;
+		onModifySpa(move) {
+			return this.chainModify(1.3);
 		},
 		onModifySpe(spe) {
 			return this.chainModify(1.5);
