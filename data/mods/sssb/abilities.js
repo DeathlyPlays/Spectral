@@ -281,12 +281,12 @@ let BattleAbilities = {
 	"xfz": {
 		id: "xfz",
 		name: "XFZ",
-		desc: "Flash Fire and Prankster.",
-		shortDesc: "Flash Fire + Prankster.",
+		desc: "This Pokemon is immune to Fire attacks and does 1.5x damage with Steel attacks if hit by a Fire attack. Status moves gain +1 priority.",
+		shortDesc: "Fire immunity, 1.5x damage with Steel if hit by Fire, +1 priority to Status.",
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Fire') {
 				move.accuracy = true;
-				if (!target.addVolatile('flashfire')) {
+				if (!target.addVolatile('xfz')) {
 					this.add('-immune', target, '[from] ability: XFZ');
 				}
 				return null;
@@ -302,14 +302,14 @@ let BattleAbilities = {
 			},
 			onModifyAtkPriority: 5,
 			onModifyAtk(atk, attacker, defender, move) {
-				if (move.type === 'Fire') {
+				if (move.type === 'Steel') {
 					this.debug('XFZ boost');
 					return this.chainModify(1.5);
 				}
 			},
 			onModifySpAPriority: 5,
 			onModifySpA(atk, attacker, defender, move) {
-				if (move.type === 'Fire') {
+				if (move.type === 'Steel') {
 					this.debug('XFZ boost');
 					return this.chainModify(1.5);
 				}
@@ -320,7 +320,7 @@ let BattleAbilities = {
 		},
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.category === 'Status') {
-				move.pranksterBoosted = true;
+				move.xfzBoosted = true;
 				return priority + 1;
 			}
 		},
