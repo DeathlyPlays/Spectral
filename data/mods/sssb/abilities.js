@@ -38,6 +38,7 @@ let BattleAbilities = {
 		onStart(pokemon) {
 			this.add('-message', pokemon.name + "'s Emergency Actions has multiplied their speed by 1.5x (silently) and boosted their STAB bonus to 2x.");
 		},
+		onModifySpaPriority: 5,
 		onModifySpa(move) {
 			return this.chainModify(1.3);
 		},
