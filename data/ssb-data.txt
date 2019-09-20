@@ -43,7 +43,7 @@ Moves: Close Combat, Spectral Thief, Ice Punch
 Signature Move: Sharp Shadow
 	- Ghost Type, Physical, 40 BP, never misses, 32 PP. User switches out after damaging the target.
 Z-Move: Embrace the Void
-	- Ghost Type, Physical, 120 BP, never misses, 1 PP. Sets up Magic Room, switches out the opposing Pokémon.
+	- Ghost Type, Physical, 120 BP, never misses, 1 PP, -1 Priority. Sets up Magic Room, switches out the opposing Pokémon.
 Adamant Nature
 
 Horrific17
