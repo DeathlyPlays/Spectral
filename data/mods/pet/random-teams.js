@@ -19,6 +19,19 @@ class RandomPetmonsTeams extends RandomTeams {
 				},
 				nature: 'Modest',
 			},
+			'Bittercold': {
+				species: 'Cryogonal',
+				ability: 'Snow Warning',
+				item: 'Leftovers',
+				moves: ['blizzard', 'recover', 'earthpower', 'toxic', 'substitute', 'surf', 'calmmind'],
+				signatureMove: 'auroraveil',
+				evs: {
+					def: 252,
+					spd: 252,
+					hp: 4,
+				},
+				nature: 'Modest',
+			},
 			'Mimishad': {
 				species: 'Mimikyu-Totem',
 				ability: 'Magic Guard',
