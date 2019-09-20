@@ -160,5 +160,5 @@ Revival xFloatz
 Ability: XFZ
 	- Fire immunity, 1.5x damage with Steel attacks if hit by Fire, +1 priority to Status.
 EVs: 252 HP, 40 Def, 216 SpD
-Moves: Rest, Toxic, Calm Mind, Iron Head
+Moves: Rest, Toxic, Cosmic Power, Iron Head
 Impish Nature
