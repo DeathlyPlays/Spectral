@@ -240,28 +240,23 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Impish",
 			},
 		};
-		let pool = Object.keys(sets);
+		let pool = this.shuffle(Object.keys(sets)).splice(0, 6);
 		/** @type {{[type: string]: number}} */
 		let typePool = {};
-		while (pool.length && team.length < 6) {
-			let name = this.sampleNoReplace(pool);
-			if (team.length === 5) {
-				let included = false;
-				for (const pkmn of team) {
-					if (toID(pkmn.name.toString()) === toID(userid.toString())) {
-						included = true;
-						break;
-					}
-				}
+		let i = 0;
+		while (pool.length && i < 6) {
+			if (i === 1) {
 				for (let mon in sets) {
-					if (toID(mon.toString()) === userid && !included) {
-						let arr = [];
-						arr.push(mon);
-						name = this.sampleNoReplace(arr);
+					let monIds = pool.slice(0, 6).map(function (p) {
+						return toId(p);
+					});
+					if (toID(mon.toString()) === userid && monIds.indexOf(userid) === -1) {
+						pool[1] = mon;
 						break;
 					}
 				}
 			}
+			let name = pool[i];
 			let ssbSet = sets[name];
 			// Enforce typing limits
 			let types = this.getTemplate(ssbSet.species).types;
@@ -316,6 +311,7 @@ class RandomSSSBTeams extends RandomTeams {
 			}
 			set.moves.push(ssbSet.signatureMove);
 			team.push(set);
+			i++;
 		}
 		return team;
 	}
