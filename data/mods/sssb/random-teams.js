@@ -248,7 +248,7 @@ class RandomSSSBTeams extends RandomTeams {
 			if (i === 1) {
 				for (let mon in sets) {
 					let monIds = pool.slice(0, 6).map(function (p) {
-						return toId(p);
+						return toID(p);
 					});
 					if (toID(mon.toString()) === userid && monIds.indexOf(userid) === -1) {
 						pool[1] = mon;
