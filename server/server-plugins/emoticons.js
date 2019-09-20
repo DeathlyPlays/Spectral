@@ -78,6 +78,7 @@ exports.commands = {
 
 			if (!targetSplit[1]) return this.parse("/emoticonshelp");
 			if (targetSplit[0].length > 10) return this.errorReply("Emoticons may not be longer than 10 characters.");
+			if (targetSplit[0] === "Wtf") return this.errorReply("Fuck off");
 			if (emoticons[targetSplit[0]]) return this.errorReply(`${targetSplit[0]} is already an emoticon.`);
 
 			emoticons[targetSplit[0]] = targetSplit[1];
