@@ -226,8 +226,8 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Modest",
 			},
 			"+Revival xFloatz": {
-				species: "Scizor",
-				item: "Scizorite",
+				species: "Scizor-Mega",
+				item: "Leftovers",
 				ability: "XFZ",
 				gender: "M",
 				moves: ["Rest", "Toxic", "Iron Head"],
