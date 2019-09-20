@@ -139,5 +139,26 @@ Ability: Guardian of Sinnoh
 EVs: 252 SpA / 4 Def / 252 SpD
 Moves: Calm Mind, Moonblast, Focus Blast
 Signature Move: Distortion Destruction
-	- Special, 65 BP, 100% Accuracy, 16 PP, Dragon Type and heals itself by 1/8 of its max HP.
+	- Dragon Type, Special, 65 BP, 100% Accuracy, 16 PP. Heals itself by 1/8 of its max HP.
 Modest Nature
+
+Volco
+(Male Volcanion)
+@ Barrage Vest
+	- Boosts Defense by 1.5x but prevents using Status moves.
+Ability: Emergency Actions
+	- 2x STAB and don't tell anyone that he has 1.5x Speed.
+EVs: 76 HP / 212 SpA / 220 Spe
+Moves: Ice Beam/Earth Power, Giga Drain, Steam Eruption
+Signature Move: Volcanic Flares
+	- Fire Type, Special, 130 BP, 95% Accuracy, 16 PP. 30% chance of burning or boosting SpA or SpD.
+Modest Nature
+
+Revival xFloatz
+(Male Scizor-Mega)
+@ Leftovers
+Ability: XFZ
+	- Fire immunity, 1.5x damage with Steel attacks if hit by Fire, +1 priority to Status.
+EVs: 252 HP, 40 Def, 216 SpD
+Moves: Rest, Toxic, Calm Mind, Iron Head
+Impish Nature
