@@ -315,7 +315,7 @@ let BattleAbilities = {
 				}
 			},
 			onEnd(target) {
-				this.add('-end', target, 'ability: Flash Fire', '[silent]');
+				this.add('-end', target, 'ability: XFZ', '[silent]');
 			},
 		},
 		onModifyPriority(priority, pokemon, target, move) {
