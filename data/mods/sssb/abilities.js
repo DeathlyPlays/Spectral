@@ -33,14 +33,13 @@ let BattleAbilities = {
 	"emergencyactions": {
 		id: "emergencyactions",
 		name: "Emergency Actions",
-		desc: "Grants a silent speed boost of 1.5x and SpA moves have a 1.3x boost",
-		shortDesc: "Silent 1.5x spe & SpA boost of 1.3x",
+		desc: "Grants a silent speed boost of 1.5x and STAB moves have a boost of 2x instead of 1.5x",
+		shortDesc: "Silent 1.5x spe & STAB is 2x instead of 1.5x",
 		onStart(pokemon) {
 			this.add('-message', pokemon.name + "'s Emergency Actions has multiplied their speed by 1.5x (silently) and boosted their STAB bonus to 2x.");
 		},
-		onModifySpaPriority: 5,
-		onModifySpa(move) {
-			return this.chainModify(1.3);
+		onModifyMove(move) {
+			move.stab = 2;
 		},
 		onModifySpe(spe) {
 			return this.chainModify(1.5);
@@ -270,7 +269,12 @@ let BattleAbilities = {
 				return this.chainModify(0.5);
 			}
 		},
-	}, // 20% chance to use wish and heal bell after switching in
+		onStart(pokemon) {
+			if (this.random(5)) {
+				this.useMove("wish", pokemon);
+				this.useMove("healbell", pokemon);
+			}
+		},
 };
 
 exports.BattleAbilities = BattleAbilities;
