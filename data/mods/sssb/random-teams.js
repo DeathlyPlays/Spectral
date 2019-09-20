@@ -225,6 +225,20 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Modest",
 			},
+			"+Revival xFloatz": {
+				species: "Scizor",
+				item: "Scizorite",
+				ability: "XFZ",
+				gender: "M",
+				moves: ["Rest", "Toxic", "Iron Head"],
+				signatureMove: "Cosmic Power",
+				evs: {
+					hp: 252,
+					def: 40,
+					spd: 216,
+				},
+				nature: "Impish",
+			},
 		};
 		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */
