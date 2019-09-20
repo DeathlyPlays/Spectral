@@ -133,10 +133,11 @@ Jolly Nature
 La Rascasse
 (Shiny Female Giratina)
 @ Heart of Darkness
-	- Reduces 75% of opponent's HP on KO.
+	- When the user is knocked out, the foe that KO'ed the user loses 1/2 of their max HP.
 Ability: Guardian of Sinnoh
 	- 0.5x damage from Dark and Psychic, 20% chance to use Wish and Heal Bell on switch in.
-EVs: 4 Def / 252 SpA / 252 SpD
+EVs: 252 SpA / 4 Def / 252 SpD
 Moves: Calm Mind, Moonblast, Focus Blast
 Signature Move: Distortion Destruction
-	- Special, 65 BP, 100% Accuracy, 16 PP. First hit is Ghost Type, second hit is Dragon Type and heals itself by 15% of its max HP.
+	- Special, 65 BP, 100% Accuracy, 16 PP, Dragon Type and heals itself by 1/8 of its max HP.
+Modest Nature
