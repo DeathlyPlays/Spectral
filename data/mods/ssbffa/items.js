@@ -17,3 +17,5 @@ let BattleItems = {
 		desc: "Holder's Special Defense is 1.5x.",
 	},
 };
+
+exports.BattleItems = BattleItems;
