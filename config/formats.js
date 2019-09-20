@@ -2509,6 +2509,7 @@ let Formats = [
 
 		mod: 'zfrenzy',
 		ruleset: ['[Gen 7] OU'],
+		banlist: ['Kommonium Z'],
 	},
 ];
 
