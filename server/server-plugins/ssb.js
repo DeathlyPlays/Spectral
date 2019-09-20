@@ -472,15 +472,14 @@ class SSB {
 		}
 		// Ability
 		let ability = dex.getAbility(this.ability);
-		if (!ability.exists || BANS.abilities.includes(this.ability) ||
-		(!Dex.getAbility(this.ability).exists && toID(this.cAbility) !== ability.id)) {
+		if (!ability.exists || BANS.abilities.includes(this.ability) && (!Dex.getAbility(this.ability).exists && toID(this.cAbility) !== ability.id)) {
 			msg.push((!ability.exists ? `The ability ${ability.id} does not exist.` : (BANS.abilities.includes(this.ability) ? `The ability ${ability.name} is banned.` : `${ability.name} is not your custom ability.`)));
 			this.ability = pokemon.abilities[0];
 		}
 		// Item
 		if (toID(this.item)) {
 			let item = dex.getItem(this.item);
-			if (!item.exists || BANS.items.includes(this.item) || (!Dex.getItem(this.item).exists && toID(this.cItem !== item.id))) {
+			if (!item.exists || BANS.items.includes(this.item) && (!Dex.getItem(this.item).exists && toID(this.cItem !== item.id))) {
 				msg.push((!item.exists ? `The item ${item.id} does not exist.` : (BANS.items.includes(this.item) ? `The item ${item.name} is banned.` : `${item.name} is not your custom item.`)));
 				this.item = "";
 			}
