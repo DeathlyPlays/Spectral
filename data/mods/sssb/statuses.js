@@ -133,6 +133,35 @@ let BattleStatuses = {
 			this.add(`c|+La Rascasse|Have you told John I like my one-timers in a certain spot yet?`);
 		},
 	},
+	
+	// Modified Pre-existing Statuses
+	raindance: {
+		inherit: true,
+		durationCallback(source, effect) {
+			if (source && (source.hasItem('damprock') || source.hasItem('environmentalorb'))) {
+				return 8;
+			}
+			return 5;
+		},
+	},
+	sunnyday: {
+		inherit: true,
+		durationCallback(source, effect) {
+			if (source && (source.hasItem('heatrock') || source.hasItem('environmentalorb'))) {
+				return 8;
+			}
+			return 5;
+		},
+	},
+	hail: {
+		inherit: true,
+		durationCallback(source, effect) {
+			if (source && (source.hasItem('icyrock') || source.hasItem('environmentalorb'))) {
+				return 8;
+			}
+			return 5;
+		},
+	},
 };
 
 exports.BattleStatuses = BattleStatuses;
