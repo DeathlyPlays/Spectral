@@ -151,18 +151,20 @@ let BattleMovedex = {
 	"spectralthief": {
 		num: 712,
 		accuracy: 100,
-		basePower: 80,
+		basePower: 90,
 		category: "Physical",
-		desc: "The target's stat stages greater than 0 are stolen from it and applied to the user before dealing damage.",
-		shortDesc: "Steals target's boosts before dealing damage.",
+		desc: "Clears target's boosts before dealing damage.",
+		shortDesc: "Clears target's boosts before dealing damage.",
 		id: "spectralthief",
 		isViable: true,
 		name: "Spectral Thief",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1, authentic: 1},
-		stealsBoosts: true,
-		// Boost stealing implemented in scripts.js
+		flags: {protect: 1, mirror: 1},
+		onHit(target) {
+			target.clearBoosts();
+			this.add('-clearboost', target);
+		},
 		secondary: null,
 		target: "normal",
 		type: "Ghost",
