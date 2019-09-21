@@ -18,6 +18,22 @@ let BattleStatuses = {
 		},
 	},
 
+	volco: {
+		noCopy: true,
+		onStart() {
+			this.add(`c|⚔Volco|I'm just here procrastinating so let's get this bread gamers.  The server being killed with crashes is just a nice meme anyways.`);
+		},
+		onSwitchOut() {
+			this.add(`c|⚔Arrays|I don't feel like doing shit, RaginInfernape stop breaking shit.`);
+		},
+		onFaint() {
+			this.add(`c|⚔Volco|WHO THE FUCK WILL FIX THE SERVER NOW?!`);
+		},
+		onSourceFaint() {
+			this.add(`c|⚔Volco|I have to kill everyone so I can kill the server because shit's broke, so die.`);
+		},
+	},
+
 	horrific17: {
 		noCopy: true,
 		onStart() {
