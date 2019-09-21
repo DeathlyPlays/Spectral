@@ -137,8 +137,8 @@ let BattleMovedex = {
 		priority: -1,
 		flags: {protect: 1, mirror: 1},
 		onPrepareHit(target, source) {
-			this.add('-anim', target, 'Dark Void', target);
 			this.add('-anim', target, 'Black Hole Eclipse', target);
+			this.add('-anim', target, 'Dark Void', target);
 		},
 		pseudoWeather: "magicroom",
 		secondary: null,
@@ -146,6 +146,28 @@ let BattleMovedex = {
 		forceSwitch: true,
 		category: "Physical",
 		type: "Ghost",
+	// Chandie
+	},
+	"spectralthief": {
+		num: 712,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		desc: "The target's stat stages greater than 0 are stolen from it and applied to the user before dealing damage.",
+		shortDesc: "Steals target's boosts before dealing damage.",
+		id: "spectralthief",
+		isViable: true,
+		name: "Spectral Thief",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, authentic: 1},
+		stealsBoosts: true,
+		// Boost stealing implemented in scripts.js
+		secondary: null,
+		target: "normal",
+		type: "Ghost",
+		zMovePower: 175,
+		contestType: "Cool",
 	},
 
 	// Horrific17
