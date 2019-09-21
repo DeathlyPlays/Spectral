@@ -48,7 +48,7 @@ class RandomSSSBTeams extends RandomTeams {
 			// Fixing Gods
 			"⚔Volco": {
 				species: "Volcanion",
-				item: "Barrage Vest",
+				item: "Leftovers",
 				ability: "Emergency Actions",
 				gender: "M",
 				moves: [["Ice Beam", "Earth Power"], "Giga Drain", "Steam Eruption"],
