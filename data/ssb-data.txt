@@ -36,7 +36,7 @@ Chandie
 @ Void Heart
 	- When used with Sharp Shadow, allows Marshadow to use Embrace the Void.
 Ability: Shade Seeker
-	- Unaware + If the user or opposing Pokémon have stat boosts, this Pokémon's Ghost moves have +1 priority.
+	- Unaware + If the user or opposing Pokémon have stat boosts, Spectral Thief has +1 priority.
 EVs: 252 Atk / 4 SpD / 252 Spe 
 Moves: Close Combat, Spectral Thief, Ice Punch
 Move Change: Spectral Thief
