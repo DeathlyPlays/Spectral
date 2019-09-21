@@ -274,7 +274,7 @@ class RandomSSSBTeams extends RandomTeams {
 					}
 				}
 			}*/
-			let name = pool[i];
+			let name = this.sampleNoReplace(pool);
 			let ssbSet = sets[name];
 			// Enforce typing limits
 			let types = this.getTemplate(ssbSet.species).types;
