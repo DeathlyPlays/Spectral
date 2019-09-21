@@ -44,7 +44,7 @@ let BattleMovedex = {
 		accuracy: 95,
 		category: "Special",
 		shortDesc: "30% to burn the foe or self-boost SpA by 1 stage.",
-		desc: "Has 30% chance of burning the foe or boost the user's SpA by 1 stage.",
+		desc: "Has 30% chance of burning the foe or boost the user's SpD by 1 stage.",
 		pp: 10,
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Eruption', target);
@@ -58,7 +58,7 @@ let BattleMovedex = {
 				if (effect === 1) {
 					target.trySetStatus('brn');
 				} else {
-					this.boost({spa: 1}, source);
+					this.boost({spd: 1}, source);
 				}
 			}
 		},
