@@ -20,9 +20,9 @@ const RandomTeams = require('../../random-teams');
 
 class RandomSSSBTeams extends RandomTeams {
 	randomSSSBTeam(side) {
-		let userid = toID(side.name);
+		// let userid = toID(side.name);
 		/* alts start */
-		if (userid === 'arrays') userid = 'volco';
+		// if (userid === 'arrays') userid = 'volco';
 		/* alts ends */
 		/** @type {PokemonSet[]} */
 		let team = [];
@@ -258,12 +258,12 @@ class RandomSSSBTeams extends RandomTeams {
 			},
 			*/
 		};
-		let pool = this.shuffle(Object.keys(sets)).splice(0, 6);
+		let pool = Object.keys(sets);
 		/** @type {{[type: string]: number}} */
 		let typePool = {};
-		let i = 0;
-		while (pool.length && i < 6) {
-			if (i === 1) {
+		// let i = 0;
+		while (pool.length && team.length < 6) {
+			/*if (i === 1) {
 				for (let mon in sets) {
 					let monIds = pool.slice(0, 6).map(function (p) {
 						return toID(p);
@@ -273,7 +273,7 @@ class RandomSSSBTeams extends RandomTeams {
 						break;
 					}
 				}
-			}
+			}*/
 			let name = pool[i];
 			let ssbSet = sets[name];
 			// Enforce typing limits
