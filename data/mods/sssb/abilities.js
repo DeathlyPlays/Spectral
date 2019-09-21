@@ -130,7 +130,7 @@ let BattleAbilities = {
 				}
 				if (changed) break;
 			}
-			if (changed && move && move.type === 'Ghost') {
+			if (changed && move && move.id === 'spectralthief') {
 				move.shadeSeekerBoosted = true;
 				return priority + 1;
 			}
