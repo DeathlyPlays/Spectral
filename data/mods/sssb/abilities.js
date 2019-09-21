@@ -248,7 +248,7 @@ let BattleAbilities = {
 			}
 		},
 	},
-	
+
 	// La Rascasse
 	"guardianofsinnoh": {
 		id: "guardianofsinnoh",
@@ -276,7 +276,7 @@ let BattleAbilities = {
 			}
 		},
 	},
-	
+
 	// Revival xFloatz
 	"xfz": {
 		id: "xfz",
@@ -325,7 +325,7 @@ let BattleAbilities = {
 			}
 		},
 	},
-	
+
 	// Auroura
 	"unholypreservation": {
 		id: "unholypreservation",
