@@ -329,7 +329,7 @@ class RandomSSSBTeams extends RandomTeams {
 			}
 			set.moves.push(ssbSet.signatureMove);
 			team.push(set);
-			i++;
+			// i++;
 		}
 		return team;
 	}
