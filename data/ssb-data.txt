@@ -140,7 +140,7 @@ Ability: Guardian of Sinnoh
 EVs: 252 SpA / 4 Def / 252 SpD
 Moves: Calm Mind, Moonblast, Focus Blast
 Signature Move: Distortion Destruction
-	- Dragon Type, Special, 65 BP, 100% Accuracy, 16 PP. Heals itself by 1/8 of its max HP.
+	- Dragon Type, Special, 65 BP, 100% Accuracy, 16 PP. Hits twice and heals itself by 1/8 of its max HP.
 Modest Nature
 
 Volco
