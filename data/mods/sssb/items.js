@@ -197,28 +197,28 @@ let BattleItems = {
 			if (move.type === 'Bug') {
 				this.debug('Ghoulish Rag strengthen');
 				return this.chainModify(16);
-			},
+			}
 		},
 		onSourceModifySpAPriority: 5,
 		onSourceModifySpA(atk, attacker, defender, move) {
 			if (move.type === 'Bug') {
 				this.debug('Ghoulish Rag strengthen');
 				return this.chainModify(16);
-			},
+			}
 		},
 		onSourceModifyAtkPriority: 6,
 		onSourceModifyAtk(atk, attacker, defender, move) {
 			if (move.type === 'Grass' || move.type === 'Poison') {
 				this.debug('Ghoulish Rag strengthen');
 				return this.chainModify(4);
-			},
+			}
 		},
 		onSourceModifySpAPriority: 5,
 		onSourceModifySpA(atk, attacker, defender, move) {
 			if (move.type === 'Grass' || move.type === 'Poison') {
 				this.debug('Ghoulish Rag strengthen');
 				return this.chainModify(4);
-			},
+			}
 		},
 	},
 };
