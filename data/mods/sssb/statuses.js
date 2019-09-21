@@ -29,6 +29,7 @@ let BattleStatuses = {
 				this.add(`c|⚔Volco|Dammit, something broke badly... I'll return once i fix it.`);
 			} else {
 				this.add(`c|⚔Arr⟦ay⟧s|I don't feel like fixing stuff, RaginInfernape stop breaking the server.`);
+			}
 		},
 		onFaint() {
 			this.add([`c|⚔Volco|Well, if the server breaks... not my problem.`, `c|⚔Arr⟦ay⟧s|Oh, cool now I can be lazy again`][this.random(2)]);
