@@ -163,6 +163,39 @@ let BattleItems = {
 			}
 		},
 	},
+
+	// Auroura
+	"environmentalorb": {
+		id: "environmentalorb",
+		name: "Environmental Orb",
+		spritenum: 169,
+		fling: {
+			basePower: 90,
+		},
+		onModifyDefPriority: 2,
+		onModifyDef(def, pokemon) {
+			return this.chainModify(1.3);
+		},
+		onModifySpDPriority: 2,
+		onModifySpD(spd, pokemon) {
+			return this.chainModify(1.3);
+		},
+		onModifyAtkPriority: 2,
+		onModifyAtk(spd, pokemon) {
+			return this.chainModify(1.3);
+		},
+		onModifySpAPriority: 2,
+		onModifySpA(spd, pokemon) {
+			return this.chainModify(1.3);
+		},
+		onModifySpePriority: 2,
+		onModifySpe(spd, pokemon) {
+			return this.chainModify(1.3);
+		},
+		num: 538,
+		gen: 5,
+		desc: "Weather lasts 8 turns instead of 5; x1.3 to all stats.",
+	},
 };
 
 exports.BattleItems = BattleItems;
