@@ -495,23 +495,33 @@ let BattleMovedex = {
 		type: "Dragon", // please make first hit ghost type and second hit dragon type
 	},
 	// Auroura
-	"spiritualhex": {
-		id: "spiritualhex",
-		name: "Spiritual Hex",
-		basePower: 80,
-		accuracy: 90,
-		desc: "Power doubles if both user and foe are burnt.",
-		shortDesc: "2x BP if both user and foe are burnt.",
-		pp: 15,
-		priority: 0,
+	"climatecast": {
+		id: "climatecast",
+		name: "Climate Cast",
+		basePower: 120,
+		accuracy: 100,
+		desc: "Type changes to match weather condition.",
+		shortDesc: "Type changes to match weather condition.",
+		pp: 20,
+		priority: 1,
 		category: "Special",
 		flags: {protect: 1, mirror: 1},
 		secondary: null,
 		target: "normal",
-		type: "Ghost",
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.status === 'brn' && target.status === 'brn') {
-				return this.chainModify(2);
+		type: "Normal",
+		onModifyMove(move) {
+			switch (this.field.effectiveWeather()) {
+			case 'sunnyday':
+			case 'desolateland':
+				move.type = 'Fire';
+				break;
+			case 'raindance':
+			case 'primordialsea':
+				move.type = 'Water';
+				break;
+			case 'hail':
+				move.type = 'Ice';
+				break;
 			}
 		},
 	},
