@@ -21,16 +21,20 @@ let BattleStatuses = {
 	volco: {
 		noCopy: true,
 		onStart() {
-			this.add(`c|⚔Volco|I'm just here procrastinating so let's get this bread gamers.  The server being killed with crashes is just a nice meme anyways.`);
+			this.add([`c|⚔Volco|Did RaginInfernape break something again? GEEZ!`, `c|⚔Arr⟦ay⟧s|Well, everything __seems__ to be working... for now.`][this.random(2)]);
 		},
 		onSwitchOut() {
-			this.add(`c|⚔Arrays|I don't feel like doing shit, RaginInfernape stop breaking shit.`);
+			if (this.random(2) === 1) {
+				this.add(`<div class="broadcast-red"><b>The server needs to restart because of a crash.</b><br />No new battles can be started until the server is done restarting.</div>`);
+				this.add(`c|⚔Volco|Dammit, something broke badly... I'll return once i fix it.`);
+			} else {
+				this.add(`c|⚔Arr⟦ay⟧s|I don't feel like fixing stuff, RaginInfernape stop breaking the server.`);
 		},
 		onFaint() {
-			this.add(`c|⚔Volco|WHO THE FUCK WILL FIX THE SERVER NOW?!`);
+			this.add([`c|⚔Volco|Well, if the server breaks... not my problem.`, `c|⚔Arr⟦ay⟧s|Oh, cool now I can be lazy again`][this.random(2)]);
 		},
 		onSourceFaint() {
-			this.add(`c|⚔Volco|I have to kill everyone so I can kill the server because shit's broke, so die.`);
+			this.add([`c|⚔Volco|Sometimes you just have to kill everyone to fix everything.`, `c|⚔Arr⟦ay⟧s|something... something... too lazy to think of a good message... something... something...`][this.random(2)]);
 		},
 	},
 
