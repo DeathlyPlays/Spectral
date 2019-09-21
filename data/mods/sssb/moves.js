@@ -468,7 +468,7 @@ let BattleMovedex = {
 		target: "any",
 		type: "Fairy",
 	},
-	
+
 	// La Rascasse
 	"distortiondestruction": {
 		id: "distortiondestruction",
