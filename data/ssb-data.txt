@@ -107,16 +107,14 @@ Signature Move: Dragon Blitz
 Jolly Nature
 
 Auroura
-(Oricorio-Sensu)
-@ Ghoulish Rag
-	- Doubles the holder's Defense and Sp. Def, and Weaknesses/Resistances of the holder are swapped.
-Ability: Unholy Preservation
-	- Magic Guard + Unaware.
-EVs: 252 HP / 4 SpD / 252 Spe
-Moves: Parting Shot, Roost, Teeter Dance
-Signature Move: Spiritual Hex
-	- Ghost Type, Special, 80 BP, 90% accuracy, 24 PP. Power is doubled if both user and opponent are burned.
-Timid Nature
+(Castform)
+@ Environmental Orb
+- 1.3x to all stats if there is a weather condition up; All weather lasts 8 turns instead of 5.
+Ability: Forecast
+EVs: 252 SpA / 4 SpD / 252 Spe
+Moves: Rain Dance, Sunny Day, Hail
+Signature Move: Climate Cast
+- Normal Type, Special, 120 BP, 100% accuracy, 24 PP. Type changes to match weather condition.
 
 Spectral Bot
 (Magearna)
