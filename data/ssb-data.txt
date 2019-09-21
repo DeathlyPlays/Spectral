@@ -147,7 +147,7 @@ Volco
 @ Barrage Vest
 	- Boosts Defense by 1.5x but prevents using Status moves.
 Ability: Emergency Actions
-	- 2x STAB and don't tell anyone that he has 1.5x Speed.
+	- Don't tell anyone that he has 1.5x Speed and 1.5x Special Attack.
 EVs: 76 HP / 212 SpA / 220 Spe
 Moves: Ice Beam/Earth Power, Giga Drain, Steam Eruption
 Signature Move: Volcanic Flares
