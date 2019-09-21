@@ -149,7 +149,7 @@ let BattleItems = {
 	"barragevest": {
 		id: "barragevest",
 		name: "Barrage Vest",
-		desc: "Boosts the defense of the holder by 1.5x. Holder cannot use status moces.",
+		desc: "Boosts the defense of the holder by 1.5x. Holder cannot use status moves.",
 		shortDesc: "Defense boost of 1.5x. Disables Status moves.",
 		onModifyDefPriority: 1,
 		onModifyDef(def) {
