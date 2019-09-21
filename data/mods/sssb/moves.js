@@ -405,6 +405,7 @@ let BattleMovedex = {
 			protect: 1,
 			distance: 1,
 		},
+		secondary: null,
 		target: "any",
 		type: "Ghost",
 	},
@@ -436,6 +437,7 @@ let BattleMovedex = {
 			protect: 1,
 			distance: 1,
 		},
+		secondary: null,
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Fleur Cannon', target);
 		},
@@ -461,11 +463,33 @@ let BattleMovedex = {
 			this.add(`c|+La Rascasse|You must be 6 feet tall to ride this ride.`);
 		},
 		flags: {protect: 1, mirror: 1},
+		secondary: null,
 		self: {
 			heal: [1, 8],
 		},
 		target: "normal",
 		type: "Dragon", // please make first hit ghost type and second hit dragon type
+	},
+	// Auroura
+	"spiritualhex": {
+		id: "spiritualhex",
+		name: "Spiritual Hex",
+		basePower: 80,
+		accuracy: 90,
+		desc: "Power doubles if both user and foe are burnt.",
+		shortDesc: "2x BP if both user and foe are burnt.",
+		pp: 15,
+		priority: 0,
+		category: "Special",
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		target: "normal",
+		type: "Ghost",
+		onBasePower(basePower, pokemon, target) {
+			if (pokemon.status === 'brn' && target.status === 'brn') {
+				return this.chainModify(2);
+			}
+		},
 	},
 };
 

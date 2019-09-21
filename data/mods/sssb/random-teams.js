@@ -176,6 +176,21 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Jolly",
 			},
 			*/
+			"*Auroura": {
+				species: "Oricorio-Sensu",
+				item: "Ghoulish Rag",
+				ability: "Unholy Preservation",
+				gender: "N",
+				moves: ["Parting Shot", "Roost", "Teeter Dance"],
+				baseSignatureMove: "spiritualhex",
+				signatureMove: "Spiritual Hex",
+				evs: {
+					hp: 252,
+					spd: 4,
+					spe: 252,
+				},
+				nature: "Timid",
+			},
 			// Drivers
 			"%Back At My Day": {
 				species: "Zapdos",

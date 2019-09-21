@@ -33,13 +33,13 @@ let BattleAbilities = {
 	"emergencyactions": {
 		id: "emergencyactions",
 		name: "Emergency Actions",
-		desc: "Grants a silent speed boost of 1.5x and STAB moves have a boost of 2x instead of 1.5x",
-		shortDesc: "Silent 1.5x spe & STAB is 2x instead of 1.5x",
+		desc: "Grants a silent speed boost of 1.5x and a silent special attack boost of 1.3x.",
+		shortDesc: "Silent 1.5x Spe & silent 1.3x SpA.",
 		onStart(pokemon) {
-			this.add('-message', pokemon.name + "'s Emergency Actions has multiplied their speed by 1.5x (silently) and boosted their STAB bonus to 2x.");
+			this.add('-message', pokemon.name + "'s Emergency Actions has multiplied their speed by 1.5x (silently) and special attack by 1.3x (silently).");
 		},
-		onModifyMove(move) {
-			move.stab = 2;
+		onModifySpA(spa) {
+			return this.chainModify(1.3);
 		},
 		onModifySpe(spe) {
 			return this.chainModify(1.5);
@@ -322,6 +322,34 @@ let BattleAbilities = {
 			if (move && move.category === 'Status') {
 				move.xfzBoosted = true;
 				return priority + 1;
+			}
+		},
+	},
+	
+	// Auroura
+	"unholypreservation": {
+		id: "unholypreservation",
+		name: "Unholy Preservation",
+		desc: "This Pokemon can only be damaged by direct attacks and ignores target's stat changes.",
+		shortDesc: "Immune to indirect attacks and ignores stat changes.",
+		onDamage(damage, target, source, effect) {
+			if (effect.effectType !== 'Move') {
+				if (effect.effectType === 'Ability') this.add('-activate', source, 'ability: ' + effect.name);
+				return false;
+			}
+		},
+		onAnyModifyBoost(boosts, target) {
+			let source = this.effectData.target;
+			if (source === target) return;
+			if (source === this.activePokemon && target === this.activeTarget) {
+				boosts['def'] = 0;
+				boosts['spd'] = 0;
+				boosts['evasion'] = 0;
+			}
+			if (target === this.activePokemon && source === this.activeTarget) {
+				boosts['atk'] = 0;
+				boosts['spa'] = 0;
+				boosts['accuracy'] = 0;
 			}
 		},
 	},
