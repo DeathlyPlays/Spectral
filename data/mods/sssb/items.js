@@ -181,15 +181,15 @@ let BattleItems = {
 			return this.chainModify(1.3);
 		},
 		onModifyAtkPriority: 2,
-		onModifyAtk(spd, pokemon) {
+		onModifyAtk(atk, pokemon) {
 			return this.chainModify(1.3);
 		},
 		onModifySpAPriority: 2,
-		onModifySpA(spd, pokemon) {
+		onModifySpA(spa, pokemon) {
 			return this.chainModify(1.3);
 		},
 		onModifySpePriority: 2,
-		onModifySpe(spd, pokemon) {
+		onModifySpe(spe, pokemon) {
 			return this.chainModify(1.3);
 		},
 		num: 538,
