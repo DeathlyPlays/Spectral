@@ -214,12 +214,12 @@ exports.commands = {
 			display += `<button class="button" name="send" value="/symbolcolor help">Symbol Color</button>`;
 			display += `<button class="button" name="send" value="/viewlogs">Viewlogs</button>`;
 			display += `</details>`;
-			if (user.group === "@" || user.group === "&" || user.group === "~") {
+			if (user.group === "@" || user.group === "&" || user.group === "~" || user.group === "☢" || user.group === "⚔") {
 				display += `<details><summary>Global Moderator (@) Commands:</summary>`;
 				display += `<button class="button" name="send" value="/clearall">Clear All</button>`;
 				display += `</details>`;
 			}
-			if (user.group === "&" || user.group === "~") {
+			if (user.group === "&" || user.group === "~" || user.group === "☢" || user.group === "⚔") {
 				display += `<details><summary>Global Leader (&) Commands:</summary>`;
 				display += `<button class="button" name="send" value="/crashlogs">Crashlogs</button>`;
 				display += `<button class="button" name="send" value="/globalclearall">Global Clear All</button>`;
@@ -231,7 +231,7 @@ exports.commands = {
 				display += `<button class="button" name="send" value="/timedgdeclare">Timed Declare</button>`;
 				display += `</details>`;
 			}
-			if (user.group === "~") {
+			if (user.group === "~" || user.group === "☢" || user.group === "⚔") {
 				display += `<details><summary>Global Administrator (~) Commands:</summary>`;
 				display += `<button class="button" name="send" value="/permabanhelp">Permaban</button>`;
 				display += `<button class="button" name="send" value="/permalockhelp">Permalock</button>`;
