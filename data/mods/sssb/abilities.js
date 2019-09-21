@@ -270,7 +270,7 @@ let BattleAbilities = {
 			}
 		},
 		onStart(pokemon) {
-			if (this.random(5)) {
+			if (this.random(5) === 1) {
 				this.useMove("wish", pokemon);
 				this.useMove("healbell", pokemon);
 			}
