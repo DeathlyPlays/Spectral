@@ -146,7 +146,7 @@ let BattleItems = {
 	},
 
 	// Volco
-	barragevest: {
+	"barragevest": {
 		id: "barragevest",
 		name: "Barrage Vest",
 		desc: "Boosts the defense of the holder by 1.5x. Holder cannot use status moces.",
