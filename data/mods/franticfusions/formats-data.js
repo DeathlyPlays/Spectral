@@ -5,18 +5,18 @@ let BattleFormatsData = {
 	darkrai: {
 		tier: "OU",
 	},
-  genesect: {
+	genesect: {
 		tier: "OU",
 	},
-  aegislash: {
+	aegislash: {
 		tier: "OU",
 	},
-  deoxysspeed: {
+	deoxysspeed: {
 		tier: "OU",
 	},
-  deoxysdefense: {
+	deoxysdefense: {
 		tier: "OU",
 	},
-  };
+};
 
 exports.BattleFormatsData = BattleFormatsData;
