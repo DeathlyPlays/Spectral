@@ -175,6 +175,7 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Jolly",
 			},
 			*/
+			/*
 			"*Auroura": {
 				species: "Oricorio-Sensu",
 				item: "Leftovers",
@@ -190,6 +191,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Timid",
 			},
+			*/
 			// Drivers
 			"%Back At My Day": {
 				species: "Zapdos",
@@ -239,6 +241,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Modest",
 			},
+			/*
 			"+Revival xFloatz": {
 				species: "Scizor-Mega",
 				item: "Leftovers",
@@ -253,6 +256,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Impish",
 			},
+			*/
 		};
 		let pool = this.shuffle(Object.keys(sets)).splice(0, 6);
 		/** @type {{[type: string]: number}} */
