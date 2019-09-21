@@ -100,7 +100,6 @@ class RandomSSSBTeams extends RandomTeams {
 				species: "Marshadow",
 				item: "Void Heart",
 				ability: "Shade Seeker",
-				gender: "M",
 				moves: ["Close Combat", "Spectral Thief", "Ice Punch"],
 				baseSignatureMove: "sharpshadow",
 				signatureMove: "Sharp Shadow",
