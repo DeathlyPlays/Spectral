@@ -150,7 +150,7 @@ Ability: Emergency Actions
 EVs: 76 HP / 212 SpA / 220 Spe
 Moves: Ice Beam/Earth Power, Giga Drain, Steam Eruption
 Signature Move: Volcanic Flares
-	- Fire Type, Special, 130 BP, 95% Accuracy, 16 PP. 30% chance of burning or boosting SpA by 1 stage.
+	- Fire Type, Special, 130 BP, 95% Accuracy, 16 PP. 30% chance of burning or boosting SpD by 1 stage.
 Modest Nature
 
 Revival xFloatz
