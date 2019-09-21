@@ -63,6 +63,7 @@ class RandomSSSBTeams extends RandomTeams {
 					atk: 0,
 				},
 				nature: "Modest",
+				shiny: true,
 			},
 			// Administrators
 			"~Roughskull": {
