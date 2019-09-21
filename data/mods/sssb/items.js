@@ -163,64 +163,6 @@ let BattleItems = {
 			}
 		},
 	},
-	
-	// Auroura
-	"ghoulishrag": {
-		id: "ghoulishrag",
-		name: "Ghoulish Rag",
-		desc: "Inverts weaknesses and resistances and doubles Defense and Special Defense.",
-		shortDesc: "Inverts weaknesses/resistances & 2x Def/SpD.",
-		onModifyDefPriority: 6,
-		onModifyDef(def) {
-			return this.chainModify(2);
-		},
-		onModifySpDPriority: 5,
-		onModifySpD(spd) {
-			return this.chainModify(2);
-		},
-		onSourceModifyAtkPriority: 6,
-		onSourceModifyAtk(atk, attacker, defender, move) {
-			if (move.type === 'Dark' || move.type === 'Electric' || move.type === 'Ghost' || move.type === 'Ice' || move.type === 'Rock') {
-				this.debug('Ghoulish Rag weaken');
-				return this.chainModify(0.25);
-			}
-		},
-		onSourceModifySpAPriority: 5,
-		onSourceModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Dark' || move.type === 'Electric' || move.type === 'Ghost' || move.type === 'Ice' || move.type === 'Rock') {
-				this.debug('Ghoulish Rag weaken');
-				return this.chainModify(0.25);
-			}
-		},
-		onSourceModifyAtkPriority: 6,
-		onSourceModifyAtk(atk, attacker, defender, move) {
-			if (move.type === 'Bug') {
-				this.debug('Ghoulish Rag strengthen');
-				return this.chainModify(16);
-			}
-		},
-		onSourceModifySpAPriority: 5,
-		onSourceModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Bug') {
-				this.debug('Ghoulish Rag strengthen');
-				return this.chainModify(16);
-			}
-		},
-		onSourceModifyAtkPriority: 6,
-		onSourceModifyAtk(atk, attacker, defender, move) {
-			if (move.type === 'Grass' || move.type === 'Poison') {
-				this.debug('Ghoulish Rag strengthen');
-				return this.chainModify(4);
-			}
-		},
-		onSourceModifySpAPriority: 5,
-		onSourceModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Grass' || move.type === 'Poison') {
-				this.debug('Ghoulish Rag strengthen');
-				return this.chainModify(4);
-			}
-		},
-	},
 };
 
 exports.BattleItems = BattleItems;
