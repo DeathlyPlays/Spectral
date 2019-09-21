@@ -105,7 +105,7 @@ let BattleMovedex = {
 	// Chandie
 	"sharpshadow": {
 		accuracy: 100,
-		basePower: 40,
+		basePower: 60,
 		category: "Physical",
 		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit or Wimp Out Abilities.",
 		shortDesc: "User switches out after damaging the target.",
@@ -134,7 +134,7 @@ let BattleMovedex = {
 		accuracy: true,
 		isZ: "voidheart",
 		pp: 1,
-		priority: -1,
+		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onPrepareHit(target, source) {
 			this.add('-anim', target, 'Black Hole Eclipse', target);
