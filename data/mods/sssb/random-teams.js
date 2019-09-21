@@ -158,7 +158,6 @@ class RandomSSSBTeams extends RandomTeams {
 				nature: "Timid",
 			},
 			// Bots
-			/*
 			"*Spectral Bot": {
 				species: "Magearna",
 				item: "Assault Vest",
@@ -174,24 +173,21 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
-			*/
-			/*
 			"*Auroura": {
-				species: "Oricorio-Sensu",
-				item: "Leftovers",
-				ability: "Unholy Preservation",
-				gender: "N",
-				moves: ["Parting Shot", "Roost", "Teeter Dance"],
-				baseSignatureMove: "spiritualhex",
-				signatureMove: "Spiritual Hex",
+				species: "Castform",
+				item: "Environmental Orb",
+				ability: "Forecast",
+				gender: "F",
+				moves: ["Rain Dance", "Sunny Day", "Hail"],
+				baseSignatureMove: "climatecast",
+				signatureMove: "Climate Cast",
 				evs: {
-					hp: 252,
+					spa: 252,
 					spd: 4,
 					spe: 252,
 				},
 				nature: "Timid",
 			},
-			*/
 			// Drivers
 			"%Back At My Day": {
 				species: "Zapdos",
