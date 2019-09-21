@@ -33,15 +33,16 @@ Signature Move: 16 Years
 Jolly Nature
 
 Chandie
-(Male Marshadow)
 @ Void Heart
 	- When used with Sharp Shadow, allows Marshadow to use Embrace the Void.
 Ability: Shade Seeker
 	- Unaware + If the user or opposing Pokémon have stat boosts, this Pokémon's Ghost moves have +1 priority.
 EVs: 252 Atk / 4 SpD / 252 Spe 
 Moves: Close Combat, Spectral Thief, Ice Punch
+Move Change: Spectral Thief
+	- Ghost Type, Physical, 90BP, never misses, 16 PP. Resets all of the target's stat stages to 0.
 Signature Move: Sharp Shadow
-	- Ghost Type, Physical, 40 BP, never misses, 32 PP. User switches out after damaging the target.
+	- Ghost Type, Physical, 60 BP, never misses, 32 PP. User switches out after damaging the target.
 Z-Move: Embrace the Void
 	- Ghost Type, Physical, 120 BP, never misses, 1 PP, -1 Priority. Sets up Magic Room, switches out the opposing Pokémon.
 Adamant Nature
