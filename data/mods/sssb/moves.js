@@ -524,6 +524,17 @@ let BattleMovedex = {
 				break;
 			}
 		},
+		onPrepareHit(target, source, move) {
+			if (move.type === 'Normal') {
+				this.add('-anim', source, 'Swift', target);
+			} else if (move.type === 'Fire') {
+				this.add('-anim', source, 'Searing Shot', target);
+			} else if (move.type === 'Water') {
+				this.add('-anim', source, 'Brine', target);
+			} else if (move.type === 'Ice') {
+				this.add('-anim', source, 'Icy Wind', target);
+			}
+		},
 	},
 };
 
