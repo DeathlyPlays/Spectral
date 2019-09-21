@@ -177,7 +177,7 @@ class RandomSSSBTeams extends RandomTeams {
 			*/
 			"*Auroura": {
 				species: "Oricorio-Sensu",
-				item: "Ghoulish Rag",
+				item: "Leftovers",
 				ability: "Unholy Preservation",
 				gender: "N",
 				moves: ["Parting Shot", "Roost", "Teeter Dance"],
