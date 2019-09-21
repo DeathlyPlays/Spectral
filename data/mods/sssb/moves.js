@@ -486,13 +486,16 @@ let BattleMovedex = {
 			this.add('-anim', source, 'Dragon Pulse', target);
 			this.add(`c|+La Rascasse|You must be 6 feet tall to ride this ride.`);
 		},
+		onModifyMove(move) {
+			if (move.hit > 1) move.type = 'Dragon';
+		},
 		flags: {protect: 1, mirror: 1},
 		secondary: null,
 		self: {
 			heal: [1, 8],
 		},
 		target: "normal",
-		type: "Dragon", // please make first hit ghost type and second hit dragon type
+		type: "Ghost",
 	},
 	// Auroura
 	"climatecast": {
