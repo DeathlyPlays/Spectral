@@ -109,12 +109,13 @@ Jolly Nature
 Auroura
 (Castform)
 @ Environmental Orb
-- 1.3x to all stats if there is a weather condition up; All weather lasts 8 turns instead of 5.
+- 1.3x to all stats; Weather lasts 8 turns instead of 5.
 Ability: Forecast
 EVs: 252 SpA / 4 SpD / 252 Spe
 Moves: Rain Dance, Sunny Day, Hail
 Signature Move: Climate Cast
 - Normal Type, Special, 120 BP, 100% accuracy, 24 PP. Type changes to match weather condition.
+Timid Nature
 
 Spectral Bot
 (Magearna)
