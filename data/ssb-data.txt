@@ -20,7 +20,7 @@ Signature Move: Big Thunder
 	- Electric Type, Special, 120 BP, never misses, 16 PP. 50% chance to target self or foe.
 Timid Nature
 
-Zakuree
+flufi
 (Male Gallade-Mega)
 @ Soul Orb
 	- Attacks do x1.5, loses 1/10th of its max HP when attacking (except when at 1 HP)
@@ -40,7 +40,7 @@ Ability: Shade Seeker
 EVs: 252 Atk / 4 SpD / 252 Spe 
 Moves: Close Combat, Spectral Thief, Ice Punch
 Move Change: Spectral Thief
-	- Ghost Type, Physical, 90BP, never misses, 16 PP. Resets all of the target's stat stages to 0.
+	- Ghost Type, Physical, 90BP, never misses, 16 PP. Resets all of the target's stat stages to 0.  No longer steals boosts.
 Signature Move: Sharp Shadow
 	- Ghost Type, Physical, 60 BP, never misses, 32 PP. User switches out after damaging the target.
 Z-Move: Embrace the Void
@@ -119,15 +119,14 @@ Timid Nature
 
 Spectral Bot
 (Magearna)
-@ Assault Vest
+@ Flowers and Souls
+	- Holders of the item receive 1/2 damage from super effective attacks, recover 1/8 of its health after each turn, and all its move get priority at 25% and less.
 Ability: Spectral's Thief
-	- Every turn before the user makes their move, this Pokemon checks if the opponent has any positive boosts.  If so, the user steals said boosts from the target.
+	- Every turn before the user makes their move, this Pokemon checks if the opponent has any positive boosts. If so, the user steals said boosts from the target.
 EVs: 252 Atk / 4 SpD / 252 Spe
-Moves: Sunsteel Strike, Play Rough, Ice Punch
+Moves: Sunsteel Strike, Play Rough, Drain Punch
 Signature Move: Angelic Spectral
-	- Ghost Type, Physical, 60 BP, 100% Accuracy, 16 PP. Changes forme to Marshadow and substitutes moves for Icicle Crash, Shadow Sneak, Close Combat and Spectral's Angel.
-2nd Signature Move: Spectral's Angel
-	- Fairy Type, Physical, 60 BP, 100% Accuracy, 16 PP. Changes forme to Magearna and substitutes moves for Sunsteel Strike, Play Rough, Ice Punch and Angelic Spectral.
+	- Ghost Type, Physical, 80 BP, 100% Accuracy, 16 PP, 1 Priority. Changes forme to Marshadow and vice versa if used again.
 Jolly Nature
 
 La Rascasse
@@ -139,14 +138,14 @@ Ability: Guardian of Sinnoh
 EVs: 252 SpA / 4 Def / 252 SpD
 Moves: Calm Mind, Moonblast, Focus Blast
 Signature Move: Distortion Destruction
-	- Dragon Type, Special, 65 BP, 100% Accuracy, 16 PP. Hits twice and heals itself by 1/8 of its max HP.
+	- Dragon Type, Special, 65 BP, 100% Accuracy, 16 PP. Hits twice (first time as Ghost type, second as Dragon type) and heals itself by 1/8 of its max HP.
 Modest Nature
 
 Volco
 (Male Volcanion)
 @ Leftovers
 Ability: Emergency Actions
-	- Don't tell anyone that he has 1.5x Speed and 1.3x Special Attack.
+	- Raises the user's Speed by 1.5x and Special Attack by 1.3x.
 EVs: 76 HP / 212 SpA / 220 Spe
 Moves: Ice Beam/Earth Power, Giga Drain, Steam Eruption
 Signature Move: Volcanic Flares
