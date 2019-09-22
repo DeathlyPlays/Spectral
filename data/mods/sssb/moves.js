@@ -112,8 +112,7 @@ let BattleMovedex = {
 		selfSwitch: true,
 		secondary: null,
 		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Sucker Punch', target);
-     		this.add('-anim', source, 'Shadow Strike', target);
+			this.add('-anim', target, 'Sucker Punch', target);
 		},
 		target: "normal",
 		type: "Ghost",
@@ -135,7 +134,6 @@ let BattleMovedex = {
 		onPrepareHit(target, source) {
 			this.add('-anim', target, 'Black Hole Eclipse', target);
 			this.add('-anim', target, 'Dark Void', target);
-			this.add('-anim', target, 'Acid Downpour', target);
 		},
 		pseudoWeather: "magicroom",
 		secondary: null,
@@ -265,7 +263,7 @@ let BattleMovedex = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMovePower: 120,
+		zMovePower: 200,
 		contestType: "Beautiful",
 	},
 
@@ -278,7 +276,7 @@ let BattleMovedex = {
 		desc: "Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.",
 		shortDesc: "A variety of curses begin.",
 		pp: 20,
-		priority: 1,
+		priority: 2,
 		category: "Special",
 		onHit(target, source) {
 			let targetBoosts = {};
@@ -378,7 +376,7 @@ let BattleMovedex = {
 		name: "Angelic Spectral",
 		pp: 10,
 		priority: 1,
-		basePower: 80,
+		basePower: 110,
 		onHit(target, pokemon, move) {
 			if (pokemon.baseTemplate.baseSpecies === 'Magearna' && !pokemon.transformed) {
 				move.willChangeForme = true;
@@ -390,7 +388,7 @@ let BattleMovedex = {
 			}
 		},
 		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Spectral Thief', target);
+			this.add('-anim', source, 'Boomburst', target);
 		},
 		flags: {
 			protect: 1,
