@@ -326,10 +326,6 @@ let BattleMovedex = {
 				volatileStatus: "flinch",
 			},
 		],
-		self: {
-			chance: 10,
-			volatileStatus: "confusion",
-		},
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Black Hole Eclipse', target);
 			this.add(`c|~Tactician Loki|I love sending people into a tizzy.`);
@@ -345,8 +341,8 @@ let BattleMovedex = {
 		name: "Dragon Blitz",
 		basePower: 80,
 		accuracy: 100,
-		desc: "Nearly always goes first and has 33% chance of boosting Atk by 1 stage.",
-		shortDesc: "Almost always goes first and 33% chance of boosting Atk by 1 stage.",
+		desc: "Nearly always goes first and has 33% chance of boosting Attack by 1 stage, and does neutral damage towards Fairies.",
+		shortDesc: "33% chance of boosting Atk by 1 stage, neutral damage to Fairy types.",
 		pp: 5,
 		priority: 2,
 		category: "Physical",
