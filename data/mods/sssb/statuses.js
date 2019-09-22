@@ -80,16 +80,16 @@ let BattleStatuses = {
 	tacticianloki: {
 		noCopy: true,
 		onStart() {
-			this.add(`c|@Tactician Loki|Did you...need something?~`);
+			this.add(`c|~Tactician Loki|Did you...need something?~`);
 		},
 		onSwitchOut() {
-			this.add(`c|@Tactician Loki|It's your turn dear~`);
+			this.add(`c|~Tactician Loki|It's your turn dear~`);
 		},
 		onFaint() {
-			this.add(`c|@Tactician Loki|No...more...`);
+			this.add(`c|~Tactician Loki|No...more...`);
 		},
 		onSourceFaint() {
-			this.add(`c|@Tactician Loki|Darn, someone else who couldn't handle me, what a pity~`);
+			this.add(`c|~Tactician Loki|Darn, someone else who couldn't handle me, what a pity~`);
 		},
 	},
 
