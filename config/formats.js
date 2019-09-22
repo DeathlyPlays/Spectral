@@ -2495,6 +2495,29 @@ let Formats = [
 		},
 	},
 	{
+		name: "[Gen 7] Super Staff Mons",
+		mod: "ssm",
+		desc: "A 'Super Staff Bros' free-for-all. Anyone may submit entries and as many as they'd like, and they will be inspected and voted on.",
+		ruleset: ["Sleep Clause Mod", "Cancel Mod", "HP Percentage Mod"],
+		onSwitchIn(pokemon) {
+			let name = toID(pokemon.illusion ? pokemon.illusion.name : pokemon.name);
+			if (this.getTemplate(name).exists) {
+				// Certain pokemon have volatiles named after their speciesid
+				// To prevent overwriting those, and to prevent accidentaly leaking
+				// that a pokemon is on a team through the onStart even triggering
+				// at the start of a match, users with pokemon names will need their
+				// statuse's to end in "user".
+				name = /** @type {ID} */(name + 'user');
+			}
+			// Add the mon's status effect to it as a volatile.
+			let status = this.getEffect(name);
+			if (status && status.exists) {
+				pokemon.addVolatile(name, pokemon);
+			}
+		},
+		team: "randomSSM",
+	},
+	{
 		name: "[Gen 7] Swapping Powers",
 		desc: `Power trick that's constantly there, not only swapping Attack and Defense, but Special Attack and Special Defense also.`,
 		threads: [
