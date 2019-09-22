@@ -264,7 +264,7 @@ let BattleMovedex = {
 	"radiationstench": {
 		accuracy: 100,
 		basePower: 120,
-		category: "Special",
+		category: "Physical",
 		desc: "Power doubles if the target is poisoned, and has a 30% chance to cause the target to flinch.",
 		shortDesc: "Power doubles if the target is poisoned. 30% chance to flinch.",
 		id: "radiationstench",
