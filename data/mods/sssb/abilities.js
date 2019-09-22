@@ -46,7 +46,7 @@ let BattleAbilities = {
 		},
 	},
 
-	// Zakuree
+	// flufi
 	"heartofsteel": {
 		id: "heartofsteel",
 		name: "Heart of Steel",
@@ -232,20 +232,8 @@ let BattleAbilities = {
 		desc: "Before every move, the user checks if the user has any positive boosts, if so, the user steals said stats.",
 		shortDesc: "The user steals the target's boosts, if any, before every move.",
 		onBeforeMovePriority: 0.5,
-		onBeforeMove(attacker, defender, move) {
-			if (!defender) return;
-			let steal = [];
-			for (let stats in defender.boosts) {
-				for (const target of defender.side.foe.active) {
-					if (defender.boosts[stats] > 0 || target.boosts[stats] > 0) {
-						steal.push(stats);
-						defender.boosts[stats] = 0;
-					}
-				}
-				if (steal.length > 0) {
-					this.boost(steal);
-				}
-			}
+		onBeforeMove(move) {
+			move.stealsBoosts = true;
 		},
 	},
 
@@ -322,34 +310,6 @@ let BattleAbilities = {
 			if (move && move.category === 'Status') {
 				move.xfzBoosted = true;
 				return priority + 1;
-			}
-		},
-	},
-
-	// Auroura
-	"unholypreservation": {
-		id: "unholypreservation",
-		name: "Unholy Preservation",
-		desc: "This Pokemon can only be damaged by direct attacks and ignores target's stat changes.",
-		shortDesc: "Immune to indirect attacks and ignores stat changes.",
-		onDamage(damage, target, source, effect) {
-			if (effect.effectType !== 'Move') {
-				if (effect.effectType === 'Ability') this.add('-activate', source, 'ability: ' + effect.name);
-				return false;
-			}
-		},
-		onAnyModifyBoost(boosts, target) {
-			let source = this.effectData.target;
-			if (source === target) return;
-			if (source === this.activePokemon && target === this.activeTarget) {
-				boosts['def'] = 0;
-				boosts['spd'] = 0;
-				boosts['evasion'] = 0;
-			}
-			if (target === this.activePokemon && source === this.activeTarget) {
-				boosts['atk'] = 0;
-				boosts['spa'] = 0;
-				boosts['accuracy'] = 0;
 			}
 		},
 	},

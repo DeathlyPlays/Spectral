@@ -80,16 +80,16 @@ let BattleStatuses = {
 	tacticianloki: {
 		noCopy: true,
 		onStart() {
-			this.add(`c|@Tactician Loki|Did you...need something?~`);
+			this.add(`c|~Tactician Loki|Did you...need something?~`);
 		},
 		onSwitchOut() {
-			this.add(`c|@Tactician Loki|It's your turn dear~`);
+			this.add(`c|~Tactician Loki|It's your turn dear~`);
 		},
 		onFaint() {
-			this.add(`c|@Tactician Loki|No...more...`);
+			this.add(`c|~Tactician Loki|No...more...`);
 		},
 		onSourceFaint() {
-			this.add(`c|@Tactician Loki|Darn, someone else who couldn't handle me, what a pity~`);
+			this.add(`c|~Tactician Loki|Darn, someone else who couldn't handle me, what a pity~`);
 		},
 	},
 
@@ -108,6 +108,7 @@ let BattleStatuses = {
 			this.add(`c|%Back At My Day|Guess I gotta nerf myself now.`);
 		},
 	},
+
 	revivalclair: {
 		noCopy: true,
 		onStart() {
@@ -123,6 +124,7 @@ let BattleStatuses = {
 			this.add(`c|+Revival Clair|Good game, too easy.`);
 		},
 	},
+
 	larascasse: {
 		noCopy: true,
 		onStart() {
@@ -136,6 +138,19 @@ let BattleStatuses = {
 		},
 		onSourceFaint() {
 			this.add(`c|+La Rascasse|Have you told John I like my one-timers in a certain spot yet?`);
+		},
+	},
+
+	chandie: {
+		noCopy: true,
+		onModifyMove(move) {
+			if (move.id === "spectralthief") {
+				move.onHit = function (target) {
+					target.clearBoosts();
+					this.add('-clearboost', target);
+				};
+				move.stealsBoosts = false;
+			}
 		},
 	},
 
