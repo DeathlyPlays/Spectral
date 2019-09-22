@@ -145,7 +145,7 @@ Volco
 (Male Volcanion)
 @ Leftovers
 Ability: Emergency Actions
-	- Raises the user's Speed by 1.5x and Special Attack by 1.3x.
+	- Raises the user's Speed by 1.5x.
 EVs: 76 HP / 212 SpA / 220 Spe
 Moves: Ice Beam/Earth Power, Giga Drain, Steam Eruption
 Signature Move: Volcanic Flares
