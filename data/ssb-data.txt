@@ -92,7 +92,7 @@ Ability: Chaotic Aura
 EVs: 4 Def / 252 SpA / 252 Spe
 Moves: Me First, Spiky Shield, Ice Beam
 Signature Move: Blooming Chaos
-	- Dark Type, Special, 80 BP, never misses, 32 PP, 1 Priority. Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
+	- Dark Type, Special, 80 BP, never misses, 32 PP, 1 Priority. Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to confuse opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
 Timid Nature
 
 Revival Clair
@@ -138,7 +138,7 @@ Ability: Guardian of Sinnoh
 EVs: 252 SpA / 4 Def / 252 SpD
 Moves: Calm Mind, Moonblast, Focus Blast
 Signature Move: Distortion Destruction
-	- Dragon Type, Special, 65 BP, 100% Accuracy, 16 PP. Hits twice (first time as Ghost type, second as Dragon type) and heals itself by 1/8 of its max HP.
+	- Special, 65 BP, 100% Accuracy, 16 PP. Hits twice (first time as Ghost Type, second as Dragon Type) and heals itself by 1/16 its max HP per hit.
 Modest Nature
 
 Volco
