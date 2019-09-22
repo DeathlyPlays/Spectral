@@ -138,7 +138,7 @@ let BattleStatuses = {
 			this.add(`c|+La Rascasse|Have you told John I like my one-timers in a certain spot yet?`);
 		},
 	},
-	
+
 	// Modified Pre-existing Statuses
 	raindance: {
 		inherit: true,

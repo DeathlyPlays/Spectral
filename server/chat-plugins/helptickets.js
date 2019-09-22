@@ -1328,7 +1328,7 @@ let commands = {
 			notifyStaff();
 			notifyStaff(true);
 
-			this.globalModlog(`TICKETBAN`, targetUser || userid, ` by ${user.name}${target}`);
+			this.globalModlog(`TICKETBAN`, targetUser || userid, ` by ${user.name}${(target ? `: ${target}` : ``)}`);
 			return true;
 		},
 		banhelp: [`/helpticket ban [user], (reason) - Bans a user from creating tickets for 2 days. Requires: % @ & ~`],
@@ -1358,7 +1358,7 @@ let commands = {
 			writeTickets();
 
 			this.addModAction(`${affected.join(', ')} ${Chat.plural(affected.length, "were", "was")} ticket unbanned by ${user.name}.`);
-			this.globalModlog("UNTICKETBAN", target, `by ${user.userid}`);
+			this.globalModlog("UNTICKETBAN", target, ` by ${user.userid}`);
 			if (targetUser) targetUser.popup(`${user.name} has ticket unbanned you.`);
 		},
 		unbanhelp: [`/helpticket unban [user] - Ticket unbans a user. Requires: % @ & ~`],

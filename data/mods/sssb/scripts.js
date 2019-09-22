@@ -15,6 +15,7 @@ let BattleScripts = {
 			disabled: false,
 			used: false,
 		};
+		Monitor.adminlog(index);
 		pokemon.moveset[index] = sketchedMove;
 		pokemon.moves[index] = move.id;
 	},
