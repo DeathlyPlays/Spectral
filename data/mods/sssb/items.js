@@ -2,6 +2,7 @@
 
 /**@type {{[k: string]: ItemData}} */
 let BattleItems = {
+	// Horrific17
 	"arcaniumz": {
 		id: "arcaniumz",
 		name: "Arcanium Z",
@@ -13,6 +14,7 @@ let BattleItems = {
 		desc: "If held by an Arcanine with Meteor Charge, it can use Eternal Flames.",
 	},
 
+	// Chandie
 	"voidheart": {
 		id: "voidheart",
 		name: "Void Heart",
@@ -25,6 +27,7 @@ let BattleItems = {
 		desc: "If held by a Marshadow with Sharp Shadow, it can use Embrace the Void.",
 	},
 
+	// flufi
 	"soulorb": {
 		id: "soulorb",
 		name: "Soul Orb",
@@ -40,6 +43,7 @@ let BattleItems = {
 		desc: "Holder's attacks do 1.5x damage, and it loses 1/10 its max HP after the attack. At 1 HP, the user takes no recoil.",
 	},
 
+	// Roughskull
 	"crownoftms": {
 		id: "crownoftms",
 		name: "Crown of TMS",
@@ -176,6 +180,31 @@ let BattleItems = {
 		num: 538,
 		gen: 5,
 		desc: "Weather lasts 8 turns instead of 5; x1.3 to all stats.",
+	},
+
+	// Spectral Bot
+	"flowersandsouls": {
+		id: "flowersandsouls",
+		name: "Flowers and Souls",
+		onSourceModifyDamage(damage, source, target, move) {
+			if (target.getMoveHitData(move).typeMod > 0) {
+				this.debug('-50% reduction');
+				this.add(`|html|${Server.nameColor("Spectral Bot", true, true)} did not want to be hit supereffectively with it's Flowers and Souls, so it decided to just let you hit for neutral damage.`);
+				return this.chainModify(0.5);
+			}
+		},
+		onResidualOrder: 5,
+		onResidualSubOrder: 2,
+		onResidual(pokemon) {
+			this.heal(pokemon.maxhp / 8);
+		},
+		onModifyPriority(priority, pokemon, target, move) {
+			if (pokemon.hp <= pokemon.maxhp / 4) {
+				return move.priority = 1;
+			}
+		},
+		desc: "The holder weakens supereffective attacks by 1/2 (neutral damage), the user recovers 1/8 of their maximum HP every turn, and if the user's HP is less than 1/4 of max HP the user's moves' priority becomes +1",
+		shortDesc: "Neutralizes supereffective attacks, heals by 1/8 of max HP, and if HP is < 1/4, move's get +1 priority.",
 	},
 };
 
