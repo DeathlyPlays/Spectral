@@ -268,41 +268,6 @@ let BattleAbilities = {
 		name: "XFZ",
 		desc: "This Pokemon is immune to Fire attacks and does 1.5x damage with Steel attacks if hit by a Fire attack. Status moves gain +1 priority.",
 		shortDesc: "Fire immunity, 1.5x damage with Steel if hit by Fire, +1 priority to Status.",
-		onTryHit(target, source, move) {
-			if (target !== source && move.type === 'Fire') {
-				move.accuracy = true;
-				if (!target.addVolatile('xfz')) {
-					this.add('-immune', target, '[from] ability: XFZ');
-				}
-				return null;
-			}
-		},
-		onEnd(pokemon) {
-			pokemon.removeVolatile('xfz');
-		},
-		effect: {
-			noCopy: true, // doesn't get copied by Baton Pass
-			onStart(target) {
-				this.add('-start', target, 'ability: XFZ');
-			},
-			onModifyAtkPriority: 5,
-			onModifyAtk(atk, attacker, defender, move) {
-				if (move.type === 'Steel') {
-					this.debug('XFZ boost');
-					return this.chainModify(1.5);
-				}
-			},
-			onModifySpAPriority: 5,
-			onModifySpA(atk, attacker, defender, move) {
-				if (move.type === 'Steel') {
-					this.debug('XFZ boost');
-					return this.chainModify(1.5);
-				}
-			},
-			onEnd(target) {
-				this.add('-end', target, 'ability: XFZ', '[silent]');
-			},
-		},
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.category === 'Status') {
 				move.xfzBoosted = true;
