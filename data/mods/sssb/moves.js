@@ -112,7 +112,8 @@ let BattleMovedex = {
 		selfSwitch: true,
 		secondary: null,
 		onPrepareHit(target, source) {
-			this.add('-anim', target, 'Sucker Punch', target);
+			this.add('-anim', source, 'Sucker Punch', target);
+     		this.add('-anim', source, 'Shadow Strike', target);
 		},
 		target: "normal",
 		type: "Ghost",
@@ -134,6 +135,7 @@ let BattleMovedex = {
 		onPrepareHit(target, source) {
 			this.add('-anim', target, 'Black Hole Eclipse', target);
 			this.add('-anim', target, 'Dark Void', target);
+			this.add('-anim', target, 'Acid Downpour', target);
 		},
 		pseudoWeather: "magicroom",
 		secondary: null,
