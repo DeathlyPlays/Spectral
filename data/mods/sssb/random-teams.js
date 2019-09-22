@@ -81,7 +81,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Adamant",
 			},
-			"~Zakuree": {
+			"~flufi": {
 				species: "Gallade-Mega",
 				item: "Soul Orb",
 				ability: "Heart of Steel",
@@ -95,6 +95,22 @@ class RandomSSSBTeams extends RandomTeams {
 					spe: 252,
 				},
 				nature: "Jolly",
+			},
+			"~Tactician Loki": {
+				species: "Liepard",
+				item: "Thokk",
+				ability: "Chaotic Aura",
+				shiny: true,
+				gender: "F",
+				moves: ["Me First", "Ice Beam", "Spiky Shield"],
+				baseSignatureMove: "bloomingchaos",
+				signatureMove: "Blooming Chaos",
+				evs: {
+					spa: 252,
+					spe: 252,
+					def: 4,
+				},
+				nature: "Timid",
 			},
 			// Leaders
 			"&Chandie": {
@@ -142,30 +158,13 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
-			"@Tactician Loki": {
-				species: "Liepard",
-				item: "Thokk",
-				ability: "Chaotic Aura",
-				shiny: true,
-				gender: "F",
-				moves: ["Me First", "Ice Beam", "Spiky Shield"],
-				baseSignatureMove: "bloomingchaos",
-				signatureMove: "Blooming Chaos",
-				evs: {
-					spa: 252,
-					spe: 252,
-					def: 4,
-				},
-				nature: "Timid",
-			},
 			// Bots
-			/*
 			"*Spectral Bot": {
 				species: "Magearna",
-				item: "Assault Vest",
+				item: "Flowers and Souls",
 				ability: "Spectral's Thief",
 				gender: "N",
-				moves: ["Play Rough", "Sunsteel Strike", "Ice Punch"],
+				moves: ["Play Rough", "Sunsteel Strike", "Drain Punch"],
 				baseSignatureMove: "angelicspectral",
 				signatureMove: "Angelic Spectral",
 				evs: {
@@ -175,7 +174,6 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
-			*/
 			"*Auroura": {
 				species: "Castform",
 				item: "Environmental Orb",
