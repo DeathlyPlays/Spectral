@@ -80,7 +80,7 @@ Ability: Venom Shock
 EVs: 252 HP / 252 Atk / 4 Spe
 Moves: Sucker Punch, Flame Charge, Thousand Waves
 Signature Move: Radiation Stench
-	- Poison Type, Physical, 120 BP, 85% accuracy, 16 PP. Doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch.
+	- Poison Type, Physical, 120 BP, 100% accuracy, 16 PP. Doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch, supresses the opponents ability.
 Adamant Nature
 
 Tactician Loki
@@ -92,7 +92,7 @@ Ability: Chaotic Aura
 EVs: 4 Def / 252 SpA / 252 Spe
 Moves: Copycat, Spiky Shield, Ice Beam
 Signature Move: Blooming Chaos
-	- Dark Type, Special, 100 BP, never misses, 32 PP. Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
+	- Dark Type, Special, 80 BP, never misses, 32 PP, 1 Priority. Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
 Timid Nature
 
 Revival Clair
