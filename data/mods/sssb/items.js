@@ -189,7 +189,6 @@ let BattleItems = {
 		onSourceModifyDamage(damage, source, target, move) {
 			if (target.getMoveHitData(move).typeMod > 0) {
 				this.debug('-50% reduction');
-				this.add(`|html|${Server.nameColor("Spectral Bot", true, true)} did not want to be hit supereffectively with it's Flowers and Souls, so it decided to just let you hit for neutral damage.`);
 				return this.chainModify(0.5);
 			}
 		},
