@@ -231,8 +231,8 @@ let BattleAbilities = {
 		name: "Spectral's Thief",
 		desc: "Before every move, the user checks if the user has any positive boosts, if so, the user steals said stats.",
 		shortDesc: "The user steals the target's boosts, if any, before every move.",
-		onBeforeMovePriority: 0.5,
-		onBeforeMove(move) {
+		onBeforeMovePriority: 12,
+		onModifyMove(move) {
 			move.stealsBoosts = true;
 		},
 	},
