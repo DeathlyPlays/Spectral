@@ -77,8 +77,8 @@ Roughskull
 	- On switch-in, raises the user's Attack or Special Attack based on the target's weaker Defense.  Also, on switch-in, the user raises its Defense or Special Defense to protect itself from the target's stronger Attack stat.  If this Pokemon is at full HP, the opponent's Attack damage is halved
 Ability: Venom Shock
 	- Every move has a 30% chance to either badly poison or paralyze its target.
-EVs: 252 HP / 252 Atk / 4 Spe
-Moves: Sucker Punch, Flame Charge, Thousand Waves
+EVs: 252 HP / 252 Atk / 4 SpD
+Moves: Sucker Punch, Strength Sap, Thousand Waves
 Signature Move: Radiation Stench
 	- Poison Type, Physical, 120 BP, 100% accuracy, 16 PP. Doubles the damage if the target is (badly) poisoned, 30% chance to make the target flinch, supresses the opponents ability.
 Adamant Nature
@@ -90,7 +90,7 @@ Tactician Loki
 Ability: Chaotic Aura
 	- Status moves receive +1 priority, a random stat is raised every turn by two stages and one random stat is lowered by one stage at the end of every turn.
 EVs: 4 Def / 252 SpA / 252 Spe
-Moves: Copycat, Spiky Shield, Ice Beam
+Moves: Me First, Spiky Shield, Ice Beam
 Signature Move: Blooming Chaos
 	- Dark Type, Special, 80 BP, never misses, 32 PP, 1 Priority. Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
 Timid Nature
