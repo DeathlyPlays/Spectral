@@ -240,7 +240,6 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Modest",
 			},
-			/*
 			"+Revival xFloatz": {
 				species: "Scizor-Mega",
 				item: "Leftovers",
@@ -255,7 +254,6 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Impish",
 			},
-			*/
 		};
 		let pool = this.shuffle(Object.keys(sets));
 		/** @type {{[type: string]: number}} */
