@@ -381,11 +381,14 @@ let BattleMovedex = {
 		pp: 10,
 		priority: 1,
 		basePower: 80,
-		onHit(source) {
-			if (source.template.speciesid === "magearna") {
-				this.add("-formechange", source, "Marshadow", "[msg]");
-			} else {
-				this.add("-formechange", source, "Magearna", "[msg]");
+		onHit(target, pokemon, move) {
+			if (pokemon.baseTemplate.baseSpecies === 'Magearna' && !pokemon.transformed) {
+				move.willChangeForme = true;
+			}
+		},
+		onAfterMoveSecondarySelf(pokemon, target, move) {
+			if (move.willChangeForme) {
+				pokemon.formeChange(pokemon.template.speciesid === 'marshadow' ? 'Magearna' : 'Marshadow', this.effect, false, '[msg]');
 			}
 		},
 		onPrepareHit(target, source) {
