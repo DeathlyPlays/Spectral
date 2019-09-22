@@ -92,7 +92,7 @@ Ability: Chaotic Aura
 EVs: 4 Def / 252 SpA / 252 Spe
 Moves: Me First, Spiky Shield, Ice Beam
 Signature Move: Blooming Chaos
-	- Dark Type, Special, 80 BP, never misses, 32 PP, 1 Priority. Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to confuse opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
+	- Dark Type, Special, 80 BP, never misses, 32 PP, 2 Priority. Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to confuse opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.
 Timid Nature
 
 Revival Clair
@@ -126,7 +126,7 @@ Ability: Spectral's Thief
 EVs: 252 Atk / 4 SpD / 252 Spe
 Moves: Sunsteel Strike, Play Rough, Drain Punch
 Signature Move: Angelic Spectral
-	- Ghost Type, Physical, 80 BP, 100% Accuracy, 16 PP, 1 Priority. Changes forme to Marshadow and vice versa if used again.
+	- Ghost Type, Physical, 110 BP, 100% Accuracy, 16 PP, 1 Priority. Changes forme to Marshadow and vice versa if used again.
 Jolly Nature
 
 La Rascasse
