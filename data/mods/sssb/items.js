@@ -200,7 +200,7 @@ let BattleItems = {
 		},
 		onModifyPriority(priority, pokemon, target, move) {
 			if (pokemon.hp <= pokemon.maxhp / 4) {
-				return move.priority = 1;
+				move.priority = 1;
 			}
 		},
 		desc: "The holder weakens supereffective attacks by 1/2 (neutral damage), the user recovers 1/8 of their maximum HP every turn, and if the user's HP is less than 1/4 of max HP the user's moves' priority becomes +1",
