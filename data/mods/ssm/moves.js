@@ -17,7 +17,7 @@ let BattleMovedex = {
 			this.add('-anim', source, 'Infestation', target);
 		},
 		flags: {protect: 1, mirror: 1},
-    multihit: [2, 10],
+    	multihit: [2, 10],
 		priority: 0,
 		target: "normal",
 		type: "Bug",
