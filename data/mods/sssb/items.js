@@ -197,7 +197,7 @@ let BattleItems = {
 		onResidual(pokemon) {
 			this.heal(pokemon.maxhp / 8);
 		},
-		onModifyPriority(priority, pokemon, target, move) {
+		onModifyMove(move, pokemon) {
 			if (pokemon.hp <= pokemon.maxhp / 4) {
 				move.priority = 1;
 			}
