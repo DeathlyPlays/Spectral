@@ -381,11 +381,11 @@ let BattleMovedex = {
 		pp: 10,
 		priority: 1,
 		basePower: 80,
-		onHit(pokemon) {
-			if (pokemon.species === "magearna") {
-				this.add("-formechange", pokemon, "Marshadow", "[msg]");
+		onHit(source) {
+			if (source.template.speciesid === "magearna") {
+				this.add("-formechange", source, "Marshadow", "[msg]");
 			} else {
-				this.add("-formechange", pokemon, "Magearna", "[msg]");
+				this.add("-formechange", source, "Magearna", "[msg]");
 			}
 		},
 		onPrepareHit(target, source) {
