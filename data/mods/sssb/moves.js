@@ -141,30 +141,6 @@ let BattleMovedex = {
 		forceSwitch: true,
 		category: "Physical",
 		type: "Ghost",
-	// Chandie
-	},
-	"spectralthief": {
-		num: 712,
-		accuracy: 100,
-		basePower: 90,
-		category: "Physical",
-		desc: "Clears target's boosts before dealing damage.",
-		shortDesc: "Clears target's boosts before dealing damage.",
-		id: "spectralthief",
-		isViable: true,
-		name: "Spectral Thief",
-		pp: 10,
-		priority: 0,
-		flags: {protect: 1, mirror: 1},
-		onHit(target) {
-			target.clearBoosts();
-			this.add('-clearboost', target);
-		},
-		secondary: null,
-		target: "normal",
-		type: "Ghost",
-		zMovePower: 175,
-		contestType: "Cool",
 	},
 
 	// Horrific17
@@ -214,7 +190,7 @@ let BattleMovedex = {
 		target: "normal",
 	},
 
-	// Zakuree
+	// flufi
 	"16years": {
 		id: "16years",
 		name: "16 Years",
@@ -356,7 +332,7 @@ let BattleMovedex = {
 		},
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Black Hole Eclipse', target);
-			this.add(`c|@Tactician Loki|I love sending people into a tizzy.`);
+			this.add(`c|~Tactician Loki|I love sending people into a tizzy.`);
 		},
 		flags: {reflectable: 1, protect: 1, mirror: 1},
 		target: "normal",
@@ -400,23 +376,17 @@ let BattleMovedex = {
 		accuracy: 100,
 		category: "Physical",
 		id: "angelicspectral",
-		desc: "Changes forme to Marshadow and substitutes moves.",
+		desc: "Transforms into Marshadow if Magearna or vice versa.",
 		name: "Angelic Spectral",
 		pp: 10,
-		priority: 0,
-		basePower: 60,
-		self: {
-			onHit(pokemon) {
-				// substitute moves
-				let subs = [
-					["playrough", "closecombat"],
-					["sunsteelstrike", "shadowsneak"],
-					["icepunch", "iciclecrash"],
-					["angelicspectral", "spectralsangel"],
-				];
-				subs.forEach(s => this.setMove(pokemon, s[0], s[1]));
+		priority: 1,
+		basePower: 80,
+		onHit(pokemon) {
+			if (pokemon.species === "magearna") {
 				this.add("-formechange", pokemon, "Marshadow", "[msg]");
-			},
+			} else {
+				this.add("-formechange", pokemon, "Magearna", "[msg]");
+			}
 		},
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Spectral Thief', target);
@@ -426,43 +396,8 @@ let BattleMovedex = {
 			distance: 1,
 		},
 		secondary: null,
-		target: "any",
+		target: "normal",
 		type: "Ghost",
-	},
-
-	// Spectral Bot
-	"spectralsangel": {
-		isNonstandard: true,
-		accuracy: 100,
-		category: "Physical",
-		id: "spectralsangel",
-		desc: "Changes forme to Magearna and substitutes moves.",
-		name: "Spectral's Angel",
-		pp: 10,
-		priority: 0,
-		basePower: 60,
-		self: {
-			onHit(pokemon) {
-				let subs = [
-					["closecombat", "playrough"],
-					["shadowsheak", "sunsteelstrike"],
-					["iciclecrash", "icepunch"],
-					["spectralsangel", "angelicspectral"],
-				];
-				subs.forEach(s => this.setMove(pokemon, s[0], s[1]));
-				this.add("-formechange", pokemon, "Magearna", "[msg]");
-			},
-		},
-		flags: {
-			protect: 1,
-			distance: 1,
-		},
-		secondary: null,
-		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Fleur Cannon', target);
-		},
-		target: "any",
-		type: "Fairy",
 	},
 
 	// La Rascasse
@@ -485,14 +420,15 @@ let BattleMovedex = {
 		onModifyMove(move) {
 			if (move.hit > 1) move.type = 'Dragon';
 		},
+		self: {
+			heal: [1, 16],
+		},
 		flags: {protect: 1, mirror: 1},
 		secondary: null,
-		self: {
-			heal: [1, 8],
-		},
 		target: "normal",
 		type: "Ghost",
 	},
+
 	// Auroura
 	"climatecast": {
 		id: "climatecast",
@@ -506,8 +442,6 @@ let BattleMovedex = {
 		category: "Special",
 		flags: {protect: 1, mirror: 1},
 		secondary: null,
-		target: "normal",
-		type: "Normal",
 		onModifyMove(move) {
 			switch (this.field.effectiveWeather()) {
 			case 'sunnyday':
@@ -524,16 +458,18 @@ let BattleMovedex = {
 			}
 		},
 		onPrepareHit(target, source, move) {
-			if (move.type === 'Normal') {
-				this.add('-anim', source, 'Swift', target);
-			} else if (move.type === 'Fire') {
+			if (move.type === 'Fire') {
 				this.add('-anim', source, 'Searing Shot', target);
 			} else if (move.type === 'Water') {
 				this.add('-anim', source, 'Brine', target);
 			} else if (move.type === 'Ice') {
 				this.add('-anim', source, 'Icy Wind', target);
+			} else {
+				this.add('-anim', source, 'Swift', target);
 			}
 		},
+		target: "normal",
+		type: "Normal",
 	},
 };
 
