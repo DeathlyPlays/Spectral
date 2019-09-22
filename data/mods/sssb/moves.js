@@ -262,7 +262,7 @@ let BattleMovedex = {
 
 	// Roughskull
 	"radiationstench": {
-		accuracy: 85,
+		accuracy: 100,
 		basePower: 120,
 		category: "Special",
 		desc: "Power doubles if the target is poisoned, and has a 30% chance to cause the target to flinch.",
@@ -271,6 +271,7 @@ let BattleMovedex = {
 		name: "Radiation Stench",
 		pp: 10,
 		priority: 0,
+		volatileStatus: 'gastroacid',
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (target.status === 'psn' || target.status === 'tox') {
@@ -294,12 +295,12 @@ let BattleMovedex = {
 	"bloomingchaos": {
 		id: "bloomingchaos",
 		name: "Blooming Chaos",
-		basePower: 100,
+		basePower: 80,
 		accuracy: true,
 		desc: "Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.",
 		shortDesc: "A variety of curses begin.",
 		pp: 20,
-		priority: 0,
+		priority: 1,
 		category: "Special",
 		onHit(target, source) {
 			let targetBoosts = {};
