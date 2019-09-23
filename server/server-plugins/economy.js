@@ -416,6 +416,7 @@ exports.commands = {
 					this.sendReply(`If a global staff member does not reach out to you, please contact a staff member within a few minutes.`);
 					room.addRaw(`${Server.nameColor(user.name, true)} has bought <strong>"${target}"</strong> from the shop.`);
 					Server.pmStaff(`${user.name} has purchased "${target}" from the shop.`);
+					if (Rooms.get("staff")) Rooms.get("staff").add(`${user.name} has purchased "${target}" from the shop.`);
 					handleBoughtItem.call(this, target.toLowerCase(), user, cost);
 				});
 			});
