@@ -140,6 +140,22 @@ let BattleStatuses = {
 			this.add(`c|+La Rascasse|Have you told John I like my one-timers in a certain spot yet?`);
 		},
 	},
+	
+	revivalxfloatz: {
+		noCopy: true,
+		onStart() {
+			this.add(`c|+Revival xFloatz|I didn't come up with my quotes so my Dad did.`);
+		},
+		onSwitchOut() {
+			this.add(`c|+Revival xFloatz|I didn't come up with my quotes so my Dad did.`);
+		},
+		onFaint() {
+			this.add(`c|+Revival xFloatz|I didn't come up with my quotes so my Dad did.`);
+		},
+		onSourceFaint() {
+			this.add(`c|+Revival xFlaotz|I didn't come up with my quotes so my Dad did.`);
+		},
+	},
 
 	chandie: {
 		noCopy: true,
