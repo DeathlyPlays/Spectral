@@ -6,11 +6,13 @@ class RandomFakemonsTeams extends RandomTeams {
 	randomFakemonsTeam() {
 		let team = [];
 		let sets = {
-			'Talograw': {
-				species: 'Talograw',
-				ability: 'Mold Breaker',
-				item: 'Choice Band',
-				moves: ['gunkshot', 'beakblast', 'drillrun', 'uturn', 'flamecharge'],
+			'Heracross': {
+				species: 'Heracross',
+				ability: 'Crafty',
+				item: 'Fightinium Z',
+				moves: ['swordsdance', 'closecombat', 'rockblast'],
+				baseSignatureMove: "onethousandstings",
+				signatureMove: "One Thousand Stings",
 				evs: {
 					atk: 252,
 					spd: 4,

@@ -2218,8 +2218,8 @@ let Formats = [
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
 	},
 	{
-		name: "[Gen 7] Fakemons Random Battle",
-		desc: "Randomized Fakemons.",
+		name: "[Gen 7] Super Smash Mons",
+		desc: "Random Battle with a twist.",
 		mod: 'fakemons',
 		team: 'randomFakemons',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
