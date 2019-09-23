@@ -10,7 +10,7 @@ exports.BattleAbilities = {
 				return this.chainModify(1.5);
 			}
 		},
-    	onModifyMove(move) {
+		onModifyMove(move) {
 			if (move.multihit && Array.isArray(move.multihit) && move.multihit.length) {
 				move.multihit = move.multihit[1];
 			}
@@ -32,7 +32,7 @@ exports.BattleAbilities = {
 				return false;
 			}
 		},
-    	onAnyModifyBoost(boosts, target) {
+		onAnyModifyBoost(boosts, target) {
 			let source = this.effectData.target;
 			if (source === target) return;
 			if (source === this.activePokemon && target === this.activeTarget) {
