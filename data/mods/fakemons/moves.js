@@ -17,7 +17,7 @@ let BattleMovedex = {
 			this.add('-anim', source, 'Poison Sting', target);
 		},
 		flags: {protect: 1, mirror: 1, contact: 1},
-    multihit: [5, 10],
+		multihit: [5, 10],
 		priority: 0,
 		target: "normal",
 		type: "Bug",
