@@ -100,8 +100,8 @@ let BattleAbilities = {
 	"shadeseeker": {
 		id: "shadeseeker",
 		name: "Shade Seeker",
-		desc: "The user ignores target's stat changes, and their Ghost type moves get +1 priority if the user or target have any stat boosts.",
-		shortDesc: "Ignores target's stat changes, Ghost moves get +1 priority if user/target have stat boosts.",
+		desc: "The user ignores target's stat changes, and Spectral Thief get +1 priority if the user or target have any stat boosts.",
+		shortDesc: "Ignores target's stat changes, Spectral Thief get +1 priority if user/target have stat boosts.",
 		onAnyModifyBoost(boosts, target, move) {
 			let source = this.effectData.target;
 			if (source === target) return;
