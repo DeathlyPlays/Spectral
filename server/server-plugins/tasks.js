@@ -70,6 +70,7 @@ exports.commands = {
 				display += `<td style="border: 2px solid #000000; width: 20%; text-align: center">${taskList.issues[task].issue}</td>`;
 				display += `<td style="border: 2px solid #000000; width: 20%; text-align: center">${taskList.issues[task].description}</td>`;
 				display += `<td style="border: 2px solid #000000; width: 20%; text-align: center">${taskList.issues[task].priority}</td>`;
+				if (!this.broadcasting) display += `<td style="border: 2px solid #000000; width: 20%; text-align: center"><button class="button" name="send" value="/tasks delete ${task}">Resolved!</button></td>`;
 				display += `</tr>`;
 			});
 			display += `</table></center>`;
