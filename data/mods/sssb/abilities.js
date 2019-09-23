@@ -266,8 +266,7 @@ let BattleAbilities = {
 	"xfz": {
 		id: "xfz",
 		name: "XFZ",
-		desc: "This Pokemon is immune to Fire attacks and does 1.5x damage with Steel attacks if hit by a Fire attack. Status moves gain +1 priority.",
-		shortDesc: "Fire immunity, 1.5x damage with Steel if hit by Fire, +1 priority to Status.",
+		desc: "Status moves gain +1 priority.",
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.category === 'Status') {
 				move.xfzBoosted = true;
