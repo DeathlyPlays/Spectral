@@ -64,8 +64,8 @@ let BattleAbilities = {
 	"pealofthunder": {
 		id: "pealofthunder",
 		name: "Peal of Thunder",
-		desc: "Immune to Electric attacks and if hit by one, recover 25% of max HP and boost Speed by 1 stage.",
-		shortDesc: "Electric immunity, 25% of max HP recovery and +1 Speed if hit by an Electric attack.",
+		desc: "Immune to Electric attacks and if hit by one, recover 25% of max HP and boost Defense and Special Defense by 1 stage.",
+		shortDesc: "Electric immunity, 25% of max HP recovery and +1 Def/SpD if hit by an Electric attack.",
 		onTryHit(target, source, move) {
 			if (move.type === 'Electric') {
 				if (!this.heal(target.maxhp / 4)) {
