@@ -20,17 +20,19 @@ class RandomFakemonsTeams extends RandomTeams {
 				},
 				nature: 'Jolly',
 			},
-			'Frostorus': {
-				species: 'Frostorus',
-				ability: 'Snow Warning',
-				item: 'Leftovers',
-				moves: ['calmmind', 'icebeam', 'thunderbolt', 'focusblast', 'uturn', 'defog', 'auroraveil'],
+			'Camerupt': {
+				species: 'Camerupt',
+				ability: 'Adaptability',
+				item: 'Grassium Z',
+				moves: ['rockpolish', 'earthpower', 'solarbeam'],
+				baseSignatureMove: "abrasivecombustion",
+				signatureMove: "Abrasive Combustion",
 				evs: {
 					spa: 252,
 					spd: 4,
 					spe: 252,
 				},
-				nature: 'Timid',
+				nature: 'Modest',
 			},
 			'Frostorus-Therian': {
 				species: 'Frostorus-Therian',
