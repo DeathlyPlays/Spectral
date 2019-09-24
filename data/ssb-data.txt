@@ -18,7 +18,7 @@ EVs: 252 HP / 104 Def / 156 SpD
 Moves: Aeroblast, Earth Power, Secret Sword
 Signature Move: Big Thunder
 	- Electric Type, Special, 120 BP, never misses, 16 PP. 50% chance to target self or foe.
-Timid Nature
+Bold Nature
 
 flufi
 (Male Gallade-Mega)
