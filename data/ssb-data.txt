@@ -13,7 +13,7 @@ Back At My Day
 (Shiny Male Zapdos)
 @ Leftovers
 Ability: Peal of Thunder
-	- Electric immunity, 25% of max HP recovery and boosts Speed by 1 stage if hit by an Electric attack.
+	- Electric immunity, 25% of max HP recovery and boosts Defense and Special Defense by 1 stage if hit by an Electric attack.
 EVs: 252 HP / 104 Def / 156 SpD
 Moves: Aeroblast, Earth Power, Secret Sword
 Signature Move: Big Thunder
