@@ -343,7 +343,7 @@ exports.commands = {
 		let keys = Db.money.keys().map(name => {
 			return {name: name, money: Db.money.get(name).toLocaleString()};
 		});
-		if (!keys.length) return this.errorReplyBox("Money ladder is empty.");
+		if (!keys.length) return this.errorReply("Money ladder is empty.");
 		keys.sort(function (a, b) { return toID(b.money) - toID(a.money); });
 		this.sendReplyBox(rankLadder("Richest Users", moneyPlural, keys.slice(0, target), "money") + "</div>");
 	},
