@@ -399,35 +399,6 @@ let BattleMovedex = {
 		type: "Ghost",
 	},
 
-	// La Rascasse
-	"distortiondestruction": {
-		id: "distortiondestruction",
-		name: "Distortion Destruction",
-		basePower: 65,
-		accuracy: 100,
-		desc: "First hit is Ghost Type, second hit is Dragon Type and user restores 15% of its max HP.",
-		shortDesc: "First hit Ghost, second hit Dragon, 15% of max HP recovery.",
-		pp: 10,
-		priority: 0,
-		multihit: 2,
-		category: "Special",
-		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Shadow Ball', target);
-			this.add('-anim', source, 'Dragon Pulse', target);
-			this.add(`c|+La Rascasse|You must be 6 feet tall to ride this ride.`);
-		},
-		onModifyMove(move) {
-			if (move.hit > 1) move.type = 'Dragon';
-		},
-		self: {
-			heal: [1, 16],
-		},
-		flags: {protect: 1, mirror: 1},
-		secondary: null,
-		target: "normal",
-		type: "Ghost",
-	},
-
 	// Auroura
 	"climatecast": {
 		id: "climatecast",
