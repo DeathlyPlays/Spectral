@@ -528,7 +528,7 @@ exports.commands = {
 	"!profile": true,
 	profile(target, room, user) {
 		target = toID(target);
-		if (!target) target = user.name;
+		if (!target) target = user.userid;
 		if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 		if (!this.runBroadcast()) return;
 		let targetUser = Users.get(target);
