@@ -192,7 +192,7 @@ class RandomSSSBTeams extends RandomTeams {
 			// Drivers
 			"%Back At My Day": {
 				species: "Zapdos",
-				item: "Life Orb",
+				item: "Leftovers",
 				ability: "Peal of Thunder",
 				shiny: true,
 				gender: "M",
@@ -200,11 +200,11 @@ class RandomSSSBTeams extends RandomTeams {
 				baseSignatureMove: "bigthunder",
 				signatureMove: "Big Thunder",
 				evs: {
-					spa: 252,
-					spe: 252,
-					def: 4,
+					hp: 252,
+					def: 104,
+					spd: 156,
 				},
-				nature: "Timid",
+				nature: "Bold",
 			},
 			// Voices
 			"+Revival Clair": {
