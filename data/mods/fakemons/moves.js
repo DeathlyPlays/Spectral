@@ -36,6 +36,10 @@ let BattleMovedex = {
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Searing Shot', target);
 		},
+		onEffectiveness(typeMod, target, type) {
+			let resistedTypes = ["Fire", "Water", "Rock", "Dragon"],
+			if (type.includes(resistedTypes)) return 0;
+		},
 		flags: {protect: 1, mirror: 1},
 		priority: 0,
 		target: "normal",
