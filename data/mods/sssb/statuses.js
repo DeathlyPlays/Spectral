@@ -125,22 +125,6 @@ let BattleStatuses = {
 		},
 	},
 
-	larascasse: {
-		noCopy: true,
-		onStart() {
-			this.add(`c|+La Rascasse|Sup, nerd?`);
-		},
-		onSwitchOut() {
-			this.add(`c|+La Rascasse|Back in a sec, don't miss me too much.`);
-		},
-		onFaint() {
-			this.add(`c|+La Rascasse|Well, shit, back to PoGo.`);
-		},
-		onSourceFaint() {
-			this.add(`c|+La Rascasse|Have you told John I like my one-timers in a certain spot yet?`);
-		},
-	},
-	
 	revivalxfloatz: {
 		noCopy: true,
 		onStart() {

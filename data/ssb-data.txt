@@ -129,18 +129,6 @@ Signature Move: Angelic Spectral
 	- Ghost Type, Physical, 110 BP, 100% Accuracy, 16 PP, 1 Priority. Changes forme to Marshadow and vice versa if used again.
 Jolly Nature
 
-La Rascasse
-(Shiny Female Giratina)
-@ Heart of Darkness
-	- When the user is knocked out, the foe that KO'ed the user loses 1/2 of their max HP.
-Ability: Guardian of Sinnoh
-	- 0.5x damage from Dark and Psychic, 20% chance to use Wish and Heal Bell on switch in.
-EVs: 252 SpA / 4 Def / 252 SpD
-Moves: Calm Mind, Moonblast, Focus Blast
-Signature Move: Distortion Destruction
-	- Special, 65 BP, 100% Accuracy, 16 PP. Hits twice (first time as Ghost Type, second as Dragon Type) and heals itself by 1/16 its max HP per hit.
-Modest Nature
-
 Volco
 (Male Volcanion)
 @ Leftovers

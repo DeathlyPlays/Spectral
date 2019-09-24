@@ -135,20 +135,6 @@ let BattleItems = {
 		},
 	},
 
-	// La Rascasse
-	"heartofdarkness": {
-		id: "heartofdarkness",
-		name: "Heart of Darkness",
-		desc: "If this Pokemon is KO'ed with a move, that move's user loses 1/2 of their maximum HP.",
-		shortDesc: "The foe loses 1/2 their max HP after KOing the user.",
-		onAfterDamageOrder: 1,
-		onAfterDamage(damage, target, source, move) {
-			if (source && source !== target && move && !target.hp) {
-				this.damage(source.maxhp / 2, source, target);
-			}
-		},
-	},
-
 	// Auroura
 	"environmentalorb": {
 		id: "environmentalorb",

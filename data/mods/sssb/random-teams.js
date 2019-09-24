@@ -222,22 +222,6 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
-			"+La Rascasse": {
-				species: "Giratina-Origin",
-				item: "Heart of Darkness",
-				ability: "Guardian of Sinnoh",
-				shiny: true,
-				gender: "F",
-				moves: ["Calm Mind", "Moonblast", "Focus Blast"],
-				baseSignatureMove: "distortiondestruction",
-				signatureMove: "Distortion Destruction",
-				evs: {
-					def: 4,
-					spa: 252,
-					spd: 252,
-				},
-				nature: "Modest",
-			},
 			"+Revival xFloatz": {
 				species: "Scizor-Mega",
 				item: "Leftovers",
