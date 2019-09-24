@@ -275,7 +275,7 @@ exports.commands = {
 		let options = {
 			host: "api.wordnik.com",
 			port: 80,
-			path: `/v4/word.json/${target}/definitions?limit=3&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+			path: `/v4/word.json/${target}/definitions?limit=3&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=${Config.defineKey}`,
 			method: "GET",
 		};
 
