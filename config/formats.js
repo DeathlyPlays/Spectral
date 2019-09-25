@@ -2576,6 +2576,27 @@ let Formats = [
 			},
 		},
 	},
+	{
+		name: "[Gen 7] Stat Double",
+		desc: "Nicknaming your Pokemon after a stat (attack, defense, spattack, spdefense or speed) will double that stat.",
+
+		mod: 'gen7',
+		ruleset: ['[Gen 7] OU'],
+		banlist: ['Choice Band', 'Choice Specs', 'Choice Scarf'],
+		onSwitchIn(pokemon, set) {
+			if (set.id === "attack") {
+				this.boost({atk: 2});
+			} else if (set.id === "defense") {
+				this.boost({def: 2});
+			} else if (set.id === "spattack") {
+				this.boost({spa: 2});
+			} else if (set.id === "spdefense") {
+				this.boost({spd: 2});
+			} else if (set.id === "speed") {
+				this.boost({spe: 2});
+			}
+		},
+	},
 ];
 
 exports.Formats = Formats;
