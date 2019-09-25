@@ -56,6 +56,11 @@ let BattleMovedex = {
 			this.add('-anim', source, 'Bounce', target);
 		},
 		flags: {protect: 1, mirror: 1, contact: 1},
+		self: {
+			boosts: {
+				def: -1,
+			},
+		},
 		priority: -7,
 		target: "normal",
 		type: "Steel",
