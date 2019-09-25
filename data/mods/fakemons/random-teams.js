@@ -34,17 +34,19 @@ class RandomFakemonsTeams extends RandomTeams {
 				},
 				nature: 'Modest',
 			},
-			'Frostorus-Therian': {
-				species: 'Frostorus-Therian',
-				ability: 'Refrigerate',
-				item: 'Life Orb',
-				moves: ['hypervoice', 'thunderbolt', 'focusblast', 'uturn'],
+			'Stakataka': {
+				species: 'Stakataka',
+				ability: 'Brick Wall',
+				item: 'Leftovers',
+				moves: ['stealthrock', 'toxic', 'stoneedge'],
+				baseSignatureMove: "barriercrush",
+				signatureMove: "Barrier Crush",
 				evs: {
-					spa: 252,
-					spe: 252,
-					spd: 4,
+					hp: 252,
+					spd: 252,
+					atk: 4,
 				},
-				nature: 'Timid',
+				nature: 'Careful',
 			},
 			'Semighoul': {
 				species: 'Semighoul',
