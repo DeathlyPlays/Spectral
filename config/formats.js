@@ -2470,7 +2470,7 @@ let Formats = [
 		desc: "Nicknaming your Pokemon after a stat (attack, defense, spattack, spdefense or speed) will double that stat.",
 
 		mod: 'gen7',
-		ruleset: ['[Gen 7] OU'],
+		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'Team Preview', 'Cancel Mod', 'HP Percentage Mod'],
 		banlist: ['Choice Band', 'Choice Specs', 'Choice Scarf'],
 		onSwitchIn(pokemon, set) {
 			if (pokemon.name === "attack") {
