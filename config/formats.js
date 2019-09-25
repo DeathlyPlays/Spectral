@@ -2220,6 +2220,7 @@ let Formats = [
 	{
 		name: "[Gen 7] Super Smash Mons",
 		desc: "Random Battle with a twist.",
+
 		mod: 'ssm',
 		team: 'randomFakemons',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
@@ -2473,6 +2474,27 @@ let Formats = [
 		team: "randomSSSB",
 	},
 	{
+		name: "[Gen 7] Stat Double",
+		desc: "Nicknaming your Pokemon after a stat (attack, defense, spattack, spdefense or speed) will double that stat.",
+
+		mod: 'gen7',
+		ruleset: ['[Gen 7] OU'],
+		banlist: ['Choice Band', 'Choice Specs', 'Choice Scarf'],
+		onSwitchIn(pokemon, set) {
+			if (set.name === "attack") {
+				this.boost({atk: 2});
+			} else if (set.name === "defense") {
+				this.boost({def: 2});
+			} else if (set.name === "spattack") {
+				this.boost({spa: 2});
+			} else if (set.name === "spdefense") {
+				this.boost({spd: 2});
+			} else if (set.name === "speed") {
+				this.boost({spe: 2});
+			}
+		},
+	},
+	{
 		name: "[Gen 7] Super Staff Bros Free For All",
 		desc: [
 			'Duke it out with other users custom made pokemon.',
@@ -2495,6 +2517,13 @@ let Formats = [
 		},
 	},
 	{
+		name: "[Gen 7] Super Smash Mons",
+		desc: "Random Battle with a twist.",
+		mod: 'ssm',
+		team: 'randomFakemons',
+		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
 		name: "[Gen 7] Swapping Powers",
 		desc: `Power trick that's constantly there, not only swapping Attack and Defense, but Special Attack and Special Defense also.`,
 		threads: [
@@ -2515,14 +2544,6 @@ let Formats = [
 		mod: 'bossrush',
 		team: 'randomTMS',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
-		name: "[Gen 7] Z-Frenzy",
-		desc: "Battlers have unlimited Z-Move usage and can use crystals on multiple Pokemon.",
-
-		mod: 'zfrenzy',
-		ruleset: ['[Gen 7] OU'],
-		banlist: ['Kommonium Z'],
 	},
 	{
 		name: "[Gen 7] Trademarked",
@@ -2577,25 +2598,12 @@ let Formats = [
 		},
 	},
 	{
-		name: "[Gen 7] Stat Double",
-		desc: "Nicknaming your Pokemon after a stat (attack, defense, spattack, spdefense or speed) will double that stat.",
+		name: "[Gen 7] Z-Frenzy",
+		desc: "Battlers have unlimited Z-Move usage and can use crystals on multiple Pokemon.",
 
-		mod: 'gen7',
+		mod: 'zfrenzy',
 		ruleset: ['[Gen 7] OU'],
-		banlist: ['Choice Band', 'Choice Specs', 'Choice Scarf'],
-		onSwitchIn(pokemon, set) {
-			if (pokemon.name === "attack") {
-				this.boost({atk: 2});
-			} else if (pokemon.name === "defense") {
-				this.boost({def: 2});
-			} else if (pokemon.name === "spattack") {
-				this.boost({spa: 2});
-			} else if (pokemon.name === "spdefense") {
-				this.boost({spd: 2});
-			} else if (pokemon.name === "speed") {
-				this.boost({spe: 2});
-			}
-		},
+		banlist: ['Kommonium Z'],
 	},
 ];
 

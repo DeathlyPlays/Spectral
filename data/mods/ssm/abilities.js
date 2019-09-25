@@ -58,8 +58,8 @@ exports.BattleAbilities = {
 		onModifyDef(def) {
 			return this.chainModify(1.3);
 		},
-		onModifySpdPriority: 6,
-		onModifySpd(spd) {
+		onModifySpDPriority: 6,
+		onModifySpD(spd) {
 			return this.chainModify(1.3);
 		},
 		id: "hardened",
