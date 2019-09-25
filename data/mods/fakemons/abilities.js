@@ -51,4 +51,32 @@ exports.BattleAbilities = {
 		rating: 4.5,
 		num: -1010,
 	},
+
+	"hardened": {
+		shortDesc: "Multiplies user's Def/SpD by x1.3.",
+		onModifyDefPriority: 6,
+		onModifyDef(def) {
+			return this.chainModify(1.3);
+		},
+		onModifySpdPriority: 6,
+		onModifySpd(spd) {
+			return this.chainModify(1.3);
+		},
+		id: "hardened",
+		name: "Hardened",
+		rating: 4.5,
+		num: -1011,
+	},
+
+	"brickwall": {
+		shortDesc: "Triples the user's defense.",
+		onModifyDefPriority: 6,
+		onModifyDef(def) {
+			return this.chainModify(3);
+		},
+		id: "brickwall",
+		name: "Brick Wall",
+		rating: 4.5,
+		num: -1012,
+	},
 };
