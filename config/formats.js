@@ -2584,15 +2584,15 @@ let Formats = [
 		ruleset: ['[Gen 7] OU'],
 		banlist: ['Choice Band', 'Choice Specs', 'Choice Scarf'],
 		onSwitchIn(pokemon, set) {
-			if (set.id === "attack") {
+			if (pokemon.id === "attack") {
 				this.boost({atk: 2});
-			} else if (set.id === "defense") {
+			} else if (pokemon.id === "defense") {
 				this.boost({def: 2});
-			} else if (set.id === "spattack") {
+			} else if (pokemon.id === "spattack") {
 				this.boost({spa: 2});
-			} else if (set.id === "spdefense") {
+			} else if (pokemon.id === "spdefense") {
 				this.boost({spd: 2});
-			} else if (set.id === "speed") {
+			} else if (pokemon.id === "speed") {
 				this.boost({spe: 2});
 			}
 		},
