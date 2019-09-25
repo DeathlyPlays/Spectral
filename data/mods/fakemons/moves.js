@@ -41,6 +41,25 @@ let BattleMovedex = {
 		target: "normal",
 		type: "Fire",
 	},
+	// Stakataka
+	"barriercrush": {
+		id: "barriercrush",
+		name: "Barrier Crush",
+		basePower: 150,
+		accuracy: 100,
+		category: "Physical",
+		shortDesc: "Lowers the user's defense by 1. Goes last.",
+		desc: "Lowers the user's defense by 1. Goes last.",
+		pp: 5,
+		secondary: null,
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Bounce', target);
+		},
+		flags: {protect: 1, mirror: 1, contact: 1},
+		priority: -7,
+		target: "normal",
+		type: "Steel",
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;
