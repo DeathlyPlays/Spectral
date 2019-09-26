@@ -196,7 +196,7 @@ class RandomSSSBTeams extends RandomTeams {
 				ability: "Peal of Thunder",
 				shiny: true,
 				gender: "M",
-				moves: ["Aeroblast", "Earth Power", "Secret Sword"],
+				moves: ["Oblivion Wing", "Earth Power", "Secret Sword"],
 				baseSignatureMove: "bigthunder",
 				signatureMove: "Big Thunder",
 				evs: {
