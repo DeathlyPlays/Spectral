@@ -15,7 +15,7 @@ Back At My Day
 Ability: Peal of Thunder
 	- Electric immunity, 25% of max HP recovery and boosts Defense and Special Defense by 1 stage if hit by an Electric attack.
 EVs: 252 HP / 104 Def / 156 SpD
-Moves: Aeroblast, Earth Power, Secret Sword
+Moves: Oblivion Wing, Earth Power, Secret Sword
 Signature Move: Big Thunder
 	- Electric Type, Special, 120 BP, never misses, 16 PP. 50% chance to target self or foe.
 Bold Nature
