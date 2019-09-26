@@ -15,7 +15,7 @@ let BattleScripts = {
 				pokemon.newlySwitched = false;
 
 				pokemon.maybeDisabled = false;
-				for (let entry of pokemon.moveset) {
+				for (let entry of pokemon.moveSlots) {
 					entry.disabled = false;
 					entry.disabledSource = '';
 				}
