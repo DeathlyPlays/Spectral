@@ -299,7 +299,7 @@ let Formats = [
 			battle: 3,
 		},
 		ruleset: ['Pokemon', 'Standard GBU'],
-		banlist: ['Sonic Boom', 'Dragon Rage'],
+		banlist: ['Sonic Boom', 'Dragon Rage', 'Type: Null', 'Poipole'],
 		onValidateSet(set) {
 			let allowedNonLittleCupMons = [
 				'Accelgor', 'Aerodactyl', 'Alomomola', 'Arcanine', 'Aromatisse', 'Audino', 'Basculin', 'Bouffalant', 'Bruxish', 'Carbink',
@@ -311,8 +311,8 @@ let Formats = [
 				'Mr. Mime', 'Musharna', 'Ninetales', 'Oranguru', 'Oricorio', 'Pachirisu', 'Passimian', 'Pinsir', 'Plusle', 'Porygon-Z', 'Porygon2',
 				'Pyukumuku', 'Qwilfish', 'Regigigas', 'Relicanth', 'Roselia', 'Roserade', 'Rotom', 'Sableye', 'Sawk', 'Scizor', 'Seviper', 'Shuckle',
 				'Sigilyph', 'Simipour', 'Simisage', 'Simisear', 'Skarmory', 'Slowking', 'Slurpuff', 'Smeargle', 'Snorlax', 'Solrock', 'Spinda',
-				'Spiritomb', 'Stantler', 'Starmie', 'Steelix', 'Stunfisk', 'Sudowoodo', 'Sunflora', 'Tauros', 'Throh', 'Torkoal', 'Trevenant',
-				'Tropius', 'Turtonator', 'Vaporeon', 'Volbeat', 'Whimsicott', 'Wigglytuff', 'Wobbuffet', 'Zangoose',
+				'Spiritomb', 'Stantler', 'Starmie', 'Steelix', 'Stunfisk', 'Sudowoodo', 'Sunflora', 'Tauros', 'Throh', 'Togedemaru', 'Torkoal',
+				'Trevenant', 'Tropius', 'Turtonator', 'Vaporeon', 'Volbeat', 'Whimsicott', 'Wigglytuff', 'Wobbuffet', 'Zangoose',
 			];
 			let template = this.getTemplate(set.species || set.name);
 			let futureGenEvo = template.evos && this.getTemplate(template.evos[0]).gen > this.gen;
@@ -320,6 +320,19 @@ let Formats = [
 				return [set.species + " isn't obtainable at Level 1."];
 			}
 		},
+	},
+	{
+		name: "[Gen 7] Ultra Final",
+		threads: [`&bullet; <a href="https://www.smogon.com/forums/threads/3654575/">Ultra Final Discussion</a>`],
+
+		mod: 'gen7',
+		forcedLevel: 50,
+		teamLength: {
+			validate: [3, 6],
+			battle: 3,
+		},
+		ruleset: ['Pokemon', 'Nickname Clause', 'Team Preview', 'Cancel Mod'],
+		banlist: ['Unreleased', 'Illegal'],
 	},
 	{
 		name: "[Gen 7] Custom Game",
@@ -358,7 +371,7 @@ let Formats = [
 		threads: [
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3648227/">Doubles OU Metagame Discussion</a>`,
 			`&bullet; <a href="https://www.smogon.com/forums/threads/3623347/">Doubles OU Viability Rankings</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3590987/">Doubles OU Sample Teams</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3645990/">Doubles OU Sample Teams</a>`,
 		],
 
 		mod: 'gen7',
@@ -959,7 +972,7 @@ let Formats = [
 		mod: 'gen7',
 		// searchShow: false,
 		ruleset: ['[Gen 7] OU'],
-		banlist: ['Dragonite', 'Kartana', 'Kyurem-Black', 'Latias-Mega', 'Shedinja'],
+		banlist: ['Dragonite', 'Kartana', 'Kyurem-Black', 'Latias-Mega', 'Shedinja', 'Kommonium Z'],
 		onModifyTemplate(template, target, source, effect) {
 			if (!target) return; // Chat command
 			if (effect && ['imposter', 'transform'].includes(effect.id)) return;
@@ -1238,11 +1251,13 @@ let Formats = [
 		onBegin() {
 			this.add('raw|SUPER STAFF BROS <b>BRAWL</b>!!');
 			this.add('message', 'GET READY FOR THE NEXT BATTLE!');
+			if (this.teamGenerator.allXfix) this.add(`c|&HoeenHero|Oops I dropped my bag of xfix sets sorry!`);
 			this.add(`raw|<div class='broadcast-green'><b>Wondering what all these custom moves, abilities, and items do?<br />Check out the <a href="https://www.smogon.com/articles/super-staff-bros-brawl" target="_blank">Super Staff Bros Brawl Guide</a> and find out!</b></div>`);
 		},
+		onSwitchInPriority: 100,
 		onSwitchIn(pokemon) {
 			let name = toID(pokemon.illusion ? pokemon.illusion.name : pokemon.name);
-			if (this.getTemplate(name).exists) {
+			if (this.getTemplate(name).exists || name === 'rage') {
 				// Certain pokemon have volatiles named after their speciesid
 				// To prevent overwriting those, and to prevent accidentaly leaking
 				// that a pokemon is on a team through the onStart even triggering
