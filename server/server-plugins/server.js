@@ -1091,9 +1091,9 @@ exports.commands = {
 		let declare = this.canHTML(parts.slice(1).join(","));
 		if (!declare) return;
 		setTimeout(f => {
-			for (let id in Rooms.rooms) {
-				if (id !== "global" && Rooms.rooms[id].userCount > 3) Rooms.rooms[id].addRaw(`<div class="broadcast-blue" style="border-radius: 5px; max-height: 300px; overflow-y: scroll;"><strong>${declare}</strong></div>`);
-			}
+			Rooms.rooms.forEach(r => {
+				if (r.id !== "global" && r.userCount > 3) r.addRaw(`<div class="broadcast-blue" style="border-radius: 5px; max-height: 300px; overflow-y: scroll;"><strong>${declare}</strong></div>`);
+			});
 		}, delayInMins);
 		this.room.modlog(`${user.name} scheduled a timed declare: ${declare}`);
 		return this.sendReply("Your declare has been scheduled.");
