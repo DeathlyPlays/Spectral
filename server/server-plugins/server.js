@@ -275,7 +275,7 @@ exports.commands = {
 		let options = {
 			host: "api.wordnik.com",
 			port: 80,
-			path: `/v4/word.json/${target}/definitions?limit=3&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`,
+			path: `/v4/word.json/${target}/definitions?limit=3&sourceDictionaries=all&useCanonical=false&includeTags=false&api_key=${Config.defineKey}`,
 			method: "GET",
 		};
 
@@ -1091,9 +1091,9 @@ exports.commands = {
 		let declare = this.canHTML(parts.slice(1).join(","));
 		if (!declare) return;
 		setTimeout(f => {
-			for (let id in Rooms.rooms) {
-				if (id !== "global" && Rooms.rooms[id].userCount > 3) Rooms.rooms[id].addRaw(`<div class="broadcast-blue" style="border-radius: 5px; max-height: 300px; overflow-y: scroll;"><strong>${declare}</strong></div>`);
-			}
+			Rooms.rooms.forEach(r => {
+				if (r.id !== "global" && r.userCount > 3) r.addRaw(`<div class="broadcast-blue" style="border-radius: 5px; max-height: 300px; overflow-y: scroll;"><strong>${declare}</strong></div>`);
+			});
 		}, delayInMins);
 		this.room.modlog(`${user.name} scheduled a timed declare: ${declare}`);
 		return this.sendReply("Your declare has been scheduled.");

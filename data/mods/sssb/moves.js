@@ -43,8 +43,8 @@ let BattleMovedex = {
 		basePower: 130,
 		accuracy: 95,
 		category: "Special",
-		shortDesc: "30% to burn the foe or self-boost SpA / SpD by 1 stage.",
-		desc: "Has 30% chance of burning the foe or boosting the user's SpA / SpD by 1 stage.",
+		shortDesc: "30% to burn the foe or self-boost SpA by 1 stage.",
+		desc: "Has 30% chance of burning the foe or boost the user's SpD by 1 stage.",
 		pp: 10,
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Eruption', target);
@@ -54,16 +54,11 @@ let BattleMovedex = {
 		onHit(target, source) {
 			let rand = this.random(100);
 			if (rand <= 30) {
-				let effect = this.random(1);
-				if (effect === 0) {
+				let effect = this.random(2);
+				if (effect === 1) {
 					target.trySetStatus('brn');
 				} else {
-					let stat = this.random(1);
-					if (stat === 0) {
-						this.boost({spa: 1}, source);
-					} else {
-						this.boost({spd: 1}, source);
-					}
+					this.boost({spd: 1}, source);
 				}
 			}
 		},
@@ -105,7 +100,7 @@ let BattleMovedex = {
 	// Chandie
 	"sharpshadow": {
 		accuracy: 100,
-		basePower: 60,
+		basePower: 70,
 		category: "Physical",
 		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit or Wimp Out Abilities.",
 		shortDesc: "User switches out after damaging the target.",
@@ -146,30 +141,6 @@ let BattleMovedex = {
 		forceSwitch: true,
 		category: "Physical",
 		type: "Ghost",
-	// Chandie
-	},
-	"spectralthief": {
-		num: 712,
-		accuracy: 100,
-		basePower: 90,
-		category: "Physical",
-		desc: "Clears target's boosts before dealing damage.",
-		shortDesc: "Clears target's boosts before dealing damage.",
-		id: "spectralthief",
-		isViable: true,
-		name: "Spectral Thief",
-		pp: 10,
-		priority: 0,
-		flags: {protect: 1, mirror: 1},
-		onHit(target) {
-			target.clearBoosts();
-			this.add('-clearboost', target);
-		},
-		secondary: null,
-		target: "normal",
-		type: "Ghost",
-		zMovePower: 175,
-		contestType: "Cool",
 	},
 
 	// Horrific17
@@ -219,7 +190,7 @@ let BattleMovedex = {
 		target: "normal",
 	},
 
-	// Zakuree
+	// flufi
 	"16years": {
 		id: "16years",
 		name: "16 Years",
@@ -267,15 +238,16 @@ let BattleMovedex = {
 
 	// Roughskull
 	"radiationstench": {
-		accuracy: 85,
+		accuracy: 100,
 		basePower: 120,
-		category: "Special",
+		category: "Physical",
 		desc: "Power doubles if the target is poisoned, and has a 30% chance to cause the target to flinch.",
 		shortDesc: "Power doubles if the target is poisoned. 30% chance to flinch.",
 		id: "radiationstench",
 		name: "Radiation Stench",
 		pp: 10,
 		priority: 0,
+		volatileStatus: 'gastroacid',
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon, target) {
 			if (target.status === 'psn' || target.status === 'tox') {
@@ -291,7 +263,7 @@ let BattleMovedex = {
 		},
 		target: "normal",
 		type: "Poison",
-		zMovePower: 120,
+		zMovePower: 200,
 		contestType: "Beautiful",
 	},
 
@@ -299,12 +271,12 @@ let BattleMovedex = {
 	"bloomingchaos": {
 		id: "bloomingchaos",
 		name: "Blooming Chaos",
-		basePower: 100,
+		basePower: 80,
 		accuracy: true,
 		desc: "Casts Heart Swap, then casts Topsy Turvy on opponent, 30% to cause burn to opponent, 30% chance to badly poison opponent, 10% chance to cause Confusion on caster and opponent, 10% chance to cause opponent to fall in love, 10% chance for opponent to flinch, 10% chance to freeze opponent.",
 		shortDesc: "A variety of curses begin.",
 		pp: 20,
-		priority: 0,
+		priority: 2,
 		category: "Special",
 		onHit(target, source) {
 			let targetBoosts = {};
@@ -354,13 +326,9 @@ let BattleMovedex = {
 				volatileStatus: "flinch",
 			},
 		],
-		self: {
-			chance: 10,
-			volatileStatus: "confusion",
-		},
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Black Hole Eclipse', target);
-			this.add(`c|@Tactician Loki|I love sending people into a tizzy.`);
+			this.add(`c|~Tactician Loki|I love sending people into a tizzy.`);
 		},
 		flags: {reflectable: 1, protect: 1, mirror: 1},
 		target: "normal",
@@ -373,8 +341,8 @@ let BattleMovedex = {
 		name: "Dragon Blitz",
 		basePower: 80,
 		accuracy: 100,
-		desc: "Nearly always goes first and has 33% chance of boosting Atk by 1 stage.",
-		shortDesc: "Almost always goes first and 33% chance of boosting Atk by 1 stage.",
+		desc: "Nearly always goes first and has 33% chance of boosting Attack by 1 stage, and does neutral damage towards Fairies.",
+		shortDesc: "33% chance of boosting Atk by 1 stage, neutral damage to Fairy types.",
 		pp: 5,
 		priority: 2,
 		category: "Physical",
@@ -404,116 +372,74 @@ let BattleMovedex = {
 		accuracy: 100,
 		category: "Physical",
 		id: "angelicspectral",
-		desc: "Changes forme to Marshadow and substitutes moves.",
+		desc: "Transforms into Marshadow if Magearna or vice versa.",
 		name: "Angelic Spectral",
 		pp: 10,
-		priority: 0,
-		basePower: 60,
-		self: {
-			onHit(pokemon) {
-				// substitute moves
-				let subs = [
-					["playrough", "closecombat"],
-					["sunsteelstrike", "shadowsneak"],
-					["icepunch", "iciclecrash"],
-					["angelicspectral", "spectralsangel"],
-				];
-				subs.forEach(s => this.setMove(pokemon, s[0], s[1]));
-				this.add("-formechange", pokemon, "Marshadow", "[msg]");
-			},
-		},
-		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Spectral Thief', target);
-		},
-		flags: {
-			protect: 1,
-			distance: 1,
-		},
-		secondary: null,
-		target: "any",
-		type: "Ghost",
-	},
-
-	// Spectral Bot
-	"spectralsangel": {
-		isNonstandard: true,
-		accuracy: 100,
-		category: "Physical",
-		id: "spectralsangel",
-		desc: "Changes forme to Magearna and substitutes moves.",
-		name: "Spectral's Angel",
-		pp: 10,
-		priority: 0,
-		basePower: 60,
-		self: {
-			onHit(pokemon) {
-				let subs = [
-					["closecombat", "playrough"],
-					["shadowsheak", "sunsteelstrike"],
-					["iciclecrash", "icepunch"],
-					["spectralsangel", "angelicspectral"],
-				];
-				subs.forEach(s => this.setMove(pokemon, s[0], s[1]));
-				this.add("-formechange", pokemon, "Magearna", "[msg]");
-			},
-		},
-		flags: {
-			protect: 1,
-			distance: 1,
-		},
-		secondary: null,
-		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Fleur Cannon', target);
-		},
-		target: "any",
-		type: "Fairy",
-	},
-
-	// La Rascasse
-	"distortiondestruction": {
-		id: "distortiondestruction",
-		name: "Distortion Destruction",
-		basePower: 65,
-		accuracy: 100,
-		desc: "First hit is Ghost Type, second hit is Dragon Type and user restores 15% of its max HP.",
-		shortDesc: "First hit Ghost, second hit Dragon, 15% of max HP recovery.",
-		pp: 10,
-		priority: 0,
-		multihit: 2,
-		category: "Special",
-		onPrepareHit(target, source) {
-			this.add('-anim', source, 'Shadow Ball', target);
-			this.add('-anim', source, 'Dragon Pulse', target);
-			this.add(`c|+La Rascasse|You must be 6 feet tall to ride this ride.`);
-		},
-		flags: {protect: 1, mirror: 1},
-		secondary: null,
-		self: {
-			heal: [1, 8],
-		},
-		target: "normal",
-		type: "Dragon", // please make first hit ghost type and second hit dragon type
-	},
-	// Auroura
-	"spiritualhex": {
-		id: "spiritualhex",
-		name: "Spiritual Hex",
-		basePower: 80,
-		accuracy: 90,
-		desc: "Power doubles if both user and foe are burnt.",
-		shortDesc: "2x BP if both user and foe are burnt.",
-		pp: 15,
-		priority: 0,
-		category: "Special",
-		flags: {protect: 1, mirror: 1},
-		secondary: null,
-		target: "normal",
-		type: "Ghost",
-		onBasePower(basePower, pokemon, target) {
-			if (pokemon.status === 'brn' && target.status === 'brn') {
-				return this.chainModify(2);
+		priority: 1,
+		basePower: 110,
+		onHit(target, pokemon, move) {
+			if (pokemon.baseTemplate.baseSpecies === 'Magearna' && !pokemon.transformed) {
+				move.willChangeForme = true;
 			}
 		},
+		onAfterMoveSecondarySelf(pokemon, target, move) {
+			if (move.willChangeForme) {
+				pokemon.formeChange(pokemon.template.speciesid === 'marshadow' ? 'Magearna' : 'Marshadow', this.effect, false, '[msg]');
+			}
+		},
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Boomburst', target);
+		},
+		flags: {
+			protect: 1,
+			distance: 1,
+		},
+		secondary: null,
+		target: "normal",
+		type: "Ghost",
+	},
+
+	// Auroura
+	"climatecast": {
+		id: "climatecast",
+		name: "Climate Cast",
+		basePower: 120,
+		accuracy: 100,
+		desc: "Type changes to match weather condition.",
+		shortDesc: "Type changes to match weather condition.",
+		pp: 20,
+		priority: 1,
+		category: "Special",
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		onModifyMove(move) {
+			switch (this.field.effectiveWeather()) {
+			case 'sunnyday':
+			case 'desolateland':
+				move.type = 'Fire';
+				break;
+			case 'raindance':
+			case 'primordialsea':
+				move.type = 'Water';
+				break;
+			case 'hail':
+				move.type = 'Ice';
+				break;
+			}
+		},
+		onPrepareHit(target, source, move) {
+			if (move.type === 'Fire') {
+				this.add('-anim', source, 'Searing Shot', target);
+			} else if (move.type === 'Water') {
+				this.add('-anim', source, 'Brine', target);
+			} else if (move.type === 'Ice') {
+				this.add('-anim', source, 'Icy Wind', target);
+			} else {
+				this.add('-anim', source, 'Swift', target);
+			}
+		},
+		target: "normal",
+		type: "Normal",
 	},
 };
 

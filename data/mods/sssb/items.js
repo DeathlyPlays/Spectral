@@ -2,6 +2,7 @@
 
 /**@type {{[k: string]: ItemData}} */
 let BattleItems = {
+	// Horrific17
 	"arcaniumz": {
 		id: "arcaniumz",
 		name: "Arcanium Z",
@@ -13,6 +14,7 @@ let BattleItems = {
 		desc: "If held by an Arcanine with Meteor Charge, it can use Eternal Flames.",
 	},
 
+	// Chandie
 	"voidheart": {
 		id: "voidheart",
 		name: "Void Heart",
@@ -25,6 +27,7 @@ let BattleItems = {
 		desc: "If held by a Marshadow with Sharp Shadow, it can use Embrace the Void.",
 	},
 
+	// flufi
 	"soulorb": {
 		id: "soulorb",
 		name: "Soul Orb",
@@ -40,6 +43,7 @@ let BattleItems = {
 		desc: "Holder's attacks do 1.5x damage, and it loses 1/10 its max HP after the attack. At 1 HP, the user takes no recoil.",
 	},
 
+	// Roughskull
 	"crownoftms": {
 		id: "crownoftms",
 		name: "Crown of TMS",
@@ -131,37 +135,61 @@ let BattleItems = {
 		},
 	},
 
-	// La Rascasse
-	"heartofdarkness": {
-		id: "heartofdarkness",
-		name: "Heart of Darkness",
-		desc: "If this Pokemon is KO'ed with a move, that move's user loses 1/2 of their maximum HP.",
-		shortDesc: "The foe loses 1/2 their max HP after KOing the user.",
-		onAfterDamageOrder: 1,
-		onAfterDamage(damage, target, source, move) {
-			if (source && source !== target && move && !target.hp) {
-				this.damage(source.maxhp / 2, source, target);
-			}
+	// Auroura
+	"environmentalorb": {
+		id: "environmentalorb",
+		name: "Environmental Orb",
+		spritenum: 169,
+		fling: {
+			basePower: 90,
 		},
+		onModifyDefPriority: 2,
+		onModifyDef(def, pokemon) {
+			return this.chainModify(1.3);
+		},
+		onModifySpDPriority: 2,
+		onModifySpD(spd, pokemon) {
+			return this.chainModify(1.3);
+		},
+		onModifyAtkPriority: 2,
+		onModifyAtk(atk, pokemon) {
+			return this.chainModify(1.3);
+		},
+		onModifySpAPriority: 2,
+		onModifySpA(spa, pokemon) {
+			return this.chainModify(1.3);
+		},
+		onModifySpePriority: 2,
+		onModifySpe(spe, pokemon) {
+			return this.chainModify(1.3);
+		},
+		num: 538,
+		gen: 5,
+		desc: "Weather lasts 8 turns instead of 5; x1.3 to all stats.",
 	},
 
-	// Volco
-	"barragevest": {
-		id: "barragevest",
-		name: "Barrage Vest",
-		desc: "Boosts the defense of the holder by 1.5x. Holder cannot use status moves.",
-		shortDesc: "Defense boost of 1.5x. Disables Status moves.",
-		onModifyDefPriority: 1,
-		onModifyDef(def) {
-			return this.chainModify(1.5);
-		},
-		onDisableMove(pokemon) {
-			for (const moveSlot of pokemon.moveSlots) {
-				if (this.getMove(moveSlot.move).category === 'Status') {
-					pokemon.disableMove(moveSlot.id);
-				}
+	// Spectral Bot
+	"flowersandsouls": {
+		id: "flowersandsouls",
+		name: "Flowers and Souls",
+		onSourceModifyDamage(damage, source, target, move) {
+			if (target.getMoveHitData(move).typeMod > 0) {
+				this.debug('-50% reduction');
+				return this.chainModify(0.5);
 			}
 		},
+		onResidualOrder: 5,
+		onResidualSubOrder: 2,
+		onResidual(pokemon) {
+			this.heal(pokemon.maxhp / 8);
+		},
+		onModifyMove(move, pokemon) {
+			if (pokemon.hp <= pokemon.maxhp / 4) {
+				move.priority = 1;
+			}
+		},
+		desc: "The holder weakens supereffective attacks by 1/2 (neutral damage), the user recovers 1/8 of their maximum HP every turn, and if the user's HP is less than 1/4 of max HP the user's moves' priority becomes +1",
+		shortDesc: "Neutralizes supereffective attacks, heals by 1/8 of max HP, and if HP is < 1/4, move's get +1 priority.",
 	},
 };
 

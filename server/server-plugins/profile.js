@@ -528,7 +528,7 @@ exports.commands = {
 	"!profile": true,
 	profile(target, room, user) {
 		target = toID(target);
-		if (!target) target = user.name;
+		if (!target) target = user.userid;
 		if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 		if (!this.runBroadcast()) return;
 		let targetUser = Users.get(target);
@@ -567,9 +567,9 @@ exports.commands = {
 
 		let profileData = ``;
 		if (profile.background) {
-			profileData += `<div style="background:url(${profile.background}); background-size: 100% 100%; height: 250px">`;
+			profileData += `<div style="background:url(${profile.background}); background-size: 100% 100%; max-height: 500px; overflow-y: scroll">`;
 		} else {
-			profileData += `<div style="max-height: 250px; overflow-y: scroll">`;
+			profileData += `<div style="max-height: 500px; overflow-y: scroll">`;
 		}
 		profileData += `<div style="display: inline-block; width: 6.5em; height: 100%; vertical-align: top"><img src="${avatar}" height="80" width="80" align="left"></div>`;
 		profileData += `<div style="display: inline-block">&nbsp;${pColor(userid)}<strong>Name:</strong></font> ${Server.nameColor(username, true)}&nbsp;`;

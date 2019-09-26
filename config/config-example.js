@@ -419,6 +419,9 @@ exports.serverName = "Spectral";
 // Your server IP
 exports.serverIp = "";
 
+// API key from wordnik for the define command
+exports.defineKey = "";
+
 // Time for tells to expire if unopened (defaults to 7 days)
 exports.tellsexpiryage = 1000 * 60 * 60 * 24 * 7;
 

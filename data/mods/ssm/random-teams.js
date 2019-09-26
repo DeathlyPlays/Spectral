@@ -6,11 +6,13 @@ class RandomFakemonsTeams extends RandomTeams {
 	randomFakemonsTeam() {
 		let team = [];
 		let sets = {
-			'Talograw': {
-				species: 'Talograw',
-				ability: 'Mold Breaker',
-				item: 'Choice Band',
-				moves: ['gunkshot', 'beakblast', 'drillrun', 'uturn', 'flamecharge'],
+			'Heracross': {
+				species: 'Heracross',
+				ability: 'Crafty',
+				item: 'Fightinium Z',
+				moves: ['swordsdance', 'closecombat', 'rockblast'],
+				baseSignatureMove: "onethousandstings",
+				signatureMove: "One Thousand Stings",
 				evs: {
 					atk: 252,
 					spd: 4,
@@ -18,29 +20,33 @@ class RandomFakemonsTeams extends RandomTeams {
 				},
 				nature: 'Jolly',
 			},
-			'Frostorus': {
-				species: 'Frostorus',
-				ability: 'Snow Warning',
-				item: 'Leftovers',
-				moves: ['calmmind', 'icebeam', 'thunderbolt', 'focusblast', 'uturn', 'defog', 'auroraveil'],
+			'Camerupt': {
+				species: 'Camerupt',
+				ability: 'Adaptability',
+				item: 'Grassium Z',
+				moves: ['rockpolish', 'earthpower', 'solarbeam'],
+				baseSignatureMove: "abrasivecombustion",
+				signatureMove: "Abrasive Combustion",
 				evs: {
 					spa: 252,
 					spd: 4,
 					spe: 252,
 				},
-				nature: 'Timid',
+				nature: 'Modest',
 			},
-			'Frostorus-Therian': {
-				species: 'Frostorus-Therian',
-				ability: 'Refrigerate',
-				item: 'Life Orb',
-				moves: ['hypervoice', 'thunderbolt', 'focusblast', 'uturn'],
+			'Stakataka': {
+				species: 'Stakataka',
+				ability: 'Brick Wall',
+				item: 'Leftovers',
+				moves: ['stealthrock', 'toxic', 'stoneedge'],
+				baseSignatureMove: "barriercrush",
+				signatureMove: "Barrier Crush",
 				evs: {
-					spa: 252,
-					spe: 252,
-					spd: 4,
+					hp: 252,
+					spd: 252,
+					atk: 4,
 				},
-				nature: 'Timid',
+				nature: 'Careful',
 			},
 			'Semighoul': {
 				species: 'Semighoul',

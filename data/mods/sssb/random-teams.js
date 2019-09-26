@@ -48,7 +48,7 @@ class RandomSSSBTeams extends RandomTeams {
 			// Fixing Gods
 			"⚔Volco": {
 				species: "Volcanion",
-				item: "Barrage Vest",
+				item: "Leftovers",
 				ability: "Emergency Actions",
 				gender: "M",
 				moves: [["Ice Beam", "Earth Power"], "Giga Drain", "Steam Eruption"],
@@ -63,6 +63,7 @@ class RandomSSSBTeams extends RandomTeams {
 					atk: 0,
 				},
 				nature: "Modest",
+				shiny: true,
 			},
 			// Administrators
 			"~Roughskull": {
@@ -70,17 +71,17 @@ class RandomSSSBTeams extends RandomTeams {
 				item: "Crown of TMS",
 				ability: "Venom Shock",
 				gender: "M",
-				moves: ["Sucker Punch", "Flame Charge", "Thousand Waves"],
+				moves: ["Sucker Punch", "Strength Sap", "Thousand Waves"],
 				baseSignatureMove: "radiationstench",
 				signatureMove: "Radiation Stench",
 				evs: {
 					atk: 252,
 					hp: 252,
-					spe: 4,
+					spd: 4,
 				},
 				nature: "Adamant",
 			},
-			"~Zakuree": {
+			"~flufi": {
 				species: "Gallade-Mega",
 				item: "Soul Orb",
 				ability: "Heart of Steel",
@@ -94,6 +95,22 @@ class RandomSSSBTeams extends RandomTeams {
 					spe: 252,
 				},
 				nature: "Jolly",
+			},
+			"~Tactician Loki": {
+				species: "Liepard",
+				item: "Thokk",
+				ability: "Chaotic Aura",
+				shiny: true,
+				gender: "F",
+				moves: ["Me First", "Ice Beam", "Spiky Shield"],
+				baseSignatureMove: "bloomingchaos",
+				signatureMove: "Blooming Chaos",
+				evs: {
+					spa: 252,
+					spe: 252,
+					def: 4,
+				},
+				nature: "Timid",
 			},
 			// Leaders
 			"&Chandie": {
@@ -141,30 +158,13 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
-			"@Tactician Loki": {
-				species: "Liepard",
-				item: "Thokk",
-				ability: "Chaotic Aura",
-				shiny: true,
-				gender: "F",
-				moves: ["Copycat", "Ice Beam", "Spiky Shield"],
-				baseSignatureMove: "bloomingchaos",
-				signatureMove: "Blooming Chaos",
-				evs: {
-					spa: 252,
-					spe: 252,
-					def: 4,
-				},
-				nature: "Timid",
-			},
 			// Bots
-			/*
 			"*Spectral Bot": {
 				species: "Magearna",
-				item: "Assault Vest",
+				item: "Flowers and Souls",
 				ability: "Spectral's Thief",
 				gender: "N",
-				moves: ["Play Rough", "Sunsteel Strike", "Ice Punch"],
+				moves: ["Play Rough", "Sunsteel Strike", "Drain Punch"],
 				baseSignatureMove: "angelicspectral",
 				signatureMove: "Angelic Spectral",
 				evs: {
@@ -174,28 +174,25 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
-			*/
-			/*
 			"*Auroura": {
-				species: "Oricorio-Sensu",
-				item: "Leftovers",
-				ability: "Unholy Preservation",
-				gender: "N",
-				moves: ["Parting Shot", "Roost", "Teeter Dance"],
-				baseSignatureMove: "spiritualhex",
-				signatureMove: "Spiritual Hex",
+				species: "Castform",
+				item: "Environmental Orb",
+				ability: "Forecast",
+				gender: "F",
+				moves: ["Rain Dance", "Sunny Day", "Hail"],
+				baseSignatureMove: "climatecast",
+				signatureMove: "Climate Cast",
 				evs: {
-					hp: 252,
+					spa: 252,
 					spd: 4,
 					spe: 252,
 				},
 				nature: "Timid",
 			},
-			*/
 			// Drivers
 			"%Back At My Day": {
 				species: "Zapdos",
-				item: "Life Orb",
+				item: "Leftovers",
 				ability: "Peal of Thunder",
 				shiny: true,
 				gender: "M",
@@ -203,11 +200,11 @@ class RandomSSSBTeams extends RandomTeams {
 				baseSignatureMove: "bigthunder",
 				signatureMove: "Big Thunder",
 				evs: {
-					spa: 252,
-					spe: 252,
-					def: 4,
+					hp: 252,
+					def: 104,
+					spd: 156,
 				},
-				nature: "Timid",
+				nature: "Bold",
 			},
 			// Voices
 			"+Revival Clair": {
@@ -225,23 +222,6 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
-			"+La Rascasse": {
-				species: "Giratina-Origin",
-				item: "Heart of Darkness",
-				ability: "Guardian of Sinnoh",
-				shiny: true,
-				gender: "F",
-				moves: ["Calm Mind", "Moonblast", "Focus Blast"],
-				baseSignatureMove: "distortiondestruction",
-				signatureMove: "Distortion Destruction",
-				evs: {
-					def: 4,
-					spa: 252,
-					spd: 252,
-				},
-				nature: "Modest",
-			},
-			/*
 			"+Revival xFloatz": {
 				species: "Scizor-Mega",
 				item: "Leftovers",
@@ -256,13 +236,12 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Impish",
 			},
-			*/
 		};
-		let pool = this.shuffle(Object.keys(sets)).splice(0, 6);
+		let pool = this.shuffle(Object.keys(sets));
 		/** @type {{[type: string]: number}} */
 		let typePool = {};
 		let i = 0;
-		while (pool.length && i < 6) {
+		while (team.length < 6) {
 			if (i === 1) {
 				for (let mon in sets) {
 					let monIds = pool.slice(0, 6).map(function (p) {
@@ -276,6 +255,7 @@ class RandomSSSBTeams extends RandomTeams {
 			}
 			let name = pool[i];
 			let ssbSet = sets[name];
+			i++;
 			// Enforce typing limits
 			let types = this.getTemplate(ssbSet.species).types;
 			let rejected = false;
@@ -329,7 +309,6 @@ class RandomSSSBTeams extends RandomTeams {
 			}
 			set.moves.push(ssbSet.signatureMove);
 			team.push(set);
-			i++;
 		}
 		return team;
 	}

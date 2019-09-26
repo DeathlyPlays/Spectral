@@ -18,6 +18,27 @@ let BattleStatuses = {
 		},
 	},
 
+	volco: {
+		noCopy: true,
+		onStart() {
+			this.add([`c|⚔Volco|Did RaginInfernape break something again? GEEZ!`, `c|⚔Arr⟦ay⟧s|Well, everything __seems__ to be working... for now.`][this.random(2)]);
+		},
+		onSwitchOut() {
+			if (this.random(2) === 1) {
+				this.add(`<div class="broadcast-red"><b>The server needs to restart because of a crash.</b><br />No new battles can be started until the server is done restarting.</div>`);
+				this.add(`c|⚔Volco|Dammit, something broke badly... I'll return once i fix it.`);
+			} else {
+				this.add(`c|⚔Arr⟦ay⟧s|I don't feel like fixing stuff, RaginInfernape stop breaking the server.`);
+			}
+		},
+		onFaint() {
+			this.add([`c|⚔Volco|Well, if the server breaks... not my problem.`, `c|⚔Arr⟦ay⟧s|Oh, cool now I can be lazy again`][this.random(2)]);
+		},
+		onSourceFaint() {
+			this.add([`c|⚔Volco|Sometimes you just have to kill everyone to fix everything.`, `c|⚔Arr⟦ay⟧s|something... something... too lazy to think of a good message... something... something...`][this.random(2)]);
+		},
+	},
+
 	horrific17: {
 		noCopy: true,
 		onStart() {
@@ -28,13 +49,13 @@ let BattleStatuses = {
 		},
 		onFaint() {
 			this.add(`c|@Horrific17|Eaa...`);
-			this.add(`c|~Satori Komeiji|Lord Horrific!`);
+			this.add(`c|~Satori Komeiji|Horrific!`);
 			this.add(`c|@Horrific17|I let my guard down... I'm sorry...`);
-			this.add(`c|~Satori Komeiji|Oh, no! Lord Horrific! Lord Horrific!`);
+			this.add(`c|~Satori Komeiji|Oh, no! Horrific! Horrific!`);
 			this.add(`c|@Horrific17|Calm yourself, Satori...`);
 			this.add(`c|~Satori Komeiji|But... But...`);
 			this.add(`c|@Horrific17|This is no time for tears, is it? Unless... Do you plan on the two of us dying here together?`);
-			this.add(`c|~Satori Komeiji|Never! That I would never allow! You must not die, milord...`);
+			this.add(`c|~Satori Komeiji|Never! That I would never allow! You must not die...`);
 			this.add(`c|@Horrific17|And neither should you, my wife. Lend me your shoulder, would you?`);
 			this.add(`c|~Satori Komeiji|Yes, of course.`);
 		},
@@ -59,16 +80,16 @@ let BattleStatuses = {
 	tacticianloki: {
 		noCopy: true,
 		onStart() {
-			this.add(`c|@Tactician Loki|Did you...need something?~`);
+			this.add(`c|~Tactician Loki|Did you...need something?~`);
 		},
 		onSwitchOut() {
-			this.add(`c|@Tactician Loki|It's your turn dear~`);
+			this.add(`c|~Tactician Loki|It's your turn dear~`);
 		},
 		onFaint() {
-			this.add(`c|@Tactician Loki|No...more...`);
+			this.add(`c|~Tactician Loki|No...more...`);
 		},
 		onSourceFaint() {
-			this.add(`c|@Tactician Loki|Darn, someone else who couldn't handle me, what a pity~`);
+			this.add(`c|~Tactician Loki|Darn, someone else who couldn't handle me, what a pity~`);
 		},
 	},
 
@@ -87,6 +108,7 @@ let BattleStatuses = {
 			this.add(`c|%Back At My Day|Guess I gotta nerf myself now.`);
 		},
 	},
+
 	revivalclair: {
 		noCopy: true,
 		onStart() {
@@ -102,19 +124,62 @@ let BattleStatuses = {
 			this.add(`c|+Revival Clair|Good game, too easy.`);
 		},
 	},
-	larascasse: {
+
+	revivalxfloatz: {
 		noCopy: true,
 		onStart() {
-			this.add(`c|+La Rascasse|Sup, nerd?`);
+			this.add(`c|+Revival xFloatz|I didn't come up with my quotes so my Dad did.`);
 		},
 		onSwitchOut() {
-			this.add(`c|+La Rascasse|Back in a sec, don't miss me too much.`);
+			this.add(`c|+Revival xFloatz|I didn't come up with my quotes so my Dad did.`);
 		},
 		onFaint() {
-			this.add(`c|+La Rascasse|Well, shit, back to PoGo.`);
+			this.add(`c|+Revival xFloatz|I didn't come up with my quotes so my Dad did.`);
 		},
 		onSourceFaint() {
-			this.add(`c|+La Rascasse|Have you told John I like my one-timers in a certain spot yet?`);
+			this.add(`c|+Revival xFlaotz|I didn't come up with my quotes so my Dad did.`);
+		},
+	},
+
+	chandie: {
+		noCopy: true,
+		onModifyMove(move) {
+			if (move.id === "spectralthief") {
+				move.onHit = function (target) {
+					target.clearBoosts();
+					this.add('-clearboost', target);
+				};
+				move.stealsBoosts = false;
+			}
+		},
+	},
+
+	// Modified Pre-existing Statuses
+	raindance: {
+		inherit: true,
+		durationCallback(source, effect) {
+			if (source && (source.hasItem('damprock') || source.hasItem('environmentalorb'))) {
+				return 8;
+			}
+			return 5;
+		},
+	},
+	sunnyday: {
+		inherit: true,
+		durationCallback(source, effect) {
+			if (source && (source.hasItem('heatrock') || source.hasItem('environmentalorb'))) {
+				return 8;
+			}
+			return 5;
+		},
+	},
+	hail: {
+		inherit: true,
+		durationCallback(source, effect) {
+			if (source && (source.hasItem('icyrock') || source.hasItem('environmentalorb'))) {
+				return 8;
+			}
+			return 5;
 		},
 	},
 };
