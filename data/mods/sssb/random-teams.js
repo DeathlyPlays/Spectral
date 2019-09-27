@@ -222,8 +222,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Modest",
 			},
-			// Voices
-			"+Revival Clair": {
+			"%Revival Clair": {
 				species: "Garchomp",
 				item: "Focus Sash",
 				ability: "Tough Skin",
@@ -238,6 +237,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Jolly",
 			},
+			// Voices
 			"+Revival xFloatz": {
 				species: "Scizor-Mega",
 				item: "Leftovers",
