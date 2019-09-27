@@ -140,6 +140,22 @@ let BattleStatuses = {
 			this.add(`c|+Revival xFlaotz|I didn't come up with my quotes so my Dad did.`);
 		},
 	},
+	
+	renfur⚡⚡: {
+		noCopy: true,
+		onStart() {
+			this.add(`c|%Renfur⚡⚡|Look behind u it's Me Ren!`);
+		},
+		onSwitchOut() {
+			this.add(`c|%Renfur⚡⚡|That waz a good play by my trainer I can't even lie to ya :U`);
+		},
+		onFaint() {
+			this.add(`c|%Renfur⚡⚡|My death is your fault, No not the opponent i'm talkin bout YOU`);
+		},
+		onSourceFaint() {
+			this.add(`c|%Renfur⚡⚡|That waz a good play by my trainer I can't even lie to ya :U`);
+		},
+	},
 
 	chandie: {
 		noCopy: true,
