@@ -148,3 +148,14 @@ Ability: XFZ
 EVs: 252 HP, 40 Def, 216 SpD
 Moves: Rest, Toxic, Cosmic Power, Iron Head
 Impish Nature
+
+Renfur
+(Male Shiny Flygon)
+@ Focus Sash
+Ability: Desert Spirit
+	- Becomes Bug/Dragon Type and when at 25% hp or lower, Dragon/Bug Type moves gain +1 priority.
+EVs: 252 SpA, 4 SpD, 252 Spe
+Moves: Earth Power, Flamethrower, Draco Meteor
+Signature Move: Desert Dragon
+	- Bug Type, Special, 90 BP, 100% Accuracy, 16 PP, Sound. User switches out after damaging the target and doubles allies' speed for 4 turns.
+Modest Nature
