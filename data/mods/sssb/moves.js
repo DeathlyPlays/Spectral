@@ -442,7 +442,7 @@ let BattleMovedex = {
 		type: "Normal",
 	},
 	
-	// Renfur
+	// Renfur⚡⚡
 	"desertdragon": {
 		id: "desertdragon",
 		name: "Desert Dragon",
@@ -454,6 +454,10 @@ let BattleMovedex = {
 		priority: 0,
 		selfSwitch: true,
 		category: "Special",
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Boomburst', target);
+			this.add(`c|%Renfur⚡⚡|This move ain't even that broke Obama`);
+		},
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
 		sideCondition: 'tailwind',
 		effect: {
