@@ -100,7 +100,7 @@ let BattleAbilities = {
 			}
 		},
 		onModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Water') {
+			if (move.type === 'Normal') {
 				return this.chainModify(1.5);
 			}
 		},
