@@ -267,6 +267,10 @@ let BattleAbilities = {
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.type === 'Bug' || move.type === 'Dragon' && pokemon.hp <= pokemon.maxhp / 4) return priority + 1;
 		},
+		onStart: function (pokemon) {
+			this.add("-start", pokemon, "typechange", "Bug/Dragon");
+			pokemon.types = ["Bug", "Dragon"];
+		},
 	},
 };
 
