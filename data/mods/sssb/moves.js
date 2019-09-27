@@ -441,6 +441,46 @@ let BattleMovedex = {
 		target: "normal",
 		type: "Normal",
 	},
+	
+	// Renfur
+	"desertdragon": {
+		id: "desertdragon",
+		name: "Desert Dragon",
+		basePower: 90,
+		accuracy: 100,
+		desc: "User switches out after damaging the target and doubles allies' speed for 4 turns. Hits adjacent Pokemon.",
+		shortDesc: "Switches out after damaging, doubles allies' speed for 4 turns and hits adjacent Pokemon.",
+		pp: 10,
+		priority: 0,
+		selfSwitch: true,
+		category: "Special",
+		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
+		sideCondition: 'tailwind',
+		effect: {
+			duration: 4,
+			durationCallback(target, source, effect) {
+				if (source && source.hasAbility('persistent')) {
+					this.add('-activate', source, 'ability: Persistent', effect);
+					return 6;
+				}
+				return 4;
+			},
+			onStart(side) {
+				this.add('-sidestart', side, 'move: Tailwind');
+			},
+			onModifySpe(spe, pokemon) {
+				return this.chainModify(2);
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 4,
+			onEnd(side) {
+				this.add('-sideend', side, 'move: Tailwind');
+			},
+		},
+		secondary: null,
+		target: "allAdjacent",
+		type: "Bug",
+	},
 };
 
 exports.BattleMovedex = BattleMovedex;
