@@ -141,7 +141,7 @@ let BattleStatuses = {
 		},
 	},
 	
-	renfur⚡⚡: {
+	renfur: {
 		noCopy: true,
 		onStart() {
 			this.add(`c|%Renfur⚡⚡|Look behind u it's Me Ren!`);
