@@ -206,7 +206,7 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Bold",
 			},
-			"%Renfur": {
+			"%Renfur⚡⚡": {
 				species: "Flygon",
 				item: "Focus Sash",
 				ability: "Desert Spirit",
