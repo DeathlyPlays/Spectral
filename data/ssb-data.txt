@@ -52,7 +52,7 @@ Horrific17
 @ Arcanium Z
 	- When used with Meteor Charge, allows Arcanine to use Eternal Flames.
 Ability: Reverse Card
-	- Sets up Magic Room, and when the user's maximum HP is less than 50% its Attack is raised two stages.
+	- Sets up Magic Room, Extreme Speed's base power is raised to 120, and when the user's maximum HP is less than 50% its Attack is raised two stages.
 EVs: 252 Atk / 4 Def / 252 Spe
 Moves: Wild Charge, Play Rough, Extreme Speed
 Signature Move: Meteor Charge
