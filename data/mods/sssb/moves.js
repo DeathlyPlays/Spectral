@@ -462,15 +462,8 @@ let BattleMovedex = {
 		sideCondition: 'tailwind',
 		effect: {
 			duration: 4,
-			durationCallback(target, source, effect) {
-				if (source && source.hasAbility('persistent')) {
-					this.add('-activate', source, 'ability: Persistent', effect);
-					return 6;
-				}
-				return 4;
-			},
 			onStart(side) {
-				this.add('-sidestart', side, 'move: Tailwind');
+				this.add('-sidestart', side, 'move: Desert Dragon');
 			},
 			onModifySpe(spe, pokemon) {
 				return this.chainModify(2);
@@ -478,7 +471,7 @@ let BattleMovedex = {
 			onResidualOrder: 21,
 			onResidualSubOrder: 4,
 			onEnd(side) {
-				this.add('-sideend', side, 'move: Tailwind');
+				this.add('-sideend', side, 'move: Desert Dragon');
 			},
 		},
 		secondary: null,
