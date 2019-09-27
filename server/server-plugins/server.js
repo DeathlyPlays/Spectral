@@ -261,8 +261,8 @@ exports.commands = {
 	"!define": true,
 	def: "define",
 	define(target, room, user) {
-		if (!target) return this.parse("/help define");
 		target = toID(target);
+		if (!target) return this.parse("/help define");
 		if (target > 50) return this.errorReply("/define <word> - word can not be longer than 50 characters.");
 		if (!this.runBroadcast()) return;
 
@@ -317,7 +317,7 @@ exports.commands = {
 	ud: "urbandefine",
 	urbandefine(target, room) {
 		if (!this.runBroadcast()) return;
-		if (!target) return this.parse("/help urbandefine");
+		if (!toID(target)) return this.parse("/help urbandefine");
 		if (target.toString() > 50) return this.errorReply("Phrase can not be longer than 50 characters.");
 
 		if (toID(target) !== "constructor" && udCache[toID(target)]) {

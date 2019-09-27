@@ -239,11 +239,23 @@ let BattleAbilities = {
 		id: "xfz",
 		name: "XFZ",
 		desc: "Status moves gain +1 priority.",
+		shortDesc: "+1 priority on Status.",
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.category === 'Status') {
 				move.xfzBoosted = true;
 				return priority + 1;
 			}
+		},
+	},
+	
+	// Renfur⚡⚡
+	"desertspirit": {
+		id: "desertspirit",
+		name: "Desert Spirit",
+		desc: "User becomes Bug/Dragon Type and gains +1 priority on Bug/Dragon Type moves when at 25% HP or lower.",
+		shortDesc: "Become Bug/Dragon Type and +1 priority on Bug/Dragon attacks when at 25% HP or lower.",
+		onModifyPriority(priority, pokemon, target, move) {
+			if (move && move.type === 'Bug' || move.type === 'Dragon' && pokemon.hp <= pokemon.maxhp / 4) return priority + 1;
 		},
 	},
 };
