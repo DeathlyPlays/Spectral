@@ -206,6 +206,22 @@ class RandomSSSBTeams extends RandomTeams {
 				},
 				nature: "Bold",
 			},
+			"%Renfur": {
+				species: "Flygon",
+				item: "Focus Sash",
+				ability: "Desert Spirit",
+				shiny: true,
+				gender: "M",
+				moves: ["Earth Power", "Flamethrower", "Draco Meteor"],
+				baseSignatureMove: "desertdragon",
+				signatureMove: "Desert Dragon",
+				evs: {
+					spa: 252,
+					spd: 4,
+					spe: 252,
+				},
+				nature: "Modest",
+			},
 			// Voices
 			"+Revival Clair": {
 				species: "Garchomp",
