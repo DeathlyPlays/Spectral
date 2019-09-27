@@ -83,8 +83,8 @@ let BattleAbilities = {
 	"reversecard": {
 		id: "reversecard",
 		name: "Reverse Card",
-		desc: "Sets up Magic Room, and when the user's health drops below 25% of its maximum HP the user's Attack raises two stages.",
-		shortDesc: "Sets up Magic Room & user's Atk +2 when max HP < 25%.",
+		desc: "Sets up Magic Room, and when the user's health drops below 25% of its maximum HP the user's Attack raises two stages, and Extreme Speed's base power raises to 120.",
+		shortDesc: "Sets up Magic Room & user's Atk +2 when max HP < 25%, Extreme Speed now gets 120 BP.",
 		onStart(pokemon) {
 			this.useMove("magicroom", pokemon);
 		},
@@ -94,14 +94,9 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
-		onModifyAtk(atk, attacker, defender, move) {
-			if (move.type === 'Normal') {
-				return this.chainModify(1.5);
-			}
-		},
-		onModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Normal') {
-				return this.chainModify(1.5);
+		onModifyMove(move) {
+			if (move.id === 'extremespeed') {
+				move.basePower = 120;
 			}
 		},
 	},
