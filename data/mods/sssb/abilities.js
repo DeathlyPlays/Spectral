@@ -94,6 +94,16 @@ let BattleAbilities = {
 				return this.chainModify(2);
 			}
 		},
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Normal') {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Water') {
+				return this.chainModify(1.5);
+			}
+		},
 	},
 
 	// Chandie
