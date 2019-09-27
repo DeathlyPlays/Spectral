@@ -19,6 +19,10 @@ let BattlePokedex = {
 		inherit: true,
 		baseStats: {hp: 80, atk: 70, def: 80, spa: 70, spd: 80, spe: 70},
 	},
+	flygon: {
+		inherit: true,
+		baseStats: {hp: 80, atk: 80, def: 80, spa: 100, spd: 80, spe: 100},
+	},
 };
 
 exports.BattlePokedex = BattlePokedex;
