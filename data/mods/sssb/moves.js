@@ -459,19 +459,21 @@ let BattleMovedex = {
 			this.add(`c|%Renfur⚡⚡|This move ain't even that broke Obama`);
 		},
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		sideCondition: 'tailwind',
-		effect: {
-			duration: 4,
-			onStart(side) {
-				this.add('-sidestart', side, 'move: Desert Dragon');
-			},
-			onModifySpe(spe, pokemon) {
-				return this.chainModify(2);
-			},
-			onResidualOrder: 21,
-			onResidualSubOrder: 4,
-			onEnd(side) {
-				this.add('-sideend', side, 'move: Desert Dragon');
+		self: {
+			sideCondition: 'tailwind',
+			effect: {
+				duration: 4,
+				onStart(side) {
+					this.add('-sidestart', side, 'move: Desert Dragon');
+				},
+				onModifySpe(spe, pokemon) {
+					return this.chainModify(2);
+				},
+				onResidualOrder: 21,
+				onResidualSubOrder: 4,
+				onEnd(side) {
+					this.add('-sideend', side, 'move: Desert Dragon');
+				},
 			},
 		},
 		secondary: null,
