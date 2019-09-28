@@ -160,16 +160,16 @@ let BattleStatuses = {
 	shademaura: {
 		noCopy: true,
 		onStart() {
-			this.add(`c|%shademaura ⌐⚡_|Get ready for a sub-optimal performance`);
+			this.add(`c|+shademaura ⌐⚡_|Get ready for a sub-optimal performance`);
 		},
 		onSwitchOut() {
-			this.add(`c|%shademaura ⌐⌐⚡_|Thats good for now`);
+			this.add(`c|+shademaura ⌐⌐⚡_|Thats good for now`);
 		},
 		onFaint() {
-			this.add(`c|%shademaura ⌐⚡_|fuck`);
+			this.add(`c|+shademaura ⌐⚡_|fuck`);
 		},
 		onSourceFaint() {
-			this.add(`c|%shademaura ⌐⚡_|PogChamp`);
+			this.add(`c|+shademaura ⌐⚡_|PogChamp`);
 		},
 	},
 
