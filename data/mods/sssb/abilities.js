@@ -277,6 +277,8 @@ let BattleAbilities = {
 		shortDesc: "Become Fairy/Poison, half Atk/Spe for 3 turns and Normal moves become Fairy moves with 1.2x BP.",
 		onStart(pokemon) {
 			pokemon.addVolatile('slowpixilate');
+			this.add("-start", pokemon, "typechange", "Fairy/Poison");
+			pokemon.types = ["Fairy", "Poison"];
 		},
 		onEnd(pokemon) {
 			delete pokemon.volatiles['slowpixilate'];
@@ -297,10 +299,6 @@ let BattleAbilities = {
 			onEnd(target) {
 				this.add('-end', target, 'Slow Pixilate');
 			},
-		},
-		onStart: function (pokemon) {
-			this.add("-start", pokemon, "typechange", "Fairy/Poison");
-			pokemon.types = ["Fairy", "Poison"];
 		},
 		onModifyMovePriority: -1,
 		onModifyMove(move, pokemon) {
