@@ -450,7 +450,7 @@ exports.commands = {
 		if (!targetUser) return this.errorReply(`User "${this.targetUsername}" is not online.`);
 
 		if (!room.founder) return this.errorReply("The room needs a Room Founder before it can have a Room Leader.");
-		if (room.founder !== user.userid && !this.can("makeroom")) return this.errorReply("/roomleader - Access denied.");
+		if (room.founder !== user.userid && !this.can("addhtml", null, room)) return this.errorReply("/roomleader - Access denied.");
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
@@ -465,7 +465,7 @@ exports.commands = {
 		room.onUpdateIdentity(targetUser);
 		Rooms.global.writeChatRoomData();
 	},
-	roomleaderhelp: ["/roomleader [username] - Appoints [username] as a Room Leader. Requires: Room Founder, &, ~"],
+	roomleaderhelp: ["/roomleader [username] - Appoints [username] as a Room Leader. Requires: #, &, ~"],
 
 	roomdeleader: "deroomleader",
 	deroomleader(target, room, user) {
@@ -479,7 +479,7 @@ exports.commands = {
 		if (!userid || userid === "") return this.errorReply(`User "${name}" does not exist.`);
 
 		if (room.auth[userid] !== "&") return this.errorReply(`User "${name}" is not a room leader.`);
-		if (!room.founder || user.userid !== room.founder && !this.can("makeroom", null, room)) return false;
+		if (!room.founder || user.userid !== room.founder && !this.can("addhtml", null, room)) return false;
 
 		if (targetUser) {
 			targetUser.popup(`|html|You were demoted from Room Leader by ${Server.nameColor(user.name, true)} in ${room.title}.`);
@@ -492,7 +492,7 @@ exports.commands = {
 			Rooms.global.writeChatRoomData();
 		}
 	},
-	roomdeleaderhelp: ["/roomdeleader [username] - Demotes [username] from Room Leader. Requires: Room Founder, &, ~"],
+	roomdeleaderhelp: ["/roomdeleader [username] - Demotes [username] from Room Leader. Requires: #, &, ~"],
 
 	hc(target, room, user) {
 		this.parse("/hotpatch chat");

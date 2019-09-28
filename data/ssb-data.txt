@@ -14,8 +14,8 @@ Back At My Day
 @ Leftovers
 Ability: Peal of Thunder
 	- Electric immunity, 25% of max HP recovery and boosts Defense and Special Defense by 1 stage if hit by an Electric attack.
-EVs: 252 HP / 104 Def / 156 SpD
-Moves: Aeroblast, Earth Power, Secret Sword
+EVs: 248 HP / 104 Def / 156 SpD
+Moves: Oblivion Wing, Earth Power, Secret Sword
 Signature Move: Big Thunder
 	- Electric Type, Special, 120 BP, never misses, 16 PP. 50% chance to target self or foe.
 Bold Nature
@@ -52,7 +52,7 @@ Horrific17
 @ Arcanium Z
 	- When used with Meteor Charge, allows Arcanine to use Eternal Flames.
 Ability: Reverse Card
-	- Sets up Magic Room, and when the user's maximum HP is less than 50% its Attack is raised two stages.
+	- Sets up Magic Room, Extreme Speed's base power is raised to 120, and when the user's maximum HP is less than 50% its Attack is raised two stages.
 EVs: 252 Atk / 4 Def / 252 Spe
 Moves: Wild Charge, Play Rough, Extreme Speed
 Signature Move: Meteor Charge
@@ -148,3 +148,25 @@ Ability: XFZ
 EVs: 252 HP, 40 Def, 216 SpD
 Moves: Rest, Toxic, Cosmic Power, Iron Head
 Impish Nature
+
+Renfur⚡⚡
+(Male Shiny Flygon)
+@ Focus Sash
+Ability: Desert Spirit
+	- Becomes Bug/Dragon Type and when at 25% hp or lower, Dragon/Bug Type moves gain +1 priority.
+EVs: 252 SpA, 4 SpD, 252 Spe
+Moves: Earth Power, Flamethrower, Draco Meteor
+Signature Move: Desert Dragon
+	- Bug Type, Special, 90 BP, 100% Accuracy, 16 PP, Sound. User switches out after damaging the target and doubles allies' speed for 4 turns.
+Modest Nature
+
+shademaura ⌐⚡_
+(Male Regigigas)
+@ Pixie Plate
+Ability: Slow Pixilate
+	- Half Atk/Spe for 3 turns, becomes Fairy/Poison Type and turns Normal attacks into Fairy attacks with 1.2x Power.
+EVs: 4 HP / 252 SpA / 252 Spe
+Moves: Fake Out, Extreme Speed, Bonemerang
+Signature Move: Sarcasm Over Text
+	- Poison Type, Physical, 100 BP, 100% Accuracy, 8 PP. Always taunts.
+Jolly Nature

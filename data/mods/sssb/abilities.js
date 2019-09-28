@@ -83,8 +83,8 @@ let BattleAbilities = {
 	"reversecard": {
 		id: "reversecard",
 		name: "Reverse Card",
-		desc: "Sets up Magic Room, and when the user's health drops below 25% of its maximum HP the user's Attack raises two stages.",
-		shortDesc: "Sets up Magic Room & user's Atk +2 when max HP < 25%.",
+		desc: "Sets up Magic Room, and when the user's health drops below 25% of its maximum HP the user's Attack raises two stages, and Extreme Speed's base power raises to 120.",
+		shortDesc: "Sets up Magic Room & user's Atk +2 when max HP < 25%, Extreme Speed now gets 120 BP.",
 		onStart(pokemon) {
 			this.useMove("magicroom", pokemon);
 		},
@@ -92,6 +92,11 @@ let BattleAbilities = {
 		onModifyAtk(atk, pokemon) {
 			if (pokemon.hp <= pokemon.maxhp / 2) {
 				return this.chainModify(2);
+			}
+		},
+		onModifyMove(move) {
+			if (move.id === 'extremespeed') {
+				move.basePower = 120;
 			}
 		},
 	},
@@ -239,11 +244,27 @@ let BattleAbilities = {
 		id: "xfz",
 		name: "XFZ",
 		desc: "Status moves gain +1 priority.",
+		shortDesc: "+1 priority on Status.",
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.category === 'Status') {
 				move.xfzBoosted = true;
 				return priority + 1;
 			}
+		},
+	},
+	
+	// Renfur⚡⚡
+	"desertspirit": {
+		id: "desertspirit",
+		name: "Desert Spirit",
+		desc: "User becomes Bug/Dragon Type and gains +1 priority on Bug/Dragon Type moves when at 25% HP or lower.",
+		shortDesc: "Become Bug/Dragon Type and +1 priority on Bug/Dragon attacks when at 25% HP or lower.",
+		onModifyPriority(priority, pokemon, target, move) {
+			if (move && move.type === 'Bug' || move.type === 'Dragon' && pokemon.hp <= pokemon.maxhp / 4) return priority + 1;
+		},
+		onStart: function (pokemon) {
+			this.add("-start", pokemon, "typechange", "Bug/Dragon");
+			pokemon.types = ["Bug", "Dragon"];
 		},
 	},
 };
