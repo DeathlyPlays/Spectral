@@ -91,6 +91,7 @@ let BattleAbilities = {
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, pokemon) {
 			if (pokemon.hp <= pokemon.maxhp / 2) {
+				this.add("c|@Horrific17|I will not die here!");
 				return this.chainModify(2);
 			}
 		},
