@@ -494,37 +494,36 @@ let BattleMovedex = {
 		category: "Physical",
 		onPrepareHit(target, source) {
 			this.add('-anim', source, 'Earthquake', target);
-			this.add(`c|shademaura ⌐⚡_|Oh ur SSB is so good`);
+			this.add(`c|+shademaura ⌐⚡_|Oh ur SSB is so good`);
 		},
 		flags: {protect: 1, mirror: 1},
 		volatileStatus: 'taunt',
-		effect: {
-			duration: 3,
-			onStart(target) {
-				if (target.activeTurns && !this.willMove(target)) {
-					this.effectData.duration++;
-				}
-				this.add('-start', target, 'move: Sarcasm Over Text');
-			},
-			onResidualOrder: 12,
-			onEnd(target) {
-				this.add('-end', target, 'move: Sarcasm Over Text');
-			},
-			onDisableMove(pokemon) {
-				for (const moveSlot of pokemon.moveSlots) {
-					if (this.getMove(moveSlot.id).category === 'Status') {
-						pokemon.disableMove(moveSlot.id);
-					}
-				}
-			},
-			onBeforeMovePriority: 5,
-			onBeforeMove(attacker, defender, move) {
-				if (!move.isZ && move.category === 'Status') {
-					this.add('cant', attacker, 'move: Sarcasm Over Text', move);
-					return false;
-				}
-			},
+		duration: 3,
+		onStart(target) {
+			if (target.activeTurns && !this.willMove(target)) {
+				this.effectData.duration++;
+			}
+			this.add('-start', target, 'move: Sarcasm Over Text');
 		},
+		onResidualOrder: 12,
+		onEnd(target) {
+			this.add('-end', target, 'move: Sarcasm Over Text');
+		},
+		onDisableMove(pokemon) {
+			for (const moveSlot of pokemon.moveSlots) {
+				if (this.getMove(moveSlot.id).category === 'Status') {
+					pokemon.disableMove(moveSlot.id);
+				}
+			}
+		},
+		onBeforeMovePriority: 5,
+		onBeforeMove(attacker, defender, move) {
+			if (!move.isZ && move.category === 'Status') {
+				this.add('cant', attacker, 'move: Sarcasm Over Text', move);
+				return false;
+			}
+		},
+	},
 		secondary: null,
 		target: "allAdjacent",
 		type: "Poison",
