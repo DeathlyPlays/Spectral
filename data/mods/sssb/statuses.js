@@ -156,6 +156,22 @@ let BattleStatuses = {
 			this.add(`c|%Renfur⚡⚡|That waz a good play by my trainer I can't even lie to ya :U`);
 		},
 	},
+	
+	shademaura: {
+		noCopy: true,
+		onStart() {
+			this.add(`c|%shademaura ⌐⚡_|Get ready for a sub-optimal performance`);
+		},
+		onSwitchOut() {
+			this.add(`c|%shademaura ⌐⌐⚡_|Thats good for now`);
+		},
+		onFaint() {
+			this.add(`c|%shademaura ⌐⚡_|fuck`);
+		},
+		onSourceFaint() {
+			this.add(`c|%shademaura ⌐⚡_|PogChamp`);
+		},
+	},
 
 	chandie: {
 		noCopy: true,
