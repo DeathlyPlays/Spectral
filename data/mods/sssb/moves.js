@@ -484,7 +484,7 @@ let BattleMovedex = {
 	// shademaura ⌐⚡_
 	"sarcasmovertext": {
 		id: "sarcasmovertext",
-		name: "sarcasmovertext",
+		name: "Sarcasm Over Text",
 		basePower: 100,
 		accuracy: 100,
 		desc: "Hits adjacent Pokemon and has 100% chance to Taunt.",
@@ -498,32 +498,6 @@ let BattleMovedex = {
 		},
 		flags: {protect: 1, mirror: 1},
 		volatileStatus: 'taunt',
-		duration: 3,
-		onStart(target) {
-			if (target.activeTurns && !this.willMove(target)) {
-				this.effectData.duration++;
-			}
-			this.add('-start', target, 'move: Sarcasm Over Text');
-		},
-		onResidualOrder: 12,
-		onEnd(target) {
-			this.add('-end', target, 'move: Sarcasm Over Text');
-		},
-		onDisableMove(pokemon) {
-			for (const moveSlot of pokemon.moveSlots) {
-				if (this.getMove(moveSlot.id).category === 'Status') {
-					pokemon.disableMove(moveSlot.id);
-				}
-			}
-		},
-		onBeforeMovePriority: 5,
-		onBeforeMove(attacker, defender, move) {
-			if (!move.isZ && move.category === 'Status') {
-				this.add('cant', attacker, 'move: Sarcasm Over Text', move);
-				return false;
-			}
-		},
-	},
 		secondary: null,
 		target: "allAdjacent",
 		type: "Poison",
