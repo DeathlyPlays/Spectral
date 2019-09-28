@@ -200,7 +200,7 @@ class RandomSSSBTeams extends RandomTeams {
 				baseSignatureMove: "bigthunder",
 				signatureMove: "Big Thunder",
 				evs: {
-					hp: 252,
+					hp: 248,
 					def: 104,
 					spd: 156,
 				},
@@ -251,6 +251,20 @@ class RandomSSSBTeams extends RandomTeams {
 					spd: 216,
 				},
 				nature: "Impish",
+			},
+			"+shademaura ⌐⚡_": {
+				species: "Regigigas",
+				item: "Pixie Plate",
+				ability: "Slow Pixilate",
+				gender: "M",
+				moves: ["Fake Out", "Extreme Speed", "Bonemerang"],
+				signatureMove: "Sarcasm Over Text",
+				evs: {
+					hp: 4,
+					atk: 252,
+					spe: 252,
+				},
+				nature: "Jolly",
 			},
 		};
 		let pool = this.shuffle(Object.keys(sets));

@@ -91,6 +91,7 @@ let BattleAbilities = {
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, pokemon) {
 			if (pokemon.hp <= pokemon.maxhp / 2) {
+				this.add("c|@Horrific17|I will not die here!");
 				return this.chainModify(2);
 			}
 		},
@@ -258,13 +259,57 @@ let BattleAbilities = {
 		id: "desertspirit",
 		name: "Desert Spirit",
 		desc: "User becomes Bug/Dragon Type and gains +1 priority on Bug/Dragon Type moves when at 25% HP or lower.",
-		shortDesc: "Become Bug/Dragon Type and +1 priority on Bug/Dragon attacks when at 25% HP or lower.",
+		shortDesc: "Become Bug/Dragon and +1 priority on Bug/Dragon attacks when at 25% HP or lower.",
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move && move.type === 'Bug' || move.type === 'Dragon' && pokemon.hp <= pokemon.maxhp / 4) return priority + 1;
 		},
 		onStart: function (pokemon) {
 			this.add("-start", pokemon, "typechange", "Bug/Dragon");
 			pokemon.types = ["Bug", "Dragon"];
+		},
+	},
+	
+	// shademaura ⌐⚡_
+	"slowpixilate": {
+		id: "slowpixilate",
+		name: "Slow Pixilate",
+		desc: "User becomes Fairy/Poison Type, has halved Attack and Speed for 3 turns and turns Normal attacks into Fairy attacks with 1.2x Power.",
+		shortDesc: "Become Fairy/Poison, half Atk/Spe for 3 turns and Normal moves become Fairy moves with 1.2x BP.",
+		onStart(pokemon) {
+			pokemon.addVolatile('slowpixilate');
+			this.add("-start", pokemon, "typechange", "Fairy/Poison");
+			pokemon.types = ["Fairy", "Poison"];
+		},
+		onEnd(pokemon) {
+			delete pokemon.volatiles['slowpixilate'];
+			this.add('-end', pokemon, 'Slow Pixilate', '[silent]');
+		},
+		effect: {
+			duration: 3,
+			onStart(target) {
+				this.add('-start', target, 'ability: Slow Pixilate');
+			},
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, pokemon) {
+				return this.chainModify(0.5);
+			},
+			onModifySpe(spe, pokemon) {
+				return this.chainModify(0.5);
+			},
+			onEnd(target) {
+				this.add('-end', target, 'Slow Pixilate');
+			},
+		},
+		onModifyMovePriority: -1,
+		onModifyMove(move, pokemon) {
+			if (move.type === 'Normal' && !['judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'weatherball'].includes(move.id) && !(move.isZ && move.category !== 'Status')) {
+				move.type = 'Fairy';
+				move.slowpixilateBoosted = true;
+			}
+		},
+		onBasePowerPriority: 8,
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.slowpixilateBoosted) return this.chainModify([0x1333, 0x1000]);
 		},
 	},
 };

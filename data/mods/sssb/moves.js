@@ -459,24 +459,48 @@ let BattleMovedex = {
 			this.add(`c|%Renfur⚡⚡|This move ain't even that broke Obama`);
 		},
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
-		sideCondition: 'tailwind',
-		effect: {
-			duration: 4,
-			onStart(side) {
-				this.add('-sidestart', side, 'move: Desert Dragon');
-			},
-			onModifySpe(spe, pokemon) {
-				return this.chainModify(2);
-			},
-			onResidualOrder: 21,
-			onResidualSubOrder: 4,
-			onEnd(side) {
-				this.add('-sideend', side, 'move: Desert Dragon');
+		self: {
+			sideCondition: 'tailwind',
+			effect: {
+				duration: 4,
+				onStart(side) {
+					this.add('-sidestart', side, 'move: Desert Dragon');
+				},
+				onModifySpe(spe, pokemon) {
+					return this.chainModify(2);
+				},
+				onResidualOrder: 21,
+				onResidualSubOrder: 4,
+				onEnd(side) {
+					this.add('-sideend', side, 'move: Desert Dragon');
+				},
 			},
 		},
 		secondary: null,
 		target: "allAdjacent",
 		type: "Bug",
+	},
+	
+	// shademaura ⌐⚡_
+	"sarcasmovertext": {
+		id: "sarcasmovertext",
+		name: "Sarcasm Over Text",
+		basePower: 100,
+		accuracy: 100,
+		desc: "Hits adjacent Pokemon and has 100% chance to Taunt.",
+		shortDesc: "Hits adjacent Pokemon and always Taunts.",
+		pp: 5,
+		priority: 0,
+		category: "Physical",
+		onPrepareHit(target, source) {
+			this.add('-anim', source, 'Earthquake', target);
+			this.add(`c|+shademaura ⌐⚡_|Oh ur SSB is so good`);
+		},
+		flags: {protect: 1, mirror: 1},
+		volatileStatus: 'taunt',
+		secondary: null,
+		target: "allAdjacent",
+		type: "Poison",
 	},
 };
 
