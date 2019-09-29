@@ -1084,24 +1084,32 @@ export class Tournament extends Rooms.RoomGame {
 		//
 
 		const color = '#088cc7';
-		const data = (this.generator.getResults() as TournamentPlayer[][]).map(usersToNames).toString();
-		let dataSplit: string[];
-		let winner: any;
-		let runnerUp: any;
+		let data = {results: this.generator.getResults().map(usersToNames), bracketData: this.getBracketData()};
+		let data2 = data;
+		data = data['results'].toString();
+
+		let winner = '';
+		let runnerUp = false;
 
 		if (data.indexOf(',') >= 0) {
-			dataSplit = data.split(',');
-			winner = dataSplit[0];
-			if (dataSplit[1]) runnerUp = dataSplit[1];
+			data = data.split(',');
+			winner = data[0];
 		} else {
 			winner = data;
+		}
+
+		if (data2['bracketData']['rootNode']) {
+			if (data2['bracketData']['rootNode']['children']) {
+				if (data2['bracketData']['rootNode']['children'][0]['team'] !== winner) runnerUp = data2['bracketData']['rootNode']['children'][0]['team'];
+				if (data2['bracketData']['rootNode']['children'][1]['team'] !== winner) runnerUp = data2['bracketData']['rootNode']['children'][1]['team'];
+			}
 		}
 
 		const wid = toID(winner);
 		const rid = toID(runnerUp);
 		const tourSize = this.players.length;
 
-		if (tourSize >= 2 && this.room.isOfficial) {
+		if (tourSize >= 4 && this.room.isOfficial) {
 			let firstMoney = Math.round(tourSize / 2);
 			let secondMoney = Math.round(firstMoney / 2);
 			if (firstMoney < 2) firstMoney = 2;
