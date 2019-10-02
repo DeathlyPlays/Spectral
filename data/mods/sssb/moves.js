@@ -254,6 +254,9 @@ let BattleMovedex = {
 				return this.chainModify(2);
 			}
 		},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Water') return 1;
+		},
 		secondary: {
 			chance: 30,
 			volatileStatus: 'flinch',
