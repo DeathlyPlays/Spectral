@@ -255,7 +255,7 @@ let BattleMovedex = {
 			}
 		},
 		onEffectiveness(typeMod, target, type) {
-			if (type === 'Water') return 1;
+			if (type === 'Steel') return 1;
 		},
 		secondary: {
 			chance: 30,
